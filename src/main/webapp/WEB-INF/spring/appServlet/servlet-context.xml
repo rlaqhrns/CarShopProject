@@ -21,6 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<resources location="/resources/" mapping="/resources/**" />
 	<context:component-scan base-package="com.shop.controller" />
 	
 	
