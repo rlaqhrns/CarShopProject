@@ -255,10 +255,17 @@
 		</dependency>		
 				
 
-		<dependency>
+ 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>8.0.20</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+		<dependency>
+    		<groupId>org.mariadb.jdbc</groupId>
+    		<artifactId>mariadb-java-client</artifactId>
+    		<version>2.5.4</version>
 		</dependency>
 
 		        
