@@ -41,4 +41,10 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping("/checkout")
+	public String checkout() {
+		return "checkout";
+	}
+	
+	
 }
