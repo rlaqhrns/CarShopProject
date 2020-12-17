@@ -41,4 +41,9 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping("/join")
+	public String join() {
+		return "join";
+	}
+	
 }
