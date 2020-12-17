@@ -28,7 +28,11 @@ public class HomeController {
 	@RequestMapping("/register")
 	public String register() {
 		return "carshop/register";
-
+	}
+	
+	@RequestMapping("/seller_register")
+	public String seller_register() {
+		return "carshop/seller_register";
 	}
 	
 	@RequestMapping("/checkout")
