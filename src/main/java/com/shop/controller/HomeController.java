@@ -40,5 +40,9 @@ public class HomeController {
 	public String index() {
 		return "index";
 	}
+	@RequestMapping("/carshop/product")
+	public String product() {
+		return "/carshop/product";
+	}
 	
 }
