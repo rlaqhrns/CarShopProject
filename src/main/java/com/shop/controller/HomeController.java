@@ -41,6 +41,20 @@ public class HomeController {
 	public String a() {
 		return"home";
 	}
+	
+	//보미
+	@RequestMapping("/login")
+	public String login() {
+		return "carshop/login";
+	}
+	
+	//보미_로그인성공시 index화면으로 돌아가기(로그인된상태_로그인&회원가입 버튼 안보이게)
+	@RequestMapping("/index")
+	public String index2() {
+		return "redirect:/carshop/index";       //세션객체 생성해서 처리할 것 
+	}
+	
+	
 
 	
 }
