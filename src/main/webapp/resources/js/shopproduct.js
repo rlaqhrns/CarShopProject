@@ -1,32 +1,39 @@
 function setDisplay(){
-    console.log("실행된다!!");
-
-    let $front = $("#front_parts");
-    let $side = $("#side_parts");
-    let $rear = $("#rear_parts");
-    let $etc = $("#etc");
-    let $engine = $("#engine_lower_body");
-    $(".front_parts").hide(); // 프론트 파츠 클래스(radio) 숨기기
-    $(".side_parts").hide(); // 프론트 파츠 클래스(radio) 숨기기
-    $(".rear_parts").hide(); // 프론트 파츠 클래스(radio) 숨기기
-    $(".etc").hide(); // 프론트 파츠 클래스(radio) 숨기기
-    $(".engine_lower_body").hide(); // 프론트 파츠 클래스(radio) 숨기기
+    // 체크박스 선택에 따라 어떠한 클래스를 보여주고 숨길지 정하는 함수입니다.
     
-    if($front.is(':checked')){ // 전면부품 체크시 
-        $(".front_parts").show(); // 프론트 파츠 클래스(radio) 보이기
-    }                     // 전면부품이 체크 안되어있을때
+    let $front = $("#front_parts"); //프론트 클래스
+    let $side = $("#side_parts");	//사이드 클래스
+    let $rear = $("#rear_parts");	//리어 클래스
+    let $etc = $("#etc");			//실내,전장클래스
+    let $engine = $("#engine_lower_body");//엔진클래
+    $(".front_parts").hide(); 
+    $(".side_parts").hide(); 
+    $(".rear_parts").hide(); 
+    $(".etc").hide(); 
+    $(".engine_lower_body").hide(); 
+    $(".parts_radio").hide(); // 세부부품 체크부분의 구역자체를 숨겨준다. 
+    							//체크박스에서 체크한 후에 다시 모든 체크박스의 체크를 해제하면 빈공간이 남아서
     
-    if($side.is(':checked')){ // 전면부품 체크시 
-        $ (".side_parts").show(); // 프론트 파츠 클래스(radio) 보이기
+    if($front.is(':checked')){ 
+        $(".front_parts").show(); 
+        $(".parts_radio").show();
+    }                     
+    
+    if($side.is(':checked')){ 
+        $ (".side_parts").show(); 
+        $(".parts_radio").show();
     }
-    if($rear.is(':checked')){ // 전면부품 체크시 
-        $(".rear_parts").show(); // 프론트 파츠 클래스(radio) 보이기
+    if($rear.is(':checked')){ 
+        $(".rear_parts").show(); 
+        $(".parts_radio").show();
     }
-    if($etc.is(':checked')){ // 전면부품 체크시 
-        $(".etc").show(); // 프론트 파츠 클래스(radio) 보이기
+    if($etc.is(':checked')){
+        $(".etc").show();
+        $(".parts_radio").show();
     }
-    if($engine.is(':checked')){ // 전면부품 체크시 
-        $(".engine_lower_body").show(); // 프론트 파츠 클래스(radio) 보이기
+    if($engine.is(':checked')){
+        $(".engine_lower_body").show(); 
+        $(".parts_radio").show();
     }
 
 }
