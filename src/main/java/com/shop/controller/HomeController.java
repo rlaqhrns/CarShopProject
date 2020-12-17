@@ -51,7 +51,17 @@ public class HomeController {
 	public String checkout() {
 		return "carshop/checkout";
 	}
-
+	
+	@RequestMapping("/like")
+	public String like() {
+		return"carshop/like";
+	}	
+	
+	@RequestMapping("/cart")
+	public String cart() {
+		return"carshop/cart";
+	}	
+	
 	@RequestMapping("/home")
 	public String a() {
 		return "home";
