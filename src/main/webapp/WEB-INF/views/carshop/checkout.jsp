@@ -27,21 +27,18 @@
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>Billing Details</h3>
+                    <h3>구매자 정보</h3>
+                    받는 사람 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp; 전화 번호
                     <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="first" name="name">
-                            <span class="placeholder" data-placeholder="First name"></span>
+                        <div class="col-md-6 form-group p_star"> 
+                            <input type="text" class="form-control" name="name" value='' readonly="readonly">
+                            <span class="placeholder" data-placeholder="First name"></span>                            
                         </div>
                         <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="last" name="name">
-                            <span class="placeholder" data-placeholder="Last name"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="number" name="number">
+                            <input type="text" class="form-control" id="number" name="phone">
                             <span class="placeholder" data-placeholder="Phone number"></span>
                         </div>
-                        <div class="col-md-6 form-group p_star">
+                        <div class="col-md-12 form-group p_star">
                             <input type="text" class="form-control" id="email" name="compemailany">
                             <span class="placeholder" data-placeholder="Email Address"></span>
                         </div>
