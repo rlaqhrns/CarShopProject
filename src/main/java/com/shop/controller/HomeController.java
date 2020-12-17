@@ -30,6 +30,10 @@ public class HomeController {
 		return "carshop/register";
 
 	}
+	@RequestMapping("/carshop/product")
+	public String product() {
+		return "/carshop/product";
+	}
 	
 	@RequestMapping("/checkout")
 	public String checkout() {
