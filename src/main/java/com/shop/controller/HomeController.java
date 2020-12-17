@@ -42,6 +42,11 @@ public class HomeController {
 
 	}
 
+	@RequestMapping("/product")
+	public String product() {
+		return "carshop/product";
+	}
+
 	@RequestMapping("/checkout")
 	public String checkout() {
 		return "carshop/checkout";
