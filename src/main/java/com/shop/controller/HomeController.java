@@ -22,6 +22,13 @@ public class HomeController {
 	@RequestMapping({"/", "index" })
 	public String index() {
 		return "carshop/index";
+
+	}
+	
+	@RequestMapping("/register")
+	public String register() {
+		return "carshop/register";
+
 	}
 	
 	@RequestMapping("/checkout")
