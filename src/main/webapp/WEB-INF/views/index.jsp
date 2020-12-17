@@ -43,21 +43,35 @@
 		<div class="hero-carousel__slide">
 			<img src="/resources/img/home/tire1.jpg" alt="" class="img-fluid">
 			<a href="home" class="hero-carousel__slideOverlay">
-				<h3>타이어</h3>
+				<h3>전면상품</h3>
 				<p>전체보기</p>
 			</a>
 		</div>
 		<div class="hero-carousel__slide">
 			<img src="/resources/img/home/wiper.png" alt="" class="img-fluid">
 			<a href="#" class="hero-carousel__slideOverlay">
-				<h3>와이퍼</h3>
+				<h3>측면상품</h3>
 				<p>전체보기</p>
 			</a>
 		</div>
 		<div class="hero-carousel__slide">
 			<img src="/resources/img/home/handle.jpg" alt="" class="img-fluid">
 			<a href="#" class="hero-carousel__slideOverlay">
-				<h3>핸들 커버</h3>
+				<h3>후면상품</h3>
+				<p>전체보기</p>
+			</a>
+		</div>
+				<div class="hero-carousel__slide">
+			<img src="/resources/img/home/handle.jpg" alt="" class="img-fluid">
+			<a href="#" class="hero-carousel__slideOverlay">
+				<h3>실내/전장/의장</h3>
+				<p>전체보기</p>
+			</a>
+		</div>
+				<div class="hero-carousel__slide">
+			<img src="/resources/img/home/handle.jpg" alt="" class="img-fluid">
+			<a href="#" class="hero-carousel__slideOverlay">
+				<h3>엔진/하체</h3>
 				<p>전체보기</p>
 			</a>
 		</div>
