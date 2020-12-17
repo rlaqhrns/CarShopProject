@@ -20,18 +20,17 @@ public class HomeController {
 	
 	@RequestMapping({"/", "index" })
 	public String index() {
-		return "index";
+		return "carshop/index";
 	}
 	
-<<<<<<< HEAD
-	@RequestMapping("/join")
-	public String join() {
-		return "join";
-=======
+	@RequestMapping("/register")
+	public String register() {
+		return "carshop/register";
+	}
+	
 	@RequestMapping("/home")
 	public String a() {
 		return"home";
->>>>>>> branch 'master' of https://github.com/rkqls8522/CarShopProject.git
 	}
 	
 }
