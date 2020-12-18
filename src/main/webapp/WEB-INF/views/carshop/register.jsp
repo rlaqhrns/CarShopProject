@@ -61,7 +61,7 @@
 								<input type="button" value="확인" class="check_btn" id="email_check">
 							</div>
 							<div class="col-md-12 form-group">
-							<input type="button" value="다음" class="button button-register w-100" onclick="document.getElementById('registerForm2').style.visibility='visible';document.getElementById('registerForm1').style.visibility='hidden';">
+							<input type="button" value="다음" class="button button-register w-100 register_btn" onclick="document.getElementById('registerForm1').style.visibility='hidden';document.getElementById('registerForm2').style.visibility='visible';">
 							</div>
 						</form>
 					</div>
@@ -95,8 +95,8 @@
 								
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="button" value="이전" class="button button-register w-100" onclick="document.getElementById('registerForm1').style.visibility='visible';document.getElementById('registerForm2').style.visibility='hidden';">
-								<button type="submit" value="submit" class="button button-register w-100">가입완료</button>
+								<input type="button" value="이전" class="button button-register w-100 register_btn" onclick="document.getElementById('registerForm2').style.visibility='hidden';document.getElementById('registerForm1').style.visibility='visible';">
+								<button type="submit" value="submit" class="button button-register w-100 register_btn">가입완료</button>
 							</div>
 						</form>
 					</div>
