@@ -38,7 +38,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-6 registerForm1" id="registerForm1" style="position: relative;visibility:visible;background:'white';">
 					<div class="login_form_inner register_form_inner">
 						<h3>Create an account</h3>
 						<form class="row login_form" action="#/" id="register_form" >
@@ -61,47 +61,42 @@
 								<input type="button" value="확인" class="check_btn" id="email_check">
 							</div>
 							<div class="col-md-12 form-group">
-								<div class="creat_account">
-									<input type="checkbox" id="f-option2" name="selector">
-									<label for="f-option2">Keep me logged in</label> <!-- 이건 무슨 기능???? -->
-								</div>
-							</div>
-							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="button button-register w-100">Register</button>
+							<input type="button" value="다음" class="button button-register w-100" onclick="document.getElementById('registerForm2').style.visibility='visible';document.getElementById('registerForm1').style.visibility='hidden';">
 							</div>
 						</form>
 					</div>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-6 registerForm2" id="registerForm2" style="position: relative;width: 100%;height: 610px;min-height: 1px;padding-right: 15px;padding-left: 15px;top: -610px;left: 570px;visibility:hidden">
 					<div class="login_form_inner register_form_inner">
 						<h3>Create an account</h3>
 						<form class="row login_form" action="#/" id="register_form" >
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="userid" name="UserID" placeholder="User ID" onfocus="this.placeholder = ''" onblur="this.placeholder = 'User ID'">
-								<input type="button" value="중복확인" class="check_btn" id="id_check">
+								<input type="text" class="form-control" id="phone" name="phone" placeholder="phone number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'phone number'">
+							</div>
+							
+              				<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="juso" name="juso" placeholder="juso" onfocus="this.placeholder = ''" onblur="this.placeholder = 'juso'">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="password" name="Password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="username" name="User Name" placeholder="User Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'User Name'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="email" name="email" placeholder="e-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'e-mail'">
-								<input type="button" value="이메일 인증" class="check_btn" id="email_send">
+								<input type="text" class="form-control" id="juso" name="juso" placeholder="juso2" onfocus="this.placeholder = ''" onblur="this.placeholder = 'juso'">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="email_check" name="email_check">
-								<input type="button" value="확인" class="check_btn" id="email_check">
+								<input type="text" class="form-control" id="juso" name="juso" placeholder="juso3" onfocus="this.placeholder = ''" onblur="this.placeholder = 'juso'">
 							</div>
 							<div class="col-md-12 form-group">
-								<div class="creat_account">
-									<input type="checkbox" id="f-option2" name="selector">
-									<label for="f-option2">Keep me logged in</label> <!-- 이건 무슨 기능???? -->
-								</div>
+								<label for="cars">model</label>
+								<select name="cars" id="cars"> <!-- 자동차 정보 수정 -->
+									<option value="소나타">소나타</option>
+									<option value="그린저">그린저</option>
+									<option value="카니발">카니발</option>
+									<option value="소울">소울</option>
+									<option value="마티즈">마티즈</option>
+								</select>
+								
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="button button-register w-100">Register</button>
+								<input type="button" value="이전" class="button button-register w-100" onclick="document.getElementById('registerForm1').style.visibility='visible';document.getElementById('registerForm2').style.visibility='hidden';">
+								<button type="submit" value="submit" class="button button-register w-100">가입완료</button>
 							</div>
 						</form>
 					</div>

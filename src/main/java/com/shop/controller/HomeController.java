@@ -19,7 +19,7 @@ import lombok.Setter;
 
 public class HomeController {
 
-	@Setter(onMethod_ = @Autowired)
+	@Setter(onMethod_= @Autowired)
 	private CarShopService service;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);

@@ -36,5 +36,22 @@
     font-size: 25px;
     cursor: pointer;
     border-radius: 10px;
+    
+}.registerForm2 {
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    top: -610px;
+    left: 570px;
+    background: blue;
+    /* background: blue; */
+}.registerForm1 {
+    position: relative;
+    z-index: 2;
 }
+
+
 }
