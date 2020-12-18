@@ -62,10 +62,21 @@ public class HomeController {
 		return"carshop/cart";
 	}	
 	
+	
+	@RequestMapping("/fake")
+	public String fake() {
+		return "carshop/fake";
+	}
+
+	
+	
+	
 	@RequestMapping("/home")
 	public String a() {
 		return "home";
 	}
+	
+
 
 	
 }
