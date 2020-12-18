@@ -2,34 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <!-- ================ start banner area ================= -->
-<script>
-	$(function() {
 
-		$("#btnDelete").click(function() {
-			if (confirm("장바구니를 모두 비우시겠습니까?")) {
-				location.href = "${path}/carshop/cart/deleteAll.do";
-				// 모든 장바구니를 초기화 하는 쿼리문 작성 - 버튼 기능은 추후 구현 예정 
-			}
-		});
-	});
-</script>
-
-
-<section class="blog-banner-area" id="category">	
-		<img class="img-fluid"  src="/resources/img/like/like1.png" alt=""  />
-			<div class="blog-banner">
-		
-				<div class="text-center"  >
-					<h1 style = "color:white">LIKE</h1>
-					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item active" aria-current="page"></li>
-						</ol>
-					</nav>
-				</div>
-			</div>
-
-
+<section class="blog-banner-area" id="category">
+	<img class="img-fluid" src="/resources/img/like/like1.png" alt="like배너"  style= "position: absolute; top:0; left: 0; width: 100%; height: 100%"/> 
+<!-- 정상 출력 안되면 like 문구 출 -->
+	<div class="blog-banner">
+		<div class="text-center">
+			<h1 style="color: white">LIKE</h1>
+			<nav aria-label="breadcrumb" class="banner-breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item active" aria-current="page"></li>
+				</ol>
+			</nav>
+		</div>
+	</div>
 </section>
 <!-- ================ end banner area ================= -->
 
@@ -41,26 +27,26 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col"><b>장바구니</b></th>
+							<th scope="col"><b>찜</b></th>
 							<th scope="col">price</th>
-							<th scope="col"><b>&emsp;&emsp;&emsp;수량</b></th>
-							<th scope="col">&ensp;total</th>
-							<th scope="col"><b>&emsp;&emsp;&emsp; 삭제</b></th>
+							<th scope="col"><b>수량</b></th>
+							<th scope="col">total</th>
+							<th scope="col"><b>찜</b></th> 
 						</tr>
 					</thead>
 					<tbody>
 						<c:choose>
 							<c:when test="${map.count == 0 }">
-  								  장바구니가 비었습니다.
-  								  
-    							</c:when>
-							<!-- 장바구니가 0 비었을 때, 장바구니가 비었다고 뜬다. -->
-							<c:otherwise>
+							
+  								 ※찜한 상품이 없습니다.
+  							</c:when>	<!-- 장바구니가 0 비었을 때, 장바구니가 비었다고 뜬다. -->
+    							
+    							<c:otherwise>
 								<!-- map.count가 0이 아닐때, 즉 자료가 있을때 -->
 								<!-- form을 실행한다.  -->
 								<!-- form의 id를 form1로 하고, method 방식을 post로 한다. 그리고 update.do페이지로 이동 -->
 								<form id="form1" name="form1" method="post"
-									action="${path}/carshop/cart/update.do">
+									action="${path}/carshop/like/update.do">
 
 									<!-- map에 있는 list출력하기 위해 forEach문을 사용해 row라는 변수에 넣는다. -->
 									<c:forEach var="row" items="${map.list}">
@@ -96,10 +82,11 @@
 											<a class="gray_btn ml-2" id="btnDelete" href="#">비우기</a></td>
 
 										<!--btnUpdate와 btnDelete id는 위쪽에 있는 자바스크립트가 처리한다.  -->
-										<td></td>
+
 										<td></td>
 										<td></td>
 									</tr>
+
 									<tr>
 										<td></td>
 										<td></td>
@@ -107,24 +94,20 @@
 										<td>
 											<h5>total</h5>
 										</td>
-
 										<td><fmt:formatNumber value="${map.total}"
 												pattern="#,###,###" />원</td>
-
-										</td>
 									</tr>
+
 									<tr class="shipping_area">
 										<td class="d-none d-md-block"></td>
-
-
 										<td></td>
 										<td></td>
-
 										<td>
 											<h5>Shipping</h5>
 										</td>
 										<td>2,500원</td>
 									</tr>
+
 									<tr class="out_button_area">
 										<td class="d-none-l"></td>
 										<td class=""></td>
@@ -140,10 +123,8 @@
 									</tr>
 							</c:otherwise>
 						</c:choose>
-
 					</tbody>
 				</table>
-
 			</div>
 		</div>
 	</div>
