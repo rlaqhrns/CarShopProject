@@ -76,6 +76,8 @@ public class HomeController {
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "carshop/mypage";
+		
+	}
 
 	@GetMapping("/productForm")
 	public String productForm(Model model) {
@@ -85,7 +87,7 @@ public class HomeController {
 		return "carshop/productForm";
 	}
 
-	// action 에서 post 방식으로 들어올 시 입력 폼
+	//action 에서 post 방식으로 들어올 시 입력 폼 
 	@PostMapping("/productForm")
 	public String register(Prod_Tbl product) {
 		log.info("컨틀롤러에서 등록 " + product);
@@ -98,4 +100,10 @@ public class HomeController {
 		return "carshop/productdetails";
 	}
 	
+
+	@RequestMapping("/confirmation")
+	public String confirmation() {
+		return "carshop/confirmation";
+	}
+
 }
