@@ -18,8 +18,8 @@
 					<h1>상품 구매 페이지</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+              <li class="breadcrumb-item"><a href="#">구매할 상품을 확인해주세요</a></li>
+              <li class="breadcrumb-item active" aria-current="page">구매합니다.</li>
             </ol>
           </nav>
 				</div>
