@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	<!-- 미완성페이지 -->
+
+<!-- 미완성페이지 -->
 
 <!DOCTYPE html>
 <html lang="UTF-8">
@@ -12,6 +12,9 @@
 <title>저기 카</title>
 
 <style>
+.login_box_img:before{
+	display: none;
+}
 .searchbar {
 	margin-bottom: auto;
 	margin-top: auto;
@@ -121,32 +124,83 @@
 		</div>
 	</header>
 	<div class="row">
-		<form action="">
-			<!-- 로그인 되어있는 회원의 나머지 받아서 정보는 hidden으로 보냄 -->
-			<input type="hidden" name="u_id" value="">
-			<input type="hidden" name="u_pw" value="">
-			<input type="hidden" name="name" value="">
-			<input type="hidden" name="phone" value="">
-			<input type="hidden" name="email" value="">
-			<input type="hidden" name="addr" value="">
-			<label for="cars">model</label>
-			<select name="cars" id="cars" id="carselect">
-				<!-- 자동차 정보 수정 -->
-				<option value="소나타">소나타</option>
-				<option value="그린저">그린저</option>
-				<option value="카니발">카니발</option>
-				<option value="소울">소울</option>
-				<option value="마티즈">마티즈</option>
-			</select>
-		</form>
+		<div class="container">
+			<div class="cart_inner">
+				<section class="login_box_area section-margin">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="login_box_img">
+									<div class="hover">
+										<h4>My Car</h4>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="login_form_inner register_form_inner">
+									<h3>Choose My Car</h3>
+									<form class="row login_form" action="#/" id="mycar_form">
+										<label for="cars">model</label>
+										<div class="col-md-12 form-group">
+											<select name="cars" id="cars" id="carselect">
+												<option value="소나타">소나타</option>
+												<option value="그린저">그린저</option>
+												<option value="카니발">카니발</option>
+												<option value="소울">소울</option>
+												<option value="마티즈">마티즈</option>
+											</select>
+										</div>
+										<div class="col-md-12 form-group">
+											<input type="hidden" name="u_id" value=""> <input
+												type="hidden" name="u_pw" value=""> <input
+												type="hidden" name="name" value=""> <input
+												type="hidden" name="phone" value=""> <input
+												type="hidden" name="email" value=""> <input
+												type="hidden" name="addr" value="">
+										</div>
+
+										<div class="col-md-12 form-group">
+											<button type="submit" value="submit"
+												class="button button-register w-100">my car 등록</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- <form action="">
+					로그인 되어있는 회원의 나머지 받아서 정보는 hidden으로 보냄
+					<input type="hidden" name="u_id" value="">
+					<input type="hidden" name="u_pw" value="">
+					<input type="hidden" name="name" value="">
+					<input type="hidden" name="phone" value="">
+					<input type="hidden" name="email" value="">
+					<input type="hidden" name="addr" value="">
+					<label for="cars">model</label>
+					<select name="cars" id="cars" id="carselect">
+						자동차 정보 수정
+						<option value="소나타">소나타</option>
+						<option value="그린저">그린저</option>
+						<option value="카니발">카니발</option>
+						<option value="소울">소울</option>
+						<option value="마티즈">마티즈</option>
+					</select>
+				</form> -->
+			</div>
+		</div>
 	</div>
-<script>
-	$(document).ready(function() {
-		$("body").css({'background':'url(/resources/img/sonata.jpg)'});
-		
-		$("select").change(function() {
-			
+	<script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("div.login_box_img").css({
+				'background' : 'url(/resources/img/sonata.jpg)'
+				
+			});
+
+			$("select").change(function() {
+				
+			});
 		});
-	});
-</script>
+	</script>
 	<%@ include file="../include/footer.jsp"%>
