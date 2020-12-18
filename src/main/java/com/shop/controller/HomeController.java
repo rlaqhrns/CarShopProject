@@ -31,8 +31,8 @@ import lombok.Setter;
 
 public class HomeController {
 
-//	@Setter(onMethod_ = @Autowired)
-//	private CarShopService service;
+	@Setter(onMethod_ = @Autowired)
+	private CarShopService service;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -40,13 +40,13 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 
-//	@RequestMapping({ "/", "index" })
-//	public String index(Model model) {
-//		model.addAttribute("list", service.index());
-//
-//		return "carshop/index";
-//
-//	}
+	@RequestMapping({ "/", "index" })
+	public String index(Model model) {
+		model.addAttribute("list", service.index());
+
+		return "carshop/index";
+
+	}
 
 	@RequestMapping("/register")
 	public String register() {
