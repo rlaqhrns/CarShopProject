@@ -6,8 +6,8 @@
 
 
 	<title>Aroma Shop</title>
-	<link rel="stylesheet" href="vendors/linericon/style.css">
-	<link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
+	<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
+	<link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
 	
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
@@ -29,156 +29,34 @@
   <!--================Order Details Area =================-->
   <section class="order_details section-margin--small">
     <div class="container">
-      <p class="text-center billing-alert">감사합니다 구매이력을 확인하세요.</p>
-      <div class="row mb-5">
-        <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
-          <div class="confirmation-card">
-            <h3 class="billing-title">Order Info</h3>
-            <table class="order-rable">
-              <tr>
-                <td>Order number</td>
-                <td>: 60235</td>
-              </tr>
-              <tr>
-                <td>Date</td>
-                <td>: Oct 03, 2017</td>
-              </tr>
-              <tr>
-                <td>Total</td>
-                <td>: USD 2210</td>
-              </tr>
-              <tr>
-                <td>Payment method</td>
-                <td>: Check payments</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
-          <div class="confirmation-card">
-            <h3 class="billing-title">Billing Address</h3>
-            <table class="order-rable">
-              <tr>
-                <td>Street</td>
-                <td>: 56/8 panthapath</td>
-              </tr>
-              <tr>
-                <td>City</td>
-                <td>: Dhaka</td>
-              </tr>
-              <tr>
-                <td>Country</td>
-                <td>: Bangladesh</td>
-              </tr>
-              <tr>
-                <td>Postcode</td>
-                <td>: 1205</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-<!--         <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
-          <div class="confirmation-card">
-            <h3 class="billing-title">Shipping Address</h3>
-            <table class="order-rable">
-              <tr>
-                <td>Street</td>
-                <td>: 56/8 panthapath</td>
-              </tr>
-              <tr>
-                <td>City</td>
-                <td>: Dhaka</td>
-              </tr>
-              <tr>
-                <td>Country</td>
-                <td>: Bangladesh</td>
-              </tr>
-              <tr>
-                <td>Postcode</td>
-                <td>: 1205</td>
-              </tr>
-            </table>
-          </div>
-        </div> -->
-      </div>
+      <p class="text-center billing-alert">감사합니다 주문상세정보를 확인하세요.</p>
+
       <div class="order_details_table">
-        <h2>Order Details</h2>
+        <h2>주문 상세정보</h2>
         <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
+              	<th scope="col">구매날짜</th>
+                <th scope="col">구매물품</th>
+                <th scope="col">상품수량</th>
+                <th scope="col">상품가격</th>
+                <th scope="col">결제수단</th>
+                <th scope="col">교환</th>
+                <th scope="col">환불</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <p>Pixelstore fresh Blackberry</p>
-                </td>
-                <td>
-                  <h5>x 02</h5>
-                </td>
-                <td>
-                  <p>$720.00</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>Pixelstore fresh Blackberry</p>
-                </td>
-                <td>
-                  <h5>x 02</h5>
-                </td>
-                <td>
-                  <p>$720.00</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>Pixelstore fresh Blackberry</p>
-                </td>
-                <td>
-                  <h5>x 02</h5>
-                </td>
-                <td>
-                  <p>$720.00</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h4>Subtotal</h4>
-                </td>
-                <td>
-                  <h5></h5>
-                </td>
-                <td>
-                  <p>$2160.00</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h4>Shipping</h4>
-                </td>
-                <td>
-                  <h5></h5>
-                </td>
-                <td>
-                  <p>Flat rate: $50.00</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h4>Total</h4>
-                </td>
-                <td>
-                  <h5></h5>
-                </td>
-                <td>
-                  <h4>$2210.00</h4>
-                </td>
-              </tr>
+              <c:forEach items="${list}" var ="login" varStatus="status">
+                    <tr>
+                      <td><c:out value="${login.free_id}"></c:out></td>                    
+                      <td><c:out value="${login.free_name}"></c:out></td>
+                      <td><c:out value="${login.free_password}"></c:out></td>
+                      <td><c:out value="${login.main_address}"></c:out></td>
+                      <td><c:out value="${login.detail_address}"></c:out></td>
+                      <td><c:out value="${login.cellphone}"></c:out></td>
+                      <td><c:out value="${login.invoice}"></c:out></td>
+                   </c:forEach>
             </tbody>
           </table>
         </div>
