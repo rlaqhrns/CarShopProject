@@ -80,5 +80,9 @@ public class HomeController {
 	public String mycar(Model model) {
 		return "carshop/mycar";
 	}
+	@RequestMapping("/product/details")
+	public String detail() {
+		return "carshop/productdetails";
+	}
 	
 }
