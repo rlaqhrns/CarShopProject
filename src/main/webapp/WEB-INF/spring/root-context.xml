@@ -30,11 +30,8 @@
 
 	
 	<mybatis-spring:scan base-package="com.shop.mapper"/>
-<<<<<<< HEAD
-		<context:component-scan
-		base-package="com.shop.service"></context:component-scan>
-=======
->>>>>>> branch 'master' of https://github.com/shin745/CarShopProject.git
+
+
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<context:annotation-config></context:annotation-config>

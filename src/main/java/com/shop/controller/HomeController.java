@@ -59,6 +59,7 @@ public class HomeController {
 	@GetMapping("/productForm")
 	public String productForm(Model model) {
 		System.out.println("productForm 들어옴");
+		model.addAttribute("cateParent",service.cateParent());
 		model.addAttribute("category", service.category());
 		return "carshop/productForm";
 	}
