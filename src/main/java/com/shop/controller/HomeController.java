@@ -40,13 +40,13 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 
-	@RequestMapping({ "/", "index" })
-	public String index(Model model) {
-		model.addAttribute("list", service.index());
-
-		return "carshop/index";
-
-	}
+//	@RequestMapping({ "/", "index" })
+//	public String index(Model model) {
+//		model.addAttribute("list", service.index());
+//
+//		return "carshop/index";
+//
+//	}
 
 	@RequestMapping("/register")
 	public String register() {
@@ -84,35 +84,44 @@ public class HomeController {
 		return "carshop/login";
 	}
 	
-	//보미_로그인성공시 index화면으로 돌아가기(로그인된상태_로그인&회원가입 버튼 안보이게)
-	@PostMapping("/login")
-	@ResponseBody
-	public String login_success(HttpServletRequest request, HttpServletResponse response ) throws IOException {
+
+	@PostMapping("/login") //시큐리티고 뭐고 안된다면 이걸로 쓴다
+	public String login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
-		HttpSession session = request.getSession();
-		PrintWriter out = response.getWriter();
+		System.out.println("post2로 들어옴");
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("password");
 		
 		System.out.println("id : " + id + " pw : " + pw);
 
-		session.setAttribute("id", id);
-		session.setAttribute("pw", pw);
-		
 		//service.getAllUser();                            //db연결하면 사용
 		
 		if(id.equals("admin") && pw.equals("admin")) {     //db없이 test해보기 위함
 			session.setAttribute("id" , id);
 			session.setAttribute("pw", pw);
-			return "carshop/index";  						 //redirect가 안됨! 해야하나?
+
+			return "/carshop/index";  						 //redirect가 안됨! 해야하나?
 			
 		} else {
-			out.println("hi!");
-			return null;
+			System.out.println("로그인실패");
+			return "/carshop/loginerror";
 		}    
-		
+	}
 	
+	@GetMapping("/all")
+	public void all() {
+		System.out.println("누구나 접근가능");
+	}
+	
+	@GetMapping("/member")
+	public void member() {
+		System.out.println("회원만 접근가능 ");
+	}
+	
+	@GetMapping("/admin")
+	public void admin() {
+		System.out.println("관리자만 접근가능 ");
 	}
 	
 	@RequestMapping("/mypage")
