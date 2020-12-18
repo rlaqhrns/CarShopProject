@@ -79,7 +79,6 @@ public class HomeController {
 		return "home";
 	}
 	
-<<<<<<< HEAD
 	@GetMapping("/login")
 	public String login() {
 		return "carshop/login";
@@ -116,8 +115,6 @@ public class HomeController {
 	
 	}
 	
-
-=======
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "carshop/mypage";
@@ -128,5 +125,4 @@ public class HomeController {
 		return "carshop/mycar";
 	}
 	
->>>>>>> branch 'master' of https://github.com/lee-bomi/CarShopProject
 }
