@@ -42,14 +42,39 @@ public class HomeController {
 
 	}
 
+	@RequestMapping("/product")
+	public String product() {
+		return "carshop/product";
+	}
+
 	@RequestMapping("/checkout")
 	public String checkout() {
 		return "carshop/checkout";
 	}
-
+	
+	@RequestMapping("/like")
+	public String like() {
+		return"carshop/like";
+	}	
+	
+	@RequestMapping("/cart")
+	public String cart() {
+		return"carshop/cart";
+	}	
+	
 	@RequestMapping("/home")
 	public String a() {
 		return "home";
 	}
-
+	
+	@RequestMapping("/mypage")
+	public String mypage() {
+		return "carshop/mypage";
+	}
+	
+	@RequestMapping("/mycar")
+	public String mycar(Model model) {
+		return "carshop/mycar";
+	}
+	
 }
