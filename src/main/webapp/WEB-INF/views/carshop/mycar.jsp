@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!-- 미완성페이지 -->
-
 <!DOCTYPE html>
 <html lang="UTF-8">
 <head>
@@ -12,51 +10,8 @@
 <title>저기 카</title>
 
 <style>
-.login_box_img:before{
+.login_box_img:before{ /* 파란색 커버 지움 */
 	display: none;
-}
-.searchbar {
-	margin-bottom: auto;
-	margin-top: auto;
-	height: 60px;
-	background-color: #353b48;
-	border-radius: 30px;
-	padding: 10px;
-}
-
-.search_input {
-	color: white;
-	border: 0;
-	outline: 0;
-	background: none;
-	width: 0;
-	caret-color: transparent;
-	line-height: 40px;
-	transition: width 0.4s linear;
-}
-
-.searchbar:hover>.search_input {
-	padding: 0 10px;
-	width: 450px;
-	caret-color: red;
-	transition: width 0.4s linear;
-}
-
-.searchbar:hover>.search_icon {
-	background: white;
-	color: #e74c3c;
-}
-
-.search_icon {
-	height: 40px;
-	width: 40px;
-	float: right;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 50%;
-	color: white;
-	text-decoration: none;
 }
 </style>
 
@@ -75,9 +30,6 @@
 	href="/resources/vendors/owl-carousel/owl.carousel.min.css">
 
 <link rel="stylesheet" href="/resources/css/style.css">
-
-
-
 
 </head>
 
@@ -129,7 +81,7 @@
 				<section class="login_box_area section-margin">
 					<div class="container">
 						<div class="row">
-							<div class="col-lg-6">
+							<div class="col-lg-6">  <!-- 여기는 그냥 사진보여주는 박스 -->
 								<div class="login_box_img">
 									<div class="hover">
 										<h4>My Car</h4>
@@ -139,26 +91,28 @@
 							<div class="col-lg-6">
 								<div class="login_form_inner register_form_inner">
 									<h3>Choose My Car</h3>
-									<form class="row login_form" action="#/" id="mycar_form">
+									<!-- 폼 시작, class명은 css가 적용되니 바꾸지 말것, 폼 전송 위해 제이쿼리객체 생성때는 id명으로 하기 -->
+									<form class="row login_form" action="#/" id="mycar_form">   
 										<label for="cars">model</label>
 										<div class="col-md-12 form-group">
 											<select name="cars" id="cars" id="carselect">
 												<option value="소나타">소나타</option>
-												<option value="그린저">그린저</option>
+												<option value="그랜저">그랜저</option>
 												<option value="카니발">카니발</option>
 												<option value="소울">소울</option>
 												<option value="마티즈">마티즈</option>
 											</select>
 										</div>
+										<!-- 로그인 된 사용자의 다른 정보는 hidden, value는 jstl로 나중에 가져오기 -->
 										<div class="col-md-12 form-group">
-											<input type="hidden" name="u_id" value=""> <input
-												type="hidden" name="u_pw" value=""> <input
-												type="hidden" name="name" value=""> <input
-												type="hidden" name="phone" value=""> <input
-												type="hidden" name="email" value=""> <input
-												type="hidden" name="addr" value="">
+											<input type="hidden" name="u_id" value="">
+											<input type="hidden" name="u_pw" value="">
+											<input type="hidden" name="name" value="">
+											<input type="hidden" name="phone" value="">
+											<input type="hidden" name="email" value="">
+											<input type="hidden" name="addr" value="">
 										</div>
-
+											<!-- 전송 버튼 -->
 										<div class="col-md-12 form-group">
 											<button type="submit" value="submit"
 												class="button button-register w-100">my car 등록</button>
@@ -169,37 +123,46 @@
 						</div>
 					</div>
 				</section>
-				<!-- <form action="">
-					로그인 되어있는 회원의 나머지 받아서 정보는 hidden으로 보냄
-					<input type="hidden" name="u_id" value="">
-					<input type="hidden" name="u_pw" value="">
-					<input type="hidden" name="name" value="">
-					<input type="hidden" name="phone" value="">
-					<input type="hidden" name="email" value="">
-					<input type="hidden" name="addr" value="">
-					<label for="cars">model</label>
-					<select name="cars" id="cars" id="carselect">
-						자동차 정보 수정
-						<option value="소나타">소나타</option>
-						<option value="그린저">그린저</option>
-						<option value="카니발">카니발</option>
-						<option value="소울">소울</option>
-						<option value="마티즈">마티즈</option>
-					</select>
-				</form> -->
 			</div>
 		</div>
 	</div>
 	<script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			$("div.login_box_img").css({
-				'background' : 'url(/resources/img/sonata.jpg)'
-				
+			$("div.login_box_img").css({  //페이지 시작시 사진 적용
+				'background' : 'url(/resources/img/carnival.jpg)',
+				'background-size' : 'cover'
 			});
 
-			$("select").change(function() {
-				
+			$("select").change(function() {  //select의 값이 바꼈을때(차종이 선택됐을때)
+				let model = $(this).val();
+				if(model == "소나타"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/sonata.jpg)',
+						'background-size' : 'cover'
+					});
+				} else if (model == "그랜저"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/grandeur.jpg)',
+						'background-size' : 'cover'
+					});
+				} else if (model == "카니발"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/carnival.jpg)',
+						'background-size' : 'cover'
+					});
+				} else if (model == "소울"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/soul.jpg)',
+						'background-size' : 'cover'
+					});
+				} else if (model == "마티즈"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/matiz.jpg)',
+						'background-size' : 'cover'
+					});
+				}
+
 			});
 		});
 	</script>
