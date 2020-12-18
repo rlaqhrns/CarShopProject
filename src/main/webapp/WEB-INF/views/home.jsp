@@ -12,7 +12,8 @@
 	Hello world!  한글
 </h1>
 
-<P>  The time on the server is ${serverTime}. 안녕</P>
+<P>  The time on the server is ${serverTime}.</P>
+
 </body>
 <%@ include file="include/footer.jsp"%>
 

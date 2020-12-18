@@ -111,7 +111,7 @@
 									<i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span>
 								</button></li>
 							<li class="nav-item"><a class="button button-header"
-								href="register">회원가입</a></li>
+								href="register">login</a></li>
 						</ul>
 					</div>
 				</div>
