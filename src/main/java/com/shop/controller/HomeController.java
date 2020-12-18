@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shop.service.CarShopService;
+import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -28,7 +30,7 @@ import lombok.Setter;
  */
 @Controller
 @RequestMapping("/carshop/*")
-
+@Slf4j
 public class HomeController {
 
 	@Setter(onMethod_ = @Autowired)
@@ -40,13 +42,13 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 
-//	@RequestMapping({ "/", "index" })
-//	public String index(Model model) {
-//		model.addAttribute("list", service.index());
-//
-//		return "carshop/index";
-//
-//	}
+	@RequestMapping({ "/", "index" })
+	public String index(Model model) {
+		model.addAttribute("list", service.index());
+
+		return "carshop/index";
+
+	}
 
 	@RequestMapping("/register")
 	public String register() {
@@ -54,15 +56,11 @@ public class HomeController {
 
 	}
 
-	@RequestMapping("/product")
-	public String product() {
-		return "carshop/product";
-	}
-
 	@RequestMapping("/checkout")
 	public String checkout() {
 		return "carshop/checkout";
 	}
+
 	
 	@RequestMapping("/like")
 	public String like() {
@@ -74,10 +72,17 @@ public class HomeController {
 		return"carshop/cart";
 	}	
 	
+	
+	@RequestMapping("/fake")
+	public String fake() {
+		return "carshop/fake";
+	}
+
 	@RequestMapping("/home")
 	public String a() {
 		return "home";
 	}
+
 	
 	@GetMapping("/login")
 	public String login() {
@@ -124,18 +129,38 @@ public class HomeController {
 		System.out.println("관리자만 접근가능 ");
 	}
 	
+
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "carshop/mypage";
+		
 	}
-	
-	@RequestMapping("/mycar")
-	public String mycar(Model model) {
-		return "carshop/mycar";
+
+	@GetMapping("/productForm")
+	public String productForm(Model model) {
+		System.out.println("productForm 들어옴");
+		model.addAttribute("cateParent",service.cateParent());
+		model.addAttribute("category", service.category());
+		return "carshop/productForm";
 	}
+
+	//action 에서 post 방식으로 들어올 시 입력 폼 
+	@PostMapping("/productForm")
+	public String register(Prod_Tbl product) {
+		log.info("컨틀롤러에서 등록 " + product);
+		service.productForm(product);
+		return "redirect:/carshop/index";
+	}
+
 	@RequestMapping("/product/details")
 	public String detail() {
 		return "carshop/productdetails";
 	}
 	
+
+	@RequestMapping("/confirmation")
+	public String confirmation() {
+		return "carshop/confirmation";
+	}
+
 }
