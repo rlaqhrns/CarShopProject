@@ -8,5 +8,11 @@
 		select * from prod_tbl order by hit desc
 		]]>
 	</select>
+	
+	<select id="getAllUser" resultType="com.shop.vo.All_User_Tbl">
+	<![CDATA[
+		select * from All_User_Tbl where id=#{id}
+		]]>
+	</select>
 
 </mapper>
