@@ -71,4 +71,9 @@ public class HomeController {
 		return "redirect:/carshop/index";
 	}
 
+	@RequestMapping("/product/details")
+	public String detail() {
+		return "carshop/productdetails";
+	}
+	
 }

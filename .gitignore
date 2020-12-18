@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse
 
+/target/
+
 ### Eclipse ###
 .metadata
 bin/
@@ -16,7 +18,12 @@ local.properties
 .recommenders
 .classpath
 .project
+<<<<<<< HEAD
 
+=======
+.DS_Store
+.DS_Store?
+>>>>>>> branch 'master' of https://github.com/shin745/CarShopProject.git
 # External tool builders
 .externalToolBuilders/
 
