@@ -51,10 +51,31 @@ public class HomeController {
 		return "carshop/checkout";
 	}
 
+	
+	@RequestMapping("/like")
+	public String like() {
+		return"carshop/like";
+	}	
+	
+	@RequestMapping("/cart")
+	public String cart() {
+		return"carshop/cart";
+	}	
+	
+	
+	@RequestMapping("/fake")
+	public String fake() {
+		return "carshop/fake";
+	}
+
 	@RequestMapping("/home")
 	public String a() {
 		return "home";
 	}
+
+	@RequestMapping("/mypage")
+	public String mypage() {
+		return "carshop/mypage";
 
 	@GetMapping("/productForm")
 	public String productForm(Model model) {
