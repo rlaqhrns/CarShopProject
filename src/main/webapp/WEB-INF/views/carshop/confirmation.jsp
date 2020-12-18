@@ -29,7 +29,7 @@
   <!--================Order Details Area =================-->
   <section class="order_details section-margin--small">
     <div class="container">
-      <p class="text-center billing-alert">감사합니다 주문상세정보를 확인하세요.</p>
+      <p class="text-center billing-alert">감사합니다. 주문 상세정보를 확인하세요.</p>
 
       <div class="order_details_table">
         <h2>주문 상세정보</h2>
