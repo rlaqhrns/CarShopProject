@@ -1,216 +1,139 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
+<!-- ================ start banner area ================= -->
 
-	<!-- ================ start banner area ================= -->	
 
-	<section class="blog-banner-area" id="category">
-		<div class="container h-100">
-			<div class="blog-banner">
-				<div class="text-center">
-					<h1>like</h1>
-					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">like</li>
-            </ol>
-          </nav>
-				</div>
+<script>
+	$empty = $(".icon_heart_empty");
+
+	$empty.click(function() {
+		$empty.toggleClass("icon_heart_empty");
+		$empty.toggleClass("icon_heart_red");
+	})
+</script>
+
+<html>
+<!-- hraet 아이콘 css 생성  -->
+<style>
+.icon_heart_empty {
+	width: 50px;
+	height: 50px;
+	background-size: cover;
+	background-position: center;
+	background-image: url(/resources/img/heart/heart_empty.png);
+}
+
+.icon_heart_red {
+	width: 50px;
+	height: 50px;
+	background-position: center;
+	background-size: cover;
+	background-image: url(/resources/img/heart/heart_red.png);
+}
+</style>
+<!-- css 종료 -->
+
+<section class="blog-banner-area" id="category">
+	<img class="img-fluid" src="/resources/img/like/like1.png" alt="like배너"
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" />
+	<!-- 정상 출력 안되면 like 문구 출 -->
+	<div class="blog-banner">
+		<div class="text-center">
+			<h1 style="color: white">LIKE</h1>
+			<nav aria-label="breadcrumb" class="banner-breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item active" aria-current="page"></li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+</section>
+<!-- ================ end banner area ================= -->
+
+<!--================Cart Area =================-->
+<section class="cart_area">
+	<div class="container">
+		<div class="cart_inner">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col"><b>상품명</b></th>
+							<th scope="col">price</th>
+							<th scope="col"><b>장바구니 담기</b></th>
+							<th scope="col"><b>찜</b></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${map.count == 0 }">
+							
+  								 ※찜한 상품이 없습니다.
+  							</c:when>
+							<!-- 장바구니가 0 비었을 때, 장바구니가 비었다고 뜬다. -->
+
+							<c:otherwise>
+								<!-- map.count가 0이 아닐때, 즉 자료가 있을때 -->
+								<!-- form을 실행한다.  -->
+								<!-- form의 id를 form1로 하고, method 방식을 post로 한다. 그리고 update.do페이지로 이동 -->
+								<form id="form1" name="form1" method="post"
+									action="${path}/carshop/like/update.do">
+
+									<!-- map에 있는 list출력하기 위해 forEach문을 사용해 row라는 변수에 넣는다. -->
+									<c:forEach var="row" items="${map.list}">
+										<tr align="center">
+											<td>${row.pname}</td>
+
+											<td><fmt:formatNumber value="${row.amount}"
+													pattern="#,###,###" />원</td>
+											<!-- fmt:formatNumber 태그는 숫자를 양식에 맞춰서 문자열로 변환해주는 태그이다 -->
+											<!-- 여기서는 금액을 표현할 때 사용 -->
+											<!-- ex) 5,000 / 10,000 등등등-->
+											<!-- 물건의 개수 (quantity)를 fmt태그를 사용해서 패턴의 형식에 맞춰서 문자열로 변환함 -->
+											<!--1,000 / 5,000 등등~  -->
+											<th><a class="primary-btn ml-2" href="#">장바구니 담기</a></th>
+											<td><a
+												href="${path}/carshop/cart/delete.do?pno=${row.pno}"
+												class="icon_heart_empty"></a> <!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 pno (삭제하길원하는 장바구니 pno )를 보내서 삭제한다. -->
+
+											
+
+											</td>
+										</tr>
+
+									</c:forEach>
+									<tr class="bottom_button">
+										<td><a class="gray_btn" id="btnUpdate" href="#">Update</a>
+											<a class="gray_btn ml-2" id="btnDelete" href="#">비우기</a></td>
+
+										<!--btnUpdate와 btnDelete id는 위쪽에 있는 자바스크립트가 처리한다.  -->
+
+										<td></td>
+										<td></td>
+										<td></td>
+									<tr class="out_button_area">
+										<td class="d-none-l"></td>
+										<td class=""></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>
+											<div class="checkout_btn_inner d-flex align-items-center">
+												<a class="primary-btn ml-2" href="#">장바구니</a>
+											</div>
+										</td>
+									</tr>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
 			</div>
-    </div>
-	</section>
-	
-	<!-- 경로 성연이 쪽으로 나중에 수정하기  -->>
-	<!-- ================ end banner area ================= -->
+		</div>
+	</div>
+</section>
+<!--================End Cart Area =================-->
+</html>
 
-  <!--================Cart Area =================-->
-  <section class="cart_area">
-      <div class="container">
-          <div class="cart_inner">
-              <div class="table-responsive">
-                  <table class="table">
-                      <thead>
-                          <tr>
-                              <th scope="col">Product</th>
-                              <th scope="col">Price</th>
-                              <th scope="col">Quantity</th>
-                              <th scope="col">Total</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td>
-                                  <div class="media">
-                                      <div class="d-flex">
-                                          <img src="img/cart/cart1.png" alt="">
-                                      </div>
-                                      <div class="media-body">
-                                          <p>Minimalistic shop for multipurpose use</p>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$360.00</h5>
-                              </td>
-                              <td>
-                                  <div class="product_count">
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                          class="input-text qty">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp ( sst > 0)) result.value--;return false;"
-                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$720.00</h5>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div class="media">
-                                      <div class="d-flex">
-                                          <img src="img/cart/cart2.png" alt="">
-                                      </div>
-                                      <div class="media-body">
-                                          <p>Minimalistic shop for multipurpose use</p>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$360.00</h5>
-                              </td>
-                              <td>
-                                  <div class="product_count">
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                          class="input-text qty">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp (sst > 0)) result.value--;return false;"
-                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$720.00</h5>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div class="media">
-                                      <div class="d-flex">
-                                          <img src="img/cart/cart3.png" alt="">
-                                      </div>
-                                      <div class="media-body">
-                                          <p>Minimalistic shop for multipurpose use</p>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$360.00</h5>
-                              </td>
-                              <td>
-                                  <div class="product_count">
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                          class="input-text qty">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp (sst > 0)) result.value--;return false;"
-                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$720.00</h5>
-                              </td>
-                          </tr>
-                          <tr class="bottom_button">
-                              <td>
-                                  <a class="button" href="#">Update Cart</a>
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-                                  <div class="cupon_text d-flex align-items-center">
-                                      <input type="text" placeholder="Coupon Code">
-                                      <a class="primary-btn" href="#">Apply</a>
-                                      <a class="button" href="#">Have a Coupon?</a>
-                                  </div>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-                                  <h5>Subtotal</h5>
-                              </td>
-                              <td>
-                                  <h5>$2160.00</h5>
-                              </td>
-                          </tr>
-                          <tr class="shipping_area">
-                              <td class="d-none d-md-block">
-
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-                                  <h5>Shipping</h5>
-                              </td>
-                              <td>
-                                  <div class="shipping_box">
-                                      <ul class="list">
-                                          <li><a href="#">Flat Rate: $5.00</a></li>
-                                          <li><a href="#">Free Shipping</a></li>
-                                          <li><a href="#">Flat Rate: $10.00</a></li>
-                                          <li class="active"><a href="#">Local Delivery: $2.00</a></li>
-                                      </ul>
-                                      <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
-                                      <select class="shipping_select">
-                                          <option value="1">Bangladesh</option>
-                                          <option value="2">India</option>
-                                          <option value="4">Pakistan</option>
-                                      </select>
-                                      <select class="shipping_select">
-                                          <option value="1">Select a State</option>
-                                          <option value="2">Select a State</option>
-                                          <option value="4">Select a State</option>
-                                      </select>
-                                      <input type="text" placeholder="Postcode/Zipcode">
-                                      <a class="gray_btn" href="#">Update Details</a>
-                                  </div>
-                              </td>
-                          </tr>
-                          <tr class="out_button_area">
-                              <td class="d-none-l">
-
-                              </td>
-                              <td class="">
-
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-                                  <div class="checkout_btn_inner d-flex align-items-center">
-                                      <a class="gray_btn" href="#">Continue Shopping</a>
-                                      <a class="primary-btn ml-2" href="#">Proceed to checkout</a>
-                                  </div>
-                              </td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-  </section>
-  <!--================End Cart Area =================-->
 
 <%@ include file="../include/footer.jsp"%>

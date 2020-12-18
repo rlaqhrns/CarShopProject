@@ -6,12 +6,10 @@
 			<div class="row section_gap">
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="single-footer-widget tp_widgets">
-						<h4 class="footer_title large_title">Our Mission</h4>
-						<p>So seed seed green that winged cattle in. Gathering thing
-							made fly you're no divided deep moved us lan Gathering thing us
-							land years living.</p>
-						<p>So seed seed green that winged cattle in. Gathering thing
-							made fly you're no divided deep moved</p>
+						<h4 class="footer_title large_title">집콕코딩단</h4>
+						<p>Green Academy 출신, 7명의 수석 개린이들이 창단한 집콕코딩단. 창의적인 아이디어와 실력을
+							겸비하여 '저리카SHOP' 기획, 개발했다.</p>
+
 					</div>
 				</div>
 				<div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
@@ -27,14 +25,20 @@
 				</div>
 				<div class="col-lg-2 col-md-6 col-sm-6">
 					<div class="single-footer-widget instafeed">
-						<h4 class="footer_title">Gallery</h4>
+						<h4 class="footer_title">member</h4>
 						<ul class="list instafeed d-flex flex-wrap">
-							<li><img src="/resources/img/gallery/r1.jpg" alt=""></li>
-							<li><img src="/resources/img/gallery/r2.jpg" alt=""></li>
-							<li><img src="/resources/img/gallery/r3.jpg" alt=""></li>
-							<li><img src="/resources/img/gallery/r5.jpg" alt=""></li>
-							<li><img src="/resources/img/gallery/r7.jpg" alt=""></li>
-							<li><img src="/resources/img/gallery/r8.jpg" alt=""></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
 						</ul>
 					</div>
 				</div>
@@ -45,20 +49,20 @@
 							<p class="sm-head">
 								<span class="fa fa-location-arrow"></span> Head Office
 							</p>
-							<p>123, Main Street, Your City</p>
+							<p>경기도 성남시 JIP.CO.K codingdan company 2층</p>
 
 							<p class="sm-head">
-								<span class="fa fa-phone"></span> Phone Number
+								<span class="fa fa-phone"></span> INSTAGRAM
 							</p>
 							<p>
-								+123 456 7890 <br> +123 456 7890
+								@jipcok <br> tel.031-1234-5678
 							</p>
 
 							<p class="sm-head">
 								<span class="fa fa-envelope"></span> Email
 							</p>
 							<p>
-								free@infoexample.com <br> www.infoexample.com
+								findme0@naver.com <br> www.jipcokcodingdan.com
 							</p>
 						</div>
 					</div>
@@ -76,9 +80,7 @@
 					<script>
 						document.write(new Date().getFullYear());
 					</script>
-					All rights reserved | This template is made with <i
-						class="fa fa-heart" aria-hidden="true"></i> by <a
-						href="https://colorlib.com" target="_blank">Colorlib</a>
+					All rights reserved | This template is made with by JIPCOK 
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
 			</div>
