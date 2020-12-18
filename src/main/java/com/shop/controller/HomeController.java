@@ -77,6 +77,18 @@ public class HomeController {
 	}
 	
 
-
+	@RequestMapping("/mypage")
+	public String mypage() {
+		return "carshop/mypage";
+	}
+	
+	@RequestMapping("/mycar")
+	public String mycar(Model model) {
+		return "carshop/mycar";
+	}
+	@RequestMapping("/product/details")
+	public String detail() {
+		return "carshop/productdetails";
+	}
 	
 }
