@@ -3,9 +3,41 @@
 <%@ include file="../include/header.jsp"%>
 <!-- ================ start banner area ================= -->
 
+
+<script>
+	$empty = $(".icon_heart_empty");
+
+	$empty.click(function() {
+		$empty.toggleClass("icon_heart_empty");
+		$empty.toggleClass("icon_heart_red");
+	})
+</script>
+
+<html>
+<!-- hraet 아이콘 css 생성  -->
+<style>
+.icon_heart_empty {
+	width: 50px;
+	height: 50px;
+	background-size: cover;
+	background-position: center;
+	background-image: url(/resources/img/heart/heart_empty.png);
+}
+
+.icon_heart_red {
+	width: 50px;
+	height: 50px;
+	background-position: center;
+	background-size: cover;
+	background-image: url(/resources/img/heart/heart_red.png);
+}
+</style>
+<!-- css 종료 -->
+
 <section class="blog-banner-area" id="category">
-	<img class="img-fluid" src="/resources/img/like/like1.png" alt="like배너"  style= "position: absolute; top:0; left: 0; width: 100%; height: 100%"/> 
-<!-- 정상 출력 안되면 like 문구 출 -->
+	<img class="img-fluid" src="/resources/img/like/like1.png" alt="like배너"
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" />
+	<!-- 정상 출력 안되면 like 문구 출 -->
 	<div class="blog-banner">
 		<div class="text-center">
 			<h1 style="color: white">LIKE</h1>
@@ -27,11 +59,10 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col"><b>찜</b></th>
+							<th scope="col"><b>상품명</b></th>
 							<th scope="col">price</th>
-							<th scope="col"><b>수량</b></th>
-							<th scope="col">total</th>
-							<th scope="col"><b>찜</b></th> 
+							<th scope="col"><b>장바구니 담기</b></th>
+							<th scope="col"><b>찜</b></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -39,9 +70,10 @@
 							<c:when test="${map.count == 0 }">
 							
   								 ※찜한 상품이 없습니다.
-  							</c:when>	<!-- 장바구니가 0 비었을 때, 장바구니가 비었다고 뜬다. -->
-    							
-    							<c:otherwise>
+  							</c:when>
+							<!-- 장바구니가 0 비었을 때, 장바구니가 비었다고 뜬다. -->
+
+							<c:otherwise>
 								<!-- map.count가 0이 아닐때, 즉 자료가 있을때 -->
 								<!-- form을 실행한다.  -->
 								<!-- form의 id를 form1로 하고, method 방식을 post로 한다. 그리고 update.do페이지로 이동 -->
@@ -60,19 +92,13 @@
 											<!-- ex) 5,000 / 10,000 등등등-->
 											<!-- 물건의 개수 (quantity)를 fmt태그를 사용해서 패턴의 형식에 맞춰서 문자열로 변환함 -->
 											<!--1,000 / 5,000 등등~  -->
-											<td><input type="number" name="quantity"
-												style="width: 30px;"
-												value="<fmt:formatNumber value="${row.quantity}"
-                      					      	pattern="#,###,###" " />
-
-												<input type="hidden" name="pno" value="${row.pno}">
-											</td>
-											<td><fmt:formatNumber value="${row.total}"
-													pattern="#,###,###" />원</td>
-
+											<th><a class="primary-btn ml-2" href="#">장바구니 담기</a></th>
 											<td><a
 												href="${path}/carshop/cart/delete.do?pno=${row.pno}"
-												type="button">삭제</a> <!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 pno (삭제하길원하는 장바구니 pno )를 보내서 삭제한다. -->
+												class="icon_heart_empty"></a> <!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 pno (삭제하길원하는 장바구니 pno )를 보내서 삭제한다. -->
+
+											
+
 											</td>
 										</tr>
 
@@ -85,29 +111,7 @@
 
 										<td></td>
 										<td></td>
-									</tr>
-
-									<tr>
 										<td></td>
-										<td></td>
-										<td></td>
-										<td>
-											<h5>total</h5>
-										</td>
-										<td><fmt:formatNumber value="${map.total}"
-												pattern="#,###,###" />원</td>
-									</tr>
-
-									<tr class="shipping_area">
-										<td class="d-none d-md-block"></td>
-										<td></td>
-										<td></td>
-										<td>
-											<h5>Shipping</h5>
-										</td>
-										<td>2,500원</td>
-									</tr>
-
 									<tr class="out_button_area">
 										<td class="d-none-l"></td>
 										<td class=""></td>
@@ -116,8 +120,7 @@
 										<td></td>
 										<td>
 											<div class="checkout_btn_inner d-flex align-items-center">
-												<a class="gray_btn" href="#">쇼핑계속하기</a> <a
-													class="primary-btn ml-2" href="#">전체상품주문</a>
+												<a class="primary-btn ml-2" href="#">장바구니</a>
 											</div>
 										</td>
 									</tr>
@@ -130,5 +133,7 @@
 	</div>
 </section>
 <!--================End Cart Area =================-->
+</html>
+
 
 <%@ include file="../include/footer.jsp"%>
