@@ -81,4 +81,8 @@ public class HomeController {
 		return "carshop/productdetails";
 	}
 	
+	@RequestMapping("/confirmation")
+	public String confirmation() {
+		return "carshop/confirmation";
+	}
 }
