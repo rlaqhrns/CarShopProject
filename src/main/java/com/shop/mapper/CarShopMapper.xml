@@ -32,4 +32,11 @@
 		c_parent=0
 	</select>
 
+	<select id="cateCheck" resultType="com.shop.vo.Cat_Tbl">
+		select * from cat_tbl where
+		c_parent=#{c_no} 
+	</select>
+
+
+
 </mapper>

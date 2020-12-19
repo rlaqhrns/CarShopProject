@@ -45,4 +45,9 @@ public class CarShopServiceImple implements CarShopService {
 		return mapper.cateParent();
 	}
 
+	@Override
+	public List<Cat_Tbl> cateCheck(int c_no) {
+		return mapper.cateCheck(c_no);
+	}
+
 }

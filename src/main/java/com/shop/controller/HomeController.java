@@ -1,5 +1,7 @@
 package com.shop.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shop.service.CarShopService;
+import com.shop.vo.Cat_Tbl;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
@@ -59,7 +64,7 @@ public class HomeController {
 	@GetMapping("/productForm")
 	public String productForm(Model model) {
 		System.out.println("productForm 들어옴");
-		model.addAttribute("cateParent",service.cateParent());
+		model.addAttribute("cateParent", service.cateParent());
 		model.addAttribute("category", service.category());
 		return "carshop/productForm";
 	}
@@ -76,5 +81,14 @@ public class HomeController {
 	public String detail() {
 		return "carshop/productdetails";
 	}
-	
+
+	@RequestMapping("/cateChek")
+	@ResponseBody
+	public List<Cat_Tbl> cateChek(@RequestParam("cateId") int c_no, Model model) {
+		model.addAttribute("cateCheck", service.cateCheck(c_no));
+		System.out.println("카테고리 no = " + c_no);
+		log.info(" 카테고리는 ?  " + service.cateCheck(c_no));
+		return  service.cateCheck(c_no);
+	}
+
 }

@@ -92,7 +92,7 @@ input:checked+.slider:before {
 </style>
 
 <script>
-		// onchange 로 input 태그 클릭 시 이벤트 발생
+	// onchange 로 input 태그 클릭 시 이벤트 발생
 	function setDisplay(obj) {
 		let cateParent = $('#cateParent');
 		// 상위카테고리 name
@@ -100,25 +100,39 @@ input:checked+.slider:before {
 		// 하위카테고리 id
 		let cateId = $(obj).attr('id');
 		console.log(cateId);
-		console.log("찍힘", cateName);
+		console.log(cateName);
 
-		// 하위 카테고리 를 id 로 활성화
-		$(".parts_radio").show();
-		
+		// ajax 
 		$.ajax({
-			url : '',
-			type : 'get',
-			success : function(data){
-				console.log ("data : " , data);
-			}
-			
+		// get방식으로 cateId(jquery객체화 시킨 하위카테고리 id)를 보낸다 dataType은 JSON방식
+		// 성공시 해당 data(카테고리 를 부모카테고리no와 비교해서 key 와 value로 )에 담긴다
+		url : 'cateChek?cateId=' + cateId,
+		type : 'get',
+		// dataType 을 JSON으로 하지 않으면 배열로 리턴된다
+		dataType : 'JSON',
+		success : function(data) {
+		console.log(data);
+		let text = '';
+		let radio = $(".parts_radio");
+		// 비우기
+		radio.empty();
+		
+		$.each(data,function(key, value) { 	
+		console.log("key의 값 : " + key + " "+ "value의 값 : "+ value.c_name);
+		console.log("data 길이");
+		text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="brand"value=""><label for="headlight">'+value.c_name+'</label></li></ul>';
 		})
+		radio.append(text);
 
+		radio.show();
+
+
+	},error : function() {
+	console.log("통신실패");
+			}
+		})
 	}
-	
-	
-	
-	
+
 	$(document).ready(function() {
 
 		// 이미지 미리보기
@@ -190,14 +204,14 @@ input:checked+.slider:before {
 							<div class="top-filter-head">하위 카테고리</div>
 							<div class="common-filter parts_radio" style="display: none">
 								<!-- 전면부품 체크시 나타날 radio -->
-								<c:forEach items="${category }" var="category">
-									<ul class="front_parts">
-										<li class="filter-list"><input class="pixel-radio"
-											type="radio" id="category" name="brand"
-											value="${categoey.c_name }"><label for="headlight"><c:out
-													value="${category.c_name }" /></label></li>
-									</ul>
-								</c:forEach>
+<%-- 								<c:forEach items="${cateCheck }" var="category"> --%>
+<!-- 																		<ul class="front_parts"> -->
+<!-- 																			<li class="filter-list"><input class="pixel-radio" -->
+<!-- 																				type="radio" id="category" name="brand" -->
+<%-- 																				value="${category.c_name }"><label for="headlight"><c:out --%>
+<%-- 																						value="${category.c_name }" /></label></li> --%>
+<!-- 																		</ul> -->
+<%-- 								</c:forEach> --%>
 							</div>
 						</div>
 					</div>

@@ -16,4 +16,6 @@ public interface CarShopMapper {
 	public List<Cat_Tbl> cateParent(); // 상위 카테고리
 
 	public List<Cat_Tbl> category(); // 카테고리
+	
+	public List<Cat_Tbl> cateCheck(int c_no); // 카테고리 상위 체크
 }
