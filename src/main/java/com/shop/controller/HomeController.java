@@ -50,11 +50,6 @@ public class HomeController {
 
 	}
 
-	@RequestMapping("/register")
-	public String register() {
-		return "carshop/register";
-
-	}
 
 	@RequestMapping("/checkout")
 	public String checkout() {
