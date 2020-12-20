@@ -10,12 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/carshop/*")
 @Slf4j
-public class LikeController {
-	
-	@RequestMapping("/like")
-	public String like() {
-		return"carshop/like";
-	}	
-	
+public class CheckOutController {
 
+	
+	@RequestMapping("/checkout")
+	public String checkout() {
+		return "carshop/checkout";
+	}
 }
