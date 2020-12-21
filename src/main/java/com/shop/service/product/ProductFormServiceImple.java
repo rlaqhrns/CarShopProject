@@ -9,7 +9,7 @@ import com.shop.vo.Prod_Tbl;
 import lombok.Setter;
 
 @Service
-public class ProductFormServiceImple {
+public class ProductFormServiceImple implements ProductFormService{
 
 	@Setter(onMethod_ = @Autowired)
 	private ProductFormMapper mapper;
