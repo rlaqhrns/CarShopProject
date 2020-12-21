@@ -2,24 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 	<!--================ End Header Menu Area =================-->
-  <link rel="stylesheet" href="/resources/css/register.css">
+  
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center" style = "text-align: center!important;">
 					<h1>Register</h1>
-					<!--<nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Register</li>
-            </ol>
-          </nav> -->
+					
 				</div>
 			</div>
 			<div class="register_type">
-				<input type="button" value="user register" class="register_type_btn" id="user_type" onClick="#"> 
-				<input type="button" value="seller register" class="register_type_btn" id="seller_type" onClick="location.href='seller_register'"> 
+				<input type="button" value="user register" class="register_type_btn" id="user_type" onClick="location.href='register'"> 
+				<input type="button" value="seller register" class="register_type_btn" id="seller_type" onClick="#"> 
 			</div>
     </div>
 	</section>
@@ -61,8 +56,8 @@
 								<input type="text" class="form-control" id="email_check" name="email_check">
 								<input type="button" value="확인" class="check_btn" id="email_check">
 							</div>
-							<div class="col-md-12 form-group register_btn_div register_next_btn">
-							<input type="button" value="다음" class="button button-register w-100 register_btn" onclick="document.getElementById('registerForm1').style.visibility='hidden';document.getElementById('registerForm2').style.visibility='visible';">
+							<div class="col-md-12 form-group register_btn_div ">
+							<input type="button" value="다음" class="button button-register w-100 register_btn seller_register_next_btn" onclick="document.getElementById('registerForm1').style.visibility='hidden';document.getElementById('registerForm2').style.visibility='visible';">
 							</div>		
 						</div>
 					
@@ -73,15 +68,7 @@
 								</div>
 								
 	              				<div class="col-md-12 form-group registerForm_input register_juso_div">
-		              				<!-- <div style="display:flex">
-										<input type="text" id="sample2_postcode" placeholder="우편번호">
-										<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-		              				</div>
-		              				<div>
-										<input type="text" name="juso1" id="sample2_address" placeholder="주소"><br>
-										<input type="text" name="juso2" id="sample2_detailAddress" placeholder="상세주소">
-										<input type="text" name="juso3" id="sample2_extraAddress" placeholder="참고항목">
-		              				</div>  -->
+		              				
 		              				<div style="display:flex">
 										<input type="text" id="sample2_postcode" placeholder="우편번호">
 										<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" class="check_btn"><br>
@@ -94,6 +81,7 @@
 									<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
 									<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 									</div>
+
 									
 									<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 									<script>
@@ -184,19 +172,13 @@
 									    }
 									</script>
 								</div>
-								<div class="col-md-12 form-group registerForm_input register_model_div">
-								<p style="padding: 10px 30px;">car model</p>
-									<label for="cars"></label>
-									<select name="cars" id="cars" style="min-width:300px !important;"> <!-- 자동차 정보 수정 -->
-										<option value="소나타">소나타</option>
-										<option value="그린저">그린저</option>
-										<option value="카니발">카니발</option>
-										<option value="소울">소울</option>
-										<option value="마티즈">마티즈</option>
-									</select>
-									
+								<div class="col-md-12 form-group registerForm_input" style="margin-bottom:1px;">
+									<input type="text" class="form-control" id="b_no" name="b_no" placeholder="Business license number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Business license number'">
 								</div>
-								<div class="col-md-12 form-group register_btn_div">
+								<div class="col-md-12 form-group registerForm_input">
+									<input type="text" class="form-control" id="b_name" name="b_name" placeholder="Name of business name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name of business name'">
+								</div>
+								<div class="col-md-12 form-group register_btn_div seller_register_btn_div">
 									<input type="button" value="이전" class="button button-register w-100 register_btn" onclick="document.getElementById('registerForm2').style.visibility='hidden';document.getElementById('registerForm1').style.visibility='visible';">
 									<button type="submit" value="submit" class="button button-register w-100 register_btn">가입완료</button>
 								</div>
