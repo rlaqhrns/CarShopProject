@@ -159,7 +159,7 @@ public class HomeController {
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "carshop/mypage";
-		
+
 	}
 
 	@GetMapping("/productForm")
