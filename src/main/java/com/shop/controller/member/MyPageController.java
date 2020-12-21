@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/carshop/*")
 @Slf4j
 public class MyPageController {
+	//성연님 마이페이지
+	
 	
 	@RequestMapping("/mypage")
 	public String mypage() {

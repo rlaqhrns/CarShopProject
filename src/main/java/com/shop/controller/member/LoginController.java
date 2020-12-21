@@ -33,6 +33,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoginController {
 	
+	//보미님 로그인
+	
 	@GetMapping("/login")
 	public String login() {
 		return "carshop/login";

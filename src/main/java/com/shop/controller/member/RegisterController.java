@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RegisterController {
 
-	
+	//°¡ºó´Ô È¸¿ø°¡ÀÔ
 	
 	@RequestMapping("/register")
 	public String register() {

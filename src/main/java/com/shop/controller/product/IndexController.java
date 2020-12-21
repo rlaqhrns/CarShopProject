@@ -31,6 +31,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class IndexController {
 	
+	//½Â¿ø´Ô ÀÎµ¦½º ÆäÀÌÁö
+	
 	@Setter(onMethod_ = @Autowired)
 	private CarShopService service;
 	

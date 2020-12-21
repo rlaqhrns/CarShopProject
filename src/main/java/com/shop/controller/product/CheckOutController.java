@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CheckOutController {
 
+	//재원님 결제화면 페이지
 	
 	@RequestMapping("/checkout")
 	public String checkout() {

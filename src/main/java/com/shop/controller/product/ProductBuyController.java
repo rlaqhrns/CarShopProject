@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ProductBuyController {
 	
+	//보군님 물품구매 페이지
+	
 	@RequestMapping("/product/details")
 	public String detail() {
 		return "carshop/productdetails";

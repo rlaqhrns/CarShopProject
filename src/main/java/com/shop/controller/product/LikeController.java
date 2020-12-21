@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LikeController {
 	
+	//ÇıÁ¤´Ô Âò ÆäÀÌÁö
+	
 	@RequestMapping("/like")
 	public String like() {
 		return"carshop/like";
