@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.shop.service.product.IndexService;
 import com.shop.service.product.IndexServiceImple;
 
 import lombok.Setter;
@@ -17,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class IndexController {
 
-	@Setter(onMethod_ = @Autowired)
-	private IndexServiceImple service;
+	@Setter
+	private IndexService service;
 
 	@RequestMapping({ "/", "index" })
 	public String index(Model model) {

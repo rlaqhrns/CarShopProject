@@ -11,7 +11,7 @@ import com.shop.vo.Return_Tbl;
 import lombok.Setter;
 
 @Service
-public class ProductReturnServiceImple {
+public class ProductReturnServiceImple implements ProductReturnService{
 
 	@Setter(onMethod_ = @Autowired)
 	private ProductReturnMapper mapper;

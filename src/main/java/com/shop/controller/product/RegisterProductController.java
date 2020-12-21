@@ -19,19 +19,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RegisterProductController {
 
-	@Setter(onMethod_ = @Autowired)
+	@Setter(onMethod_=@Autowired)
 	private CategoryService service;
 	private ProductFormService productService;
 
 	@GetMapping("/productForm")
 	public String productForm(Model model) {
-		System.out.println("productForm 占쏙옙占쏙옙");
+		System.out.println("productForm �뜝�룞�삕�뜝�룞�삕");
 		model.addAttribute("cateParent", service.cateParent());
 		model.addAttribute("category", service.category());
 		return "carshop/productForm";
 	}
 
-	// action 占쏙옙占쏙옙 post 占쏙옙占쏙옙占쏙옙占 占쏙옙占쏙옙 占쏙옙 占쌉뤄옙 占쏙옙
+	// action 
 	@PostMapping("/productForm")
 	public String register(Prod_Tbl product) {
 		productService.productForm(product);
