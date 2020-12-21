@@ -7,6 +7,7 @@ import com.shop.vo.All_User_Tbl;
 import com.shop.vo.Cat_Tbl;
 
 import com.shop.vo.Prod_Tbl;
+import com.shop.vo.Return_Tbl;
 
 public interface CarShopMapper {
 
@@ -23,4 +24,6 @@ public interface CarShopMapper {
 	public List<Cat_Tbl> category(); // 카테고리
 	
 	public List<Cat_Tbl> cateCheck(int c_no); // 카테고리 상위 체크
+	
+	public List<Return_Tbl> return_end(); // 교환 반품 페이지
 }

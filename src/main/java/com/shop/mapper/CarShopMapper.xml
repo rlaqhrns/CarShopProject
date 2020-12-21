@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.shop.mapper.CarShopMapper">
 	<select id="index" resultType="com.shop.vo.Prod_Tbl">
 	<![CDATA[
@@ -40,9 +40,37 @@
 
 	<select id="cateCheck" resultType="com.shop.vo.Cat_Tbl">
 		select * from cat_tbl where
-		c_parent=#{c_no} 
+		c_parent=#{c_no}
 	</select>
 
+	<resultMap type="com.shop.vo.Return_Tbl" id="return_tbl">
+		<id property="ono" column="ono" />
+		<id property="u_id" column="u_id" />
+		<id property="p_id" column="p_id" />
+		<id property="content" column="content" />
+		<id property="date" column="date" />
+		<id property="s_id" column="s_id" />
+
+	</resultMap>
+	<resultMap type="com.shop.vo.Order_Histroy_Tbl"
+		id="order_history_tbl">
+		<id property="u_id" column="u_id" />
+		<id property="p_id" column="p_id" />
+		<id property="pay" column="pay" />
+		<id property="order_date" column="order_date" />
+		<id property="ono" column="ono" />
+		<id property="p_no" column="p_no" />
+		<id property="quantity" column="quantity" />
+		<id property="amount" column="amount" />
+		<collection property="order" resultMap="com.shop.vo.Order_Histroy_Tbl"/>
+	</resultMap>
+	<select id="return_end" resultMap="return_tbl">
+		<![CDATA[
+		select o.ono, o.u_id,
+		r.p_id,r.content, o.order_date, o.pay from
+		return_tbl as r join order_history_tbl as o on r.ono=o.ono
+		]]>
+	</select>
 
 
 </mapper>

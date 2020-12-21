@@ -91,79 +91,6 @@ input:checked+.slider:before {
 }
 </style>
 
-<script>
-	// onchange 로 input 태그 클릭 시 이벤트 발생
-	function setDisplay(obj) {
-		let cateParent = $('#cateParent');
-		// 상위카테고리 name
-		let cateName = $(obj).val();
-		// 하위카테고리 id
-		let cateId = $(obj).attr('id');
-		console.log(cateId);
-		console.log(cateName);
-
-		// ajax 
-		$.ajax({
-		// get방식으로 cateId(jquery객체화 시킨 하위카테고리 id)를 보낸다 dataType은 JSON방식
-		// 성공시 해당 data(카테고리 를 부모카테고리no와 비교해서 key 와 value로 )에 담긴다
-		url : 'cateChek?cateId=' + cateId,
-		type : 'get',
-		// dataType 을 JSON으로 하지 않으면 배열로 리턴된다
-		dataType : 'JSON',
-		success : function(data) {
-		console.log(data);
-		let text = '';
-		let radio = $(".parts_radio");
-		// 비우기
-		radio.empty();
-		
-		$.each(data,function(key, value) { 	
-		console.log("key의 값 : " + key + " "+ "value의 값 : "+ value.c_name);
-		console.log("data 길이");
-		text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="brand"value=""><label for="headlight">'+value.c_name+'</label></li></ul>';
-		})
-		radio.append(text);
-
-		radio.show();
-
-
-	},error : function() {
-	console.log("통신실패");
-			}
-		})
-	}
-
-	$(document).ready(function() {
-
-		// 이미지 미리보기
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					$('#image_section').attr('src', e.target.result);
-				}
-
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-
-		// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행합니다.
-		$("#imgInput").change(function() {
-			readURL(this);
-		});
-
-		$('#btnclick').click(function(event) {
-			console.log("클릭");
-			let amount = $('#amount').val();
-			console.log(amount);
-			if (amount == null || amount != isNaN()) {
-				alert("숫자만 입력");
-			}
-		})
-
-	})
-</script>
 
 <body>
 
@@ -203,15 +130,6 @@ input:checked+.slider:before {
 						<div class="sidebar-filter">
 							<div class="top-filter-head">하위 카테고리</div>
 							<div class="common-filter parts_radio" style="display: none">
-								<!-- 전면부품 체크시 나타날 radio -->
-<%-- 								<c:forEach items="${cateCheck }" var="category"> --%>
-<!-- 																		<ul class="front_parts"> -->
-<!-- 																			<li class="filter-list"><input class="pixel-radio" -->
-<!-- 																				type="radio" id="category" name="brand" -->
-<%-- 																				value="${category.c_name }"><label for="headlight"><c:out --%>
-<%-- 																						value="${category.c_name }" /></label></li> --%>
-<!-- 																		</ul> -->
-<%-- 								</c:forEach> --%>
 							</div>
 						</div>
 					</div>
@@ -232,7 +150,7 @@ input:checked+.slider:before {
 					</div>
 					<div class="form-group">
 						<label>이미지</label> <input type="file" class="form-control"
-							name="title" id="imgInput"> <img id="image_section"
+							name="inputFile" id="imgInput"> <img id="image_section"
 							src="#" alt="이미지">
 					</div>
 					<div class="col-md-6">
@@ -277,4 +195,114 @@ input:checked+.slider:before {
 		</div>
 	</div>
 </body>
+<script>
+	// onchange 로 input 태그 클릭 시 이벤트 발생
+	function setDisplay(obj) {
+		let cateParent = $('#cateParent');
+		// 상위카테고리 name
+		let cateName = $(obj).val();
+		// 하위카테고리 id
+		let cateId = $(obj).attr('id');
+		console.log(cateId);
+		console.log(cateName);
+
+		// ajax 
+		$
+				.ajax({
+					// get방식으로 cateId(jquery객체화 시킨 하위카테고리 id)를 보낸다 dataType은 JSON방식
+					// 성공시 해당 data(카테고리 를 부모카테고리no와 비교해서 key 와 value로 )에 담긴다
+					url : 'cateChek?cateId=' + cateId,
+					type : 'get',
+					// dataType 을 JSON으로 하지 않으면 배열로 리턴된다
+					dataType : 'JSON',
+					success : function(data) {
+						console.log(data);
+						let text = '';
+						let radio = $(".parts_radio");
+						// 비우기
+						radio.empty();
+
+						$
+								.each(
+										data,
+										function(key, value) {
+											console.log("key의 값 : " + key + " "
+													+ "value의 값 : "
+													+ value.c_name);
+											console.log("data 길이");
+											text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="'+value.c_no+'"value=""><label for="headlight">'
+													+ value.c_name
+													+ '</label></li></ul>';
+										})
+						radio.append(text);
+
+						radio.show();
+
+					},
+					error : function() {
+						console.log("통신실패");
+					}
+				})
+	}
+
+	$(document).ready(function() {
+
+		// 이미지 미리보기
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#image_section').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		// 파일 업로드
+// 		$("#imgInput").on("click", function(e) {
+// 			let formData = new FormData();
+// 			let inputFile = $("input[name='uploadFile']");
+// 			console.log("여기서 inputFile은 무엇이길래 0번 인덱스를 가져올까 ? ", inputFile);
+// 			let files = inputFile[0].files;
+// 			console.log("file ? ", files);
+// 			// filedate를 formdata에 추가함
+// 			for (var i = 0; i < files.length; i++) {
+// 				formData.append("uploadFile", files[i]);
+// 			}
+// 			console.log("formData : ", formData.get("uploadFile"));
+// 			// 위의 formData를 ajax로 컨트롤러로 전송함
+// 			$.ajax({
+// 				url : '/uploadAjaxAction',
+// 				proceedData : false,
+// 				contentType : false,
+// 				data : formData,
+// 				type : 'POST',
+// 				success : function(result) {
+// 					alert("성공적으로 업로드 되었습니다");
+// 				},
+// 				errorr : function() {
+// 					console.log("통신실패");
+// 				}
+// 			})
+// 		});
+
+		// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행합니다.
+		$("#imgInput").change(function() {
+			readURL(this);
+		});
+
+		$('#btnclick').click(function(event) {
+			console.log("클릭");
+			let amount = $('#amount').val();
+			console.log(amount);
+			if (amount == null || amount != isNaN()) {
+				alert("숫자만 입력");
+			}
+		})
+
+	})
+</script>
+
 <%@ include file="../include/footer.jsp"%>
