@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/carshop/*")
-@Slf4j
+
 public class RegisterProductController {
 
 	@Setter(onMethod_=@Autowired)

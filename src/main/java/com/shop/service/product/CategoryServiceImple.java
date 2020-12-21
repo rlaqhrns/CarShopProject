@@ -11,20 +11,27 @@ import com.shop.vo.Cat_Tbl;
 import lombok.Setter;
 
 @Service
-public class CategoryServiceImple implements CategoryService{
-	
-	@Setter(onMethod_=@Autowired)
+public class CategoryServiceImple implements CategoryService {
+
+	@Setter(onMethod_ = @Autowired)
 	private CategoryMapper mapper;
 
-	public List<Cat_Tbl> category() {
-		return mapper.category();
-	}
-
+	
+	@Override
 	public List<Cat_Tbl> cateParent() {
+		// TODO Auto-generated method stub
 		return mapper.cateParent();
 	}
 
+	@Override
+	public List<Cat_Tbl> category() {
+		// TODO Auto-generated method stub
+		return mapper.category();
+	}
+
+	@Override
 	public List<Cat_Tbl> cateCheck(int c_no) {
+		// TODO Auto-generated method stub
 		return mapper.cateCheck(c_no);
 	}
 
