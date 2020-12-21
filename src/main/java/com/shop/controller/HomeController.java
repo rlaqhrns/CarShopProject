@@ -39,11 +39,6 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 
-	
-	@RequestMapping("/fake")
-	public String fake() {
-		return "carshop/fake";
-	}
 
 	@RequestMapping("/home")
 	public String a() {
