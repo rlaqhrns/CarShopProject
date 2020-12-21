@@ -18,12 +18,9 @@ local.properties
 .recommenders
 .classpath
 .project
-<<<<<<< HEAD
-
-=======
 .DS_Store
 .DS_Store?
->>>>>>> branch 'master' of https://github.com/shin745/CarShopProject.git
+
 # External tool builders
 .externalToolBuilders/
 
