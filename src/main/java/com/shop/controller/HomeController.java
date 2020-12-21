@@ -93,8 +93,6 @@ public class HomeController {
 	@PostMapping("/login") //시큐리티고 뭐고 안된다면 이걸로 쓴다
 	public String login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
-		System.out.println("post2로 들어옴");
-		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("password");
 		
@@ -106,13 +104,41 @@ public class HomeController {
 			session.setAttribute("id" , id);
 			session.setAttribute("pw", pw);
 
-			return "/carshop/index";  						 //redirect가 안됨! 해야하나?
+			return "/carshop/indexlogin";  						 //redirect가 안됨! 해야하나?
 			
 		} else {
 			System.out.println("로그인실패");
 			return "/carshop/loginerror";
 		}    
 	}
+	
+	@GetMapping("/loginerror")
+	public String loginerror() {
+		return "carshop/loginerror";
+	}
+	
+	@PostMapping("/loginerror")
+	public String loginerror2() {
+		return "carshop/login";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		System.out.println("세션은 사라졌어요" +session.getId());
+		return "carshop/index";
+	}
+	
+	@GetMapping("/pwsearch")
+	public String pwsearch() {
+		return "carshop/pwsearch";
+	}
+	
+	@PostMapping("/pwsearch")
+	public String pwsearch2() {
+		return "carshop/login";          //login창에 인증메일보냈다는 배너가 표시
+	}
+	
 	
 	@GetMapping("/all")
 	public void all() {

@@ -42,10 +42,6 @@
 		<filter-name>encoding</filter-name>
 		<servlet-name>appServlet</servlet-name>
 	</filter-mapping>
-<<<<<<< HEAD
 	
 </web-app>
-=======
 
-</web-app>
->>>>>>> branch 'master' of https://github.com/lee-bomi/CarShopProject
