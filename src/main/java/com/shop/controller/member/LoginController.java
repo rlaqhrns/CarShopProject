@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shop.service.CarShopService;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
