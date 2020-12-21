@@ -5,4 +5,14 @@
 
 <mapper namespace="com.shop.mapper.product.IndexMapper">
 
+	<select id="index" resultType="com.shop.vo.Prod_Tbl">
+	<![CDATA[
+		select * from prod_tbl order by hit desc limit 5
+		]]>
+	</select>
+	<select id="index2" resultType="com.shop.vo.Prod_Tbl">
+		<![CDATA[
+		select * from prod_tbl order by p_no desc limit 4
+		]]>
+	</select>
 </mapper>
