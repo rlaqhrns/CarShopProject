@@ -12,6 +12,7 @@ import com.shop.vo.All_User_Tbl;
 import com.shop.vo.Cat_Tbl;
 
 import com.shop.vo.Prod_Tbl;
+import com.shop.vo.Return_Tbl;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,6 @@ public class CarShopServiceImple implements CarShopService {
 		System.out.println("mapper 회원로그인정보 가져옴");
 		return mapper.getAllUser();
 	}
-	
 
 	@Override
 	public List<Prod_Tbl> index2() {
@@ -56,6 +56,16 @@ public class CarShopServiceImple implements CarShopService {
 	@Override
 	public List<Cat_Tbl> cateParent() {
 		return mapper.cateParent();
+	}
+
+	@Override
+	public List<Cat_Tbl> cateCheck(int c_no) {
+		return mapper.cateCheck(c_no);
+	}
+
+	@Override
+	public List<Return_Tbl> retrun_end() {
+		return mapper.return_end();
 	}
 
 }
