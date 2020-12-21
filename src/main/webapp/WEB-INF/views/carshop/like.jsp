@@ -93,6 +93,8 @@
 											<!-- 물건의 개수 (quantity)를 fmt태그를 사용해서 패턴의 형식에 맞춰서 문자열로 변환함 -->
 											<!--1,000 / 5,000 등등~  -->
 											<th><a class="primary-btn ml-2" href="#">장바구니 담기</a></th>
+											
+											
 											<td><a
 												href="${path}/carshop/cart/delete.do?pno=${row.pno}"
 												class="icon_heart_empty"></a> <!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 pno (삭제하길원하는 장바구니 pno )를 보내서 삭제한다. -->

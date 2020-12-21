@@ -6,5 +6,7 @@ import lombok.Data;
 public class Return_Tbl {
 	private int ono;
 	private String u_id, p_id, content, date, s_id;
+	
+	private Order_Histroy_Tbl order;
 
 }

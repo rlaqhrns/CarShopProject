@@ -27,9 +27,11 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-
+	
 	
 	<mybatis-spring:scan base-package="com.shop.mapper"/>
+	<mybatis-spring:scan base-package="com.shop.mapper.member"/>
+	<mybatis-spring:scan base-package="com.shop.mapper.product"/>
 
 
 	
@@ -37,7 +39,7 @@
 		<context:annotation-config></context:annotation-config>
 		<context:component-scan base-package="com.shop.controller"/>
 		<context:component-scan base-package="com.shop.service"></context:component-scan>
-	
+
 		<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 		<task:annotation-driven/>
 </beans>
