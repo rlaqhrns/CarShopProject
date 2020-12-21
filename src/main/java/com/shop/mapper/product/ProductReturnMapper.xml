@@ -3,9 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.shop.mapper.product.ProductReturnMapper">
-	<select id="return_" resultType="com.shop.vo.Return_">
+<mapper namespace="com.shop.mapper.product.ProductReturnMapper">
+	<select id="return_" resultType="com.shop.vo.Return_Tbl">
 		<![CDATA[
 		select o.ono, o.u_id,
 		r.p_id,r.content, o.order_date, o.pay from
