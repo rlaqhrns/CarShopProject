@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.mapper.product.ProductReturnMapper">
+	<select id="return_" resultType="com.shop.vo.Return_Tbl">
+		<![CDATA[
+		select o.ono, o.u_id,
+		r.p_id,r.content, o.order_date, o.pay from
+		return_tbl as r join order_history_tbl as o on r.ono=o.ono
+		]]>
+	</select>
+</mapper>
