@@ -15,8 +15,10 @@ import com.shop.vo.Prod_Tbl;
 import com.shop.vo.Return_Tbl;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+
 public class CarShopServiceImple implements CarShopService {
 
 	@Setter(onMethod_ = @Autowired)

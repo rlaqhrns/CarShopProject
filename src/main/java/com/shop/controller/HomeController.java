@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HomeController {
 
-	@Setter(onMethod_ = @Autowired)
+	@Setter(onMethod_= @Autowired)
 	private CarShopService service;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -56,7 +56,11 @@ public class HomeController {
 	@RequestMapping("/register")
 	public String register() {
 		return "carshop/register";
-
+	}
+	
+	@RequestMapping("/seller_register")
+	public String seller_register() {
+		return "carshop/seller_register";
 	}
 
 	@RequestMapping("/checkout")
