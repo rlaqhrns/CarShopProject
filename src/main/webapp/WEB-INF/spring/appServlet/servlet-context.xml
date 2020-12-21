@@ -27,10 +27,8 @@
 	</beans:bean>
 
 	<resources location="/resources/" mapping="/resources/**" />
+	
 	<context:component-scan
-		base-package="com.shop.controller.memver" />
-
-
-
+		base-package="com.shop.controller" />
 
 </beans:beans>
