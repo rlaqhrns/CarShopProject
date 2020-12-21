@@ -25,13 +25,13 @@ public class RegisterProductController {
 
 	@GetMapping("/productForm")
 	public String productForm(Model model) {
-		System.out.println("productForm ����");
+		System.out.println("productForm 占쏙옙占쏙옙");
 		model.addAttribute("cateParent", service.cateParent());
 		model.addAttribute("category", service.category());
 		return "carshop/productForm";
 	}
 
-	// action ���� post ������� ���� �� �Է� ��
+	// action 占쏙옙占쏙옙 post 占쏙옙占쏙옙占쏙옙占 占쏙옙占쏙옙 占쏙옙 占쌉뤄옙 占쏙옙
 	@PostMapping("/productForm")
 	public String register(Prod_Tbl product) {
 		productService.productForm(product);
