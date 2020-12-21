@@ -3,7 +3,6 @@ package com.shop.controller.product;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shop.controller.HomeController;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LikeController {
 	
-	//ÇýÁ¤´Ô Âò ÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	@RequestMapping("/like")
 	public String like() {

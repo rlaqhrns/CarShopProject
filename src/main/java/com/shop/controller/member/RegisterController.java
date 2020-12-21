@@ -3,7 +3,6 @@ package com.shop.controller.member;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shop.controller.HomeController;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RegisterController {
 
-	//╟║╨С╢т х╦©Ь╟║ют
+	//О©╫О©╫О©╫О©╫О©╫ х╦О©╫О©╫О©╫О©╫О©╫О©╫
 	
 	@RequestMapping("/register")
 	public String register() {

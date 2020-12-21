@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shop.controller.HomeController;
-import com.shop.service.CarShopService;
+import com.shop.service.member.RegisterService;
+import com.shop.service.product.RegisterProductService;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
@@ -20,27 +20,27 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RegisterProductController {
 
-	//½Â¿ø´Ô ¹°Ç°µî·Ï
+	//ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ï¿½
 	
-	@Setter(onMethod_ = @Autowired)
-	private CarShopService service;
-
-	
-	@GetMapping("/productForm")
-	public String productForm(Model model) {
-		System.out.println("productForm µé¾î¿È");
-		model.addAttribute("cateParent",service.cateParent());
-		model.addAttribute("category", service.category());
-		return "carshop/productForm";
-	}
-
-	//action ¿¡¼­ post ¹æ½ÄÀ¸·Î µé¾î¿Ã ½Ã ÀÔ·Â Æû 
-	@PostMapping("/productForm")
-	public String register(Prod_Tbl product) {
-		log.info("ÄÁÆ²·Ñ·¯¿¡¼­ µî·Ï " + product);
-		service.productForm(product);
-		return "redirect:/carshop/index";
-	}
+//	@Setter(onMethod_ = @Autowired)
+//	private RegisterProductService service;
+//
+//	
+//	@GetMapping("/productForm")
+//	public String productForm(Model model) {
+//		System.out.println("productForm ï¿½ï¿½ï¿½ï¿½");
+//		model.addAttribute("cateParent",service.cateParent());
+//		model.addAttribute("category", service.category());
+//		return "carshop/productForm";
+//	}
+//
+//	//action ï¿½ï¿½ï¿½ï¿½ post ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ 
+//	@PostMapping("/productForm")
+//	public String register(Prod_Tbl product) {
+//		log.info("ï¿½ï¿½Æ²ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ " + product);
+//		service.productForm(product);
+//		return "redirect:/carshop/index";
+//	}
 
 	
 }

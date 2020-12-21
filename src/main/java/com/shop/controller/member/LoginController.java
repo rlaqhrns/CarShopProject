@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shop.service.CarShopService;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
@@ -33,7 +32,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoginController {
 	
-	//º¸¹Ì´Ô ·Î±×ÀÎ
+	
+	
+	//ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Î±ï¿½ï¿½ï¿½
 	
 	@GetMapping("/login")
 	public String login() {
@@ -41,43 +42,43 @@ public class LoginController {
 	}
 	
 
-	@PostMapping("/login") //½ÃÅ¥¸®Æ¼°í ¹¹°í ¾ÈµÈ´Ù¸é ÀÌ°É·Î ¾´´Ù
+	@PostMapping("/login") //ï¿½ï¿½Å¥ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÈ´Ù¸ï¿½ ï¿½Ì°É·ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public String login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
-		System.out.println("post2·Î µé¾î¿È");
+		System.out.println("post2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("password");
 		
 		System.out.println("id : " + id + " pw : " + pw);
 
-		//service.getAllUser();                            //db¿¬°áÇÏ¸é »ç¿ë
+		//service.getAllUser();                            //dbï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½
 		
-		if(id.equals("admin") && pw.equals("admin")) {     //db¾øÀÌ testÇØº¸±â À§ÇÔ
+		if(id.equals("admin") && pw.equals("admin")) {     //dbï¿½ï¿½ï¿½ï¿½ testï¿½Øºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			session.setAttribute("id" , id);
 			session.setAttribute("pw", pw);
 
-			return "/carshop/index";  						 //redirect°¡ ¾ÈµÊ! ÇØ¾ßÇÏ³ª?
+			return "/carshop/index";  						 //redirectï¿½ï¿½ ï¿½Èµï¿½! ï¿½Ø¾ï¿½ï¿½Ï³ï¿½?
 			
 		} else {
-			System.out.println("·Î±×ÀÎ½ÇÆÐ");
+			System.out.println("ï¿½Î±ï¿½ï¿½Î½ï¿½ï¿½ï¿½");
 			return "/carshop/loginerror";
 		}    
 	}
 	
 	@GetMapping("/all")
 	public void all() {
-		System.out.println("´©±¸³ª Á¢±Ù°¡´É");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ï¿½ï¿½");
 	}
 	
 	@GetMapping("/member")
 	public void member() {
-		System.out.println("È¸¿ø¸¸ Á¢±Ù°¡´É ");
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ï¿½ï¿½ ");
 	}
 	
 	@GetMapping("/admin")
 	public void admin() {
-		System.out.println("°ü¸®ÀÚ¸¸ Á¢±Ù°¡´É ");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ï¿½ï¿½ ");
 	}
 	
 

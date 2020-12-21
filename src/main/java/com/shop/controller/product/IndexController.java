@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shop.controller.HomeController;
-import com.shop.service.CarShopService;
+import com.shop.service.product.IndexService;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
@@ -31,17 +30,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class IndexController {
 	
-	//½Â¿ø´Ô ÀÎµ¦½º ÆäÀÌÁö
+	//ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	@Setter(onMethod_ = @Autowired)
-	private CarShopService service;
+//	@Setter(onMethod_ = @Autowired)
+//	private IndexService indexService;
 	
-	@RequestMapping({ "/", "index" })
-	public String index(Model model) {
-		model.addAttribute("list", service.index());
-
-		return "carshop/index";
-
-	}
+//	@RequestMapping({ "/", "index" })
+//	public String index(Model model) {
+//		model.addAttribute("list", indexService.index());
+//
+//		return "carshop/index";
+//
+//	}
 
 }
