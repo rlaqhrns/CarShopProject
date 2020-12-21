@@ -18,8 +18,7 @@
 					<h1>상품 구매 페이지</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+              <li class="breadcrumb-item">구매할 상품을 확인해주세요</li>
             </ol>
           </nav>
 				</div>
@@ -69,6 +68,8 @@
                     </form>
                 </div>
                 <div class="col-lg-4" style="padding-top:80px; padding-bottom:30px">
+                 <!-- form으로 구매이력의 데이터를 넘겨야 함  (2020.12.18 재원)  -->
+                  <form>
                     <div class="order_box">
                       <h2>결제 정보</h2>
                       <!-- 장바구니 테이블 에서 상품명, 상품번호, 상품수량, 상품 금액 jstl로 가져오기 (2020.12.18 재원)  -->
@@ -76,7 +77,7 @@
                         <ul class="list">
                             <li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${cart.amount}"></c:out></span></li>
                         	<li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${cart.amount}"></c:out></span></li>
-                        	<li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
+                        	<li>Fresh Brocoli <span class="middle">x 02</span> <span class="last">$720.00</span></li>
                         </ul>
                         </c:forEach>
                         <hr>
@@ -98,6 +99,8 @@
                                 <div class="check"></div>
                             </div>
                         </div>
+                    </form>
+                    <!-- a 태그에 onclick 줘서 데이터 넘겨야함  (2020.12.18 재원)  -->
                        	<div class="text-center">
                           <a class="button button-paypal" href="#">결제하기</a>
                         </div>
