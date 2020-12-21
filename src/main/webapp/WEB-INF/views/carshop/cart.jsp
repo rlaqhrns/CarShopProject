@@ -44,7 +44,7 @@
 							<th scope="col">price</th>
 							<th scope="col"><b>&emsp;&emsp;&emsp;수량</b></th>
 							<th scope="col">&ensp;total</th>
-							<th scope="col"><b>&emsp;&emsp;&emsp; 삭제</b></th>
+							<th scope="col"><b>&emsp;&emsp;&emsp; 삭제 </b></th>
 						</tr>
 					</thead>
 					<tbody>
