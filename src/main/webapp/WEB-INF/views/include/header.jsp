@@ -53,6 +53,7 @@
 	color: white;
 	text-decoration: none;
 }
+
 </style>
 
 <link rel="icon" href="/resources/img/Fevicon.png" type="image/png">

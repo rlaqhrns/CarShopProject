@@ -1,5 +1,6 @@
 package com.shop.controller;
 
+import java.util.List;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -16,14 +17,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shop.service.CarShopService;
+import com.shop.vo.Cat_Tbl;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
 
 /**
  * Handles requests for the application home page.
@@ -33,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HomeController {
 
-	@Setter(onMethod_ = @Autowired)
+	@Setter(onMethod_= @Autowired)
 	private CarShopService service;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -53,7 +56,11 @@ public class HomeController {
 	@RequestMapping("/register")
 	public String register() {
 		return "carshop/register";
-
+	}
+	
+	@RequestMapping("/seller_register")
+	public String seller_register() {
+		return "carshop/seller_register";
 	}
 
 	@RequestMapping("/checkout")
@@ -61,18 +68,16 @@ public class HomeController {
 		return "carshop/checkout";
 	}
 
-	
 	@RequestMapping("/like")
 	public String like() {
-		return"carshop/like";
-	}	
-	
+		return "carshop/like";
+	}
+
 	@RequestMapping("/cart")
 	public String cart() {
-		return"carshop/cart";
-	}	
-	
-	
+		return "carshop/cart";
+	}
+
 	@RequestMapping("/fake")
 	public String fake() {
 		return "carshop/fake";
@@ -83,68 +88,90 @@ public class HomeController {
 		return "home";
 	}
 
-	
 	@GetMapping("/login")
 	public String login() {
 		return "carshop/login";
 	}
-	
 
-	@PostMapping("/login") //시큐리티고 뭐고 안된다면 이걸로 쓴다
+	@PostMapping("/login") // 시큐리티고 뭐고 안된다면 이걸로 쓴다
 	public String login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		
-		System.out.println("post2로 들어옴");
-		
+
 		String id = request.getParameter("id");
 		String pw = request.getParameter("password");
-		
+
 		System.out.println("id : " + id + " pw : " + pw);
 
-		//service.getAllUser();                            //db연결하면 사용
-		
-		if(id.equals("admin") && pw.equals("admin")) {     //db없이 test해보기 위함
-			session.setAttribute("id" , id);
+		// service.getAllUser(); //db연결하면 사용
+
+		if (id.equals("admin") && pw.equals("admin")) { // db없이 test해보기 위함
+			session.setAttribute("id", id);
 			session.setAttribute("pw", pw);
 
-			return "/carshop/index";  						 //redirect가 안됨! 해야하나?
-			
+      return "/carshop/index"; // redirect가 안됨! 해야하나?
+
 		} else {
 			System.out.println("로그인실패");
 			return "/carshop/loginerror";
-		}    
+		}
+	}
+
+	@GetMapping("/loginerror")
+	public String loginerror() {
+		return "carshop/loginerror";
+	}
+	
+	@PostMapping("/loginerror")
+	public String loginerror2() {
+		return "carshop/login";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		System.out.println("세션은 사라졌어요" +session.getId());
+		return "carshop/index";
+	}
+	
+	@GetMapping("/pwsearch")
+	public String pwsearch() {
+		return "carshop/pwsearch";
+	}
+	
+	@PostMapping("/pwsearch")
+	public String pwsearch2() {
+		return "carshop/login";          //login창에 인증메일보냈다는 배너가 표시
 	}
 	
 	@GetMapping("/all")
 	public void all() {
 		System.out.println("누구나 접근가능");
 	}
-	
+
 	@GetMapping("/member")
 	public void member() {
 		System.out.println("회원만 접근가능 ");
 	}
-	
+
 	@GetMapping("/admin")
 	public void admin() {
 		System.out.println("관리자만 접근가능 ");
 	}
-	
 
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "carshop/mypage";
-		
+
 	}
 
 	@GetMapping("/productForm")
 	public String productForm(Model model) {
 		System.out.println("productForm 들어옴");
-		model.addAttribute("cateParent",service.cateParent());
+		model.addAttribute("cateParent", service.cateParent());
 		model.addAttribute("category", service.category());
 		return "carshop/productForm";
 	}
 
-	//action 에서 post 방식으로 들어올 시 입력 폼 
+	// action 에서 post 방식으로 들어올 시 입력 폼
 	@PostMapping("/productForm")
 	public String register(Prod_Tbl product) {
 		log.info("컨틀롤러에서 등록 " + product);
@@ -156,11 +183,29 @@ public class HomeController {
 	public String detail() {
 		return "carshop/productdetails";
 	}
-	
+
+	@RequestMapping("/cateChek")
+	@ResponseBody
+	public List<Cat_Tbl> cateChek(@RequestParam("cateId") int c_no, Model model) {
+		model.addAttribute("cateCheck", service.cateCheck(c_no));
+		System.out.println("카테고리 no = " + c_no);
+		log.info(" 카테고리는 ?  " + service.cateCheck(c_no));
+		return service.cateCheck(c_no);
+
+	}
 
 	@RequestMapping("/confirmation")
 	public String confirmation() {
 		return "carshop/confirmation";
+
+	}
+
+	@RequestMapping("/retrun_end")
+	public String return_end(Model model) {
+		model.addAttribute("list", service.retrun_end());
+		System.out.println("교환반품페이지 들어옴 ");
+		log.info("리스트" + service.retrun_end());
+		return "carshop/return_end";
 	}
 
 }
