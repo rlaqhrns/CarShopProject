@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 	<style>
 		.icon_heart_empty{
-			
+			margin:0;
 			width: 50px;
 			height: 50px;
 			background-size: cover;
@@ -15,7 +15,7 @@
 			
 		}
 		.icon_heart_red{
-		
+			margin:0;
 			width: 50px;
 			height: 50px;
 			background-position: center;
@@ -73,17 +73,20 @@
 							이미 그린 수료생들이 꿈을 이루고 있습니다.
 							직장인을 위한 환급제도 과정을 운용, 최대 80%까지 환급받으실 수 있게 해드리며 그 외에도 공무원 가산점인정, 학점은행제 등을 시행하여 여러분이 가고 싶은 무대로
 							더 빨리 갈 수 있게 도와드립니다.</p>
-						<div class="product_count">
-							<label for="qty">수량:</label>
-							
-							<input type="number" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:"
-								class="input-text qty">
-							
-							<a class="button primary-btn" href="#">장바구니</a>
-						</div>
 						<div class="card_area d-flex align-items-center">
-							<div class="icon_heart_empty"></div>
+							<div class="product_count" style="margin-top:20px;float: left;vertical-align: middle;">
+								<label for="qty" style="float:left">수량 : </label>
+								
+								<input type="number" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:"
+									class="input-text qty" style="float:left">
+								
+								<label for="" style="margin-left:15px;float:left">찜 : </label>
+								 <div class="icon_heart_empty" style="float:left"></div>
+								
+								<a class="button primary-btn" href="#" style="margin-left:30px">장바구니</a>
+							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>
