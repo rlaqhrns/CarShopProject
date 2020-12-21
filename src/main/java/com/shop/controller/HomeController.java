@@ -36,8 +36,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HomeController {
 
+
 	@Setter(onMethod_= @Autowired)
 	private CarShopService service;
+
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -83,10 +85,12 @@ public class HomeController {
 		return "carshop/fake";
 	}
 
+
 	@RequestMapping("/home")
 	public String a() {
 		return "home";
 	}
+
 
 	@GetMapping("/login")
 	public String login() {
@@ -207,5 +211,6 @@ public class HomeController {
 		log.info("리스트" + service.retrun_end());
 		return "carshop/return_end";
 	}
+
 
 }

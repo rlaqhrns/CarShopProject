@@ -15,7 +15,7 @@
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
-					<h1>상품 구매 페이지</h1>
+					<h1><img src="/resources/img/checkout/bankcash.png" style="width:80px; heigh:100%; padding-right:10px"/>상품 구매 페이지</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">구매할 상품을 확인해주세요</li>
@@ -84,17 +84,17 @@
                         <ul class="list list_2">
                             <li><a href="#">총 금액<span><c:out value="${cart.total}"></c:out></span></a></li>
                         </ul>
-                        <!-- Todo : 결제 수단 (pay)가 구매이력 테이블에 들어가야함 (2020.12.18 재원) -->
+                        <!-- Todo : 결제 수단 (pay)가 구매이력(buylist) 테이블에 들어가야함 (2020.12.18 재원) -->
                         <div class="payment_item">
                             <div class="radion_btn">
-                                <input type="radio" id="f-option5" name="pay">
+                                <input type="radio" id="f-option5" name="pay1" value="신용카드">
                                 <label for="f-option5">신용카드</label>
                                 <div class="check"></div>
                             </div>
                         </div>
                         <div class="payment_item active">
                             <div class="radion_btn">
-                                <input type="radio" id="f-option6" name="pay">
+                                <input type="radio" id="f-option6" name="pay2" value="계좌이체">
                                 <label for="f-option6">계좌이체</label>                                
                                 <div class="check"></div>
                             </div>
