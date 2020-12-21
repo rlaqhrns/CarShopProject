@@ -54,7 +54,7 @@
 	text-decoration: none;
 }
 
-</style>
+</style> 
 
 <link rel="icon" href="/resources/img/Fevicon.png" type="image/png">
 <link rel="stylesheet"
@@ -83,17 +83,13 @@
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container">
-					<a class="navbar-brand logo_h" href="index.html"><img
-						src="/resources/img/logo2.png" alt="로고"></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
+					<a class="navbar-brand logo_h" href="index.html"><img src="/resources/img/logo2.png" alt="로고"></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
 					</button>
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 							<li class="nav-item active"><a class="nav-link"
 								href="index.html">Home</a></li>
@@ -105,14 +101,9 @@
 								role="button" aria-haspopup="true" aria-expanded="false">MyPage</a>
 							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 						</ul>
-
 						<ul class="nav-shop">
-
-							<li class="nav-item"><button>
-									<i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span>
-								</button></li>
-							<li class="nav-item"><a class="button button-header"
-								href="register">login</a></li>
+							<li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></button></li>
+							<li class="nav-item"><a class="button button-header" href="register">login</a></li>
 						</ul>
 					</div>
 				</div>
