@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 	<!--================ End Header Menu Area =================-->
-  
+  <link rel="stylesheet" href="/resources/css/register.css">
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
