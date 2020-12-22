@@ -2,11 +2,8 @@ package com.shop.service.product;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.shop.vo.Cat_Tbl;
 
-@Service
 public interface CategoryService {
 	public List<Cat_Tbl> cateParent(); // �긽�쐞 移댄뀒怨좊━
 
