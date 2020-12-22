@@ -2,7 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 	<!--================ End Header Menu Area =================-->
-  <link rel="stylesheet" href="/resources/css/register.css">
+  	<link rel="stylesheet" href="/resources/css/register.css">
+  	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+   	<script type="text/javascript">
+		$(document).ready(function(){
+			
+		})
+   	
+   	
+	</script>
+   
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
@@ -44,22 +55,37 @@
 						<form class="row login_form" action="#/" id="register_form" >
 						<div class="registerForm1" id="registerForm1" style="position: relative;visibility:visible;background:'white';">
 							<div class="col-md-12 form-group registerForm_input">
-								<input type="text" class="form-control" id="userid" name="UserID" placeholder="User ID" onfocus="this.placeholder = ''" onblur="this.placeholder = 'User ID'">
+								<input type="text" class="form-control hint--top" aria-label="안녕하유" id="userid" name="UserID" placeholder="User ID" onfocus="this.placeholder = ''" onblur="this.placeholder = 'User ID'">
 								<input type="button" value="중복확인" class="check_btn" id="id_check">
+							</div>
+							<div class="tip_massage_div">
+								<input type="text" value="아이디확인" class="tip_massage" id="mid" readonly>
 							</div>
 							<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="password" name="Password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
               				</div>
+              				<div class="tip_massage_div">
+								<input type="text" value="비밀번호 확인" class="tip_massage" id="mpwd" readonly>
+							</div>
               				<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="username" name="User Name" placeholder="User Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'User Name'">
               				</div>
+              				<div class="tip_massage_div">
+								<input type="text" value="이륾확인" class="tip_massage" id="mname" readonly>
+							</div>
               				<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="email" name="email" placeholder="e-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'e-mail'">
 								<input type="button" value="이메일 인증" class="check_btn" id="email_send">
 							</div>
+							<div class="tip_massage_div">
+								<input type="text" value="이메일 보냄" class="tip_massage" id="memail" readonly>
+							</div>
 							<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="email_check" name="email_check">
 								<input type="button" value="확인" class="check_btn" id="email_check">
+							</div>
+							<div class="tip_massage_div">
+								<input type="text" value="코드확인" class="tip_massage" id="memailcode" readonly>
 							</div>
 							<div class="col-md-12 form-group register_btn_div register_next_btn">
 							<input type="button" value="다음" class="button button-register w-100 register_btn" onclick="document.getElementById('registerForm1').style.visibility='hidden';document.getElementById('registerForm2').style.visibility='visible';">
@@ -67,7 +93,7 @@
 						</div>
 					
 							
-							<div class="registerForm2" id="registerForm2" style="position: relative;width: 100%;height: 610px; background-color: transparent;min-height: 1px;padding-right: 15px;padding-left: 15px;top: -610px;left: 570px;visibility:hidden">
+							<div class="registerForm2" id="registerForm2" style="position: relative;width: 100%;height: 610px; background-color: transparent;min-height: 1px;padding-left: 15px;top: -610px;left: 570px;visibility:hidden">
 								<div class="col-md-12 form-group registerForm_input">
 									<input type="text" class="form-control" id="phone" name="phone" placeholder="phone number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'phone number'">
 								</div>
@@ -83,12 +109,12 @@
 										<input type="text" name="juso3" id="sample2_extraAddress" placeholder="참고항목">
 		              				</div>  -->
 		              				<div style="display:flex">
-										<input type="text" id="sample2_postcode" placeholder="우편번호">
+										<input type="text" id="sample2_postcode" style="width:200px;margin-bottom:10px" placeholder="우편번호">
 										<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" class="check_btn"><br>
 									</div>
-										<input type="text" name="juso1" style="width:250px;" id="sample2_address" placeholder="주소"><br>
-										<input type="text" name="juso2" style="width:250px;" id="sample2_detailAddress" placeholder="상세주소">
-										<input type="text" name="juso3" style="width:250px;" id="sample2_extraAddress" placeholder="참고항목">
+										<input type="text" name="juso1" style="width:300px;margin-bottom:10px" id="sample2_address" placeholder="주소">
+										<input type="text" name="juso2" style="width:300px;margin-bottom:10px" id="sample2_detailAddress" placeholder="상세주소">
+										<input type="hidden" name="juso3" style="width:250px;margin-bottom:10px" id="sample2_extraAddress" placeholder="참고항목">
 									
 									<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 									<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -197,8 +223,8 @@
 									
 								</div>
 								<div class="col-md-12 form-group register_btn_div">
-									<input type="button" value="이전" class="button button-register w-100 register_btn" onclick="document.getElementById('registerForm2').style.visibility='hidden';document.getElementById('registerForm1').style.visibility='visible';">
-									<button type="submit" value="submit" class="button button-register w-100 register_btn">가입완료</button>
+									<input type="button" value="이전" class="register_btn_pre button button-register w-100 register_btn" onclick="document.getElementById('registerForm2').style.visibility='hidden';document.getElementById('registerForm1').style.visibility='visible';">
+									<button type="submit" value="submit" class="register_btn_submit button button-register w-100 register_btn">가입완료</button>
 								</div>
 							</div>
 							

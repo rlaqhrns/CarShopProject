@@ -56,7 +56,7 @@
     height: 610px;
 }
 .registerForm2 {
-    top: -372px !important;
+    top: -340px !important;
     left: 0px !important;
 }
 /* 가빈 - 가입 폼 안의 모든 input담긴 div들 */
@@ -78,13 +78,16 @@
 }
 /* 가빈 - 주소 api담긴 div */
 .register_juso_div{
-    display: inline-block;
+    display: grid;
+    padding-left: 28px;
+    padding-top: 10px;
+
 }
 /* 가빈 - 유저회원가입폼의 다음버튼 위치 맞추기 */
 .register_next_btn {
     position: relative;
-    right: 122.5px;
-    top: 16px;
+    top: 67px;
+    left: 45px;
 }
 .seller_register_btn_div{
     left:13px;
@@ -97,4 +100,36 @@
 }
 .business_input{
     margin-bottom:1px;
+}
+/* 레지스터폼1의 input들 바텀마진 없애기 */
+.registerForm1 .form-group {
+    margin-bottom: 0 !important;
+}
+/* 툴팁 실패 -> 인풋박스 밑에 만든 div. 이 안에 인풋있음 */
+.tip_massage_div {
+    font-size: 12px;
+    float: left;
+    padding-left: 20px;
+    padding-bottom: 5px;
+}
+/* div안에 있는 인풋들 */
+.tip_massage {
+    border: none;
+    color: blue;
+}
+/* 차모델 고르는 div */
+.register_model_div{
+    padding-left: 55px;
+}
+/* 이전버튼의 위치 맞추기 */
+.register_btn_pre {
+    position: relative;
+    top: 40px;
+    left: -170px;
+}
+/* 가입완료버튼의 위치 맞추기 */
+.register_btn_submit {
+    position: relative;
+    top: 40px;
+    left: 60px;
 }
