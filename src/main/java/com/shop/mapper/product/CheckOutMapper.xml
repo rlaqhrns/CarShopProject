@@ -8,4 +8,10 @@
 		]]>
  	</select>
 
+ 	<select id ="cartList" resultType="com.shop.vo.Cart_Tbl">
+		<![CDATA[ 
+			select * from cart_tbl
+		]]>
+ 	</select>
+
 </mapper>

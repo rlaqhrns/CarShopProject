@@ -77,7 +77,7 @@
                        <c:forEach items="${cartList}" var ="cart" varStatus="status">
                        <!-- 장바구니 각 상품에 대한 총 값을 jstl로 가져오기 (재원/2020.12.22) -->
                        	<c:set var="eachTotal" value="${cart.amount}" />
-                       	<c:set var="eachQuantity" value="${cart.amount}" />
+                       	<c:set var="eachQuantity" value="${cart.quantity}" />
          	               <ul class="list">
                             	<li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${eachTotal * eachQuantity}"></c:out></span></li>
                         		<c:set var="col_sum" value="${col_sum + (eachTotal * eachQuantity)}" />
