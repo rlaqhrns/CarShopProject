@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../include/header.jsp"%>
 
   <title>Aroma Shop - Category</title>
@@ -161,6 +163,29 @@
           <!-- Start Best Seller -->
           <section class="lattest-product-area pb-40 category-list">
             <div class="row">
+              <!-- list test -->
+              <c:forEach items="${list}" var ="product">
+                <div class="col-md-6 col-lg-4">
+                  <div class="card text-center card-product">
+                    <div class="card-product__img">
+                      <img class="card-img" src="${product.img }" alt="">
+                      <ul class="card-product__imgOverlay">
+                        <li><button><i class="ti-search"></i></button></li>
+                        <li><button><i class="ti-shopping-cart"></i></button></li>
+                        <li><button><i class="ti-heart"></i></button></li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                   
+                      <p>Accessories</p>
+                      <h4 class="card-product__title"><a href="#">${product.p_name}</a></h4>
+                      <p class="card-product__price">${product.amount}원 </p>
+                     
+                    </div>
+                  </div>
+                </div>
+              </c:forEach>
+              <!-- list test -->
               <div class="col-md-6 col-lg-4">
                 <div class="card text-center card-product">
                   <div class="card-product__img">
