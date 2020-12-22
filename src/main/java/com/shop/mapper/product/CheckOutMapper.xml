@@ -14,4 +14,8 @@
 		]]>
  	</select>
 
+	<insert id="insertBuyList">
+		insert into order_history_tbl values(ono, u_id, pno, pname, quantity, amount, pay, order_date)
+	</insert>
+
 </mapper>

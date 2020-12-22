@@ -20,5 +20,6 @@ public interface CheckOutMapper {
 	
 	public List<User_Tbl> userList(); //user_tbl에서 유저의 정보를 가져옴(재원/20.12.22)
 	public List<Cart_Tbl> cartList(); //cart_tbl에서 cart정보 가져옴(재원/20.12.22)  
-
+	public void insertBuyList(); //구매이력 insert(재원/20.12.22)  
+	
 }
