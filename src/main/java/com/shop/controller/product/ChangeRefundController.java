@@ -28,9 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ChangeRefundController {
 	
-	//����� ȯ�ұ�ȯ(�����̷�) 
+	//재원님 환불교환(구매이력) 
 	
-	//confirmation�� �߰� 
+	//confirmation도 추가 
 	@RequestMapping("/confirmation")
 	public String confirmation() {
 		return "carshop/confirmation";
