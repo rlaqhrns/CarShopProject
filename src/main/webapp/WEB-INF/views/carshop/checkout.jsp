@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../include/header.jsp"%>
 
   <!-- 상품 결제 페이지 (재원/20.12.22) -->
@@ -36,13 +37,13 @@
                 <div class="col-lg-8" style="padding-top:30px; padding-bottom:30px">
                 	    <!-- 일반 유저 테이블 에서 실명, 아이디, 전화번호, 이메일, 주소(대분류), 상세주소(소분류), 차종 jstl로 가져오기 (재원/20.12.18)  -->
                     <h3>구매자 정보</h3> 
-                    <form class="row contact_form" action="buylist" method="get" novalidate="novalidate">
+                    <form class="row contact_form" novalidate="novalidate">
                         <div class="col-md-6 form-group p_star">받는사람
                             <input type="text" class="form-control" name="name" value='${pUser.name}' readonly="readonly">
                             <span class="placeholder" data-placeholder="First name"></span>                            
                         </div>
                         <div class="col-md-6 form-group p_star">아이디
-                            <input type="text" class="form-control" id="last" name="id" value='${pUser.id}' readonly="readonly">
+                            <input type="text" class="form-control" id="last" name="u_id" value='${pUser.u_id}' readonly="readonly">
                             <span class="placeholder" data-placeholder="Last name"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">전화 번호
@@ -54,11 +55,11 @@
                             <span class="placeholder" data-placeholder="Email Address"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">주소
-                            <input type="text" class="form-control" id="add1" name="main_address" value='${pUser.main_address}'>
+                            <input type="text" class="form-control" id="add1" name="addr" value='${fn:substring(pUser.addr, 0, 15)}'>
                             <span class="placeholder" data-placeholder="Address line 01"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">상세 주소
-                            <input type="text" class="form-control" id="add2" name="detail_address" value='${pUser.detail_address}'>
+                            <input type="text" class="form-control" id="add2" name="addr" value='${fn:substring(pUser.addr, 16, 20)}'>
                             <span class="placeholder" data-placeholder="Address line 02"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">구매자 차종
@@ -107,7 +108,7 @@
                     <!-- a 태그에 click 줘서 데이터 넘겨야함 (재원/20.12.18)  -->
                     
                        	<div class="text-center">
-                          <a class="button button-paypal" href="">결제하기</a>
+                          <a class="button button-paypal" href='/carshop/confirmation?id=<c:out value="${pUser.u_id}"'>결제하기</a>
                         </div>
                     </div>
                 </div>
