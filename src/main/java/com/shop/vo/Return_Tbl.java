@@ -7,7 +7,7 @@ public class Return_Tbl{
 	
 	private int ono;
 
-	private String u_id, pname, content, date, s_id;
+	private String u_id, pname, content, date, s_id, order_Date, pay;
 	
 
 
