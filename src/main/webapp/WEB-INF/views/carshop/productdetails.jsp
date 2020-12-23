@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../include/header.jsp"%>	
 	
 	<title>CarShop - Product Details</title>
@@ -52,18 +54,14 @@
 						<div class="single-prd-item">
 							<img class="img-fluid" src="/resources/img/category/s-p1.jpg" alt="">
 						</div>
-						<!-- <div class="single-prd-item">
-							<img class="img-fluid" src="/resources/img/category/s-p1.jpg" alt="">
-						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="/resources/img/category/s-p1.jpg" alt="">
-						</div> -->
+					
 					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">
+					
 					<div class="s_product_text">
-						<h3>그린컴퓨터 학원 이용권</h3>
-						<h2>200,000원</h2>
+						<h3><c:out value="${product.p_name}"/></h3>
+						<h2><fmt:formatNumber type="number" value="${product.amount}"/>원</h2>
 						<ul class="list">
 							<li><span>카테고리 </span> : 사이드미러</li>
 							<li><span>재고 상태 </span> : 재고 있음</li>
@@ -353,14 +351,19 @@
 	
 	<!--================End Product Description Area =================-->
 
-<%@ include file="../include/topproduct.jsp"%>
+	<%@ include file="../include/topproduct.jsp"%>
 	<%@ include file="../include/footer.jsp"%>
-	<script>
-		$empty = $(".icon_heart_empty");
+		<script>
+		
+			$empty = $(".icon_heart_empty");
 
-		$empty.click(function(){
-			$empty.toggleClass("icon_heart_red");
-		})
-	
-	
+			$empty.click(function(){
+				$empty.toggleClass("icon_heart_red");
+			})
+
+
+
+
+		
+		
 	</script>
