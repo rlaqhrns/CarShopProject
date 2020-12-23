@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../include/header.jsp"%>
 
 
@@ -75,13 +76,12 @@
                     <div class="order_box">
                       <h2>결제 정보</h2>
                       <!-- 장바구니 테이블 에서 상품명, 상품번호, 상품수량, 상품 금액 jstl로 가져오기 (2020.12.18 재원)  -->
-                       <c:forEach items="${cartList}" var ="cart" varStatus="status">
                         <ul class="list">
-                            <li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${cart.amount}"></c:out></span></li>
-                        	<li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${cart.amount}"></c:out></span></li>
-                        	<li>Fresh Brocoli <span class="middle">x 02</span> <span class="last">$720.00</span></li>
+                        	<li><a href="#"><h4>상품이름 &emsp;&emsp;&emsp;&nbsp; 수량<span>Total</span></h4></a></li>
+                        	<c:forEach items="${cartList}" var ="cart" varStatus="status">
+                            	<li><a href="#"><c:out value="${cart.pname}"></c:out><span class="middle"> <c:out value="${cart.quantity}"></c:out></span></a></li>
+                        	</c:forEach>
                         </ul>
-                        </c:forEach>
                         <hr>
                         <ul class="list list_2">
                             <li><a href="#">총 금액<span><c:out value="${cart.total}"></c:out></span></a></li>
