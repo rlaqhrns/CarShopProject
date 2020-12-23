@@ -6,9 +6,10 @@ import lombok.Data;
 public class Cart_Tbl {
 	
 	private String u_id,pname;
-	private int pno,quantity,amount;
+	private int pno,quantity,amount,total;
 	// amount 총금액
 
+	
 	
 	  @Override
 	    public String toString() {

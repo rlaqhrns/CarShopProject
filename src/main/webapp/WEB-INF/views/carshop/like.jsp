@@ -4,17 +4,10 @@
 <!-- ================ start banner area ================= -->
 
 
-<script>
-	$empty = $(".icon_heart_empty");
+<title>CarShop - like</title>
+<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 
-	$empty.click(function() {
-		$empty.toggleClass("icon_heart_empty");
-		$empty.toggleClass("icon_heart_red");
-	})
-</script>
-
-<html>
-<!-- hraet 아이콘 css 생성  -->
+<!-- hraet 아이콘 css 생성 2020.12.22 -->
 <style>
 .icon_heart_empty {
 	width: 50px;
@@ -30,8 +23,18 @@
 	background-position: center;
 	background-size: cover;
 	background-image: url(/resources/img/heart/heart_red.png);
+	primary-btn: ml-2;
+}
+
+.icon_cart {
+	width: 50px;
+	height: 50px;
+	background-position: center;
+	background-size: cover;
+	background-image: url(/resources/img/cart/cart_icon.png);
 }
 </style>
+
 <!-- css 종료 -->
 
 <section class="blog-banner-area" id="category">
@@ -51,6 +54,8 @@
 </section>
 <!-- ================ end banner area ================= -->
 
+
+
 <!--================Cart Area =================-->
 <section class="cart_area">
 	<div class="container">
@@ -60,9 +65,9 @@
 					<thead>
 						<tr>
 							<th scope="col"><b>상품명</b></th>
-							<th scope="col">price</th>
-							<th scope="col"><b>장바구니 담기</b></th>
-							<th scope="col"><b>찜</b></th>
+							<th scope="col" style="text-align: center;">price</th>
+							<th scope="col" style="text-align: center;"><b>장바구니 담기</b></th>
+							<th scope="col" style="text-align: center;"><b>찜</b></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -92,22 +97,18 @@
 											<!-- ex) 5,000 / 10,000 등등등-->
 											<!-- 물건의 개수 (quantity)를 fmt태그를 사용해서 패턴의 형식에 맞춰서 문자열로 변환함 -->
 											<!--1,000 / 5,000 등등~  -->
-											<th><a class="primary-btn ml-2" href="#">장바구니 담기</a></th>
-											
-											
+											<td><a href="#" class="icon_cart"></a></td>
+											<!-- 혜정 : 나중에 장바구니로 경로 설ㅈ -->
+
+
 											<td><a
 												href="${path}/carshop/cart/delete.do?pno=${row.pno}"
-												class="icon_heart_empty"></a> <!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 pno (삭제하길원하는 장바구니 pno )를 보내서 삭제한다. -->
-
-											
-
-											</td>
+												class="icon_heart_empty"></a></td>
 										</tr>
 
 									</c:forEach>
 									<tr class="bottom_button">
-										<td><a class="gray_btn" id="btnUpdate" href="#">Update</a>
-											<a class="gray_btn ml-2" id="btnDelete" href="#">비우기</a></td>
+										<td><a class="gray_btn ml-2" id="btnDelete" href="#">비우기</a></td>
 
 										<!--btnUpdate와 btnDelete id는 위쪽에 있는 자바스크립트가 처리한다.  -->
 
@@ -116,10 +117,11 @@
 										<td></td>
 									<tr class="out_button_area">
 										<td class="d-none-l"></td>
-										<td class=""></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td class="d-none-l"></td>
+										<td class="d-none-l"></td>
+										
+										
+										
 										<td>
 											<div class="checkout_btn_inner d-flex align-items-center">
 												<a class="primary-btn ml-2" href="#">장바구니</a>
@@ -135,7 +137,16 @@
 	</div>
 </section>
 <!--================End Cart Area =================-->
-</html>
-
-
 <%@ include file="../include/footer.jsp"%>
+
+<script>
+		$empty = $(".icon_heart_empty");
+
+		$empty.click(function(){
+            $empty.toggleClass("icon_heart_empty");
+			$empty.toggleClass("icon_heart_red");
+		})
+</script>
+
+
+
