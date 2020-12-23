@@ -33,8 +33,6 @@ public class ProductBuyController {
 	private CartService cartService;
 	@Setter(onMethod_=@Autowired)
 	private LikeService likeService;
-
-	
 	
 	@GetMapping("/product/details")
 	public String detail(Model model,@Param("p_no") int p_no) {
