@@ -118,7 +118,6 @@ input:checked+.slider:before {
 												class="pixel-checkbox parts-radio" type="radio"
 												id="${cateParent.c_no }" name="brand"
 												onchange="setDisplay(this)" value="${cateParent.c_name }">
-
 												<label for="front_parts"> <c:out
 														value="${cateParent.c_name }" />
 
@@ -198,41 +197,40 @@ input:checked+.slider:before {
 <script>
 	// onchange 로 input 태그 클릭 시 이벤트 발생
 	function setDisplay(obj) {
+		console.log("obj : " + obj);
 		let cateParent = $('#cateParent');
 		// 상위카테고리 name
 		let cateName = $(obj).val();
+		console.log("objVal",cateName);
 		// 하위카테고리 id
 		let cateId = $(obj).attr('id');
 		console.log(cateId);
 		console.log(cateName);
 
 		// ajax 
-		$
-				.ajax({
-					// get방식으로 cateId(jquery객체화 시킨 하위카테고리 id)를 보낸다 dataType은 JSON방식
-					// 성공시 해당 data(카테고리 를 부모카테고리no와 비교해서 key 와 value로 )에 담긴다
-					url : 'cateChek?cateId=' + cateId,
-					type : 'get',
-					// dataType 을 JSON으로 하지 않으면 배열로 리턴된다
-					dataType : 'JSON',
-					success : function(data) {
-						console.log(data);
-						let text = '';
-						let radio = $(".parts_radio");
+		$.ajax({
+			// get방식으로 cateId(jquery객체화 시킨 하위카테고리 id)를 보낸다 dataType은 JSON방식
+			// 성공시 해당 data(카테고리 를 부모카테고리no와 비교해서 key 와 value로 )에 담긴다
+			url : 'cateChek?cateId=' + cateId,
+			type : 'get',
+			// dataType 을 JSON으로 하지 않으면 html로 리턴된다
+			dataType : 'JSON',
+			
+			
+			success : function(data) {
+				console.log(" success 데이터 값 : ",data);
+					let text = '';
+					let radio = $(".parts_radio");
 						// 비우기
-						radio.empty();
-
-						$
-								.each(
-										data,
-										function(key, value) {
-											console.log("key의 값 : " + key + " "
-													+ "value의 값 : "
-													+ value.c_name);
-											console.log("data 길이");
-											text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="'+value.c_no+'"value=""><label for="headlight">'
-													+ value.c_name
-													+ '</label></li></ul>';
+					radio.empty();
+						$.each(data,function(key, value) {
+					console.log("key의 값 : " + key + " "
+							+ "value의 값 : "
+							+ value.c_name);
+							console.log("data 길이");
+							text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="'+value.c_no+'"value=""><label for="headlight">'
+							+ value.c_name
+							+ '</label></li></ul>';
 										})
 						radio.append(text);
 
