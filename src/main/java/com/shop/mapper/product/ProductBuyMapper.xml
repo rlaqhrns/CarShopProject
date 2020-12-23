@@ -6,4 +6,7 @@
 	<select id="getProductAll" resultType="com.shop.vo.Prod_Tbl">
 		select * from prod_tbl
 	</select>
+	<select id="getProduct" resultType="com.shop.vo.Prod_Tbl">
+		select * from prod_tbl where p_no = #{p_no}
+	</select>
 </mapper>
