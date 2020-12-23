@@ -56,11 +56,11 @@
                             <span class="placeholder" data-placeholder="Email Address"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">주소
-                            <input type="text" class="form-control" id="add1" name="addr" value='${fn:substring(pUser.addr, 0, 15)}'>
+                            <input type="text" class="form-control" id="add1" name="addr" value='${fn:substring(pUser.addr, 0, 6)}'>
                             <span class="placeholder" data-placeholder="Address line 01"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">상세 주소
-                            <input type="text" class="form-control" id="add2" name="addr" value='${fn:substring(pUser.addr, 16, 20)}'>
+                            <input type="text" class="form-control" id="add2" name="addr" value='${fn:substring(pUser.addr, 7, 20)}'>
                             <span class="placeholder" data-placeholder="Address line 02"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">구매자 차종
@@ -82,7 +82,7 @@
                        	<c:set var="eachTotal" value="${cart.amount}" />
                        	<c:set var="eachQuantity" value="${cart.quantity}" />
          	               <ul class="list">
-                            	<li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${eachTotal * eachQuantity}"></c:out></span></li>
+                            	<li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${cart.total}"></c:out></span></li>
                         		<c:set var="col_sum" value="${col_sum + (eachTotal * eachQuantity)}" />
                         	</ul>
                        </c:forEach>

@@ -14,8 +14,8 @@
 		]]>
  	</select>
 
-	<select id="getUser">
-		select * from where u_id = #{u_id}
+	<select id="getUser" resultType="com.shop.vo.User_Tbl">
+		select * from user_tbl where u_id = #{u_id}
 	</select>
 
 	<insert id="insertBuyList">
