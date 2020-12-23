@@ -37,7 +37,8 @@
                 <div class="col-lg-8" style="padding-top:30px; padding-bottom:30px">
                 	    <!-- 일반 유저 테이블 에서 실명, 아이디, 전화번호, 이메일, 주소(대분류), 상세주소(소분류), 차종 jstl로 가져오기 (재원/20.12.18)  -->
                     <h3>구매자 정보</h3> 
-                    <form class="row contact_form" novalidate="novalidate">
+                    <form class="row contact_form" action="carshop/checkout" method="post" novalidate="novalidate">
+                    <c:forEach items="${pUser}" var="pUser">
                         <div class="col-md-6 form-group p_star">받는사람
                             <input type="text" class="form-control" name="name" value='${pUser.name}' readonly="readonly">
                             <span class="placeholder" data-placeholder="First name"></span>                            
@@ -65,8 +66,9 @@
                         <div class="col-md-12 form-group p_star">구매자 차종
                             <input type="text" class="form-control" id="city" name="cars" value='${pUser.cars}' readonly="readonly">
                             <span class="placeholder" data-placeholder="Town/City"></span>
-                        </div>                     
-                    </form>
+                        </div>  
+                    </c:forEach>                   
+                    </form>                   
                 </div>
                 <div class="col-lg-4" style="padding-top:80px; padding-bottom:30px">
                  <!-- form으로 구매이력의 데이터를 넘겨야 함  (재원/20.12.18)  -->
@@ -108,7 +110,7 @@
                     <!-- a 태그에 click 줘서 데이터 넘겨야함 (재원/20.12.18)  -->
                     
                        	<div class="text-center">
-                          <a class="button button-paypal" href='/carshop/confirmation?id=<c:out value="${pUser.u_id}"'>결제하기</a>
+                          <a class="button button-paypal" href="/carshop/confirmation?id=<c:out value="${pUser.u_id}"/>">결제하기</a>
                         </div>
                     </div>
                 </div>

@@ -18,8 +18,9 @@ public interface CheckOutMapper {
 	 * 	(재원/20.12.22)
 	 * */
 	
-	public List<User_Tbl> userList(); //user_tbl에서 유저의 정보를 가져옴(재원/20.12.22)
-	public List<Cart_Tbl> cartList(); //cart_tbl에서 cart정보 가져옴(재원/20.12.22)  
+	public List<User_Tbl> userList(); //user_tbl에서 모든 유저의 정보를 가져옴 -- 테스트용(재원/20.12.22)
+	public User_Tbl getUser(String u_id); //user_tbl에서 유저 아이디 정보로 가져옴  (재원/20.12.23)
+	public List<Cart_Tbl> cartList(); //cart_tbl에서 cart정보 가져옴 -- 테스트용(재원/20.12.22)  
 	public void insertBuyList(); //구매이력 insert(재원/20.12.22)  
 	
 }

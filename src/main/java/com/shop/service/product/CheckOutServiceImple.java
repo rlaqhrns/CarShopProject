@@ -21,6 +21,12 @@ public class CheckOutServiceImple implements CheckOutService{
 		System.out.println(mapper.userList().get(0).getName());
 		return mapper.userList();
 	}
+
+	@Override
+	public User_Tbl getUser(String u_id) {
+		// TODO Auto-generated method stub
+		return mapper.getUser(u_id);
+	}
 	
 	
 }

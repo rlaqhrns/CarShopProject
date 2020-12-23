@@ -1,5 +1,6 @@
 package com.shop.controller.product;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CheckOutController {
 
-	@Setter
-	private CheckOutService service;
+	@Setter(onMethod_ =@Autowired)
+	private CheckOutService checkoutservice;
 
-	@RequestMapping("/checkout")
+	@GetMapping("/checkout")
 	public String checkout(Model model) {
 		
-		model.addAttribute("pUser", service.userList());
+		System.out.println(checkoutservice.userList().get(0).getAddr());
+		model.addAttribute("pUser", checkoutservice.userList());
 		
 		return "carshop/checkout";
 	}
