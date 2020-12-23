@@ -7,7 +7,7 @@
 	<select id="return_" resultType="com.shop.vo.Return_Tbl">
 		<![CDATA[
 		select o.ono, o.u_id,
-		r.p_id,r.content, o.order_date, o.pay from
+		r.pname,r.content, o.order_date, o.pay from
 		return_tbl as r join order_history_tbl as o on r.ono=o.ono
 		]]>
 	</select>
