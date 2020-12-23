@@ -15,7 +15,13 @@ public class ProductBuyServiceImple implements ProductBuyService {
 	@Setter(onMethod_ = @Autowired)
 	private ProductBuyMapper mapper;
 	
+	@Override
 	public List<Prod_Tbl> getProductAll(){
 		return mapper.getProductAll();
+	}
+
+	@Override
+	public Prod_Tbl getProduct(int p_no) {
+		return mapper.getProduct(p_no);
 	}
 }
