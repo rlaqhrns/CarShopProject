@@ -9,7 +9,6 @@ public class Return_Tbl{
 
 	private String u_id, pname, content, date, s_id;
 	
-	private Order_Histroy_Tbl order;
 
 
 }
