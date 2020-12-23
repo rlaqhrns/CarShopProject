@@ -132,8 +132,8 @@
 										<td></td>
 										<td>
 											<div class="checkout_btn_inner d-flex align-items-center">
-												<a class="gray_btn" href="#">쇼핑계속하기</a> <a
-													class="primary-btn ml-2" href="#">전체상품주문</a>
+													<a class="gray_btn" href="#">쇼핑계속하기</a> <a
+														class="primary-btn ml-2" href="#">전체상품주문</a>
 											</div>
 										</td>
 									</tr>
