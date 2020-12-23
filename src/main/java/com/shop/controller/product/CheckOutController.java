@@ -31,6 +31,12 @@ public class CheckOutController {
 		//System.out.println(checkoutservice.getUser(user.getU_id()));
 		//model.addAttribute("pUser", checkoutservice.getUser(user.getU_id()));
 		
+		//cart 테이블에서 상품 정보 전부 받아오기 (재원/20.12.23)
+		
+		String u_id = "something";
+		user.setU_id(u_id);
+		System.out.println(user.getU_id());
+		model.addAttribute("cartList", checkoutservice.cartList(user.getU_id()));
 		
 		return "carshop/checkout";
 	}

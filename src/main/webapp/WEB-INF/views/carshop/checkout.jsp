@@ -37,7 +37,7 @@
                 <div class="col-lg-8" style="padding-top:30px; padding-bottom:30px">
                 	    <!-- 일반 유저 테이블 에서 실명, 아이디, 전화번호, 이메일, 주소(대분류), 상세주소(소분류), 차종 jstl로 가져오기 (재원/20.12.18)  -->
                     <h3>구매자 정보</h3> 
-                    <form class="row contact_form" action="carshop/checkout" method="post" novalidate="novalidate">
+                    <form class="row contact_form" method="get" novalidate="novalidate">
                     <c:forEach items="${pUser}" var="pUser">
                         <div class="col-md-6 form-group p_star">받는사람
                             <input type="text" class="form-control" name="name" value='${pUser.name}' readonly="readonly">
@@ -72,24 +72,24 @@
                 </div>
                 <div class="col-lg-4" style="padding-top:80px; padding-bottom:30px">
                  <!-- form으로 구매이력의 데이터를 넘겨야 함  (재원/20.12.18)  -->
-                  <form id="checkout_form" action="checkout" method="post" name="checking">
+<!--                   <form id="checkout_form" action="checkout" method="post"> -->
                     <div class="order_box">
                       <h2>결제 정보</h2>
-                      <!-- 장바구니 테이블 에서 상품명, 상품번호, 상품수량, 상품 금액 jstl로 가져오기 (재원/2020.12.18)  -->
-                      <c:set var="col_sum" value="0" />
-                       <c:forEach items="${cartList}" var ="cart" varStatus="status">
-                       <!-- 장바구니 각 상품에 대한 총 값을 jstl로 가져오기 (재원/2020.12.22) -->
-                       	<c:set var="eachTotal" value="${cart.amount}" />
-                       	<c:set var="eachQuantity" value="${cart.quantity}" />
-         	               <ul class="list">
-                            	<li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${cart.total}"></c:out></span></li>
-                        		<c:set var="col_sum" value="${col_sum + (eachTotal * eachQuantity)}" />
-                        	</ul>
-                       </c:forEach>
-                       <hr>
+         	             <ul class="list">
+						<!-- 장바구니 테이블 에서 상품명, 상품번호, 상품수량, 상품 금액 jstl로 가져오기 (재원/2020.12.18)  -->
+                      		<li><a href="#"><h4>상품이름 &emsp;&emsp;&emsp;&nbsp; 수량<span>Total</span></h4></a></li>
+                      		<c:set var="col_sum" value="0" />
+                        		<c:forEach items="${cartList}" var ="cart" varStatus="status">
+                       		<!-- 장바구니 각 상품에 대한 총 값을 jstl로 가져오기 (재원/2020.12.22) -->
+                       			<c:set var="eachTotal" value="${cart.amount}" />
+                       			<c:set var="eachQuantity" value="${cart.quantity}" />
+                            	<li><a href="#"><c:out value="${cart.pname}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span> <span class="last"><c:out value="${cart.total}"></c:out></span></a></li>
+                        		<c:set var="col_sum" value="${col_sum + cart.total}" />
+                        	</c:forEach>
+                          </ul>         
                         <ul class="list list_2">
                         <!-- 상품들 총 값을 jstl로 가져오기 (재원/2020.12.22) -->
-                            <li><a href="#">총 금액<span><c:out value="${col_sum}"></c:out></span></a></li>
+                            <li><a href="#">총 금액<span><%-- <c:out value="${col_sum}"></c:out> --%></span></a></li>
                         </ul>
                         <!-- Todo : 결제 수단 (pay)가 구매이력(buylist) 테이블에 들어가야함 (재원/2020.12.18) -->
                         <div class="payment_item">
@@ -106,7 +106,7 @@
                                 <div class="check"></div>
                             </div>
                         </div>
-                    </form>
+<!--                     </form> -->
                     <!-- a 태그에 click 줘서 데이터 넘겨야함 (재원/20.12.18)  -->
                     
                        	<div class="text-center">

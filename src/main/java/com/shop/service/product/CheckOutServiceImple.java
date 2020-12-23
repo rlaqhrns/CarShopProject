@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shop.mapper.product.CheckOutMapper;
+import com.shop.vo.Cart_Tbl;
 import com.shop.vo.User_Tbl;
 
 import lombok.Setter;
@@ -26,6 +27,15 @@ public class CheckOutServiceImple implements CheckOutService{
 	public User_Tbl getUser(String u_id) {
 		// TODO Auto-generated method stub
 		return mapper.getUser(u_id);
+	}
+
+	@Override
+	public List<Cart_Tbl> cartList(String u_id) {
+		// TODO Auto-generated method stub
+		//u_id = "somethig";
+		//User_Tbl user = new User_Tbl();
+		//user.setU_id(u_id);
+		return mapper.cartList(u_id);
 	}
 	
 	
