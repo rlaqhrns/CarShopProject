@@ -38,6 +38,7 @@
 	<mybatis-spring:scan
 		base-package="com.shop.mapper.product" />
 
+	
 
 
 
