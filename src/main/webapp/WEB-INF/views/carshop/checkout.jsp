@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../include/header.jsp"%>
 
 
@@ -36,13 +37,14 @@
                 <div class="col-lg-8" style="padding-top:30px; padding-bottom:30px">
                 	    <!-- 일반 유저 테이블 에서 실명, 아이디, 전화번호, 이메일, 주소(대분류), 상세주소(소분류), 차종 jstl로 가져오기 (2020.12.18 재원)  -->
                     <h3>구매자 정보</h3> 
-                    <form class="row contact_form" action="buylist" method="post" novalidate="novalidate">
+                    <form class="row contact_form" action="" method="get" novalidate="novalidate">
+                       <c:forEach items="${pUser}" var="pUser">
                         <div class="col-md-6 form-group p_star">받는사람
                             <input type="text" class="form-control" name="name" value='${pUser.name}' readonly="readonly">
                             <span class="placeholder" data-placeholder="First name"></span>                            
                         </div>
                         <div class="col-md-6 form-group p_star">아이디
-                            <input type="text" class="form-control" id="last" name="id" value='${pUser.id}' readonly="readonly">
+                            <input type="text" class="form-control" id="last" name="u_id" value='${pUser.u_id}' readonly="readonly">
                             <span class="placeholder" data-placeholder="Last name"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">전화 번호
@@ -54,17 +56,18 @@
                             <span class="placeholder" data-placeholder="Email Address"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">주소
-                            <input type="text" class="form-control" id="add1" name="main_address" value='${pUser.main_address}'>
+                            <input type="text" class="form-control" id="add1" name="addr" value='${fn:substring(pUser.addr, 0, 6)}'>
                             <span class="placeholder" data-placeholder="Address line 01"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">상세 주소
-                            <input type="text" class="form-control" id="add2" name="detail_address" value='${pUser.detail_address}'>
+                            <input type="text" class="form-control" id="add2" name="addr" value='${fn:substring(pUser.addr, 7, 20)}'>
                             <span class="placeholder" data-placeholder="Address line 02"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">구매자 차종
                             <input type="text" class="form-control" id="city" name="cars" value='${pUser.cars}' readonly="readonly">
                             <span class="placeholder" data-placeholder="Town/City"></span>
-                        </div>                     
+                        </div>  
+                    </c:forEach>                   
                     </form>
                 </div>
                 <div class="col-lg-4" style="padding-top:80px; padding-bottom:30px">
@@ -73,13 +76,12 @@
                     <div class="order_box">
                       <h2>결제 정보</h2>
                       <!-- 장바구니 테이블 에서 상품명, 상품번호, 상품수량, 상품 금액 jstl로 가져오기 (2020.12.18 재원)  -->
-                       <c:forEach items="${cartList}" var ="cart" varStatus="status">
                         <ul class="list">
-                            <li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${cart.amount}"></c:out></span></li>
-                        	<li><c:out value="${cart.pname}"></c:out><c:out value="${cart.pno}"></c:out><span class="middle"><c:out value="${cart.quantity}"></c:out></span><span class="last"><c:out value="${cart.amount}"></c:out></span></li>
-                        	<li>Fresh Brocoli <span class="middle">x 02</span> <span class="last">$720.00</span></li>
+                        	<li><a href="#"><h4>상품이름 &emsp;&emsp;&emsp;&nbsp; 수량<span>Total</span></h4></a></li>
+                        	<c:forEach items="${cartList}" var ="cart" varStatus="status">
+                            	<li><a href="#"><c:out value="${cart.pname}"></c:out><span class="middle"> <c:out value="${cart.quantity}"></c:out></span></a></li>
+                        	</c:forEach>
                         </ul>
-                        </c:forEach>
                         <hr>
                         <ul class="list list_2">
                             <li><a href="#">총 금액<span><c:out value="${cart.total}"></c:out></span></a></li>
