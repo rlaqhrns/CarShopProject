@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
@@ -29,9 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ChangeRefundController {
 	
-	//Àç¿ø´Ô È¯ºÒ±³È¯(±¸¸ÅÀÌ·Â) 
+	//ì¬ì›ë‹˜ í™˜ë¶ˆêµí™˜(êµ¬ë§¤ì´ë ¥) 
 	
-	//confirmationµµ Ãß°¡ 
+	//confirmationë„ ì¶”ê°€ 
 	@RequestMapping("/confirmation")
 	public String confirmation() {
 		return "carshop/confirmation";
