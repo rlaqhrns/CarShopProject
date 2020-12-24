@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RegisterController {
 
-	//╟║╨С╢т х╦©Ь╟║ют
+	//О©╫О©╫О©╫О©╫О©╫ х╦О©╫О©╫О©╫О©╫О©╫О©╫
 	
 	@RequestMapping("/register")
 	public String register() {
