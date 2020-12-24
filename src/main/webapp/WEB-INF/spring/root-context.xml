@@ -3,10 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
@@ -24,19 +24,22 @@
 			value="jdbc:log4jdbc:mysql://127.0.0.1:3306/carshop?serverTimezone=Asia/Seoul"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="1234"></property>
-
 	</bean>
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>  <!-- SungYeon blacklist page transaction 20.12.23 -->
+	<tx:annotation-driven/> <!-- SungYeon blacklist page transaction 20.12.23 -->
 
+	<mybatis-spring:scan base-package="com.shop.mapper" />
+	<mybatis-spring:scan base-package="com.shop.mapper.member" />
+	<mybatis-spring:scan base-package="com.shop.mapper.product" />
 
-	<mybatis-spring:scan
-		base-package="com.shop.mapper.member" />
-	<mybatis-spring:scan
-		base-package="com.shop.mapper.product" />
 
 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
