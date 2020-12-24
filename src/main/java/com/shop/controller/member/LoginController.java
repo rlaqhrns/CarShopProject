@@ -91,6 +91,7 @@ public class LoginController {
 			return "/carshop/loginerror";
 		}    
 	}
+	
 //	@GetMapping("/logout")
 //	public String login2() {
 //		System.out.println("logout들어옴");
@@ -115,20 +116,6 @@ public class LoginController {
 //		}    
 //	}
 	
-	@GetMapping("/all")
-	public void all() {
-		System.out.println("누구나 접근가능");
-	}
-	
-	@GetMapping("/member")
-	public void member() {
-		System.out.println("회원만 접근가능");
-	}
-	
-	@GetMapping("/admin")
-	public void admin() {
-		System.out.println("관리자만 접근가능");
-	}
 
 	@GetMapping("/indexlogin")
 	public String indexlogin() {
