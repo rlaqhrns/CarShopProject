@@ -39,6 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoginController {
 	
+
 	@Autowired
 	MailServiceImpl service = new MailServiceImpl();
 	
@@ -50,12 +51,13 @@ public class LoginController {
 	public String index() {
 		return "carshop/index";
 	}
-	
+
 	@GetMapping("/login")
 	public String login() {
 		return "carshop/login";
 	}
 	
+
 
 	@PostMapping("/login") 
 	public String login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -68,8 +70,11 @@ public class LoginController {
 		System.out.println("id : " + id + " pw : " + pw);
 
 		//service.getAllUser();                            //db연결시 사용하기
+
 		
-		if(id.equals("admin") && pw.equals("admin")) {    
+
+		if(id.equals("admin") && pw.equals("admin")) {      //db없이 test해보기 위함
+
 			session.setAttribute("id" , id);
 			session.setAttribute("pw", pw);
 
@@ -109,6 +114,21 @@ public class LoginController {
 //			return "/carshop/loginerror";
 //		}    
 //	}
+	
+	@GetMapping("/all")
+	public void all() {
+		System.out.println("누구나 접근가능");
+	}
+	
+	@GetMapping("/member")
+	public void member() {
+		System.out.println("회원만 접근가능");
+	}
+	
+	@GetMapping("/admin")
+	public void admin() {
+		System.out.println("관리자만 접근가능");
+	}
 
 	@GetMapping("/indexlogin")
 	public String indexlogin() {
