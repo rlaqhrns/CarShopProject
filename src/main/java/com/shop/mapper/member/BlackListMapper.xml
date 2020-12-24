@@ -2,5 +2,29 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.shop.mapper.member.BlackListMapper">
+	<select id="getBlack" resultType="com.shop.vo.Black_Tbl">
+		SELECT * FROM black_tbl
+	</select>
+	
+	<select id="getBlackWithPaging" resultType="com.shop.vo.Black_Tbl">
+			SELECT s_id, date FROM black_tbl LIMIT #{startNum}, #{amount}  <!-- mysql doesn't allow us using where >< grammar -SungYeon 20.12.23 -->
+	</select>
+	
+	<delete id="delete">  <!-- default return type: int, result: 1 -SungYeon 20.12.23 -->
+		DELETE FROM black_tbl WHERE s_id = #{s_id}
+	</delete>
+	
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(s_id) FROM black_tbl
+	</select>
+	
+	<delete id="delete_alluser">
+		DELETE FROM all_user_tbl WHERE id = #{s_id}
+	</delete>
+	
+	<delete id="delete_seller">
+		DELETE FROM seller_tbl WHERE s_id = #{s_id}
+	</delete>
 </mapper>

@@ -14,6 +14,19 @@ import lombok.Setter;
 @Controller
 @RequestMapping("/carshop/*")
 public class IndexController {
+	
+	//�¿��� �ε��� ������
+	
+//	@Setter(onMethod_ = @Autowired)
+//	private IndexService indexService;
+	
+//	@RequestMapping({ "/", "index" })
+//	public String index(Model model) {
+//		model.addAttribute("list", indexService.index());
+//
+//		return "carshop/index";
+//
+//	}
 
 	@Setter(onMethod_ = @Autowired)
 	private IndexService service;

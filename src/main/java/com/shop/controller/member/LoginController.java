@@ -32,7 +32,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoginController {
 	
-	//º¸¹Ì´Ô ·Î±×ÀÎ
+	
+	//ë³´ë¯¸ë‹˜ ë¡œê·¸ì¸
+	
 	
 	@GetMapping("/login")
 	public String login() {
@@ -40,43 +42,43 @@ public class LoginController {
 	}
 	
 
-	@PostMapping("/login") //½ÃÅ¥¸®Æ¼°í ¹¹°í ¾ÈµÈ´Ù¸é ÀÌ°É·Î ¾´´Ù
+	@PostMapping("/login") //ì‹œíë¦¬í‹°ê³  ë­ê³  ì•ˆëœë‹¤ë©´ ì´ê±¸ë¡œ ì“´ë‹¤
 	public String login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
-		System.out.println("post2·Î µé¾î¿È");
+		System.out.println("post2ë¡œ ë“¤ì–´ì˜´");
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("password");
 		
 		System.out.println("id : " + id + " pw : " + pw);
 
-		//service.getAllUser();                            //db¿¬°áÇÏ¸é »ç¿ë
+		//service.getAllUser();                            //dbì—°ê²°í•˜ë©´ ì‚¬ìš©
 		
-		if(id.equals("admin") && pw.equals("admin")) {     //db¾øÀÌ testÇØº¸±â À§ÇÔ
+		if(id.equals("admin") && pw.equals("admin")) {      //dbì—†ì´ testí•´ë³´ê¸° ìœ„í•¨
 			session.setAttribute("id" , id);
 			session.setAttribute("pw", pw);
 
-			return "/carshop/index";  						 //redirect°¡ ¾ÈµÊ! ÇØ¾ßÇÏ³ª?
+			return "/carshop/index";  						  //redirectê°€ ì•ˆë¨! í•´ì•¼í•˜ë‚˜?
 			
 		} else {
-			System.out.println("·Î±×ÀÎ½ÇÆĞ");
+			System.out.println("ë¡œê·¸ì¸ì‹¤íŒ¨");
 			return "/carshop/loginerror";
 		}    
 	}
 	
 	@GetMapping("/all")
 	public void all() {
-		System.out.println("´©±¸³ª Á¢±Ù°¡´É");
+		System.out.println("ëˆ„êµ¬ë‚˜ ì ‘ê·¼ê°€ëŠ¥");
 	}
 	
 	@GetMapping("/member")
 	public void member() {
-		System.out.println("È¸¿ø¸¸ Á¢±Ù°¡´É ");
+		System.out.println("íšŒì›ë§Œ ì ‘ê·¼ê°€ëŠ¥");
 	}
 	
 	@GetMapping("/admin")
 	public void admin() {
-		System.out.println("°ü¸®ÀÚ¸¸ Á¢±Ù°¡´É ");
+		System.out.println("ê´€ë¦¬ìë§Œ ì ‘ê·¼ê°€ëŠ¥");
 	}
 	
 

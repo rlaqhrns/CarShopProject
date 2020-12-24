@@ -20,9 +20,12 @@
 	href="/resources/vendors/owl-carousel/owl.carousel.min.css">
 
 <link rel="stylesheet" href="/resources/css/style.css">
-<link href='/resources/lib/main.css' rel='stylesheet' />  <!-- 달력 css -->
-<script src='/resources/lib/main.js'></script> <!-- 달력 js  -->
-<script> /* 달력 실행을 위한 스크립트 */
+<link href='/resources/lib/main.css' rel='stylesheet' />
+<!-- 달력 css -->
+<script src='/resources/lib/main.js'></script>
+<!-- 달력 js  -->
+<script>
+	/* 달력 실행을 위한 스크립트 */
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 
@@ -190,11 +193,11 @@ body {
 					<div class="categories_post">
 						<img class="card-img rounded-0"
 							src="/resources/img/blog/cat-post/cat-post-3.jpg" alt="post">
-						<div class="categories_details">
+						<div class="categories_details" onclick="location.href='/carshop/mycar'">
 							<div class="categories_text">
-								<a href="single-blog.html">
+								<!-- <a href="/carshop/mycar"> -->
 									<h5>My Car</h5>
-								</a>
+								<!--  </a> -->
 								<div class="border_line"></div>
 								<p>내 차 정보 관리하기</p>
 							</div>
@@ -242,10 +245,14 @@ body {
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="blog_left_sidebar">
-						<div id='calendar'></div>    <!-- 달력생성 -->
-						<article class="row blog_item">  <!-- 1대1문의 보여줌 -->
+						<div id='calendar'></div>
+						<!-- 달력생성 -->
+						<article class="row blog_item">
+							<!-- 1대1문의 보여줌 -->
 							<div>
-								<h3 class="widget_title" style="padding-top:20px; padding-bottom: 20px">Popular Posts</h3>
+								<h3 class="widget_title"
+									style="padding-top: 20px; padding-bottom: 20px">Popular
+									Posts</h3>
 								<div class="media post_item">
 									<img src="/resources/img/blog/popular-post/post1.jpg"
 										alt="post">
@@ -293,19 +300,22 @@ body {
 				</div>
 				<div class="col-lg-4">
 					<div class="blog_right_sidebar">
-						<aside class="single_sidebar_widget author_widget">  <!-- 회원프로필 -->
+						<aside class="single_sidebar_widget author_widget">
+							<!-- 회원프로필 -->
 							<img class="author_img rounded-circle"
 								src="/resources/img/blog/author.png" alt="">
 							<h4>Charlie Barber</h4>
 							<p>일반회원</p>
 							<div class="social_icon">
 								<a href="#"> <i class="fab fa-github"></i> 계정정보 수정하기
-								</a> <a href="/carshop/like"> <i class="fab fa-behance"></i> 찜 목록
+								</a> <a href="/carshop/like"> <i class="fab fa-behance"></i> 찜
+									목록
 								</a>
 							</div>
 							<div class="br"></div>
 						</aside>
-						<aside class="single_sidebar_widget popular_post_widget">  <!-- best상품 창 -->
+						<aside class="single_sidebar_widget popular_post_widget">
+							<!-- best상품 창 -->
 							<h3 class="widget_title">Best 상품 또 봐라</h3>
 							<div class="media post_item">
 								<img src="/resources/img/blog/popular-post/post1.jpg" alt="post">
@@ -368,5 +378,5 @@ body {
 
 
 	<!--================ Start footer Area  =================-->
-<%@ include file="../include/footer.jsp"%>
+	<%@ include file="../include/footer.jsp"%>
 </html>
