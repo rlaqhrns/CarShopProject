@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CheckOutController {
 
-	//Àç¿ø´Ô °áÁ¦È­¸é ÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	@RequestMapping("/checkout")
 	public String checkout() {
