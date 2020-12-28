@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.shop.mapper.product.CheckOutMapper;
 import com.shop.vo.Cart_Tbl;
+import com.shop.vo.Order_Histroy_Tbl;
 import com.shop.vo.User_Tbl;
 
 import lombok.Setter;
@@ -39,15 +40,34 @@ public class CheckOutServiceImple implements CheckOutService{
 	}
 
 	@Override
-	public void insertBuyList() {
+	public void deleteCartList() {
 		// TODO Auto-generated method stub
-		
 		
 	}
 
 	@Override
-	public void deleteCartList() {
+	public void insertBuyList(Order_Histroy_Tbl order) {
 		// TODO Auto-generated method stub
+		
+		String u_id = "something";	
+		List<Cart_Tbl> cartL = mapper.cartList(u_id);
+//		order.setU_id(cart.getU_id());
+//		order.setPay("신용카드");
+//		order.setU_id(cart.getU_id());
+		
+		for(int i =0; i<cartL.size(); i++) {
+			System.out.println(cartL.get(i).getAmount());
+		}
+		
+		for(int i =0; i<cartL.size(); i++) {
+			order.setU_id(cartL.get(i).getU_id());		
+			order.setAmount(cartL.get(i).getAmount());
+			order.setPname(cartL.get(i).getPname());
+			order.setQuantity(cartL.get(i).getQuantity());
+			order.setPno(cartL.get(i).getPno());
+			mapper.insertBuyList(order);
+		}
+
 		
 	}
 	

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shop.service.product.CheckOutService;
 import com.shop.vo.Cart_Tbl;
+import com.shop.vo.Order_Histroy_Tbl;
 import com.shop.vo.User_Tbl;
 
 import lombok.Setter;
@@ -26,7 +27,7 @@ public class CheckOutController {
 	public String checkout(Model model, User_Tbl user) {
 		
 		//나중에 세션으로 아이디 값을 받아오기 전에 유저 정보 가져오기 (재원/20.12.23)
-		System.out.println(checkoutservice.userList().get(0).getAddr());
+		//System.out.println(checkoutservice.userList().get(0).getAddr());
 		model.addAttribute("pUser", checkoutservice.userList());
 		
 		//세션으로 아이디 값 가져오면 유저 정보 받아쓰기 (재원/20.12.23)
@@ -44,8 +45,14 @@ public class CheckOutController {
 	}
 	
 	@PostMapping("/checkout")
-	public String checkout(Cart_Tbl cart) {
+	public String checkout(Cart_Tbl cart, User_Tbl user, Order_Histroy_Tbl order, Model model) {
 		
+		//String u_id = "something"; 
+		//user.setU_id(u_id); 
+		//cart.setU_id(user.getU_id());
+		//order.setU_id(cart.getU_id());
+		System.out.println(order.getAmount());
+		checkoutservice.insertBuyList(order);
 		
 		return "redirect:confirmation";
 		

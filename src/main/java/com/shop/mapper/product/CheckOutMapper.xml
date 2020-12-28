@@ -19,8 +19,8 @@
 		select * from user_tbl where u_id = #{u_id}
 	</select>
 
-	<insert id="insertBuyList" useGeneratedKeys="true" keyProperty="ono">
-		insert into order_history_tbl values(#{u_id}, #{pno}, #{pname}, #{quantity}, #{amount}, #{pay}, #{order_date})
+	<insert id="insertBuyList" parameterType="map" useGeneratedKeys="true" keyProperty="ono">
+		insert into order_history_tbl (u_id, pno, pname, quantity, amount, pay, order_date) values(#{u_id}, #{pno}, #{pname}, #{quantity}, #{amount}, #{pay}, now())
 	</insert>
 	
 	<delete id="deleteCartList">

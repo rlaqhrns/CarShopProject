@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-lg-4" style="padding-top:80px; padding-bottom:30px">
                  <!-- form으로 구매이력의 데이터를 넘겨야 함  (2020.12.18 재원)  -->
-                 <form action="carshop/checkout" method="post" id="checkoutform">
+                 <form action="checkout" method="post" id="checkoutform">
                     <div class="order_box">
                       <h2>결제 정보</h2>
                       <!-- 장바구니 테이블 에서 상품명, 상품번호, 상품수량, 상품 금액 jstl로 가져오기 (2020.12.18 재원)  -->
@@ -99,14 +99,14 @@
                         <!-- Todo : 결제 수단 (pay)가 구매이력(buylist) 테이블에 들어가야함 (2020.12.18 재원) -->
                         <div class="payment_item">
                             <div class="radion_btn">
-                                <input type="radio" id="f-option5" name="pay1" value="신용카드">
+                                <input type="radio" id="f-option5" name="pay" value="신용카드">
                                 <label for="f-option5">신용카드</label>
                                 <div class="check"></div>
                             </div>
                         </div>
                         <div class="payment_item active">
                             <div class="radion_btn">
-                                <input type="radio" id="f-option6" name="pay2" value="계좌이체">
+                                <input type="radio" id="f-option6" name="pay" value="계좌이체">
                                 <label for="f-option6">계좌이체</label>                                
                                 <div class="check"></div>
                             </div>
