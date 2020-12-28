@@ -3,6 +3,7 @@ package com.shop.controller.member;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -18,6 +22,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysql.cj.Session;
+import com.shop.service.member.MailService;
+import com.shop.service.member.MailServiceImpl;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
@@ -32,52 +39,136 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoginController {
 	
-	//º¸¹Ì´Ô ·Î±×ÀÎ
+
+	@Autowired
+	MailServiceImpl service = new MailServiceImpl();
 	
+	@Autowired
+	private MailService mailService;
+	private JavaMailSenderImpl mailSender;
+	
+	@GetMapping("/index") 
+	public String index() {
+		return "carshop/index";
+	}
+
 	@GetMapping("/login")
 	public String login() {
 		return "carshop/login";
 	}
 	
 
-	@PostMapping("/login") //½ÃÅ¥¸®Æ¼°í ¹¹°í ¾ÈµÈ´Ù¸é ÀÌ°É·Î ¾´´Ù
+
+	@PostMapping("/login") 
 	public String login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
-		System.out.println("post2·Î µé¾î¿È");
+		System.out.println("post2ë“¤ì–´ì˜´");
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("password");
 		
 		System.out.println("id : " + id + " pw : " + pw);
 
-		//service.getAllUser();                            //db¿¬°áÇÏ¸é »ç¿ë
+		//service.getAllUser();                            //dbì—°ê²°ì‹œ ì‚¬ìš©í•˜ê¸°
+
 		
-		if(id.equals("admin") && pw.equals("admin")) {     //db¾øÀÌ testÇØº¸±â À§ÇÔ
+
+		if(id.equals("admin") && pw.equals("admin")) {      //dbì—†ì´ testí•´ë³´ê¸° ìœ„í•¨
+
 			session.setAttribute("id" , id);
 			session.setAttribute("pw", pw);
 
-			return "/carshop/index";  						 //redirect°¡ ¾ÈµÊ! ÇØ¾ßÇÏ³ª?
+			String memberId = (String)session.getAttribute("id");
+			boolean login = memberId == null ? false : true;
+			
+			System.out.println("memberIdëŠ” : " + memberId);
+			System.out.println("loginì„¸ì…˜ê²°ê³¼ëŠ” : " + login);
+
+			return "/carshop/indexlogin";  						 
 			
 		} else {
-			System.out.println("·Î±×ÀÎ½ÇÆĞ");
+			System.out.println("ë¡œê·¸ì¸ì •ë³´ ë¶ˆì¼ì¹˜");
 			return "/carshop/loginerror";
 		}    
 	}
 	
-	@GetMapping("/all")
-	public void all() {
-		System.out.println("´©±¸³ª Á¢±Ù°¡´É");
-	}
-	
-	@GetMapping("/member")
-	public void member() {
-		System.out.println("È¸¿ø¸¸ Á¢±Ù°¡´É ");
-	}
-	
-	@GetMapping("/admin")
-	public void admin() {
-		System.out.println("°ü¸®ÀÚ¸¸ Á¢±Ù°¡´É ");
-	}
+//	@GetMapping("/logout")
+//	public String login2() {
+//		System.out.println("logoutë“¤ì–´ì˜´");
+//		
+//		return "carshop/login";
+//	}
+//	
+//
+//	@PostMapping("/logout") 
+//	public String login_success3(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+//		
+//		System.out.println("logoutë“¤ì–´ì˜´");
+//		
+//		if() {    
+//			
+//
+//			return "/carshop/indexlogin";  						 
+//			
+//		} else {
+//			
+//			return "/carshop/loginerror";
+//		}    
+//	}
 	
 
+	@GetMapping("/indexlogin")
+	public String indexlogin() {
+		return "carshop/indexlogin";
+	}
+	
+	@PostMapping("/indexlogin")
+	public String indexlogin2() {
+		return "carshop/indexlogin";
+	}
+	@GetMapping("/loginerror")
+	public String loginerror() {
+		return "carshop/loginerror";
+	}
+	
+	@PostMapping("/loginerror")
+	public String loginerror2() {
+		return "carshop/indexlogin";
+	}
+	
+	@GetMapping("/pwsearch")
+	public String pwsearch() {
+		return "/carshop/pwsearch";
+	}
+	
+	@PostMapping("/pwsearch")
+	public String pwsearch2() {
+		return "/carshop/index";
+	}
+	
+	@GetMapping("/sendmail")
+	public String sendMail1() {
+		return "carshop/pwsearch";
+	}
+	
+	@PostMapping("/sendmail")
+	public String sendMail(HttpServletRequest request, HttpServletResponse response) {
+		
+		String email = request.getParameter("email");
+		service.sendMail();						        //MailServiceImpl
+		
+		return "carshop/pwsearch";
+	}
+	
+	@GetMapping("/pwsetting")
+	public String pwsetting() {
+		return "/carshop/pwsetting";
+	}
+	
+	@PostMapping("/pwsetting")
+	public String pwsetting2() {
+		return "/carshop/login";
+	}
+
+	
 }

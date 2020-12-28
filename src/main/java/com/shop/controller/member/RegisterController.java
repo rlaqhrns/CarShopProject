@@ -25,7 +25,6 @@ public class RegisterController {
 	@Setter(onMethod_=@Autowired)
 	private RegisterService service;
 	
-	
 	@RequestMapping("/register")
 	public String register() {
 		return "carshop/register";

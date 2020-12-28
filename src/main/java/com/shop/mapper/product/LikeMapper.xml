@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.shop.mapper.product.LikeMapper">
 	<!-- 유저아이디로 장바구니테이블에서 상품목록을 가져온다.(BK/12.22) -->
 	<select id="getUserLikedList" resultType="com.shop.vo.Like_Tbl">

@@ -10,11 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MyCarController {
 	
-	//¼º¿¬´Ô ¸¶ÀÌÄ«ÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	@RequestMapping("/cart")
+	@RequestMapping("/mycar")
 	public String cart() {
-		return"carshop/cart";
+		return"carshop/mycar";
 	}	
 	
 

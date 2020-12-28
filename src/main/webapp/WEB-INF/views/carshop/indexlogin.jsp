@@ -114,7 +114,7 @@
 									<i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span>
 								</button></li>
 							<li class="nav-item2"><a class="button button-header"
-								href="logout">logout</a></li>
+								href="index">logout</a></li>
 						</ul>
 					</div>
 				</div>
