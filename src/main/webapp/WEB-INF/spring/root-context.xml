@@ -31,6 +31,21 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
+		<!-- mailSender bean생성 --> 
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />    		 <!-- gmail전용 value -->
+		<property name="port" value="587" />       				 <!-- gmail TLS(데이터암호화) -->
+		<property name="username" value="zipcock1234@gmail.com" />
+		<property name="password" value="zipzip1234@@" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auty">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>  <!-- SungYeon blacklist page transaction 20.12.23 -->
@@ -39,10 +54,6 @@
 	<mybatis-spring:scan base-package="com.shop.mapper" />
 	<mybatis-spring:scan base-package="com.shop.mapper.member" />
 	<mybatis-spring:scan base-package="com.shop.mapper.product" />
-
-
-
-
 
 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
