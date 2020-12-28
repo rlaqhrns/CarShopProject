@@ -74,7 +74,7 @@
 									<div class="col-lg-9">
 										<input type="text" id="roadFullAddr" name="roadFullAddr"
 											class="form-control" readonly="readonly" onclick="goPopup()"
-											placeholder="클릭하세요" />
+											placeholder="클릭하세요" value="roadFullAddr"/>
 									</div>
 								</div>
 							</form>
