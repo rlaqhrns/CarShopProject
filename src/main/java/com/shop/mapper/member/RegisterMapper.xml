@@ -7,4 +7,17 @@
 		select id from user where id = #{id}
 	
 	</select>
+	<insert id="adduser">
+		insert into user_tbl values(#{u_id},#{u_pw},#{name},#{phone},#{email},#{juso1},#{juso2},#{cars})
+	</insert>
+	<insert id="addseller">
+		insert into seller_tbl values(#{s_id},#{s_pw},#{name},#{phone},#{email},#{addr},#{b_no},#{b_name})
+	</insert>
+	<insert id="alluser_adduser">
+		insert into all_user_tbl values(#{u_id},#{u_pw},#{name},#{email},'N')
+	</insert>
+	<insert id="alluser_addseller">
+		insert into all_user_tbl values(#{s_id},#{s_pw},#{name},#{email},'Y')
+	</insert>
+	
 </mapper>

@@ -7,242 +7,13 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <!-- 이메일 보내는 js -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 <!-- 주소 api를 위한 js -->
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript">
-		var	idok=false;
-		var pwdok=false;
-		var emailok=false;
-		var emailcode;
-		var emailcodeok=false;
-		var phoneok=false;
-		var sample2_addressok=false;
-		var sample2_detailAddressok=false;
-
-		$(document).ready(function(){
-			console.log("document ready!");
-			
-			$("#id_check").click(function(){
-				userid = $("#userid").val();
-				if(userid == ""){
-					$("#mid").css("color","red");
-					$("#mid").val("아이디를 입력해주세요");
-				} else{
-					
-					$.ajax({
-						url : 'idcheck?id=' + userid,
-						type : 'get',
-						dataType : 'json',
-						success : function(data) {
-							$("#mid").css("color","red");
-							$("#mid").val("중복된 아이디가 있습니다");
-							idok=false;
-						},
-						error : function() {
-							$("#mid").css("color","blue");
-							$("#mid").val("사용 가능한 아이디입니다");
-							idok=true;
-						}
-					})
-					
-				}
-					
-			});
-			
-			$("#email_send").click(function(){
-				emailcheck();
-			})
-			$("#email_check").click(function(){
-				emailcodecheck();
-			})
-			$("#submit").click(function(){
-				if($("#sample2_addressok").val() !== "") sample2_addressok=true;
-				if($("#sample2_detailAddressok").val() !== "") sample2_detailAddressok=true;
-				
-				
-				
-				if(idok&&pwdok&&emailok&&emailcodeok&&phoneok&&sample2_addressok&&sample2_detailAddressok){
-					var car = $("#cars option:selected").val();
-					console.log(userid);					
-				}else{
-					console.log("입력 덜 됐음");
-				}
-			
-			})
-			
-			
-		})
-
-   		function pwdcheck(){
-			pwd = $("#password").val();
-			if(!/^[a-zA-Z0-9]{8,15}$/.test(pwd)){
-				$("#mpwd").css("color","red");
-				$("#mpwd").val("숫자와 영문자 조합으로 8~15자리를 사용해야 합니다.");
-				pwdok=false;
-			} else {
-				$("#mpwd").val("");
-				pwdok=true;
-			}
-		}
-		
-		function emailcheck(){
-			toemail = $("#email").val();
-			if(!/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/.test(toemail)){
-				$("#memail").css("color","red");
-				$("#memail").val("이메일 형식이 맞지 않습니다.");
-				emailok=false;
-			} else {
-				//이메일 인증코드를 위한 난수 생성
-				emailcode = Math.floor(Math.random() * 1000000)+100000;
-				if(emailcode>1000000){
-					emailcode = emailcode - 100000;
-				}
-
-				emailjs.init("user_rOnjfiky5XaIkAXuV0flv");
-				
-				//전달할 객체
-				var templateParams = {	
-					code : emailcode,
-					email : toemail
-				};
-				                    
-				//서비스id, 템플릿id, 객체를 파라미터로 전달. 이메일 전달 과정임.                	
-				emailjs.send('service_9s6rhbj', 'template_n0q4nwz', templateParams)
-				         	    .then(function(response) {
-				         	       console.log('SUCCESS!', response.status, response.text);
-				         	    }, function(error) {
-				         	       console.log('FAILED...', error);
-				         	    });
-				
-				
-				$("#memail").css("color","blue");
-				$("#memail").val("이메일 전송 완료");
-				$("#email_send").val("다시 보내기");
-				console.log(templateParams);
-				emailok=true;
-			}
-		}
-   		
-   		function emailcodecheck(){
-   			if(emailok){
-	   			var emailcode_input = $("#emailcode").val();
-	   			if(emailcode == emailcode_input){
-	   				$("#memailcode").css("color","blue");
-					$("#memailcode").val("코드가 일치합니다");
-					emailcodeok=true;
-	   			} else {
-	   				$("#memailcode").css("color","red");
-					$("#memailcode").val("코드가 일치하지 않습니다");
-	   			}
-   			} else {
-	   				$("#memailcode").css("color","red");
-					$("#memailcode").val("이메일인증을 눌러주세요");
-   			}
-   		}
-   		
-   		function phonecheck(){
-   			phone = $("#phone").val();
-			if(!/(\d{2,4}).*(\d{3,4}).*(\d{4})/.test(phone)){
-				$("#mphone").css("color","red");
-				$("#mphone").val("전화번호 형식이 맞지 않습니다.");
-				phoneok=false;
-			} else {
-				$("#mphone").val("");
-				phoneok=true;
-			}
-		}
-   		// 우편번호 찾기 화면을 넣을 element
-   	    var element_layer = $("#layer");
-
-   		function closeDaumPostcode() {
-   		    // iframe을 넣은 element를 안보이게 한다.
-   		    element_layer.style.display = 'none';
-   		}
-   		
-   		function sample2_execDaumPostcode() {
-   		    new daum.Postcode({
-   		        oncomplete: function(data) {
-   		            // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-   		
-   		            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-   		            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-   		            var addr = ''; // 주소 변수
-   		            var extraAddr = ''; // 참고항목 변수
-   		
-   		            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-   		            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-   		                addr = data.roadAddress;
-   		            } else { // 사용자가 지번 주소를 선택했을 경우(J)
-   		                addr = data.jibunAddress;
-   		            }
-   		
-   		            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-   		            if (data.userSelectedType === 'R') {
-   		                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-   		                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-   		                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-   		                    extraAddr += data.bname;
-   		                }
-   		                // 건물명이 있고, 공동주택일 경우 추가한다.
-   		                if (data.buildingName !== '' && data.apartment === 'Y') {
-   		                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-   		                }
-   		                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-   		                if (extraAddr !== '') {
-   		                    extraAddr = ' (' + extraAddr + ')';
-   		                }
-   		                // 조합된 참고항목을 해당 필드에 넣는다.
-   		                document.getElementById("sample2_extraAddress").value = extraAddr;
-   		
-   		            } else {
-   		                document.getElementById("sample2_extraAddress").value = '';
-   		            }
-   		
-   		            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-   		            document.getElementById('sample2_postcode').value = data.zonecode;
-   		            document.getElementById("sample2_address").value = addr;
-   		            // 커서를 상세주소 필드로 이동한다.
-   		            document.getElementById("sample2_detailAddress").focus();
-   		
-   		            // iframe을 넣은 element를 안보이게 한다.
-   		            // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
-   		            element_layer.style.display = 'none';
-   		        },
-   		        width: '100%',
-   		        height: '100%',
-   		        maxSuggestItems: 5
-   		    }).embed(element_layer);
-   		
-   		    // iframe을 넣은 element를 보이게 한다.
-   		    //element_layer.style.display = 'block';
-   			element_layer.css("display","block");
-   		    
-   		    // iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
-   		    initLayerPosition();
-   		}
-   		
-   		function initLayerPosition() {
-   		    var width = 300; //우편번호서비스가 들어갈 element의 width
-   		    var height = 400; //우편번호서비스가 들어갈 element의 height
-   		    var borderWidth = 5; //샘플에서 사용하는 border의 두께
-   		
-   		    // 위에서 선언한 값들을 실제 element에 넣는다.
-   		    //element_layer.style.width = width + 'px';
-   		    element_layer.css("width",width+"px");
-   		    //element_layer.style.height = height + 'px';
-   		    element_layer.css("height",height+"px");
-   		    //element_layer.style.border = borderWidth + 'px solid';
-   		    element_layer.css("borderWidth",borderWidth+"px solid");
-   		    // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
-   		    //element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width) / 2 - borderWidth) + 'px';
-   		    element_layer.css("left",(((window.innerWidth || document.documentElement.clientWidth) - width) / 2 - borderWidth) + 'px');
-   		    //element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth) + 'px';
-   		    element_layer.css("top",(((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth) + 'px');
-   		} 
-   		
-    
-</script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="/resources/js/register.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="category">
@@ -250,12 +21,7 @@
 		<div class="blog-banner">
 			<div class="text-center" style="text-align: center !important;">
 				<h1>Register</h1>
-				<!--<nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Register</li>
-            </ol>
-          </nav> -->
+
 			</div>
 		</div>
 		<div class="register_type">
@@ -283,40 +49,41 @@
 			</div>
 			<div class="col-lg-6 col-log-6_registerForm">
 				<div class="login_form_inner register_form_inner">
-					<h3>Create an account</h3>
-					<form class="row login_form" action="#/" id="register_form">
+					<h3>user register</h3>
+					<form class="row login_form" action="onregister" id="register_form" method="post"
+						onsubmit="return finalcheck()">
 						<div class="registerForm1" id="registerForm1"
 							style="position: relative; visibility: visible; background: 'white';">
 							<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="userid"
-									name="UserID" placeholder="User ID"
+									name="u_id" placeholder="User ID"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = 'User ID'"> <input
 									type="button" value="중복확인" class="check_btn" id="id_check">
 							</div>
 							<div class="tip_massage_div">
 								<input type="text" value="" class="tip_massage" id="mid"
-									readonly>
+									tabindex="-1" readonly>
 							</div>
 							<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="password"
-									onkeyup="pwdcheck()" name="Password" placeholder="Password"
+									onkeyup="pwdcheck()" name="u_pw" placeholder="Password"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = 'Password'">
 							</div>
 							<div class="tip_massage_div">
 								<input type="text" value="" style="width: 300px"
-									class="tip_massage" id="mpwd" readonly>
+									class="tip_massage" id="mpwd" tabindex="-1" readonly>
 							</div>
 							<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="username"
-									name="User Name" placeholder="User Name"
+									onkeyup="namecheck()" name="name" placeholder="User Name"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = 'User Name'">
 							</div>
 							<div class="tip_massage_div">
 								<input type="text" value="" class="tip_massage" id="mname"
-									readonly>
+									tabindex="-1" readonly>
 							</div>
 							<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="email" name="email"
@@ -326,7 +93,7 @@
 							</div>
 							<div class="tip_massage_div">
 								<input type="text" value="" style="width: 300px"
-									class="tip_massage" id="memail" readonly>
+									class="tip_massage" id="memail" tabindex="-1" readonly>
 							</div>
 							<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="emailcode"
@@ -335,7 +102,7 @@
 							</div>
 							<div class="tip_massage_div">
 								<input type="text" value="" class="tip_massage" id="memailcode"
-									readonly>
+									tabindex="-1" readonly>
 							</div>
 							<div
 								class="col-md-12 form-group register_btn_div register_next_btn">
@@ -355,7 +122,7 @@
 									onblur="this.placeholder = 'phone number'">
 							</div>
 							<div class="tip_massage_div">
-								<input type="text" value="전화번호" style="width: 300px"
+								<input type="text" value="" style="width: 300px" tabindex="-1"
 									class="tip_massage" id="mphone" readonly>
 							</div>
 							<div
@@ -384,7 +151,6 @@
 										onclick="closeDaumPostcode()" alt="닫기 버튼">
 								</div>
 
-
 							</div>
 							<div
 								class="col-md-12 form-group registerForm_input register_model_div">
@@ -404,7 +170,7 @@
 								<input type="button" value="이전"
 									class="register_btn_pre button button-register w-100 register_btn"
 									onclick="document.getElementById('registerForm2').style.visibility='hidden';document.getElementById('registerForm1').style.visibility='visible';">
-								<button type="button" value="submit" id="submit"
+								<button type="submit" value="submit" id="submit"
 									class="register_btn_submit button button-register w-100 register_btn">가입완료</button>
 							</div>
 						</div>
@@ -415,5 +181,6 @@
 		</div>
 	</div>
 </section>
+<script type="text/javascript" src="/resources/js/register_addrAPI.js"></script>
 <!--================End Login Box Area =================-->
 <%@ include file="../include/footer.jsp"%>

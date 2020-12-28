@@ -89,10 +89,10 @@
     top: 67px;
     left: 45px;
 }
+/* 가빈 - 판매자회원가입폼의 다음버튼 위치맞추기 */
 .seller_register_btn_div{
     left:13px;
 }
-/* 가빈 - 판매자회원가입폼의 다음버튼 위치맞추기 */
 .seller_register_next_btn{
     position: relative;
     top: 37px;
