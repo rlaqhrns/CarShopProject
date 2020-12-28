@@ -6,6 +6,14 @@
 <%@ include file="../include/header.jsp"%>
 
 
+<style>
+
+.order_box .list li:nth-child(4) a .middle {
+    margin-left: 30px;
+}
+
+</style>
+
   <title>carshop - checkout</title>
 	<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
   <link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
@@ -72,19 +80,21 @@
                 </div>
                 <div class="col-lg-4" style="padding-top:80px; padding-bottom:30px">
                  <!-- form으로 구매이력의 데이터를 넘겨야 함  (2020.12.18 재원)  -->
-                  <form>
+                 <form action="carshop/checkout" method="post" id="checkoutform">
                     <div class="order_box">
                       <h2>결제 정보</h2>
                       <!-- 장바구니 테이블 에서 상품명, 상품번호, 상품수량, 상품 금액 jstl로 가져오기 (2020.12.18 재원)  -->
                         <ul class="list">
-                        	<li><a href="#"><h4>상품이름 &emsp;&emsp;&emsp;&nbsp; 수량<span>Total</span></h4></a></li>
+                        	<li><a href="#"><h4>상품이름 &emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;수량<span>Total</span></h4></a></li>
+                        	<c:set var="col_sum" value="0"/>
                         	<c:forEach items="${cartList}" var ="cart" varStatus="status">
-                            	<li><a href="#"><c:out value="${cart.pname}"></c:out><span class="middle"> <c:out value="${cart.quantity}"></c:out></span></a></li>
+                            	<li><a href="#"><c:out value="${cart.pname}"></c:out><span class="middle" style="position:absolute;left:30%;"> <c:out value="${cart.quantity}"></c:out></span> <span class="last"><c:out value="${cart.total}" /></span></a></li>
+                        		<c:set var="col_sum" value="${col_sum + cart.total}" />
                         	</c:forEach>
                         </ul>
                         <hr>
                         <ul class="list list_2">
-                            <li><a href="#">총 금액<span><c:out value="${cart.total}"></c:out></span></a></li>
+                            <li><a href="#">총 금액<span><c:out value="${col_sum}"></c:out></span></a></li>
                         </ul>
                         <!-- Todo : 결제 수단 (pay)가 구매이력(buylist) 테이블에 들어가야함 (2020.12.18 재원) -->
                         <div class="payment_item">
@@ -101,18 +111,50 @@
                                 <div class="check"></div>
                             </div>
                         </div>
-                    </form>
                     <!-- a 태그에 onclick 줘서 데이터 넘겨야함  (2020.12.18 재원)  -->
                        	<div class="text-center">
                           <a class="button button-paypal" href="#">결제하기</a>
                         </div>
                     </div>
+                   </form>
                 </div>
             </div>
         </div>
     </div>
   </section>
   <!--================End Checkout Area =================-->
+  <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
+  <!-- 결제수단 라디오 버튼 체크 확인 및 name 설정 (재원/20.12.22) -->
+ 	<script type="text/javascript">
+ 		$(document).ready(function(){
+ 			
+ 			//console.log("들어오는지");
+ 			//var isChecked = $('#f-option5').val();
+ 			//console.log("인식하는지" + isChecked);
+ 			
+  			$("input[type='radio']").on('change', function() {
+  				console.log("input[type='radio']들어오는지");
+  				
+ 	  				if($('#f-option6').is(":checked")){
+ 	 					$('#f-option6').attr('name', 'pay');
+ 	 					$('#f-option5').removeAttr('name'); 
+ 	 					console.log("계좌이체 체크");
+ 	 				}
+ 	 				if($('#f-option5').is(":checked")) {
+ 	 					$('#f-option5').attr('name', 'pay');
+ 	 					$('#f-option6').removeAttr('name');
+ 	 					console.log("신용카드 체크");
+ 	 				}
+ 			}); 
+  			
+  			$('.button-paypal').click(function() {
+  				$('#checkoutform').submit();
+  			});
+  			
+ 		
+ 		});
+  		
+  	</script>
 
 
 

@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shop.service.product.CheckOutService;
+import com.shop.vo.Cart_Tbl;
 import com.shop.vo.User_Tbl;
 
 import lombok.Setter;
@@ -39,6 +41,14 @@ public class CheckOutController {
 		model.addAttribute("cartList", checkoutservice.cartList(user.getU_id()));
 		
 		return "carshop/checkout";
+	}
+	
+	@PostMapping("/checkout")
+	public String checkout(Cart_Tbl cart) {
+		
+		
+		return "redirect:confirmation";
+		
 	}
 	
 }

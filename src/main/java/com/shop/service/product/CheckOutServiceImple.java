@@ -37,6 +37,19 @@ public class CheckOutServiceImple implements CheckOutService{
 		//user.setU_id(u_id);
 		return mapper.cartList(u_id);
 	}
+
+	@Override
+	public void insertBuyList() {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+	@Override
+	public void deleteCartList() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
