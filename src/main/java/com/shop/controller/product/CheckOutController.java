@@ -47,10 +47,6 @@ public class CheckOutController {
 	@PostMapping("/checkout")
 	public String checkout(Cart_Tbl cart, User_Tbl user, Order_Histroy_Tbl order, Model model) {
 		
-		//String u_id = "something"; 
-		//user.setU_id(u_id); 
-		//cart.setU_id(user.getU_id());
-		//order.setU_id(cart.getU_id());
 		System.out.println(order.getAmount());
 		checkoutservice.insertBuyList(order);
 		

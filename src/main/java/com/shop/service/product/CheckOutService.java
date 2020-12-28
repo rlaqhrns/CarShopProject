@@ -12,6 +12,6 @@ public interface CheckOutService {
 	public User_Tbl getUser(String u_id); //user_tbl에서 유저 아이디 정보로 가져옴  (재원/20.12.23)
 	public List<Cart_Tbl> cartList(String u_id); //cart_tbl에서 cart정보 가져옴 -- 테스트용(재원/20.12.22)  
 	public void insertBuyList(Order_Histroy_Tbl order); //구매이력 insert(재원/20.12.22)  
-	public void deleteCartList(); // 장바구니 이력 없애기
+	public void deleteCartList(); // 장바구니 이력 없애기 (재원/20.12.28)
 }
  

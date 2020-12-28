@@ -33,9 +33,6 @@ public class CheckOutServiceImple implements CheckOutService{
 	@Override
 	public List<Cart_Tbl> cartList(String u_id) {
 		// TODO Auto-generated method stub
-		//u_id = "somethig";
-		//User_Tbl user = new User_Tbl();
-		//user.setU_id(u_id);
 		return mapper.cartList(u_id);
 	}
 
@@ -49,17 +46,14 @@ public class CheckOutServiceImple implements CheckOutService{
 	public void insertBuyList(Order_Histroy_Tbl order) {
 		// TODO Auto-generated method stub
 		
-		String u_id = "something";	
-		List<Cart_Tbl> cartL = mapper.cartList(u_id);
-//		order.setU_id(cart.getU_id());
-//		order.setPay("신용카드");
-//		order.setU_id(cart.getU_id());
+		String u_id = "something";	//임시 아이디 설정 (재원/20.12.28)
+		List<Cart_Tbl> cartL = mapper.cartList(u_id); //카트 정보 list로 받아오기 (재원/20.12.28)
 		
-		for(int i =0; i<cartL.size(); i++) {
+		for(int i =0; i<cartL.size(); i++) { //들어가는지 확인 (재원/20.12.28)
 			System.out.println(cartL.get(i).getAmount());
 		}
 		
-		for(int i =0; i<cartL.size(); i++) {
+		for(int i =0; i<cartL.size(); i++) { //카트 정보를 담은 List 돌면서 mapping 함 (재원/20.12.28)
 			order.setU_id(cartL.get(i).getU_id());		
 			order.setAmount(cartL.get(i).getAmount());
 			order.setPname(cartL.get(i).getPname());
