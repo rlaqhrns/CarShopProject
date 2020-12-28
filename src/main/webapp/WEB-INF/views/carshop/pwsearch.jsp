@@ -22,26 +22,33 @@
 	}                                
 </script>
 <script> <!--"인증메일받기"클릭시 실행되는 함수 -->
-	$(function(){
-		$(".btn").click(function(){
-			var email = document.getElementById("email");
-			
+$(document).ready(function(){
+		
+		$(".btn").click(function(e){
+			var email = $('#email').val();
+			//e.preventDefault();
+			console.log(email);
 			//이메일이 제대로 입력이 되지않은경우
-			if(email='' || email == 'undefined'){
-				alert("내용을 기입해주세요.");
+			if(email==''){
+				swal("Please write", "이메일주소를 기입해주세요!", "info");
 				return;
 			}
 			//이메일 유효성 검사
-			if(email_check(email) == true){
-				alert("비밀번호 초기화를 위한 메일을 보냈습니다.");
-				location.href = 'index.html';
-				return ;
-			} else {
-				alert("이메일 형식이 올바르지 않습니다.")
-				return;
-			}
+			if (!ValidateEmail(email)) {
+           		swal("Oops", "이메일주소를 다시확인해주세요!", "error");
+        	}else {
+        		//db와 이메일주소 비교하는코드 작성
+        		//if(email == service.getemail){
+        		//	swal("Good job", "가입한 이메일주소로  비밀번호 재설정링크 발송완료:-)", "success");
+        		//}else {
+        		//	swal("error", "일치하는 이메일이 없습니다:()", "error");
+        		//}
+        		
+        		//메일발송
+            	swal("Good job", "가입한 이메일주소로 pw재설정 메일보내드렸어요:-)", "success");  
+        	}
 		});
-	});
+});
 </script>
 <style>
 .container .box{
