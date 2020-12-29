@@ -64,11 +64,11 @@
                             <span class="placeholder" data-placeholder="Email Address"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">주소
-                            <input type="text" class="form-control" id="add1" name="addr1" value='${pUser.juso1}'>
+                            <input type="text" class="form-control" id="add1" name="addr" value='${pUser.addr}'>
                             <span class="placeholder" data-placeholder="Address line 01"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">상세 주소
-                            <input type="text" class="form-control" id="add2" name="addr2" value='${pUser.juso2}'>
+                            <input type="text" class="form-control" id="add2" name="addr2" value='${pUser.addr2}'>
                             <span class="placeholder" data-placeholder="Address line 02"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">구매자 차종

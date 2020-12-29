@@ -22,7 +22,7 @@
 	</insert>
 	
 	<delete id="deleteCartList">
-		delete * from cart_tbl where u_id = #{u_id}
+		delete from cart_tbl where u_id = #{u_id}
 	</delete>
 
 </mapper>

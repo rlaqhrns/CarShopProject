@@ -49,7 +49,10 @@ public class CheckOutController {
 		
 		System.out.println(order.getAmount());
 		checkoutservice.insertBuyList(order);
-		checkoutservice.deleteCartList(cart.getU_id());
+		String u_id = "something";
+		user.setU_id(u_id);
+		System.out.println(user.getU_id());
+		checkoutservice.deleteCartList(user.getU_id());
 		
 		return "redirect:confirmation";
 		
