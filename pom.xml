@@ -239,7 +239,18 @@
 			<version>2.5.4</version>
 		</dependency>
 
-
+		<!-- mail -->
+		<dependency> <!-- 메일발송지원기능 -->
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.0.4.RELEASE</version>
+		</dependency>
+		<dependency>  <!-- java mail API(Mime 메시지활용) -->
+			<groupId>javax.mail</groupId>         
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

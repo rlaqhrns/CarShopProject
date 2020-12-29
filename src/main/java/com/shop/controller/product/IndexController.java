@@ -31,7 +31,7 @@ public class IndexController {
 	@Setter(onMethod_ = @Autowired)
 	private IndexService service;
 
-	@GetMapping({ "/", "index" })
+	@GetMapping( "index" )
 	public String index(Model model) {
 		model.addAttribute("list", service.index());
 		System.out.println("index들어옴");

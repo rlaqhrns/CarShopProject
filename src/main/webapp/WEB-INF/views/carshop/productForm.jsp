@@ -213,10 +213,7 @@ input:checked+.slider:before {
 			// 성공시 해당 data(카테고리 를 부모카테고리no와 비교해서 key 와 value로 )에 담긴다
 			url : 'cateChek?cateId=' + cateId,
 			type : 'get',
-			// dataType 을 JSON으로 하지 않으면 html로 리턴된다
 			dataType : 'JSON',
-			
-			
 			success : function(data) {
 				console.log(" success 데이터 값 : ",data);
 					let text = '';
@@ -227,7 +224,6 @@ input:checked+.slider:before {
 					console.log("key의 값 : " + key + " "
 							+ "value의 값 : "
 							+ value.c_name);
-							console.log("data 길이");
 							text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="'+value.c_no+'"value=""><label for="headlight">'
 							+ value.c_name
 							+ '</label></li></ul>';
