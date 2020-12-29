@@ -50,10 +50,10 @@ public class LoginController {
 	private MailService mailService;
 	private JavaMailSenderImpl mailSender;
 	
-	@GetMapping("/index") 
-	public String index() {
-		return "carshop/index";
-	}
+//	@GetMapping("/index") 
+//	public String index() {
+//		return "carshop/index";
+//	}
 
 	@GetMapping("/login")
 	public String login() {
