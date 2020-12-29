@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Order_Histroy_Tbl {
-	private String u_id, pay, order_date;
+	private String u_id, pay, order_date, pname;
 	private int ono, pno, quantity, amount;
 
 }
