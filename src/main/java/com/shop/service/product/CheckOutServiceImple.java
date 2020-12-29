@@ -58,7 +58,7 @@ public class CheckOutServiceImple implements CheckOutService{
 			order.setAmount(cartL.get(i).getAmount());
 			order.setPname(cartL.get(i).getPname());
 			order.setQuantity(cartL.get(i).getQuantity());
-			order.setPno(cartL.get(i).getPno());
+			order.setP_no(cartL.get(i).getP_no()); //vo 객체를 바꾸면서 수정 setPno, getPno(재원/20.12.29)
 			mapper.insertBuyList(order);
 		}
 
