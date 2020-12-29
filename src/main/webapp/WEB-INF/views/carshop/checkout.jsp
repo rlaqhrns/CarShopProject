@@ -102,13 +102,15 @@
                             <div class="radion_btn">
                                 <input type="radio" id="f-option5" name="pay" value="신용카드">
                                 <label for="f-option5">신용카드</label>
+                                <img src="/resources/img/product/card.jpg" alt="">
                                 <div class="check"></div>
                             </div>
                         </div>
                         <div class="payment_item active">
                             <div class="radion_btn">
-                                <input type="radio" id="f-option6" name="pay" value="계좌이체">
-                                <label for="f-option6">계좌이체</label>                                
+                                <input type="radio" id="f-option6" name="pay" value="카카오페이">
+                                <label for="f-option6">카카오페이</label>  
+                                <img src="/resources/img/checkout/payment_icon_yellow_medium.png" alt="카카오페이" style="width:60px; heigth:60px;">                              
                                 <div class="check"></div>
                             </div>
                         </div>
@@ -146,8 +148,29 @@
 </div>
 
 
-<!-- 결제 Modal -->
+<!-- 신용카드 결제 Modal -->
 <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLongTitle">결제를 진행하시겠습니까?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        결제 완료 후 구매이력창으로 이동합니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-danger btn-creditcheck">결제하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 카카오페이 결제 Modal -->
+<div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -179,11 +202,10 @@
         </button>
       </div>
       <div class="modal-body">
-        결제 완료 후 구매이력창으로 이동합니다.
+        결제 수단을 선택하여 주십시오.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger btn-creditcheck">결제하기</button>
       </div>
     </div>
   </div>
@@ -191,6 +213,8 @@
   
   
   <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
   <!-- 결제수단 라디오 버튼 체크 확인 및 name 설정 (재원/20.12.22) -->
  	<script type="text/javascript">
  		$(document).ready(function(){
@@ -220,18 +244,22 @@
   			
   			$('.button-paypal').click(function() {
   				
-  				if(($('#f-option6').is(":checked")) || ($('#f-option5').is(":checked"))){
-  						$("#exampleModalCenter2").modal('show');
-  		
+  				if($('#f-option5').is(":checked")){
+  						$("#exampleModalCenter2").modal('show'); //신용카드결제 modal 창 보여줌 (재원/20.12.29)	
+  				}
+  				else if($('#f-option6').is(":checked")){
+  						$("#exampleModalCenter2").modal('show'); //카카오페이결제 modal 창 보여줌 (재원/20.12.29)
   				}
   				else {
+  					
+  					$("#exampleModalCenter3").modal('show'); //구매 방법 선택 modal창 띄움(재원/20.12.29)
   					
   				}
   			});
   			
   			$('.btn-creditcheck').click(function() {
   				
-  				$('#checkoutform').submit();
+  				$('#checkoutform').submit(); //form submit(재원/20.12.29)
   				
   			});
   			
