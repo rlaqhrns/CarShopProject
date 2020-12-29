@@ -78,14 +78,14 @@
 												value="<fmt:formatNumber value="${row.quantity}"
                       					      	pattern="#,###,###" " />
 
-												<input type="hidden" name="pno" value="${row.pno}">
+												<input type="hidden" name="p_no" value="${row.p_no}">
 											</td>
 											<td><fmt:formatNumber value="${row.total}"
 													pattern="#,###,###" />원</td>
 
 											<td><a
-												href="${path}/carshop/cart/delete.do?pno=${row.pno}"
-												type="button">삭제</a> <!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 pno (삭제하길원하는 장바구니 pno )를 보내서 삭제한다. -->
+												href="${path}/carshop/cart/delete.do?p_no=${row.p_no}"
+												type="button">삭제</a> <!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 p_no (삭제하길원하는 장바구니 p_no )를 보내서 삭제한다. -->
 											</td>
 										</tr>
 
