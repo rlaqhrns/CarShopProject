@@ -20,7 +20,7 @@
 	</select>
 
 	<insert id="insertBuyList" parameterType="map" useGeneratedKeys="true" keyProperty="ono">
-		insert into order_history_tbl (u_id, pno, pname, quantity, amount, pay, order_date) values(#{u_id}, #{pno}, #{pname}, #{quantity}, #{amount}, #{pay}, now())
+		insert into order_history_tbl (u_id, pno, pname, quantity, amount, pay, order_date) values(#{u_id}, #{p_no}, #{pname}, #{quantity}, #{amount}, #{pay}, now())
 	</insert>
 	
 	<delete id="deleteCartList">
