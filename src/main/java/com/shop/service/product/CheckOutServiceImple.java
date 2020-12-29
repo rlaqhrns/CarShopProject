@@ -37,8 +37,9 @@ public class CheckOutServiceImple implements CheckOutService{
 	}
 
 	@Override
-	public void deleteCartList() {
+	public void deleteCartList(String u_id) {
 		// TODO Auto-generated method stub
+		mapper.deleteCartList(u_id);
 		
 	}
 
