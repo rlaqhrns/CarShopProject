@@ -31,15 +31,13 @@
 					<h3>ID 또는 비밀번호를 다시 확인해주세요:-)</h3>
 					<h1></h1>
 					<h1></h1>
-					<form class="row login_form" action="loginerror.html" id="contactForm" method="post">
-					<div class="login_form_inner" style="width: 230px; height: 120px;" >
-						<h2>Login Again!</h2>
-						<form class="row login_form" action="login.html" id="contactForm" method="post">
+					<form class="row login_form" action="login.html" id="contactForm" method="get">
+						<div class="login_form_inner" style="width: 230px; height: 120px;" >
+							<h2>Login Again!</h2>
 							<div class="col-md-12 form-group">
 								<button type="submit" value="submit" class="button button-login w-100">Log In <i class="fas fa-chevron-right"></i></button>
 							</div>
-						</form>
-					</div>
+						</div>
 					</form>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb"></nav>
 				</div>

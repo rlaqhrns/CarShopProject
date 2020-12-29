@@ -20,4 +20,9 @@ public class ProductReturnServiceImple implements ProductReturnService{
 		return mapper.return_();
 	}
 
+	@Override
+	public List<Return_Tbl> order_date(String order_date) {
+		return mapper.order_date(order_date);
+	}
+
 }
