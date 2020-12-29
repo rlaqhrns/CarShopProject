@@ -3,6 +3,7 @@ package com.shop.controller.member;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.cj.Session;
+import com.shop.service.member.LoginServiceImple;
 import com.shop.service.member.MailService;
 import com.shop.service.member.MailServiceImpl;
 import com.shop.vo.Prod_Tbl;
@@ -41,7 +43,8 @@ public class LoginController {
 	
 
 	@Autowired
-	MailServiceImpl service = new MailServiceImpl();
+	MailServiceImpl mailservice = new MailServiceImpl();
+	LoginServiceImple loginservice = new LoginServiceImple();
 	
 	@Autowired
 	private MailService mailService;
@@ -60,46 +63,20 @@ public class LoginController {
 
 
 	@PostMapping("/login") 
-	public String login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public void login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
-		System.out.println("post2들어옴");
+		loginservice.login(request, response, session);
+
+	}
+	  
+	@GetMapping("/logout")
+	public String login2() {
+		System.out.println("logout들어옴");
 		
-		String id = request.getParameter("id");
-		String pw = request.getParameter("password");
-		
-		System.out.println("id : " + id + " pw : " + pw);
-
-		//service.getAllUser();                            //db연결시 사용하기
-
-		
-
-		if(id.equals("admin") && pw.equals("admin")) {      //db없이 test해보기 위함
-
-			session.setAttribute("id" , id);
-			session.setAttribute("pw", pw);
-
-			String memberId = (String)session.getAttribute("id");
-			boolean login = memberId == null ? false : true;
-			
-			System.out.println("memberId는 : " + memberId);
-			System.out.println("login세션결과는 : " + login);
-
-			return "/carshop/indexlogin";  						 
-			
-		} else {
-			System.out.println("로그인정보 불일치");
-			return "/carshop/loginerror";
-		}    
+		return "carshop/login";
 	}
 	
-//	@GetMapping("/logout")
-//	public String login2() {
-//		System.out.println("logout들어옴");
-//		
-//		return "carshop/login";
-//	}
-//	
-//
+
 //	@PostMapping("/logout") 
 //	public String login_success3(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 //		
@@ -152,11 +129,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/sendmail")
-	public String sendMail(HttpServletRequest request, HttpServletResponse response) {
-		
+	public String sendMail(HttpServletRequest request, HttpServletResponse response) throws MessagingException{
 		String email = request.getParameter("email");
-		service.sendMail();						        //MailServiceImpl
-		
+		mailservice.sendMail();						        //MailServiceImpl
 		return "carshop/pwsearch";
 	}
 	
