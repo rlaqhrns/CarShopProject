@@ -86,7 +86,7 @@
                       <h2>결제 정보</h2>
                       <!-- 장바구니 테이블 에서 상품명, 상품번호, 상품수량, 상품 금액 jstl로 가져오기 (2020.12.18 재원)  -->
                         <ul class="list">
-                        	<li><a href="#"><h4>상품이름 &emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;수량<span>Total</span></h4></a></li>
+                        	<li><a href="#"><h4>상품이름 <span style="position:absolute;width:50px;float:none;margin-left:30px;left:38%">수량</span><span>Total</span></h4></a></li>
                         	<c:set var="col_sum" value="0"/>
                         	<c:forEach items="${cartList}" var ="cart" varStatus="status">
                             	<li><a href="#"><c:out value="${cart.pname}"></c:out><span class="middle" style="position:absolute;left:30%;"> <c:out value="${cart.quantity}"></c:out></span> <span class="last"><c:out value="${cart.total}" /></span></a></li>
@@ -159,7 +159,7 @@
         </button>
       </div>
       <div class="modal-body">
-        결제 완료 후 구매이력창으로 이동합니다.
+        결제 수단: 신용카드 <br>결제 완료 후 구매이력창으로 이동합니다.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
@@ -180,11 +180,11 @@
         </button>
       </div>
       <div class="modal-body">
-        결제 완료 후 구매이력창으로 이동합니다.
+        결제 수단: 카카오페이 <br>결제 완료 후 구매이력창으로 이동합니다.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger btn-creditcheck">결제하기</button>
+        <button type="button" class="btn btn-danger btn-creditcheck" onclick="requestPay()">결제하기</button>
       </div>
     </div>
   </div>
@@ -211,10 +211,9 @@
   </div>
 </div>
   
-  
   <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!--   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> -->
   <!-- 결제수단 라디오 버튼 체크 확인 및 name 설정 (재원/20.12.22) -->
  	<script type="text/javascript">
  		$(document).ready(function(){
@@ -248,7 +247,7 @@
   						$("#exampleModalCenter2").modal('show'); //신용카드결제 modal 창 보여줌 (재원/20.12.29)	
   				}
   				else if($('#f-option6').is(":checked")){
-  						$("#exampleModalCenter2").modal('show'); //카카오페이결제 modal 창 보여줌 (재원/20.12.29)
+  						$("#exampleModalCenter4").modal('show'); //카카오페이결제 modal 창 보여줌 (재원/20.12.29)
   				}
   				else {
   					
@@ -256,6 +255,7 @@
   					
   				}
   			});
+  			
   			
   			$('.btn-creditcheck').click(function() {
   				
@@ -266,6 +266,57 @@
  		
  		});
   		
+ 	/* 		var totalPrice = ${col_sum};
+ 			<c:forEach items="${pUser}" var="pUser">
+ 			var email= ${pUser.email};
+ 			var name = ${pUser.name};
+ 			var phone = ${pUser.phone};
+ 			var address = ${pUser.addr};
+ 			</c:forEach> */
+ 			
+ 			/* function requestPay() {
+	 		        var IMP = window.IMP; // 생략가능
+	 		        IMP.init('TC0ONETIME'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	 		        var msg;
+ 			   	IMP.request_pay({ // param
+ 			            pg : 'kakaopay',
+ 			            pay_method : 'card',
+ 			            merchant_uid : 'merchant_' + new Date().getTime(),
+ 			            name : 'KH Books 도서 결제',
+ 			            amount : totalPrice,
+ 			            buyer_email : email,
+ 			            buyer_name : name,
+ 			            buyer_tel : phone,
+ 			            buyer_addr : address,
+ 			            buyer_postcode : '123-456',
+ 			      }, function (rsp) { // callback
+ 			    	 jQuery.ajax({
+ 			            url: "/carshop/confirmation", // 가맹점 서버
+ 			            method: "POST",
+ 			            headers: { "Content-Type": "application/json" },
+ 			            data: {
+ 			                imp_uid: rsp.imp_uid,
+ 			                merchant_uid: rsp.merchant_uid
+ 			            }
+ 			        }).done(function (data) {
+ 			          // 가맹점 서버 결제 API 성공시 로직
+ 			        	 msg = '결제가 완료되었습니다.';
+                         msg += '\n고유ID : ' + rsp.imp_uid;
+                         msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                         msg += '\결제 금액 : ' + rsp.paid_amount;
+                         msg += '카드 승인번호 : ' + rsp.apply_num;
+                         
+                         alert(msg);
+                         
+ 			        });
+ 			    	 	//location.href='request.getContextPath()/order/paySuccess?msg='+msg;
+ 			      } else {
+	 			        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+	 			       //	location.href="request.getContextPath()/order/payFail";
+ 			      	}
+ 			      }); 
+ 	    }*/
+ 		
   	</script>
 
 
