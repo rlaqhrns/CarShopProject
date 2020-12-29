@@ -71,7 +71,7 @@ public class ProductBuyController {
 	    
 		Prod_Tbl product = productBuyService.getProduct(p_no);
 		Cart_Tbl cart = new Cart_Tbl(); 
-		cart.setPno(product.getP_no());
+		cart.setP_no(product.getP_no()); //vo 객체 수정으로 (pno -> p_no) setPno => setP_no 수정 (재원/20.12.29)
 		cart.setU_id(u_id);
 		cart.setPname(product.getP_name());
 		cart.setAmount(product.getAmount());
