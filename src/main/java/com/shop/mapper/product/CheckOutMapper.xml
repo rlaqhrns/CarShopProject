@@ -10,9 +10,7 @@
  	</select>
 
  	<select id ="cartList" resultType="com.shop.vo.Cart_Tbl">
-		<![CDATA[ 
 			select * from cart_tbl where u_id = #{u_id}
-		]]>
  	</select>
 
 	<select id="getUser" resultType="com.shop.vo.User_Tbl">
@@ -20,7 +18,7 @@
 	</select>
 
 	<insert id="insertBuyList" parameterType="map" useGeneratedKeys="true" keyProperty="ono">
-		insert into order_history_tbl (u_id, pno, pname, quantity, amount, pay, order_date) values(#{u_id}, #{p_no}, #{pname}, #{quantity}, #{amount}, #{pay}, now())
+		insert into order_history_tbl (u_id, p_no, pname, quantity, amount, pay, order_date) values(#{u_id}, #{p_no}, #{pname}, #{quantity}, #{amount}, #{pay}, now())
 	</insert>
 	
 	<delete id="deleteCartList">
