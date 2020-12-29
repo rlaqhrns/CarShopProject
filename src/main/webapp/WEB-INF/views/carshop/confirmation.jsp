@@ -105,6 +105,10 @@
       		    $("#getItemChange").click(function(){
       		        $("#exampleModal").appendTo("body").modal();
       		    });
+      		    
+      		  $("#getItemRefund").click(function(){
+    		        $("#exampleModal").appendTo("body").modal();
+    		    });
       		});
 </script>
 	

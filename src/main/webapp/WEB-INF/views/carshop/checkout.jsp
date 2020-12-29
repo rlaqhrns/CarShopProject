@@ -56,20 +56,21 @@
                             <span class="placeholder" data-placeholder="Last name"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">전화 번호
-                            <input type="text" class="form-control" id="number" name="phone" value='${pUser.phone}'>
+                            <input type="text" class="form-control" id="number" name="phone" value='${pUser.phone}' readonly="readonly">
                             <span class="placeholder" data-placeholder="Phone number"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">이메일
-                            <input type="text" class="form-control" id="email" name="email" value='${pUser.email}'>
+                            <input type="text" class="form-control" id="email" name="email" value='${pUser.email}' readonly="readonly">
                             <span class="placeholder" data-placeholder="Email Address"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">주소
-                            <input type="text" class="form-control" id="add1" name="addr" value='${pUser.addr}'>
+                            <input type="text" class="form-control" id="add1" name="addr" value='${pUser.addr}' readonly="readonly">
                             <span class="placeholder" data-placeholder="Address line 01"></span>
                         </div>
                         <div class="col-md-12 form-group p_star">상세 주소
-                            <input type="text" class="form-control" id="add2" name="addr2" value='${pUser.addr2}'>
+                            <input type="text" class="form-control" id="add2" name="addr2" value='${pUser.addr2}' readonly="readonly">
                             <span class="placeholder" data-placeholder="Address line 02"></span>
+                            <button type="button" class="btn btn-outline-info font-weight-light" style="float:right;" data-toggle="modal" data-target="#exampleModalCenter1">주소 바꾸기</button>
                         </div>
                         <div class="col-md-12 form-group p_star">구매자 차종
                             <input type="text" class="form-control" id="city" name="cars" value='${pUser.cars}' readonly="readonly">
@@ -123,6 +124,72 @@
     </div>
   </section>
   <!--================End Checkout Area =================-->
+<!-- 주소 Modal -->
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">주소를 새롭게 설정하시겠습니까?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        마이페이지 > 개인 정보 수정으로 이동합니다. 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/carshop/mypage'">이동</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 결제 Modal -->
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLongTitle">결제를 진행하시겠습니까?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        결제 완료 후 구매이력창으로 이동합니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-danger btn-creditcheck">결제하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 구매 방법 Modal -->
+<div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLongTitle">구매방법을 결정하십시오</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        결제 완료 후 구매이력창으로 이동합니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-danger btn-creditcheck">결제하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
   <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
   <!-- 결제수단 라디오 버튼 체크 확인 및 name 설정 (재원/20.12.22) -->
  	<script type="text/javascript">
@@ -131,6 +198,10 @@
  			//console.log("들어오는지");
  			//var isChecked = $('#f-option5').val();
  			//console.log("인식하는지" + isChecked);
+ 			
+/*  			$("#getItemChange").click(function(){
+  		        $("#exampleModal").appendTo("body").modal();
+  		    }); */
  			
   			$("input[type='radio']").on('change', function() {
   				console.log("input[type='radio']들어오는지");
@@ -148,7 +219,20 @@
  			}); 
   			
   			$('.button-paypal').click(function() {
+  				
+  				if(($('#f-option6').is(":checked")) || ($('#f-option5').is(":checked"))){
+  						$("#exampleModalCenter2").modal('show');
+  		
+  				}
+  				else {
+  					
+  				}
+  			});
+  			
+  			$('.btn-creditcheck').click(function() {
+  				
   				$('#checkoutform').submit();
+  				
   			});
   			
  		
