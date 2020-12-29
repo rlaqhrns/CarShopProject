@@ -10,8 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/carshop/*")
 @Slf4j
+
 public class CartController {
 
-	//������ ��ٱ���
+	@RequestMapping("/cart")
+	public String cart() {
+		return"carshop/cart";
+	}	
 	
 }
