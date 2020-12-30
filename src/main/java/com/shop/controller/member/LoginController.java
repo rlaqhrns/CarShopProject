@@ -27,6 +27,9 @@ import com.mysql.cj.Session;
 import com.shop.service.member.LoginServiceImple;
 import com.shop.service.member.MailService;
 import com.shop.service.member.MailServiceImpl;
+import com.shop.service.member.RegisterService;
+import com.shop.vo.All_User_Tbl;
+import com.shop.vo.Login;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
@@ -42,12 +45,13 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 	
 
-	@Autowired
-	MailServiceImpl mailservice = new MailServiceImpl();
-	LoginServiceImple loginservice = new LoginServiceImple();
+	@Setter(onMethod_=@Autowired)
+	MailServiceImpl mailservice;
 	
-	@Autowired
-	private MailService mailService;
+	@Setter(onMethod_=@Autowired)
+	LoginServiceImple loginservice;
+	
+	@Setter(onMethod_=@Autowired)
 	private JavaMailSenderImpl mailSender;
 	
 //	@GetMapping("/index") 
@@ -60,13 +64,21 @@ public class LoginController {
 		return "carshop/login";
 	}
 	
-
-
 	@PostMapping("/login") 
-	public void login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public String login_success( HttpSession session, Login logvo) {
 		
-		loginservice.login(request, response, session);
-
+		//입력받은 id,pw확인
+		System.out.println("id = " + logvo.getId() + " pw = " + logvo.getPw());
+		
+		boolean result = loginservice.login(logvo.getId(), logvo.getPw(), session);
+		
+		if(result == true) {
+//			if(logvo.getId() == "admin"){
+//			return "carshop/adminpage";                  -- 관리자페이지로 랜딩할경우
+//			}
+			return "carshop/indexlogin";
+		}
+		else return "/carshop/loginerror";
 	}
 	  
 	@GetMapping("/logout")
@@ -75,25 +87,18 @@ public class LoginController {
 		
 		return "carshop/login";
 	}
-	
 
 //	@PostMapping("/logout") 
 //	public String login_success3(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 //		
 //		System.out.println("logout들어옴");
-//		
-//		if() {    
-//			
-//
+//		if() {    	
 //			return "/carshop/indexlogin";  						 
-//			
-//		} else {
-//			
+//		} else {	
 //			return "/carshop/loginerror";
 //		}    
 //	}
 	
-
 	@GetMapping("/indexlogin")
 	public String indexlogin() {
 		return "carshop/indexlogin";
@@ -119,9 +124,27 @@ public class LoginController {
 	}
 	
 	@PostMapping("/pwsearch")
-	public String pwsearch2() {
-		return "/carshop/index";
+	public String pwsearch2(All_User_Tbl aut) {
+		
+		String result = loginservice.getemail(aut);
+	
+		if(result == "1") {
+			return "/carshop/login";
+		}else {
+			if(result == "0") {
+				//일치하는 이메일이없는경우
+				return "/carshop/index";
+			}
+			//이메일은 있으나 사용자가 입력한값과 다른경우
+			return "/carshop/index";
+		}
 	}
+	
+//	@GetMapping("/input")
+//	public ModelAndView input(Model model) {
+//		ModelAndView mv = new ModelAndView("/pwsearch");
+//		view.addObject("message", )
+//	}
 	
 	@GetMapping("/sendmail")
 	public String sendMail1() {
@@ -131,7 +154,7 @@ public class LoginController {
 	@PostMapping("/sendmail")
 	public String sendMail(HttpServletRequest request, HttpServletResponse response) throws MessagingException{
 		String email = request.getParameter("email");
-		mailservice.sendMail();						        //MailServiceImpl
+		mailservice.sendMail();				
 		return "carshop/pwsearch";
 	}
 	
