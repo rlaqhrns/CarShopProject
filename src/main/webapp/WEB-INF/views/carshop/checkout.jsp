@@ -163,7 +163,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger btn-creditcheck">결제하기</button>
+        <button type="button" class="btn btn-danger btn-creditcheck1">결제하기</button>
       </div>
     </div>
   </div>
@@ -214,18 +214,13 @@
   <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+  <script src="http://malsup.github.com/jquery.form.js"></script> 
   <!-- 결제수단 라디오 버튼 체크 확인 및 name 설정 (재원/20.12.22) -->
  	<script type="text/javascript">
 			
  		$(document).ready(function(){
  			
- 			//console.log("들어오는지");
- 			//var isChecked = $('#f-option5').val();
- 			//console.log("인식하는지" + isChecked);
- 			
-/*  			$("#getItemChange").click(function(){
-  		        $("#exampleModal").appendTo("body").modal();
-  		    }); */
  			
   			$("input[type='radio']").on('change', function() {
   				console.log("input[type='radio']들어오는지");
@@ -258,112 +253,78 @@
   			});
   			
   			
-  			$('.btn-creditcheck').click(function() {
+  			$('.btn-creditcheck1').click(function() {
   				
   				$('#checkoutform').submit(); //form submit(재원/20.12.29)
   				
   			});
 
-  		 		var totalPrice = ${col_sum};
+  		 	//jstl 을 javascript에서 사용, 실행 순서가 제일 느려서 사용가능 (재원/20.12.30)	
+  			var totalPrice = ${col_sum};
 			
-  		 	<c:forEach items="${pUser}" var="pUser">		
+  		 	<c:forEach items="${pUser}" var="pUser">	
+  		 		var u_id = "${pUser.u_id}";
 	  		 	var email= "${pUser.email}"; 					
 	  		 	var name = "${pUser.name}";  					
 	  		 	var phone = "${pUser.phone}";  					
 	  		 	var address = "${pUser.addr}";		
   		 	</c:forEach> 
   			
+  		 	//iamport 일반 결제 api 사용 https://docs.iamport.kr/implementation/payment?lang=ko (재원/20.12.30)
+  		 	
   			$("#kakaoPayCheck").click(function() {
   				 console.log("들어오나?");
+  				 	var form = $("form")[1];
+  				 	var formData = new FormData(form);
+  				 	console.log(formData);
+  				 
 	 		        var IMP = window.IMP; // 생략가능
-	 		        IMP.init('TC0ONETIME'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	 		        IMP.init('imp20831122'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	 		        var msg;
 			   	IMP.request_pay({ // param
 			            pg : 'kakaopay',
-			            pay_method : 'card',
+			            pay_method : 'kakaopay',
 			            merchant_uid : 'merchant_' + new Date().getTime(),
-			            name : 'KH Books 도서 결제',
+			            name : '저리카 부품 결제',
 			            amount : totalPrice,
 			            buyer_email : email,
 			            buyer_name : name,
 			            buyer_tel : phone,
-			            buyer_addr : address,
-			            buyer_postcode : '123-456',
+			            buyer_addr : address			           
 			      }, function (rsp) { // callback
 			    	 if ( rsp.success ) {
-			    	  jQuery.ajax({
-			            url: "/checkout/payments/complete", // 가맹점 서버
-			            method: "POST",
-			            headers: { "Content-Type": "application/json" },
-			            data: {
-			                imp_uid: rsp.imp_uid,
-			                merchant_uid: rsp.merchant_uid
-			            }
+ 			    	/*   $.ajax({
+			            url: "/checkout", // 가맹점 서버
+			            type: "POST",
+			            contentType: "application/json; charset=utf-8",
+			            data: formData
 			        }).done(function (data) { 
 			          // 가맹점 서버 결제 API 성공시 로직
 			        	 msg = '결제가 완료되었습니다.';
-                      msg += '\n고유ID : ' + rsp.imp_uid;
-                      msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                      //msg += '\n고유ID : ' + rsp.imp_uid;
+                      //msg += '\n상점 거래ID : ' + rsp.merchant_uid;
                       msg += '\결제 금액 : ' + rsp.paid_amount;
-                      msg += '카드 승인번호 : ' + rsp.apply_num;
-                      
+                      //msg += '카드 승인번호 : ' + rsp.apply_num;
                       alert(msg);
                       
-			      //  });
-			    	 	//location.href='request.getContextPath()/order/paySuccess?msg='+msg;
+                      
+                      
+			        });  */
+			        $('#checkoutform').submit();
+			        
+			    	 //  $('#checkoutform').ajaxForm({url:'/checkout', type:'post', contentType: 'application/json; charset=utf-8'});
+			    		console.log("들어오나");
+			    	  //유저 아이디 넣은 경로 생성 필요 (재원/20.12.29)
+			    	 //	location.href='/checkout/confirmation/';
 			      } else {
 	 			        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-	 			       //	location.href="request.getContextPath()/order/payFail";
+	 			       	location.href="/checkout/";
 			      	}
 			      }); 
   			});
  		
  		});
  			
-/*  			 function requestPay() {
- 				 console.log("들어오나?");
-	 		        var IMP = window.IMP; // 생략가능
-	 		        IMP.init('TC0ONETIME'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-	 		        var msg;
- 			   	IMP.request_pay({ // param
- 			            pg : 'kakaopay',
- 			            pay_method : 'card',
- 			            merchant_uid : 'merchant_' + new Date().getTime(),
- 			            name : 'KH Books 도서 결제',
- 			            amount : totalPrice,
- 			            buyer_email : email,
- 			            buyer_name : name,
- 			            buyer_tel : phone,
- 			            buyer_addr : address,
- 			            buyer_postcode : '123-456',
- 			      }, function (rsp) { // callback
- 			    	 if ( rsp.success ) {
- 			    	 jQuery.ajax({
- 			            url: "/carshop/confirmation", // 가맹점 서버
- 			            method: "POST",
- 			            headers: { "Content-Type": "application/json" },
- 			            data: {
- 			                imp_uid: rsp.imp_uid,
- 			                merchant_uid: rsp.merchant_uid
- 			            }
- 			        }).done(function (data) {
- 			          // 가맹점 서버 결제 API 성공시 로직
- 			        	 msg = '결제가 완료되었습니다.';
-                         msg += '\n고유ID : ' + rsp.imp_uid;
-                         msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                         msg += '\결제 금액 : ' + rsp.paid_amount;
-                         msg += '카드 승인번호 : ' + rsp.apply_num;
-                         
-                         alert(msg);
-                         
- 			        });
- 			    	 	//location.href='request.getContextPath()/order/paySuccess?msg='+msg;
- 			      } else {
-	 			        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-	 			       //	location.href="request.getContextPath()/order/payFail";
- 			      	}
- 			      }); 
- 	    } */
  		
   	</script>
 
