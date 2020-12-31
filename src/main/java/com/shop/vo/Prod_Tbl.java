@@ -9,8 +9,6 @@ public class Prod_Tbl {
 
 	private String s_id, p_name, discribe, compa, new_date, update_date,img;
 
-
-	private String s_id, p_name, discribe, compa, img, new_date, update_date;
 	
 
 }
