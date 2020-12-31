@@ -3,9 +3,12 @@
 <head>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Carshop MyPage</title>
+
 <link rel="icon" href="/resources/img/Fevicon.png" type="image/png">
 <link rel="stylesheet"
 	href="/resources/vendors/bootstrap/bootstrap.min.css">
@@ -19,93 +22,181 @@
 <link rel="stylesheet"
 	href="/resources/vendors/owl-carousel/owl.carousel.min.css">
 
+
 <link rel="stylesheet" href="/resources/css/style.css">
 <link href='/resources/lib/main.css' rel='stylesheet' />
 <!-- 달력 css -->
 <script src='/resources/lib/main.js'></script>
 <!-- 달력 js  -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
-	/* 달력 실행을 위한 스크립트 */
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
+//제이쿼리와 스크립트 둘 다 사용하기 위해 가장 바깥쪽에 객체, 변수들 선언 -Monica 2020.12.31
+var modal = document.getElementById('modalEvent'); 
+var schdtitle = "";
+var schdstart = "";
+var schdend = "";
+var calendar = null;
+const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 버그입니다. 실행 문제없이 잘 됨 -Monica 2020.12.31
+    document.querySelector(".modalc").classList.remove("hiddenc");
+  }
 
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialDate : '2020-12-17',
-			editable : true,
-			selectable : true,
-			businessHours : true,
-			navLinks : true,
-			dayMaxEvents : true, // allow "more" link when too many events
-			headerToolbar : {
-				left : 'prev,next today',
-				center : 'title',
-				right : 'dayGridMonth,timeGridDay'
-			},
-			selectMirror : true,
-			select : function(arg) {
-				var title = prompt('일정 제목:');
-				if (title) {
-					calendar.addEvent({
-						title : title,
-						start : arg.start,
-						end : arg.end,
-						allDay : arg.allDay
-					})
-				}
-				calendar.unselect()
-			},
-			eventClick : function(arg) {
-				if (confirm('이 일정을 삭제하겠습니까?')) {
-					arg.event.remove()
-				}
-			},
-			events : [ {
-				title : 'All Day Event',
-				start : '2020-09-01'
-			}, {
-				title : 'Long Event',
-				start : '2020-09-07',
-				end : '2020-09-10'
-			}, {
-				groupId : 999,
-				title : 'Repeating Event',
-				start : '2020-09-09T16:00:00'
-			}, {
-				groupId : 999,
-				title : 'Repeating Event',
-				start : '2020-09-16T16:00:00'
-			}, {
-				title : 'Conference',
-				start : '2020-09-11',
-				end : '2020-09-13'
-			}, {
-				title : 'Meeting',
-				start : '2020-09-12T10:30:00',
-				end : '2020-09-12T12:30:00'
-			}, {
-				title : 'Lunch',
-				start : '2020-09-12T12:00:00'
-			}, {
-				title : 'Meeting',
-				start : '2020-09-12T14:30:00'
-			}, {
-				title : 'Happy Hour',
-				start : '2020-09-12T17:30:00'
-			}, {
-				title : 'Dinner',
-				start : '2020-09-12T20:00:00'
-			}, {
-				title : 'Birthday Party',
-				start : '2020-09-13T07:00:00'
-			}, {
-				title : 'Click for Google',
-				url : 'http://google.com/',
-				start : '2020-09-28'
-			} ]
+  const close = () => { //이클립스 버그로 빨간줄 뜰 때가 있지만 버그입니다. 실행 문제없이 잘 됨 -Monica 2020.12.31
+    document.querySelector(".modalc").classList.add("hiddenc");
+  }
+  
+	
+		 /* 달력 실행을 위한 스크립트 */
+		document.addEventListener('DOMContentLoaded', function() {
+			var calendarEl = document.getElementById('calendar');
+
+			calendar = new FullCalendar.Calendar(calendarEl, {
+				initialDate : '2020-12-17',
+				editable : true,
+				selectable : true,
+				businessHours : true,
+				navLinks : true,
+				dayMaxEvents : true, // allow "more" link when too many events
+				headerToolbar : {
+					left : 'prev,next today',
+					center : 'title',
+					right : 'dayGridMonth,timeGridDay'
+				},
+				selectMirror : true,
+				select : function(arg) {  //달력 날짜칸이 눌렸을 때 -Monica 2020.12.31
+					/* console.log("arg start: " + arg.start);
+					console.log("arg end: " + arg.end);
+					console.log("arg allday: " + arg.allDay); */
+					
+					var syear = arg.start.getFullYear();  //년도 추출
+					var smonth = arg.start.getMonth() + 1;  //월 추출
+					var sday = arg.start.getDate();  //일 추출
+					var stime = arg.start.toTimeString().substring(0,8);  //시간 추출
+					
+					schdstart = syear+ "-" + smonth + "-" + sday + " " + stime;  //맞는 형식으로 재조합
+					schdend = arg.end;
+					
+					//console.log(schdstart);
+					document.getElementById('schdstart').value = schdstart;  //재조합 한 시작일을 모달창 form에 주입 -Monica 2020.12.31
+					document.getElementById('schdtitle').value = '';  //일정제목 부분 리셋 -Monica 2020.12.31
+					
+					
+					  open();  //모달창 오픈
+					  
+						document.querySelector(".bgc").addEventListener("click", close);  //모달 창 배경이 클릭되면 아무 실행 없이 닫음 -Monica 2020.12.31
+						calendar.unselect() //달력 클릭 취소됨
+				},
+				eventClick : function(arg) {  //일정이 클릭되면
+					//console.log('선택된 일정 제목: ' + arg.event.title);
+					var evttitle = arg.event.title;  //일정 제목 추출
+					if (confirm('이 일정을 삭제하겠습니까?')) {  //확인이 눌리면 밑에 페이지 이동 실행 + 일정 삭제 실행 -Monica 2020.12.31
+						//console.log("주소: " + "/carshop/delschd?u_id=<c:out value='${idcal}' />&schdtitle=" +  evttitle);
+						location.replace("/carshop/delschd?u_id=<c:out value='${idcal}' />&schdtitle=" +  evttitle);
+						//arg.event.remove();
+					}
+				},
+				events : [ {  //상관 없음 보여주기 식 부분 ~139줄 -Monica 2020.12.31
+					title : 'All Day Event',
+					start : '2020-09-01'
+				}, {
+					title : 'Long Event',
+					start : '2020-09-07',
+					end : '2020-09-10'
+				}, {
+					groupId : 999,
+					title : 'Repeating Event',
+					start : '2020-09-09T16:00:00'
+				}, {
+					groupId : 999,
+					title : 'Repeating Event',
+					start : '2020-09-16T16:00:00'
+				}, {
+					title : 'Conference',
+					start : '2020-09-11',
+					end : '2020-09-13'
+				}, {
+					title : 'Meeting',
+					start : '2020-09-12T10:30:00',
+					end : '2020-09-12T12:30:00'
+				}, {
+					title : 'Lunch',
+					start : '2020-09-12T12:00:00'
+				}, {
+					title : 'Meeting',
+					start : '2020-09-12T14:30:00'
+				}, {
+					title : 'Happy Hour',
+					start : '2020-09-12T17:30:00'
+				}, {
+					title : 'Dinner',
+					start : '2020-09-12T20:00:00'
+				}, {
+					title : 'Birthday Party',
+					start : '2020-09-13T07:00:00'
+				}, {
+					title : 'Click for Google',
+					url : 'http://google.com/',
+					start : '2020-09-28'
+				} ]
+			});
+
+			calendar.render();  //달력 출력
+			document.querySelector(".closeBtnc").addEventListener("click", function() { //모달의 입력 버튼이 눌리면 -Monica 2020.12.31
+				  schdtitle = document.getElementById('schdtitle').value;  //입력한 일정제목 값 가져옴
+				  /* schdtitle = document.getElementById('schdtitle').value;
+				  schdtitle = document.getElementById('schdtitle').value; */
+				  var schdstart2 = schdstart.substring(0,10) + "T" + schdstart.substring(11);  //시작시간 값 가져와서 재조립
+				  schdtitle = document.getElementById('schdtitle').value; //
+				   
+				  //일정 마감일 각각 select 값 가져와서 맞는 형식ㅇ로 재조립 -Monica 2020.12.31
+				  schdend = document.getElementById('cal_year').value + "-" + document.getElementById('cal_month').value
+				  				+ "-" + document.getElementById('cal_day').value + "T" + "23:59:59"; 
+				  
+					//console.log(schdtitle);
+					//console.log("arg2 start: " + schdstart2);
+					//console.log("arg2 end: " + schdend);
+					//console.log("arg2 allday: " + true);
+					
+					//console.log("syear:" + schdstart);
+					//console.log("smonth:" + schdstart);
+					//console.log("sday:" + schdstart);
+					//console.log("stime:" + schdstart);
+					
+					
+					if (schdtitle) {  //일정제목이 들어왔을 때
+						calendar.addEvent({  //캘린더api 메서드, 달력에 입력된 일정 출력 -Monica 2020.12.31
+							title : schdtitle,
+							start : schdstart2,
+							end : schdend
+						});
+						//console.log("스케쥴 start:" + schdstart);
+						//console.log("스케쥴 end: " + schdend);
+						
+						
+					}
+					
+					
+					calendar.unselect();  //달력 선택 취소
+					close();  //모달 창 닫음 -Monica 2020.12.31
+					
+			});
+		});  //달력 끝 -Monica 2020.12.31
+		 
+		 $(document).ready(function() {  //제이쿼리 동작을 위한 구역 -Monica 2020.12.31
+			 
+			 
+			 
+			 <c:forEach items='${schedules}' var="schd">  //db에서 가져온 아이디에 해당하는 일정 반복문으로 달력에 입력 -Monica 2020.12.31
+			 	calendar.addEvent({
+					title : "<c:out value='${schd.schdtitle}' />",
+					start : "<c:out value='${schd.schdstart}' />",
+					end : "<c:out value='${schd.schdend}' />"
+				});
+			 </c:forEach>
+
+			//console.log("제이쿼리 되는거냥");
+			
 		});
-
-		calendar.render();
-	});
+		 
 </script>
 <style>
 body {
@@ -119,9 +210,55 @@ body {
 	max-width: 750px;
 	margin: 0 auto;
 }
+
+button {
+	background-color: #F9B514;
+	padding: 5px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* 이하는 모달 설정 */
+.modalc {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 5;
+}
+
+.modalc .bgc {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modalBoxc {
+	position: absolute;
+	background-color: #fff;
+	width: 400px;
+	height: 200px;
+	padding: 15px;
+}
+
+.modalBoxc button {
+	display: block;
+	width: 80px;
+	margin: 0 auto;
+}
+
+.hiddenc {
+	display: none;
+}
+
 </style>
 </head>
 <body>
+
 	<!--================ Start Header Menu Area =================-->
 	<header class="header_area">
 		<div class="main_menu">
@@ -146,7 +283,7 @@ body {
 								role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 							<li class="nav-item submenu dropdown"><a href="#"
 								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">MyPage</a>
+								role="button" aria-haspopup="true" aria-expanded="false">MyPage</a></li>
 							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 						</ul>
 
@@ -164,7 +301,75 @@ body {
 		</div>
 	</header>
 	<!--================ End Header Menu Area =================-->
-
+	
+<!--  Modal -->
+	<div class="modalc hiddenc">
+		<div class="bgc"></div>
+		<div class="modalBoxc">
+			<p>모달창입니다.</p>
+			<form action="/carshop/insert" method="post" id="calform">  <!-- 일정 입력을 위한 폼 -Monica 2020.12.31 -->
+				<input type="hidden" name="u_id" value='<c:out value="${idcal }" />'>  <!-- 유저아이디 hidden -->
+				일정 제목: <input type="text" name="schdtitle" id="schdtitle"><br>
+				시작일: <input type="text" name="schdstart" id="schdstart" readonly><br>
+				마감일:<br>
+				<select name="cal_year" id="cal_year">  <!-- 연도 선택 -->
+					<option value="2020">2020</option>
+					<option value="2021">2021</option>
+					<option value="2022">2022</option>
+				</select>
+				<select name="cal_month" id="cal_month"> <!-- 달 선택 -->
+					<option value="01">Jan</option>
+					<option value="02">Feb</option>
+					<option value="03">Mar</option>
+					<option value="04">Apr</option>
+					<option value="05">May</option>
+					<option value="06">Jun</option>
+					<option value="07">Jul</option>
+					<option value="08">Aug</option>
+					<option value="09">Sep</option>
+					<option value="10">Oct</option>
+					<option value="11">Nov</option>
+					<option value="12">Dec</option>
+				</select>
+				<select name="cal_day" id="cal_day"> <!-- 날짜 선택 -->
+					<option value="01">1</option>
+					<option value="02">2</option>
+					<option value="03">3</option>
+					<option value="04">4</option>
+					<option value="05">5</option>
+					<option value="06">6</option>
+					<option value="07">7</option>
+					<option value="08">8</option>
+					<option value="09">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select>
+				 <br>
+				<button class="closeBtnc" type="submit">입력</button>
+			</form>
+		</div>
+	</div>
+	<!-- /.modal -->
 
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="blog">
@@ -210,7 +415,7 @@ body {
 							src="/resources/img/blog/cat-post/cat-post-2.jpg" alt="post">
 						<div class="categories_details">
 							<div class="categories_text">
-								<a href="/carshop/cart">
+								<a href="/carshop/cart">  <!-- 장바구니페이지로 이동url 필요 -->
 									<h5>장바구니</h5>
 								</a>
 								<div class="border_line"></div>
@@ -225,7 +430,7 @@ body {
 							src="/resources/img/blog/cat-post/cat-post-1.jpg" alt="post">
 						<div class="categories_details">
 							<div class="categories_text">
-								<a href="single-blog.html">
+								<a href="/carshop/retrun_end">  <!-- 리턴페이지로 이동url 필요 -->
 									<h5>주문 이력</h5>
 								</a>
 								<div class="border_line"></div>
@@ -247,6 +452,8 @@ body {
 					<div class="blog_left_sidebar">
 						<div id='calendar'></div>
 						<!-- 달력생성 -->
+						
+						
 						<article class="row blog_item">
 							<!-- 1대1문의 보여줌 -->
 							<div>
@@ -377,6 +584,105 @@ body {
 	<!--================End Instagram Area =================-->
 
 
+
+	<!-- 불필요한 플러그인, api사용을 방지하기 위한 include폴더에 있는 footer.jsp로부터 독립적인 footer구역입니다. include/footer.jsp의 내용이 갱신됐을 때
+				성연이에게 알려주세요 -Monica 2020.12.31 -->
 	<!--================ Start footer Area  =================-->
-	<%@ include file="../include/footer.jsp"%>
+	<footer class="footer">
+	<div class="footer-area">
+		<div class="container">
+			<div class="row section_gap">
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-footer-widget tp_widgets">
+						<h4 class="footer_title large_title">집콕코딩단</h4>
+						<p>Green Academy 출신, 7명의 수석 개린이들이 창단한 집콕코딩단. 창의적인 아이디어와 실력을
+							겸비하여 '저리카SHOP' 기획, 개발했다.</p>
+
+					</div>
+				</div>
+				<div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
+					<div class="single-footer-widget tp_widgets">
+						<h4 class="footer_title">Quick Links</h4>
+						<ul class="list">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">Shop</a></li>
+							<li><a href="#">MyPage</a></li>
+							<li><a href="#">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-6 col-sm-6">
+					<div class="single-footer-widget instafeed">
+						<h4 class="footer_title">member</h4>
+						<ul class="list instafeed d-flex flex-wrap">
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+							<li><img src="/resources/img/gallery/r1.png" alt=""
+								style="width: 70px; hight: 70px;"></li>
+						</ul>
+					</div>
+				</div>
+				<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+					<div class="single-footer-widget tp_widgets">
+						<h4 class="footer_title">Contact Us</h4>
+						<div class="ml-40">
+							<p class="sm-head">
+								<span class="fa fa-location-arrow"></span> Head Office
+							</p>
+							<p>경기도 성남시 JIP.CO.K codingdan company 2층</p>
+
+							<p class="sm-head">
+								<span class="fa fa-phone"></span> INSTAGRAM
+							</p>
+							<p>
+								@jipcok <br> tel.031-1234-5678
+							</p>
+
+							<p class="sm-head">
+								<span class="fa fa-envelope"></span> Email
+							</p>
+							<p>
+								findme0@naver.com <br> www.jipcokcodingdan.com
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-bottom">
+		<div class="container">
+			<div class="row d-flex">
+				<p class="col-lg-12 footer-text text-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>
+						document.write(new Date().getFullYear());
+					</script>
+					All rights reserved | This template is made with by JIPCOK 
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+<!--================ End footer Area  =================-->
+
+<!-- 주의! 제이쿼리 nice-select.js 넣지 마세요 -Monica 2020.12.31 -->
+<script src="/resources/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/resources/vendors/skrollr.min.js"></script>
+<script src="/resources/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="/resources/vendors/jquery.ajaxchimp.min.js"></script>
+<script src="/resources/vendors/mail-script.js"></script>
+<script src="/resources/js/main.js"></script>
+</body>
 </html>
