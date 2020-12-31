@@ -30,16 +30,17 @@
 <!-- 달력 js  -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
-var modal = document.getElementById('modalEvent');
+//제이쿼리와 스크립트 둘 다 사용하기 위해 가장 바깥쪽에 객체, 변수들 선언 -Monica 2020.12.31
+var modal = document.getElementById('modalEvent'); 
 var schdtitle = "";
 var schdstart = "";
 var schdend = "";
 var calendar = null;
-const open = () => {
+const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 버그입니다. 실행 문제없이 잘 됨 -Monica 2020.12.31
     document.querySelector(".modalc").classList.remove("hiddenc");
   }
 
-  const close = () => {
+  const close = () => { //이클립스 버그로 빨간줄 뜰 때가 있지만 버그입니다. 실행 문제없이 잘 됨 -Monica 2020.12.31
     document.querySelector(".modalc").classList.add("hiddenc");
   }
   
@@ -61,40 +62,39 @@ const open = () => {
 					right : 'dayGridMonth,timeGridDay'
 				},
 				selectMirror : true,
-				select : function(arg) {
-					console.log("arg start: " + arg.start);
+				select : function(arg) {  //달력 날짜칸이 눌렸을 때 -Monica 2020.12.31
+					/* console.log("arg start: " + arg.start);
 					console.log("arg end: " + arg.end);
-					console.log("arg allday: " + arg.allDay);
+					console.log("arg allday: " + arg.allDay); */
 					
-					var syear = arg.start.getFullYear();
-					var smonth = arg.start.getMonth() + 1;
-					var sday = arg.start.getDate();
-					var stime = arg.start.toTimeString().substring(0,8);
+					var syear = arg.start.getFullYear();  //년도 추출
+					var smonth = arg.start.getMonth() + 1;  //월 추출
+					var sday = arg.start.getDate();  //일 추출
+					var stime = arg.start.toTimeString().substring(0,8);  //시간 추출
 					
-					schdstart = syear+ "-" + smonth + "-" + sday + " " + stime;
+					schdstart = syear+ "-" + smonth + "-" + sday + " " + stime;  //맞는 형식으로 재조합
 					schdend = arg.end;
 					
-					console.log(schdstart);
-					schdstart
-					document.getElementById('schdstart').value = schdstart;
-					document.getElementById('schdtitle').value = '';
+					//console.log(schdstart);
+					document.getElementById('schdstart').value = schdstart;  //재조합 한 시작일을 모달창 form에 주입 -Monica 2020.12.31
+					document.getElementById('schdtitle').value = '';  //일정제목 부분 리셋 -Monica 2020.12.31
 					
 					
-					  open();
+					  open();  //모달창 오픈
 					  
-						document.querySelector(".bgc").addEventListener("click", close);
-						calendar.unselect()
+						document.querySelector(".bgc").addEventListener("click", close);  //모달 창 배경이 클릭되면 아무 실행 없이 닫음 -Monica 2020.12.31
+						calendar.unselect() //달력 클릭 취소됨
 				},
-				eventClick : function(arg) {
-					console.log('선택된 일정 제목: ' + arg.event.title);
-					var evttitle = arg.event.title;
-					if (confirm('이 일정을 삭제하겠습니까?')) {
-						console.log("주소: " + "/carshop/delschd?u_id=<c:out value='${idcal}' />&schdtitle=" +  evttitle);
+				eventClick : function(arg) {  //일정이 클릭되면
+					//console.log('선택된 일정 제목: ' + arg.event.title);
+					var evttitle = arg.event.title;  //일정 제목 추출
+					if (confirm('이 일정을 삭제하겠습니까?')) {  //확인이 눌리면 밑에 페이지 이동 실행 + 일정 삭제 실행 -Monica 2020.12.31
+						//console.log("주소: " + "/carshop/delschd?u_id=<c:out value='${idcal}' />&schdtitle=" +  evttitle);
 						location.replace("/carshop/delschd?u_id=<c:out value='${idcal}' />&schdtitle=" +  evttitle);
 						//arg.event.remove();
 					}
 				},
-				events : [ {
+				events : [ {  //상관 없음 보여주기 식 부분 ~139줄 -Monica 2020.12.31
 					title : 'All Day Event',
 					start : '2020-09-01'
 				}, {
@@ -139,56 +139,53 @@ const open = () => {
 				} ]
 			});
 
-			calendar.render();
-			document.querySelector(".closeBtnc").addEventListener("click", function() {
-				  schdtitle = document.getElementById('schdtitle').value;
+			calendar.render();  //달력 출력
+			document.querySelector(".closeBtnc").addEventListener("click", function() { //모달의 입력 버튼이 눌리면 -Monica 2020.12.31
+				  schdtitle = document.getElementById('schdtitle').value;  //입력한 일정제목 값 가져옴
 				  /* schdtitle = document.getElementById('schdtitle').value;
 				  schdtitle = document.getElementById('schdtitle').value; */
-				  var schdstart2 = schdstart.substring(0,10) + "T" + schdstart.substring(11);
-				  schdtitle = document.getElementById('schdtitle').value;
-				  
+				  var schdstart2 = schdstart.substring(0,10) + "T" + schdstart.substring(11);  //시작시간 값 가져와서 재조립
+				  schdtitle = document.getElementById('schdtitle').value; //
+				   
+				  //일정 마감일 각각 select 값 가져와서 맞는 형식ㅇ로 재조립 -Monica 2020.12.31
 				  schdend = document.getElementById('cal_year').value + "-" + document.getElementById('cal_month').value
 				  				+ "-" + document.getElementById('cal_day').value + "T" + "23:59:59"; 
 				  
-					console.log(schdtitle);
-					console.log("arg2 start: " + schdstart2);
-					console.log("arg2 end: " + schdend);
-					console.log("arg2 allday: " + true);
-/* 					var syear = schdstart.getFullYear();
-					var smonth = schdstart.getMonth() + 1;
-					var sday = schdstart.getDate();
-					var stime = schdstart.toTimeString().substring(0,8);
+					//console.log(schdtitle);
+					//console.log("arg2 start: " + schdstart2);
+					//console.log("arg2 end: " + schdend);
+					//console.log("arg2 allday: " + true);
 					
-					console.log("syear:" + schdstart);
-					console.log("smonth:" + schdstart);
-					console.log("sday:" + schdstart);
-					console.log("stime:" + schdstart); */
+					//console.log("syear:" + schdstart);
+					//console.log("smonth:" + schdstart);
+					//console.log("sday:" + schdstart);
+					//console.log("stime:" + schdstart);
 					
 					
-					if (schdtitle) {
-						calendar.addEvent({
+					if (schdtitle) {  //일정제목이 들어왔을 때
+						calendar.addEvent({  //캘린더api 메서드, 달력에 입력된 일정 출력 -Monica 2020.12.31
 							title : schdtitle,
 							start : schdstart2,
 							end : schdend
 						});
-						console.log("스케쥴 start:" + schdstart);
-						console.log("스케쥴 end: " + schdend);
+						//console.log("스케쥴 start:" + schdstart);
+						//console.log("스케쥴 end: " + schdend);
 						
 						
 					}
 					
 					
-					calendar.unselect();
-					close();
+					calendar.unselect();  //달력 선택 취소
+					close();  //모달 창 닫음 -Monica 2020.12.31
 					
 			});
-		});
+		});  //달력 끝 -Monica 2020.12.31
 		 
-		 $(document).ready(function() {
+		 $(document).ready(function() {  //제이쿼리 동작을 위한 구역 -Monica 2020.12.31
 			 
 			 
 			 
-			 <c:forEach items='${schedules}' var="schd">
+			 <c:forEach items='${schedules}' var="schd">  //db에서 가져온 아이디에 해당하는 일정 반복문으로 달력에 입력 -Monica 2020.12.31
 			 	calendar.addEvent({
 					title : "<c:out value='${schd.schdtitle}' />",
 					start : "<c:out value='${schd.schdstart}' />",
@@ -196,17 +193,7 @@ const open = () => {
 				});
 			 </c:forEach>
 
-			console.log("제이쿼리 되는거냥");
-			
-/* 			$(document).on("click", ".closeBtn", function(e) {
-				console.log("제이쿼리 클릭 됨");
-			}); */
-			
-/* 			$(document).on("click", ".fc-daygrid-event-harness", function(e) {
-				console.log("스케쥴 삭제 클릭 됨");
-				var title = $(this).children('.fc-event-title').text();
-				console.log(title);
-			}); */
+			//console.log("제이쿼리 되는거냥");
 			
 		});
 		 
@@ -231,6 +218,7 @@ button {
 	cursor: pointer;
 }
 
+/* 이하는 모달 설정 */
 .modalc {
 	position: fixed;
 	top: 0;
@@ -313,22 +301,23 @@ button {
 		</div>
 	</header>
 	<!--================ End Header Menu Area =================-->
+	
 <!--  Modal -->
 	<div class="modalc hiddenc">
 		<div class="bgc"></div>
 		<div class="modalBoxc">
 			<p>모달창입니다.</p>
-			<form action="/carshop/insert" method="post" id="calform">
-				<input type="hidden" name="u_id" value='<c:out value="${idcal }" />'>
+			<form action="/carshop/insert" method="post" id="calform">  <!-- 일정 입력을 위한 폼 -Monica 2020.12.31 -->
+				<input type="hidden" name="u_id" value='<c:out value="${idcal }" />'>  <!-- 유저아이디 hidden -->
 				일정 제목: <input type="text" name="schdtitle" id="schdtitle"><br>
 				시작일: <input type="text" name="schdstart" id="schdstart" readonly><br>
 				마감일:<br>
-				<select name="cal_year" id="cal_year">
+				<select name="cal_year" id="cal_year">  <!-- 연도 선택 -->
 					<option value="2020">2020</option>
 					<option value="2021">2021</option>
 					<option value="2022">2022</option>
 				</select>
-				<select name="cal_month" id="cal_month">
+				<select name="cal_month" id="cal_month"> <!-- 달 선택 -->
 					<option value="01">Jan</option>
 					<option value="02">Feb</option>
 					<option value="03">Mar</option>
@@ -342,7 +331,7 @@ button {
 					<option value="11">Nov</option>
 					<option value="12">Dec</option>
 				</select>
-				<select name="cal_day" id="cal_day">
+				<select name="cal_day" id="cal_day"> <!-- 날짜 선택 -->
 					<option value="01">1</option>
 					<option value="02">2</option>
 					<option value="03">3</option>
@@ -378,9 +367,6 @@ button {
 				 <br>
 				<button class="closeBtnc" type="submit">입력</button>
 			</form>
-
-
-
 		</div>
 	</div>
 	<!-- /.modal -->
@@ -429,7 +415,7 @@ button {
 							src="/resources/img/blog/cat-post/cat-post-2.jpg" alt="post">
 						<div class="categories_details">
 							<div class="categories_text">
-								<a href="/carshop/cart">
+								<a href="/carshop/cart">  <!-- 장바구니페이지로 이동url 필요 -->
 									<h5>장바구니</h5>
 								</a>
 								<div class="border_line"></div>
@@ -444,7 +430,7 @@ button {
 							src="/resources/img/blog/cat-post/cat-post-1.jpg" alt="post">
 						<div class="categories_details">
 							<div class="categories_text">
-								<a href="single-blog.html">
+								<a href="/carshop/retrun_end">  <!-- 리턴페이지로 이동url 필요 -->
 									<h5>주문 이력</h5>
 								</a>
 								<div class="border_line"></div>
@@ -598,6 +584,9 @@ button {
 	<!--================End Instagram Area =================-->
 
 
+
+	<!-- 불필요한 플러그인, api사용을 방지하기 위한 include폴더에 있는 footer.jsp로부터 독립적인 footer구역입니다. include/footer.jsp의 내용이 갱신됐을 때
+				성연이에게 알려주세요 -Monica 2020.12.31 -->
 	<!--================ Start footer Area  =================-->
 	<footer class="footer">
 	<div class="footer-area">
@@ -687,6 +676,8 @@ button {
 	</div>
 </footer>
 <!--================ End footer Area  =================-->
+
+<!-- 주의! 제이쿼리 nice-select.js 넣지 마세요 -Monica 2020.12.31 -->
 <script src="/resources/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/resources/vendors/skrollr.min.js"></script>
 <script src="/resources/vendors/owl-carousel/owl.carousel.min.js"></script>
