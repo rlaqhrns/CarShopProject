@@ -3,15 +3,15 @@ package com.shop.service.member;
 import java.util.Map;
 
 import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.groovy.util.Maps;
+//import org.apache.groovy.util.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
 import com.shop.handler.MailHandler;
 
 //html + 이미지발송
@@ -21,8 +21,7 @@ public class MailServiceImpl implements MailService {
 	private JavaMailSender mailsender;
 	
 	@Autowired
-	public void sendMail() {
-		try {
+	public void sendMail() throws MessagingException {
 			MimeMessage msg = mailsender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 			helper.setTo("bomvll@naver.com");
@@ -63,10 +62,6 @@ public class MailServiceImpl implements MailService {
 					"</html>", true);
 
 			mailsender.send(msg);
-
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
 
 	}
 	
