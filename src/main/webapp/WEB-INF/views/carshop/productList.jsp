@@ -479,6 +479,30 @@
 				
 			}else if(dataNm === 'nameDESC'){
 				//console.log('name 내림차순');
+			let text = $(this).val();
+			productArea.hide();
+			let obj = $(".product-area[data-product-name]:contains('"+text+"')");
+			$(obj).show();
+		})
+		
+	}
+	function sortOption(){ //정렬 버튼
+		let sortingAmountOrName = $("#sortingAmountOrName");
+		sortingAmountOrName.change(function(){
+			let dataNm = $("option:selected",this).val(); 
+			//console.log("정렬 함수 this.val() : " + dataNm);
+			if(dataNm === 'amountASC'){
+				listSort('productAmount','ASC');
+			}else if(dataNm === 'amountDESC'){
+				listSort('productAmount','DESC');
+				
+			}else if(dataNm === 'nameASC'){
+				//console.log('name 오름차순');
+				listSort('productName','ASC');
+				
+			}else if(dataNm === 'nameDESC'){
+				//console.log('name 내림차순');
+
 				listSort('productName','DESC');
 				
 			}
