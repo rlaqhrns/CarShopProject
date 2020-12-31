@@ -18,7 +18,7 @@
 	background-image: url(/resources/img/heart/heart_white_full.png);
 }
  .heart_white_full{
-      margin: 0;
+    margin: 0;
 	width: 15px;
 	height: 15.2px;
 	background-size: cover;
@@ -103,12 +103,13 @@
 			<div class="col-xl-9 col-lg-8 col-md-7">
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
-					<div class="sorting">
+					<div class="sorting" id="sortingAmountOrName">
 						<select>
-							<option value="1">가격 낮은 순</option>
-							<option value="1">가격 높은 순</option>
-							<option value="1">이름 순(a-z)</option>
-							<option value="1">이름 순(z-a)</option>
+							<option value="1">정렬 순서</option>
+							<option value="amountASC">가격 낮은 순</option>
+							<option value="amountDESC">가격 높은 순</option>
+							<option value="nameASC">이름 순(a-z)</option>
+							<option value="nameDESC">이름 순(z-a)</option>
 						</select>
 					</div>
 					<div class="sorting mr-auto">
@@ -120,9 +121,9 @@
 					</div>
 					<div>
 						<div class="input-group filter-bar-search">
-							<input type="text" placeholder="Search">
+							<input type="text" id="search-input-box" placeholder="Search">
 							<div class="input-group-append">
-								<button type="button">
+								<button type="button" id="search-btn">
 									<i class="ti-search"></i>
 								</button>
 							</div>
@@ -135,8 +136,9 @@
 					<div class="row" id="product-list-area">
 						<!-- list forEach start-->
 						<c:forEach items="${list}" var="product">
+							<%-- <div class="product-area" data-product-amount="${product.amount }" data-product-name="${product.p_name }"> --%>
+							<div class="col-md-6 col-lg-4 product-area" data-product-amount="${product.amount }" data-product-name="${product.p_name }">
 							<input type="hidden" value="${product.p_no}">
-							<div class="col-md-6 col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
 										<img class="card-img" src="${product.img } "
@@ -166,6 +168,7 @@
 									</div>
 								</div>
 							</div>
+							<!-- </div> -->
 						</c:forEach>
 						<!-- list forEach end -->
 
@@ -173,8 +176,6 @@
 				</section>
 				<!-- End Best Seller -->
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#exampleModalCenter">Launch demo modal</button>
 
 			</div>
 		</div>
@@ -287,7 +288,7 @@
 				dataType : 'JSON',
 				success : function(data) {
 					if(data){
-						
+
 						$obj.children(".ti-heart").addClass("heart_white_full");					
 					}
 					
@@ -353,7 +354,11 @@
 						$productListArea.empty();
 						$.each(data,function(key, product) {
 							//백틱으로 처음부터 끝까지 해결하려했으나 태그 다음에 오류 ex) `src="${product.img}"`동작 안함
-											  text += `<div class="col-md-6 col-lg-4"> 
+											  text += `<div class="col-md-6 col-lg-4 product-area" data-product-amount="`;
+											  	text += product.amount;
+												text +=`" data-product-name="`;
+												text += product.p_name;
+												text += `"> 
 												<div class="card text-center card-product">
 												<div class="card-product__img">
 													<img class="card-img" src="`;
@@ -401,7 +406,7 @@
 						 //리스트 새로불러왔으니까 다시 이벤트 등록
 						checkLiked(); //찜리스트인지 확인
 						clickEvent(); //장바구니, 찜리스트 클릭이벤트 등록
-						
+						search();
 						
 
 					},
@@ -445,12 +450,59 @@
 			setProductList($obj,'/carshop/product/detailList');
 		})
 	}
+	function search(){ //검색
+		let searchInputBox = $("#search-input-box");
+		let searchBtn = $("#search-btn");
+		let productArea = $(".product-area");
+		searchInputBox.keyup(function(){
+			//console.log("검색시");
+			let text = $(this).val();
+			productArea.hide();
+			let obj = $(".product-area[data-product-name]:contains('"+text+"')");
+			$(obj).show();
+		})
+		
+	}
+	function sortOption(){ //정렬 버튼
+		let sortingAmountOrName = $("#sortingAmountOrName");
+		sortingAmountOrName.change(function(){
+			let dataNm = $("option:selected",this).val(); 
+			//console.log("정렬 함수 this.val() : " + dataNm);
+			if(dataNm === 'amountASC'){
+				listSort('productAmount','ASC');
+			}else if(dataNm === 'amountDESC'){
+				listSort('productAmount','DESC');
+				
+			}else if(dataNm === 'nameASC'){
+				//console.log('name 오름차순');
+				listSort('productName','ASC');
+				
+			}else if(dataNm === 'nameDESC'){
+				//console.log('name 내림차순');
+				listSort('productName','DESC');
+				
+			}
+		})
+	}
+	function listSort(dataNm,direction){ //정렬 함수
+		
+		let listArea = $("#product-list-area"); //상품목록출력 공간
+		listArea.html(
+			listArea.children(".product-area").sort(function(a,b){
+				return direction === 'ASC' ? $(a).data(dataNm) > $(b).data(dataNm) ? 0 : -1 :  $(a).data(dataNm) <= $(b).data(dataNm) ? 0 : -1;
+			})		
+		);
+		
+	}
 	function init(){ //이벤트함수 init
 		checkLiked(); //초기에 리스트 출력할때에 찜목록을 확인하여 하트에 불이 들어온다.
 		clickEvent(); //클릭이벤트 
 		categoryParentChange(); //부모카테고리 값이 바뀌면 동작하는 이벤 
+		sortOption();
+		search();
 	}
 	$(document).ready(function() {
 		init();
+		//listSort("productName");
 	})
 </script>
