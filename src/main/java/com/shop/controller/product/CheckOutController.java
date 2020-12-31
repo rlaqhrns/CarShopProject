@@ -41,7 +41,7 @@ public class CheckOutController {
 
 		String u_id = "something";
 		user.setU_id(u_id);
-		System.out.println(user.getU_id());
+		//System.out.println(user.getU_id());
 		model.addAttribute("cartList", checkoutservice.cartList(user.getU_id()));
 
 		return "carshop/checkout";
@@ -51,11 +51,11 @@ public class CheckOutController {
 	@PostMapping("/checkout")
 	public String checkout(Cart_Tbl cart, User_Tbl user, Order_Histroy_Tbl order, Model model) {
 
-		System.out.println(order.getAmount());
+		//System.out.println(order.getAmount());
 		checkoutservice.insertBuyList(order);
 		String u_id = "something";
 		user.setU_id(u_id);
-		System.out.println(user.getU_id());
+		//System.out.println(user.getU_id());
 		checkoutservice.deleteCartList(user.getU_id());
 
 		return "redirect:confirmation";

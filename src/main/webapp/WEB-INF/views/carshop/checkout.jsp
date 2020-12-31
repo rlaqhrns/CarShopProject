@@ -223,17 +223,17 @@
  			
  			
   			$("input[type='radio']").on('change', function() {
-  				console.log("input[type='radio']들어오는지");
+  				//console.log("input[type='radio']들어오는지");
   				
  	  				if($('#f-option6').is(":checked")){
  	 					$('#f-option6').attr('name', 'pay');
  	 					$('#f-option5').removeAttr('name'); 
- 	 					console.log("카카오페이 체크");
+ 	 					//console.log("카카오페이 체크");
  	 				}
  	 				if($('#f-option5').is(":checked")) {
  	 					$('#f-option5').attr('name', 'pay');
  	 					$('#f-option6').removeAttr('name');
- 	 					console.log("신용카드 체크");
+ 	 					//console.log("신용카드 체크");
  	 				}
  			}); 
   			
@@ -273,10 +273,10 @@
   		 	//iamport 일반 결제 api 사용 https://docs.iamport.kr/implementation/payment?lang=ko (재원/20.12.30)
   		 	
   			$("#kakaoPayCheck").click(function() {
-  				 console.log("들어오나?");
+  				 //console.log("들어오나?");
   				 	var form = $("form")[1];
   				 	var formData = new FormData(form);
-  				 	console.log(formData);
+  				 	//console.log(formData);
   				 
 	 		        var IMP = window.IMP; // 생략가능
 	 		        IMP.init('imp20831122'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -313,7 +313,7 @@
 			        $('#checkoutform').submit();
 			        
 			    	 //  $('#checkoutform').ajaxForm({url:'/checkout', type:'post', contentType: 'application/json; charset=utf-8'});
-			    		console.log("들어오나");
+			    		//console.log("들어오나");
 			    	  //유저 아이디 넣은 경로 생성 필요 (재원/20.12.29)
 			    	 //	location.href='/checkout/confirmation/';
 			      } else {
