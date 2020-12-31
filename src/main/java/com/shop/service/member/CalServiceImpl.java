@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CalServiceImpl implements CalService{
 	
-	private CalMapper calmapper;
+	private CalMapper calmapper;  //캘린더매퍼 호출 -Monica 2020.12.31
 
 	@Override
 	public List<CalendarVO> getschdList(String u_id) {
