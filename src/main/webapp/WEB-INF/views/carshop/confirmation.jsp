@@ -2,20 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
-	rel="stylesheet">
-<link href='/resources/lib/fullcalendar/main.css' rel='stylesheet' />
-<script src='/resources/lib/fullcalendar/main.js'></script>
-
 <%@ include file="../include/header.jsp"%>
 
 	<title>Aroma Shop</title>
 	<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 	<link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
-	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+	<link href='/resources/lib/fullcalendar/main.css' rel='stylesheet' />
+	<script src='/resources/lib/fullcalendar/main.js'></script>
+<body>
 	<!-- ================ start banner area ================= -->	
-<!-- 	<section class="blog-banner-area" id="category">
+ 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
@@ -28,16 +25,17 @@
 				</div>
 			</div>
     </div>
-	</section> -->
+	</section> 
 	
-	<div id='calendar'></div>
 	<!-- ================ end banner area ================= -->
   
   <!--================Order Details Area =================-->
   <section class="order_details section-margin--small">
     <div class="container">
       <p class="text-center billing-alert">감사합니다. 주문 상세정보를 확인하세요.</p>
-
+		
+		<div id='calendar'></div>
+	
       <div class="order_details_table">
         <h2>주문 상세정보</h2>
         <div class="table-responsive">
@@ -71,6 +69,7 @@
       </div>
     </div>
   </section>
+ </body>	
   <!--================End Order Details Area =================-->
   
   		  	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -109,6 +108,7 @@
 			</div> 
 <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
+	  
       		$(document).ready(function(){
       		    $("#getItemChange").click(function(){
       		        $("#exampleModal").appendTo("body").modal();
@@ -117,8 +117,72 @@
       		  $("#getItemRefund").click(function(){
     		        $("#exampleModal").appendTo("body").modal();
     		    });
+      		  
+      		  
       		});
+      		
+    		// 캘린더 이벤트
+      	    document.addEventListener('DOMContentLoaded', function() {
+      	    	let tbody = $('#tbodyid');
+      	    	let str = '';
+      	    	
+      	        var calendarEl = document.getElementById('calendar');
+      	        var calendar = new FullCalendar.Calendar(calendarEl, {
+      	        	/* // 캘린더 요일 클릭 시 이벤트 발생
+      	              dateClick: function(info) {
+      	            	  tbody.empty();
+      	            	  let text = '';
+//      	                   alert('Date: ' + info.dateStr);
+//      	                   alert('Resource ID: ' + info.resource.id);
+      				// ajax 로 주문날짜와 현재날짜를 비교하여 가져온다
+      	           			$.ajax({
+      	            	    url :'clickDate?order_date=' + info.dateStr,
+      	               		type : 'get',
+      	               		dataType : 'JSON',
+      	               		success : function(data){
+      	              		console.log(data);
+      	            		let result = '';
+      	            		   $.each(data,function(key,value){
+      	            	  		 text += '<tr><td scope="col" id="ono">'+value.ono+'</td><td scope="col" id="u_id">'+value.u_id+'</td>'
+      	            	   	   	 text += '<td scope="col" id="p_name">'+value.pname+'</td><td scope="col" id="content" data-content="'+value.content+'"data-toggle="modal" data-target="#exampleModalCenter">'
+      	            	  		if(value.content.length >2){
+      						result =	value.content.substring(0,2) +'...<small>더보기</small>';
+      							console.log("if문 실행",result);
+      	            	   }else{
+      	            		  result= value.content;
+      							console.log("else문 실행",result);
+      	            		   
+      	            	   }
+      	            	   text += ''+result+'</td>'
+      	            	   text += '<td scope="col" id="order_date">'+value.order_date+'</td><td scope="col" id="pay">'+value.pay+'</td>'
+      	            	   text += '<td scope="col" class="span1" id=""><button id="btn_click" class="btn btn-success"><span><strong>교환/반품</strong></span></button></td></tr>'
+      	               })
+      	        	   tbody.append(text);
+
+      	               },
+      	               error : function(){	
+      	                  console.log("통신실패");
+      	               }
+      	               
+      	              
+      	            })
+      	            
+      	              }, */
+
+      	        initialView: 'dayGridMonth'
+
+      	          
+      	        });
+      	        calendar.render();
+      	        
+      	        
+      	      });
 </script>
-	
+<style>
+#calendar { /* 달력 크기 */
+	max-width: 750px;
+	margin: 0 auto;
+}
+</style>	
 
 <%@ include file="../include/footer.jsp"%>
