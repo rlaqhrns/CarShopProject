@@ -222,6 +222,17 @@
  		$(document).ready(function(){
  			
  			
+  		 	//jstl 을 javascript에서 사용, 실행 순서가 제일 느려서 사용가능 (재원/20.12.30)	
+  			var totalPrice = ${col_sum};
+			
+  		 	<c:forEach items="${pUser}" var="pUser">	
+  		 		var u_id = "${pUser.u_id}";
+	  		 	var email= "${pUser.email}"; 					
+	  		 	var name = "${pUser.name}";  					
+	  		 	var phone = "${pUser.phone}";  					
+	  		 	var address = "${pUser.addr}";		
+  		 	</c:forEach> 
+ 			
   			$("input[type='radio']").on('change', function() {
   				//console.log("input[type='radio']들어오는지");
   				
@@ -255,20 +266,16 @@
   			
   			$('.btn-creditcheck1').click(function() {
   				
-  				$('#checkoutform').submit(); //form submit(재원/20.12.29)
+  				if(totalPrice == 0) {
+  					alert("구매하실 물품이 없습니다. 물품을 선택 후 구매해주세요");
+  				}
+  				else {
+  					$('#checkoutform').submit(); //form submit(재원/20.12.29)	
+  				}				
   				
   			});
 
-  		 	//jstl 을 javascript에서 사용, 실행 순서가 제일 느려서 사용가능 (재원/20.12.30)	
-  			var totalPrice = ${col_sum};
-			
-  		 	<c:forEach items="${pUser}" var="pUser">	
-  		 		var u_id = "${pUser.u_id}";
-	  		 	var email= "${pUser.email}"; 					
-	  		 	var name = "${pUser.name}";  					
-	  		 	var phone = "${pUser.phone}";  					
-	  		 	var address = "${pUser.addr}";		
-  		 	</c:forEach> 
+
   			
   		 	//iamport 일반 결제 api 사용 https://docs.iamport.kr/implementation/payment?lang=ko (재원/20.12.30)
   		 	

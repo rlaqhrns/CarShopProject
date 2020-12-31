@@ -28,7 +28,7 @@ public class ConfirmationController {
 		
 		user.setU_id(u_id);
 		
-		model.addAttribute("buylist", service.orderList(user.getU_id()));
+		//model.addAttribute("buylist", service.orderList(user.getU_id()));
 		return "carshop/confirmation";
 	}
 	
