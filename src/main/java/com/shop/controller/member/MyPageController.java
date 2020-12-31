@@ -48,7 +48,7 @@ public class MyPageController {
 		
 		calservice.recordSchd(calVO);
 		
-		return "redirect:/calendar/calendar";
+		return "redirect:/carshop/mypage";
 	}
 	
 	@GetMapping("/delschd")
@@ -59,7 +59,7 @@ public class MyPageController {
 		int a = calservice.removeSchd(u_id, schdtitle);
 		System.out.println(a);
 		
-		return "redirect:/calendar/calendar";
+		return "redirect:/carshop/mypage";
 	}
 
 }
