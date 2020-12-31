@@ -27,7 +27,6 @@ $(document).ready(function(){
 		$(".btn").click(function(e){
 			var email = $('#email').val();
 			//e.preventDefault();
-			console.log(email);
 			//이메일이 제대로 입력이 되지않은경우
 			if(email==''){
 				swal("Please write", "이메일주소를 기입해주세요!", "info");
@@ -35,7 +34,7 @@ $(document).ready(function(){
 			}
 			//이메일 유효성 검사
 			if (!ValidateEmail(email)) {
-           		swal("Oops", "이메일주소를 다시확인해주세요!", "error");
+				swal("Oops", "이메일주소를 다시확인해주세요!", "error");
         	}else {
         		//db와 이메일주소 비교하는코드 작성
         		//if(email == service.getemail){
@@ -45,9 +44,10 @@ $(document).ready(function(){
         		//}
         		
         		//메일발송
+        		alert("메일보냈어 ========");
             	swal("Good job", "가입한 이메일주소로 pw재설정 메일보내드렸어요:-)", "success");  
         	}
-		});
+		});	
 });
 </script>
 <style>
@@ -132,7 +132,7 @@ $(document).ready(function(){
 					<h2 class="size-20">비밀번호 찾기</h2>
 					<hr class="hr">
 				</div>
-				<form class="sendemail" method="post" action="">
+				<form class="sendemail" method="post" action="pwsearch">
 					<fieldset>
 						<div class="row">
 							<div class="form-group">
@@ -157,5 +157,5 @@ $(document).ready(function(){
 </body>
 
 	<!--================End Password Search Area =================-->
-	<!-- 인증메일받기 누르면 alert창! 거기서 확인누르면 login창으로 이동 -->
+
 <%@ include file="../include/footer.jsp"%>

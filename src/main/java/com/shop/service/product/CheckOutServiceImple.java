@@ -20,7 +20,7 @@ public class CheckOutServiceImple implements CheckOutService{
 	@Override
 	public List<User_Tbl> userList() {
 		//user_tbl에서 유저의 정보를 가져옴 (재원/20.12.23)
-		System.out.println(mapper.userList().get(0).getName());
+		//System.out.println(mapper.userList().get(0).getName());
 		return mapper.userList();
 	}
 
@@ -37,8 +37,9 @@ public class CheckOutServiceImple implements CheckOutService{
 	}
 
 	@Override
-	public void deleteCartList() {
+	public void deleteCartList(String u_id) {
 		// TODO Auto-generated method stub
+		mapper.deleteCartList(u_id);
 		
 	}
 
