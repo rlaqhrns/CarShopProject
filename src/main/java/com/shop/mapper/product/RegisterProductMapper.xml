@@ -5,4 +5,9 @@
 
 <mapper namespace="com.shop.mapper.product.RegisterProductMapper">
 
+	<insert id="productForm">
+		insert into
+		prod_tbl(s_id,p_name,c_no,amount,quantity,discribe,compa,img)
+		values(#{s_id},#{p_name},#{c_no},#{amount},#{quantity},#{discribe},#{compa},#{img})
+	</insert>
 </mapper>

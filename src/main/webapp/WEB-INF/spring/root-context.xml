@@ -48,10 +48,15 @@
 	</bean>  <!-- SungYeon blacklist page transaction 20.12.23 -->
 	<tx:annotation-driven/> <!-- SungYeon blacklist page transaction 20.12.23 -->
 
+	<mybatis-spring:scan
+		base-package="com.shop.mapper.member" />
+	<mybatis-spring:scan
+		base-package="com.shop.mapper.product" />
+
+	
 	<mybatis-spring:scan base-package="com.shop.mapper" />
 	<mybatis-spring:scan base-package="com.shop.mapper.member" />
 	<mybatis-spring:scan base-package="com.shop.mapper.product" />
-
 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	<task:annotation-driven />
