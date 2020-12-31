@@ -3,6 +3,7 @@ package com.shop.controller.member;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.cj.Session;
+import com.shop.service.member.LoginServiceImple;
 import com.shop.service.member.MailService;
 import com.shop.service.member.MailServiceImpl;
+import com.shop.service.member.RegisterService;
+import com.shop.vo.All_User_Tbl;
+import com.shop.vo.Login;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
@@ -40,11 +45,13 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 	
 
-	@Autowired
-	MailServiceImpl service = new MailServiceImpl();
+	@Setter(onMethod_=@Autowired)
+	MailServiceImpl mailservice;
 	
-	@Autowired
-	private MailService mailService;
+	@Setter(onMethod_=@Autowired)
+	LoginServiceImple loginservice;
+	
+	@Setter(onMethod_=@Autowired)
 	private JavaMailSenderImpl mailSender;
 	
 //	@GetMapping("/index") 
@@ -57,66 +64,41 @@ public class LoginController {
 		return "carshop/login";
 	}
 	
-
-
 	@PostMapping("/login") 
-	public String login_success(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public String login_success( HttpSession session, Login logvo) {
 		
-		System.out.println("post2들어옴");
+		//입력받은 id,pw확인
+		System.out.println("id = " + logvo.getId() + " pw = " + logvo.getPw());
 		
-		String id = request.getParameter("id");
-		String pw = request.getParameter("password");
+		boolean result = loginservice.login(logvo.getId(), logvo.getPw(), session);
 		
-		System.out.println("id : " + id + " pw : " + pw);
-
-		//service.getAllUser();                            //db연결시 사용하기
-
-		
-
-		if(id.equals("admin") && pw.equals("admin")) {      //db없이 test해보기 위함
-
-			session.setAttribute("id" , id);
-			session.setAttribute("pw", pw);
-
-			String memberId = (String)session.getAttribute("id");
-			boolean login = memberId == null ? false : true;
-			
-			System.out.println("memberId는 : " + memberId);
-			System.out.println("login세션결과는 : " + login);
-
-			return "/carshop/indexlogin";  						 
-			
-		} else {
-			System.out.println("로그인정보 불일치");
-			return "/carshop/loginerror";
-		}    
+		if(result == true) {
+//			if(logvo.getId() == "admin"){
+//			return "carshop/adminpage";                  -- 관리자페이지로 랜딩할경우
+//			}
+			return "carshop/indexlogin";
+		}
+		else return "/carshop/loginerror";
 	}
-	
-//	@GetMapping("/logout")
-//	public String login2() {
-//		System.out.println("logout들어옴");
-//		
-//		return "carshop/login";
-//	}
-//	
-//
+	  
+	@GetMapping("/logout")
+	public String login2() {
+		System.out.println("logout들어옴");
+		
+		return "carshop/login";
+	}
+
 //	@PostMapping("/logout") 
 //	public String login_success3(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 //		
 //		System.out.println("logout들어옴");
-//		
-//		if() {    
-//			
-//
+//		if() {    	
 //			return "/carshop/indexlogin";  						 
-//			
-//		} else {
-//			
+//		} else {	
 //			return "/carshop/loginerror";
 //		}    
 //	}
 	
-
 	@GetMapping("/indexlogin")
 	public String indexlogin() {
 		return "carshop/indexlogin";
@@ -142,9 +124,27 @@ public class LoginController {
 	}
 	
 	@PostMapping("/pwsearch")
-	public String pwsearch2() {
-		return "/carshop/index";
+	public String pwsearch2(All_User_Tbl aut) {
+		
+		String result = loginservice.getemail(aut);
+	
+		if(result == "1") {
+			return "/carshop/login";
+		}else {
+			if(result == "0") {
+				//일치하는 이메일이없는경우
+				return "/carshop/index";
+			}
+			//이메일은 있으나 사용자가 입력한값과 다른경우
+			return "/carshop/index";
+		}
 	}
+	
+//	@GetMapping("/input")
+//	public ModelAndView input(Model model) {
+//		ModelAndView mv = new ModelAndView("/pwsearch");
+//		view.addObject("message", )
+//	}
 	
 	@GetMapping("/sendmail")
 	public String sendMail1() {
@@ -152,11 +152,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/sendmail")
-	public String sendMail(HttpServletRequest request, HttpServletResponse response) {
-		
+	public String sendMail(HttpServletRequest request, HttpServletResponse response) throws MessagingException{
 		String email = request.getParameter("email");
-		service.sendMail();						        //MailServiceImpl
-		
+		mailservice.sendMail();				
 		return "carshop/pwsearch";
 	}
 	

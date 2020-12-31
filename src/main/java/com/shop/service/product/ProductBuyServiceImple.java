@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.shop.mapper.product.ProductBuyMapper;
 import com.shop.vo.Prod_Tbl;
+import com.shop.vo.ProductCategoryJoin;
 
 import lombok.Setter;
 
@@ -23,5 +24,11 @@ public class ProductBuyServiceImple implements ProductBuyService {
 	@Override
 	public Prod_Tbl getProduct(int p_no) {
 		return mapper.getProduct(p_no);
+	}
+
+	@Override
+	public List<ProductCategoryJoin> getProductCategory(Integer c_parent,Integer c_no) {
+		// TODO Auto-generated method stub
+		return mapper.getProductCategory(c_parent, c_no);
 	}
 }
