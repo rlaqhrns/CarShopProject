@@ -39,7 +39,6 @@ public class LikeServiceImple implements LikeService {
 		boolean data = false;
 		try {
 			Like_Tbl likes = mapper.getUserLikeProduct(p_no, u_id);
-			System.out.println(likes.getU_id() + likes.getP_no());
 			if( likes != null) {
 				data = true;
 			};
