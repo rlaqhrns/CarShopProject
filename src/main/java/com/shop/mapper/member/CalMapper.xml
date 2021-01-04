@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.mapper.member.CalMapper">
+	<insert id="insertSchd">
+		INSERT INTO mysched(u_id, schdtitle, schdstart, schdend) 
+			VALUES (#{u_id}, #{schdtitle}, #{schdstart}, #{schdend})
+	</insert>
+	
+	<select id="getschd" resultType="com.shop.vo.CalendarVO">
+		SELECT * FROM mysched WHERE u_id = #{u_id}
+	</select>
+	
+	<delete id="deleteSchd">
+		DELETE FROM mysched WHERE u_id = #{arg0} AND schdtitle = #{arg1}
+	</delete>
+	
+	
+
+</mapper>
