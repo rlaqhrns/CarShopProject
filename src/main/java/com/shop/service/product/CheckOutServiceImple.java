@@ -18,10 +18,10 @@ public class CheckOutServiceImple implements CheckOutService{
 	private CheckOutMapper mapper;
 
 	@Override
-	public List<User_Tbl> userList() {
+	public List<User_Tbl> userList(String u_id) {
 		//user_tbl에서 유저의 정보를 가져옴 (재원/20.12.23)
-		System.out.println(mapper.userList().get(0).getName());
-		return mapper.userList();
+		//System.out.println(mapper.userList().get(0).getName());
+		return mapper.userList(u_id);
 	}
 
 	@Override
@@ -37,16 +37,17 @@ public class CheckOutServiceImple implements CheckOutService{
 	}
 
 	@Override
-	public void deleteCartList() {
+	public void deleteCartList(String u_id) {
 		// TODO Auto-generated method stub
+		mapper.deleteCartList(u_id);
 		
 	}
 
 	@Override
-	public void insertBuyList(Order_Histroy_Tbl order) {
+	public void insertBuyList(Order_Histroy_Tbl order, String u_id) {
 		// TODO Auto-generated method stub
 		
-		String u_id = "something";	//임시 아이디 설정 (재원/20.12.28)
+		//String u_id = "something";	임시 아이디 설정 (재원/20.12.28)
 		List<Cart_Tbl> cartL = mapper.cartList(u_id); //카트 정보 list로 받아오기 (재원/20.12.28)
 		
 		for(int i =0; i<cartL.size(); i++) { //들어가는지 확인 (재원/20.12.28)
@@ -58,7 +59,7 @@ public class CheckOutServiceImple implements CheckOutService{
 			order.setAmount(cartL.get(i).getAmount());
 			order.setPname(cartL.get(i).getPname());
 			order.setQuantity(cartL.get(i).getQuantity());
-			order.setPno(cartL.get(i).getPno());
+			order.setP_no(cartL.get(i).getP_no()); //vo 객체를 바꾸면서 수정 setPno, getPno(재원/20.12.29)
 			mapper.insertBuyList(order);
 		}
 
