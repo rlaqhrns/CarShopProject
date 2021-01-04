@@ -40,21 +40,21 @@ public class RegisterController {
 	@PostMapping("/onregister")
 	public String onregister(Model model, User_Tbl user_tbl) {
 		service.adduser(user_tbl);
-		service.alluser_adduser(user_tbl);
-		return "carshop/login";
+		//service.alluser_adduser(user_tbl);
+		return "redirect:login";
 	}
 	
 	@PostMapping("/onseller_register")
 	public String onseller_register(Model model, Seller_Tbl seller_tbl) {
 		service.addseller(seller_tbl);
-		service.alluser_addseller(seller_tbl);
-		return "carshop/login";
+		//service.alluser_addseller(seller_tbl);
+		return "redirect:login";
 	}
 	
 	
 	@GetMapping("/idcheck")
 	@ResponseBody
-	public All_User_Tbl idcheck(@RequestParam("id") String id,Model model) {
+	public All_User_Tbl idcheck(@RequestParam("id") String id, Model model) {
 		System.out.println(id);
 		System.out.println(service.idcheck(id));
 		return service.idcheck(id);
