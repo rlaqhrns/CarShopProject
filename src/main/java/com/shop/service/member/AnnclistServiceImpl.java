@@ -21,4 +21,30 @@ public class AnnclistServiceImpl implements AnnclistService {
 		return amapper.selectall(); 
 	}
 
+	@Override
+	public int anncAdd(String title, String content) {
+		return amapper.anncAdd(title, content);
+	}
+
+	@Override
+	public Annc_Tbl selectLast() {
+		return amapper.selectLast();
+	}
+
+	@Override
+	public void updateTitle(String before_title, String after_title) {
+		amapper.updateTitle(before_title, after_title);
+	}
+
+	@Override
+	public void updateContent(String before_content, String after_content) {
+		amapper.updateContent(before_content, after_content);
+	}
+
+	@Override
+	public void delete(String date) {
+		amapper.delete(date);
+		
+	}
+
 }

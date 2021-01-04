@@ -7,5 +7,20 @@
 	<select id="selectall" resultType="com.shop.vo.Annc_Tbl">
 		select * from annc_tbl
 	</select>
+	<insert id="anncAdd" parameterType="map">
+		insert into annc_tbl(title,content) values(#{title},#{content})
+	</insert>
+	<select id="selectLast" resultType="com.shop.vo.Annc_Tbl">
+		select * from annc_tbl order by annc_date desc limit 1
+	</select>
+	<update id="updateTitle" parameterType="map">
+		update annc_tbl set title = #{after_title}, update_date = now()  where title = #{before_title}
+	</update>
+	<update id="updateContent" parameterType="map">
+		update annc_tbl set content = #{after_content}, update_date = now() where content = #{before_content}
+	</update>
+	<delete id="delete" parameterType="map">
+		delete from annc_tbl where annc_date = #{date}
+	</delete>
 	
 </mapper>
