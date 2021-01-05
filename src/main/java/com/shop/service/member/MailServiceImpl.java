@@ -13,20 +13,21 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import com.shop.handler.MailHandler;
+import com.shop.vo.All_User_Tbl;
 
 //html + 이미지발송
 @Service
-public class MailServiceImpl implements MailService {
+public class MailServiceImpl implements MailService{
 	@Autowired
 	private JavaMailSender mailsender;
 	
-	@Autowired
-	public void sendMail() throws MessagingException {
+	public void sendMail(String mail, String id) throws MessagingException {
 			MimeMessage msg = mailsender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-			helper.setTo("bomvll@naver.com");
-			helper.setSubject("저리카shop 비밀번호 재설정메일");
-			helper.setText("<!DOCTYPE html>\r\n" + 
+			helper.setTo(mail);
+			helper.setSubject("저리카shop 비밀번호 재설정메일3333");
+			
+			String a = "<!DOCTYPE html>\r\n" + 
 					"<html lang=\"en\">\r\n" + 
 					"<head>\r\n" + 
 					"<meta charset=\"UTF-8\">\r\n" + 
@@ -36,31 +37,66 @@ public class MailServiceImpl implements MailService {
 					"<link href=\"https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;display=swap\" rel=\"stylesheet\">\r\n" + 
 					"</head>\r\n" + 
 					"<body>\r\n" + 
-					"  <section style=\"border:1px solid white;width:440px;height:400px;box-shadow:1px 1px 5px rgb(216, 216, 216);margin-left:10px;font-family:'Do Hyeon', sans-serif;border-radius:10px;\"><div class=\"imgpart\" style>\r\n" + 
-					"      <img align=\"center\" src=\"https://mail.naver.com/read/image/original/?mimeSN=1608692763.755173.21705.59136&amp;offset=1513&amp;size=21942&amp;u=bomvll&amp;cid=4eb86963e95e46ef6cda35a3efeb7bad@cweb011.nm.nfra.io&amp;contentType=image/png&amp;filename=1608692758787.png&amp;org=1\" style=\"margin-left : 20px;\">\r\n" + 
+					"  <section style=\"border: 1px solid white;\r\n" + 
+					"      width:440px;\r\n" + 
+					"      height:400px;\r\n" + 
+					"      box-shadow:1px 1px 5px rgb(216, 216, 216);\r\n" + 
+					"      margin-left:10px;\r\n" + 
+					"      font-family:'Do Hyeon', sans-serif;\r\n" + 
+					"      border-radius:10px;\"><div class=\"one\">\r\n" + 
+					"      <img src=\"https://mail.naver.com/read/image/original/?mimeSN=1608692763.755173.21705.59136&amp;offset=1513&amp;size=21942&amp;u=bomvll&amp;cid=4eb86963e95e46ef6cda35a3efeb7bad@cweb011.nm.nfra.io&amp;contentType=image/png&amp;filename=1608692758787.png&amp;org=1\" alt style=\"text-align : center;\r\n" + 
+					"      margin-top: 10px;\r\n" + 
+					"      margin-left : 15px;\r\n" + 
+					"      width : 413px;\r\n" + 
+					"      height : 216px;\">\r\n" + 
 					"</div>\r\n" + 
-					"    <div class=\"contents1\">\r\n" + 
-					"      <p class=\"line1\" style=\"font-size:13px;font-family:'Do Hyeon', sans-serif;margin-bottom:0px;margin-left:10px;\">&#50504;&#45397;&#54616;&#49464;&#50836; ;-)</p>\r\n" + 
-					"      <p class=\"line2\" style=\"font-size:15px;margin-top:5px;margin-bottom:45px;margin-left:10px;\">bomvll@naver.com &#45784;&#51032;  ID&#45716; <strong>\"borobom33\"</strong> &#51077;&#45768;&#45796;</p>\r\n" + 
+					"    <span class=\"line1\" style=\"width : 300px;\r\n" + 
+					"      font-size: 20px;\r\n" + 
+					"      font-size:13px;\r\n" + 
+					"      font-family:'Do Hyeon', sans-serif;\r\n" + 
+					"      margin-top:20px;\r\n" + 
+					"      margin-left:12px;\">&#50504;&#45397;&#54616;&#49464;&#50836;:-)</span><br><span class=\"line11\" style=\"margin-left:12px;\"></span>";
+			String b =  mail;
+			String c = "<span class=\"line2\" style=\"width : 200px;\r\n" + 
+					"      font-size:10px;\r\n" + 
+					"      margin-top : 5px;\r\n" + 
+					"      margin-left:15px;\">&#45784;&#51032; ID&#45716;   &#12288;\"</span>";
+			String d = id;
+			String e ="<span class=\"line3\" style=\"font-size:10px;\r\n" + 
+					"      margin-top:px;\r\n" + 
+					"      margin-bottom:px;\">\"   &#51077;&#45768;&#45796;.</span>\r\n" + 
+					" \r\n" + 
+					"    <div class=\"three\">\r\n" + 
+					"      <p class=\"guide\" style=\"font-size:13px;\r\n" + 
+					"      margin-top: 45px;\r\n" + 
+					"      margin-left:15px;\r\n" + 
+					"      margin-bottom: 7px;\r\n" + 
+					"      font-family:'Do Hyeon', sans-serif;\">&#50500;&#47000; &#48260;&#53948;&#51012; &#53364;&#47533;&#54616;&#49884;&#47732; &#48708;&#48128;&#48264;&#54840; &#51116;&#49444;&#51221;&#51060; &#44032;&#45733;&#54633;&#45768;&#45796;.</p>\r\n" + 
 					"    </div>\r\n" + 
-					"    <div class=\"contents2\">\r\n" + 
-					"      <p class=\"line3\" style=\"font-size:15px;margin-bottom:20px;margin-left:10px;\">&#50500;&#47000; &#48260;&#53948;&#51012; &#53364;&#47533;&#54616;&#49884;&#47732; &#48708;&#48128;&#48264;&#54840; &#51116;&#49444;&#51221;&#51060; &#44032;&#45733;&#54633;&#45768;&#45796;.</p>\r\n" + 
-					"    </div>\r\n" + 
-					"    <form class=\"btn\" action method=\"post\" style=\"height : 40px; width : 100px; border : none; border-radius: 7px; color : white; font-weight: bold; font-size: 13px;margin-bottom : 30px; margin-left : 10px;\">\r\n" + 
-					"      <button class=\"btn\" type=\"submit\" style=\"background-color:#11b0be;height:40px;width:100px;border:none;border-radius:7px;color:white;font-weight:bold;font-size:13px;margin-bottom:30px;margin-left:10px;\">\r\n" + 
-					"          &#48708;&#48128;&#48264;&#54840;&#48320;&#44221;\r\n" + 
+					"    <form action=\"http://localhost:1234/carshop/pwsetting\" method=\"post\">\r\n" + 
+					"      <input type=\"hidden\" name=\"email\" value=\"";
+			String f = mail;
+			String g = "\"><button type=\"submit\" class=\"btn\" style=\"background-color:#11b0be;\r\n" + 
+					"      height:40px;\r\n" + 
+					"      width:100px;\r\n" + 
+					"      border:none;\r\n" + 
+					"      border-radius:7px;\r\n" + 
+					"      color:white;\r\n" + 
+					"      font-weight:bold;\r\n" + 
+					"      font-size:13px;\r\n" + 
+					"      margin-left:20px;\">\r\n" + 
+					"        &#48708;&#48128;&#48264;&#54840;&#48320;&#44221;\r\n" + 
 					"      </button>\r\n" + 
 					"    </form>\r\n" + 
-					"    <div class=\"contents3\" style=\"margin-bottom: 150px; margin-top : 5px;\">\r\n" + 
-					"      <p style=\"color: gray;\"><i>Copyright &#9426;2020 Zipcock, All rights reserved</i></p>\r\n" + 
+					"    <div class=\"four\" style=\"margin-bottom: 150px; \r\n" + 
+					"      margin-top : 5px;\">\r\n" + 
+					"      <p class=\"copyright\" style=\"margin-top: 30px;\r\n" + 
+					"      color: gray;\"><i>Copyright &#9426;2020 Zipcock, All rights reserved</i></p>\r\n" + 
 					"    </div>\r\n" + 
-					"    <h1>  </h1>\r\n" + 
-					"    <h1>  </h1>\r\n" + 
-					"    <h1>  </h1>\r\n" + 
-					"  </section>\r\n" + 
+					"    <br><br><br></section>\r\n" + 
 					"</body>\r\n" + 
-					"</html>", true);
-
+					"</html>";
+			helper.setText(a+b+c+d+e+f+g, true);
 			mailsender.send(msg);
 
 	}
