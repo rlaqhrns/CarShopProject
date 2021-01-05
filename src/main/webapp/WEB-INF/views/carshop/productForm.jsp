@@ -102,16 +102,12 @@ input:checked+.slider:before {
 		</div>
 	</div>
 
-
-
-
 	<div class="row" style="margin: 0px 200px 20px 200px;">
 		<div class="col-lg-12">
 			<div class="panel panel-default"></div>
 			<div class="panel-body">
 				<form action="productForm" role="form" method="post">
 					<div class="col-xl-3 col-lg-4 col-md-5">
-
 						<div class="sidebar-categories">
 							<div class="head">카테고리</div>
 							<ul class="main-categories">
@@ -127,84 +123,75 @@ input:checked+.slider:before {
 
 											</label></li>
 										</ul>
-									</li>
 								</c:forEach>
 							</ul>
-						
-
+						</div>
 						<div class="sidebar-filter">
 							<div class="top-filter-head">하위 카테고리</div>
-							<ul class="main-categories">
-								<li class="common-filter parts_radio"></li>
+							<div class="common-filter parts_radio" style="display: none">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>상품명</label><input class="form-control" name="title">
+					</div>
+					<div class="form-group">
+						<label>상품가격</label><input class="form-control" name="title"
+							id="amount">
+					</div>
+					<div class="form-group">
+						<label>남은수량</label><input class="form-control" name="title">
+					</div>
+
+					<div class="form-group">
+						<label>상세설명</label>
+						<textarea class="form-control" rows=3 name="content"></textarea>
+					</div>
+					<div class="form-group">
+						<label>이미지</label> <input type="file" class="form-control"
+							name="inputFile" id="imgInput"> <img id="image_section"
+							src="#" alt="이미지">
+					</div>
+					<div class="col-md-6">
+						<div class="card" style="margin: 50px 0">
+							<!-- Default panel contents -->
+							<div class="card-header">호환차량</div>
+							<ul class="list-group list-group-flush" id="cheked">
+
+								<li class="list-group-item">소나타 <label class="switch ">
+										<input type="checkbox" class="info" value="소나타" id="check"
+										name="check"> <span class="slider round"></span>
+								</label>
+								</li>
+								<li class="list-group-item">그랜저<label class="switch ">
+										<input type="checkbox" class="info" value="그랜저" id="check"
+										name="check"> <span class="slider round"></span>
+								</label>
+								</li>
+								<li class="list-group-item">카니발<label class="switch ">
+										<input type="checkbox" class="info" value="카니발" id="check"
+										name="check"> <span class="slider round"></span>
+								</label>
+								</li>
+								<li class="list-group-item">소울<label class="switch ">
+										<input type="checkbox" class="info" value="소울" id="check"
+										name="check"> <span class="slider round"></span>
+								</label>
+								</li>
+								<li class="list-group-item">마티즈<label class="switch ">
+										<input type="checkbox" class="info" value="마티즈" id="check"
+										name="check"> <span class="slider round"></span>
+								</label>
+								</li>
 							</ul>
 						</div>
 					</div>
-		</div>
-
-
-
-
-		<div class="form-group">
-			<label>상품명</label><input class="form-control" name="title">
-		</div>
-
-		<div class="form-group">
-			<label>상품가격</label><input class="form-control" name="title"
-				id="amount">
-		</div>
-		<div class="form-group">
-			<label>남은수량</label><input class="form-control" name="title">
-		</div>
-
-		<div class="form-group">
-			<label>상세설명</label>
-			<textarea class="form-control" rows=3 name="content"></textarea>
-		</div>
-		<div class="form-group">
-			<label>이미지</label> <input type="file" class="form-control"
-				name="inputFile" id="imgInput"> <img id="image_section"
-				src="#" alt="이미지">
-		</div>
-		<div class="col-md-6">
-			<div class="card" style="margin: 50px 0">
-				<!-- Default panel contents -->
-				<div class="card-header">호환차량</div>
-				<ul class="list-group list-group-flush" id="cheked">
-
-					<li class="list-group-item">소나타 <label class="switch ">
-							<input type="checkbox" class="info" value="소나타" id="check"
-							name="check"> <span class="slider round"></span>
-					</label>
-					</li>
-					<li class="list-group-item">그랜저<label class="switch ">
-							<input type="checkbox" class="info" value="그랜저" id="check"
-							name="check"> <span class="slider round"></span>
-					</label>
-					</li>
-					<li class="list-group-item">카니발<label class="switch ">
-							<input type="checkbox" class="info" value="카니발" id="check"
-							name="check"> <span class="slider round"></span>
-					</label>
-					</li>
-					<li class="list-group-item">소울<label class="switch ">
-							<input type="checkbox" class="info" value="소울" id="check"
-							name="check"> <span class="slider round"></span>
-					</label>
-					</li>
-					<li class="list-group-item">마티즈<label class="switch ">
-							<input type="checkbox" class="info" value="마티즈" id="check"
-							name="check"> <span class="slider round"></span>
-					</label>
-					</li>
-				</ul>
+					<button type="button" class="btn btn-default" id="btnclick">전송
+						버튼</button>
+					<button type="reset" class="btn btn-default">초기화 버튼</button>
+				</form>
 			</div>
 		</div>
-		<button type="button" class="btn btn-default" id="btnclick">전송
-			버튼</button>
-		<button type="reset" class="btn btn-default">초기화 버튼</button>
-		</form>
-	</div>
-	</div>
 	</div>
 </body>
 <script>

@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 
 public class CartController {
-
 	@RequestMapping("/cart")
 	public String cart() {
 		return "carshop/cart";
@@ -60,6 +59,7 @@ public class CartController {
 //	}
 
 	// 담긴 장바구니를 cart_tbl로 맵핑 2020.12.30 hyejeong
+
 
 	
 
