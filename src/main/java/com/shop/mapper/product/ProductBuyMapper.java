@@ -9,6 +9,6 @@ import com.shop.vo.ProductCategoryJoin;
 
 public interface ProductBuyMapper {
 	public List<Prod_Tbl> getProductAll();
-	public List<ProductCategoryJoin> getProductCategory(@Param("c_parent")Integer c_parent,@Param("c_no")Integer c_no);
+	public List<ProductCategoryJoin> getProductCategory(@Param("c_parent")Integer categoryParents,@Param("c_no")Integer categoryDetails,@Param("object") String object,@Param("direction")String direction);
 	public Prod_Tbl getProduct(int p_no);
 }
