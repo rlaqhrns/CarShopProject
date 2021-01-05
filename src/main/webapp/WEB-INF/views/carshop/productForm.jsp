@@ -102,12 +102,16 @@ input:checked+.slider:before {
 		</div>
 	</div>
 
+
+
+
 	<div class="row" style="margin: 0px 200px 20px 200px;">
 		<div class="col-lg-12">
 			<div class="panel panel-default"></div>
 			<div class="panel-body">
 				<form action="productForm" role="form" method="post">
 					<div class="col-xl-3 col-lg-4 col-md-5">
+
 						<div class="sidebar-categories">
 							<div class="head">카테고리</div>
 							<ul class="main-categories">
@@ -123,75 +127,84 @@ input:checked+.slider:before {
 
 											</label></li>
 										</ul>
+									</li>
 								</c:forEach>
 							</ul>
-						</div>
+						
+
 						<div class="sidebar-filter">
 							<div class="top-filter-head">하위 카테고리</div>
-							<div class="common-filter parts_radio" style="display: none">
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label>상품명</label><input class="form-control" name="title">
-					</div>
-					<div class="form-group">
-						<label>상품가격</label><input class="form-control" name="title"
-							id="amount">
-					</div>
-					<div class="form-group">
-						<label>남은수량</label><input class="form-control" name="title">
-					</div>
-
-					<div class="form-group">
-						<label>상세설명</label>
-						<textarea class="form-control" rows=3 name="content"></textarea>
-					</div>
-					<div class="form-group">
-						<label>이미지</label> <input type="file" class="form-control"
-							name="inputFile" id="imgInput"> <img id="image_section"
-							src="#" alt="이미지">
-					</div>
-					<div class="col-md-6">
-						<div class="card" style="margin: 50px 0">
-							<!-- Default panel contents -->
-							<div class="card-header">호환차량</div>
-							<ul class="list-group list-group-flush" id="cheked">
-
-								<li class="list-group-item">소나타 <label class="switch ">
-										<input type="checkbox" class="info" value="소나타" id="check"
-										name="check"> <span class="slider round"></span>
-								</label>
-								</li>
-								<li class="list-group-item">그랜저<label class="switch ">
-										<input type="checkbox" class="info" value="그랜저" id="check"
-										name="check"> <span class="slider round"></span>
-								</label>
-								</li>
-								<li class="list-group-item">카니발<label class="switch ">
-										<input type="checkbox" class="info" value="카니발" id="check"
-										name="check"> <span class="slider round"></span>
-								</label>
-								</li>
-								<li class="list-group-item">소울<label class="switch ">
-										<input type="checkbox" class="info" value="소울" id="check"
-										name="check"> <span class="slider round"></span>
-								</label>
-								</li>
-								<li class="list-group-item">마티즈<label class="switch ">
-										<input type="checkbox" class="info" value="마티즈" id="check"
-										name="check"> <span class="slider round"></span>
-								</label>
-								</li>
+							<ul class="main-categories">
+								<li class="common-filter parts_radio"></li>
 							</ul>
 						</div>
 					</div>
-					<button type="button" class="btn btn-default" id="btnclick">전송
-						버튼</button>
-					<button type="reset" class="btn btn-default">초기화 버튼</button>
-				</form>
+		</div>
+
+
+
+
+		<div class="form-group">
+			<label>상품명</label><input class="form-control" name="title">
+		</div>
+
+		<div class="form-group">
+			<label>상품가격</label><input class="form-control" name="title"
+				id="amount">
+		</div>
+		<div class="form-group">
+			<label>남은수량</label><input class="form-control" name="title">
+		</div>
+
+		<div class="form-group">
+			<label>상세설명</label>
+			<textarea class="form-control" rows=3 name="content"></textarea>
+		</div>
+		<div class="form-group">
+			<label>이미지</label> <input type="file" class="form-control"
+				name="inputFile" id="imgInput"> <img id="image_section"
+				src="#" alt="이미지">
+		</div>
+		<div class="col-md-6">
+			<div class="card" style="margin: 50px 0">
+				<!-- Default panel contents -->
+				<div class="card-header">호환차량</div>
+				<ul class="list-group list-group-flush" id="cheked">
+
+					<li class="list-group-item">소나타 <label class="switch ">
+							<input type="checkbox" class="info" value="소나타" id="check"
+							name="check"> <span class="slider round"></span>
+					</label>
+					</li>
+					<li class="list-group-item">그랜저<label class="switch ">
+							<input type="checkbox" class="info" value="그랜저" id="check"
+							name="check"> <span class="slider round"></span>
+					</label>
+					</li>
+					<li class="list-group-item">카니발<label class="switch ">
+							<input type="checkbox" class="info" value="카니발" id="check"
+							name="check"> <span class="slider round"></span>
+					</label>
+					</li>
+					<li class="list-group-item">소울<label class="switch ">
+							<input type="checkbox" class="info" value="소울" id="check"
+							name="check"> <span class="slider round"></span>
+					</label>
+					</li>
+					<li class="list-group-item">마티즈<label class="switch ">
+							<input type="checkbox" class="info" value="마티즈" id="check"
+							name="check"> <span class="slider round"></span>
+					</label>
+					</li>
+				</ul>
 			</div>
 		</div>
+		<button type="button" class="btn btn-default" id="btnclick">전송
+			버튼</button>
+		<button type="reset" class="btn btn-default">초기화 버튼</button>
+		</form>
+	</div>
+	</div>
 	</div>
 </body>
 <script>
@@ -208,25 +221,29 @@ input:checked+.slider:before {
 		console.log(cateName);
 
 		// ajax 
-		$.ajax({
-			// get방식으로 cateId(jquery객체화 시킨 하위카테고리 id)를 보낸다 dataType은 JSON방식
-			// 성공시 해당 data(카테고리 를 부모카테고리no와 비교해서 key 와 value로 )에 담긴다
-			url : 'cateChek?cateId=' + cateId,
-			type : 'get',
-			dataType : 'JSON',
-			success : function(data) {
-				console.log(" success 데이터 값 : ",data);
-					let text = '';
-					let radio = $(".parts_radio");
+		$
+				.ajax({
+					// get방식으로 cateId(jquery객체화 시킨 하위카테고리 id)를 보낸다 dataType은 JSON방식
+					// 성공시 해당 data(카테고리 를 부모카테고리no와 비교해서 key 와 value로 )에 담긴다
+					url : 'cateChek?cateId=' + cateId,
+					type : 'get',
+					dataType : 'JSON',
+					success : function(data) {
+						console.log(" success 데이터 값 : ", data);
+						let text = '';
+						let radio = $(".parts_radio");
 						// 비우기
-					radio.empty();
-						$.each(data,function(key, value) {
-					console.log("key의 값 : " + key + " "
-							+ "value의 값 : "
-							+ value.c_name);
-							text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="'+value.c_no+'"value=""><label for="headlight">'
-							+ value.c_name
-							+ '</label></li></ul>';
+						radio.empty();
+						$
+								.each(
+										data,
+										function(key, value) {
+											console.log("key의 값 : " + key + " "
+													+ "value의 값 : "
+													+ value.c_name);
+											text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="'+value.c_no+'"value=""><label for="headlight">'
+													+ value.c_name
+													+ '</label></li></ul>';
 										})
 						radio.append(text);
 
@@ -255,32 +272,32 @@ input:checked+.slider:before {
 		}
 
 		// 파일 업로드
-// 		$("#imgInput").on("click", function(e) {
-// 			let formData = new FormData();
-// 			let inputFile = $("input[name='uploadFile']");
-// 			console.log("여기서 inputFile은 무엇이길래 0번 인덱스를 가져올까 ? ", inputFile);
-// 			let files = inputFile[0].files;
-// 			console.log("file ? ", files);
-// 			// filedate를 formdata에 추가함
-// 			for (var i = 0; i < files.length; i++) {
-// 				formData.append("uploadFile", files[i]);
-// 			}
-// 			console.log("formData : ", formData.get("uploadFile"));
-// 			// 위의 formData를 ajax로 컨트롤러로 전송함
-// 			$.ajax({
-// 				url : '/uploadAjaxAction',
-// 				proceedData : false,
-// 				contentType : false,
-// 				data : formData,
-// 				type : 'POST',
-// 				success : function(result) {
-// 					alert("성공적으로 업로드 되었습니다");
-// 				},
-// 				errorr : function() {
-// 					console.log("통신실패");
-// 				}
-// 			})
-// 		});
+		// 		$("#imgInput").on("click", function(e) {
+		// 			let formData = new FormData();
+		// 			let inputFile = $("input[name='uploadFile']");
+		// 			console.log("여기서 inputFile은 무엇이길래 0번 인덱스를 가져올까 ? ", inputFile);
+		// 			let files = inputFile[0].files;
+		// 			console.log("file ? ", files);
+		// 			// filedate를 formdata에 추가함
+		// 			for (var i = 0; i < files.length; i++) {
+		// 				formData.append("uploadFile", files[i]);
+		// 			}
+		// 			console.log("formData : ", formData.get("uploadFile"));
+		// 			// 위의 formData를 ajax로 컨트롤러로 전송함
+		// 			$.ajax({
+		// 				url : '/uploadAjaxAction',
+		// 				proceedData : false,
+		// 				contentType : false,
+		// 				data : formData,
+		// 				type : 'POST',
+		// 				success : function(result) {
+		// 					alert("성공적으로 업로드 되었습니다");
+		// 				},
+		// 				errorr : function() {
+		// 					console.log("통신실패");
+		// 				}
+		// 			})
+		// 		});
 
 		// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행합니다.
 		$("#imgInput").change(function() {
