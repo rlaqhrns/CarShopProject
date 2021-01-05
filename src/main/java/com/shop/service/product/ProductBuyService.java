@@ -12,8 +12,9 @@ import com.shop.vo.ProductCategoryJoin;
 public interface ProductBuyService {
 	
 	public List<Prod_Tbl> getProductAll();
-	public List<ProductCategoryJoin> getProductCategory(Integer c_parent,Integer c_no);
+	public List<ProductCategoryJoin> getProductCategory(Integer categoryParents, Integer categoryDetails,String object,String direction);
 	public Prod_Tbl getProduct(int p_no);
 	public boolean pushCart(int p_no,String u_id);
 	public boolean addLike(int p_no,String u_id);
+//	public List<Prod_Tbl> getSortProduct(String object, String direction);
 }
