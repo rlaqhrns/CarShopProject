@@ -60,9 +60,8 @@ $(document).ready(function(){
 		//모든 항목에 값을 입력했는지 체크
 		if(idok&&pwdok&&nameok&&emailok&&emailcodeok&&phoneok&&sample2_addressok&&sample2_detailAddressok){
 			var car = $("#cars option:selected").val();
-			return true;
 			var address = sample2_address + sample2_detailAddress;
-			//userid,pwd,name,toemail,phone,address,car
+			if(confirm("가입이 완료되었습니다")) return true;
 		}else{
 			swal("모든 항목을 입력해주세요.");
 			return false;
@@ -160,4 +159,3 @@ function emailcheck(){
 		phoneok=true;
 	}
 }
-	
