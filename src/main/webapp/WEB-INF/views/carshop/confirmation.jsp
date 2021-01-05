@@ -8,8 +8,8 @@
 	<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 	<link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-	<link href='/resources/lib/fullcalendar/main.css' rel='stylesheet' />
-	<script src='/resources/lib/fullcalendar/main.js'></script>
+	<link href='/resources/lib/main.css' rel='stylesheet' />
+	<script src='/resources/lib/main.js'></script>
 <body>
 	<!-- ================ start banner area ================= -->	
  	<section class="blog-banner-area" id="category">
@@ -110,6 +110,9 @@
 <script type="text/javascript">
 	  
       		$(document).ready(function(){
+      			
+      			getCalendarDataDB();
+      			
       		    $("#getItemChange").click(function(){
       		        $("#exampleModal").appendTo("body").modal();
       		    });
@@ -118,65 +121,136 @@
     		        $("#exampleModal").appendTo("body").modal();
     		    });
       		  
-      		  
+      		  	
       		});
+      		
+      		
+      		function getCalendarDataDB() { 
+      			//캘린더에 띄울 정보를 배열로 받아옵니다. (재원/21.01.04)
+      			//Json 배열 만들기 (..) (재원/21.01.04)
+      			
+      			var result = new Array();
+      			
+                <c:forEach items="${buylist}" var ="buylist"> 
+                	var json = new Object();    
+	                //json.put("pname", "${buylist.pname}");
+		            json.pname = "${buylist.pname}";    
+	                //json.put("quantity", "${buylist.quantity}");
+	                json.quantity = "${buylist.quantity}";
+	                //json.put("amount", "${buylist.amount}");
+	                json.amount = "${buylist.amount}";
+	                //json.put("pay",  "${buylist.pay}");
+	                json.pay = "${buylist.pay}";
+	       		 	//json.put("order_date", "${buylist.order_date}");
+	       		 	json.order_date = "${buylist.order_date}";
+	       		 	result.push(json);
+        		</c:forEach>
+        		
+        		//var str = JSON.stringify(json, replacer);
+        		//var newValue = JSON.parse(str, reviver);
+        		console.log("json = " + json.pname);
+        		console.log("jsoninfo = " + JSON.stringify(result));
+      			
+        		var dataJson = JSON.stringify(result);
+        		
+      			$.ajax({
+      		        contentType:'application/json',
+      		        dataType:'post',
+      		        url:'calendar/getAll',
+      		        type:'get',
+      		        async: false,
+      		        data:dataJson,
+      		        success:function(data) {
+      		        	console.log(data);
+      		        }
+
+      			})
+      			
+      		}
       		
     		// 캘린더 이벤트
       	    document.addEventListener('DOMContentLoaded', function() {
       	    	let tbody = $('#tbodyid');
       	    	let str = '';
       	    	
-      	        var calendarEl = document.getElementById('calendar');
-      	        var calendar = new FullCalendar.Calendar(calendarEl, {
-      	        	/* // 캘린더 요일 클릭 시 이벤트 발생
-      	              dateClick: function(info) {
-      	            	  tbody.empty();
-      	            	  let text = '';
-//      	                   alert('Date: ' + info.dateStr);
-//      	                   alert('Resource ID: ' + info.resource.id);
-      				// ajax 로 주문날짜와 현재날짜를 비교하여 가져온다
-      	           			$.ajax({
-      	            	    url :'clickDate?order_date=' + info.dateStr,
-      	               		type : 'get',
-      	               		dataType : 'JSON',
-      	               		success : function(data){
-      	              		console.log(data);
-      	            		let result = '';
-      	            		   $.each(data,function(key,value){
-      	            	  		 text += '<tr><td scope="col" id="ono">'+value.ono+'</td><td scope="col" id="u_id">'+value.u_id+'</td>'
-      	            	   	   	 text += '<td scope="col" id="p_name">'+value.pname+'</td><td scope="col" id="content" data-content="'+value.content+'"data-toggle="modal" data-target="#exampleModalCenter">'
-      	            	  		if(value.content.length >2){
-      						result =	value.content.substring(0,2) +'...<small>더보기</small>';
-      							console.log("if문 실행",result);
-      	            	   }else{
-      	            		  result= value.content;
-      							console.log("else문 실행",result);
-      	            		   
-      	            	   }
-      	            	   text += ''+result+'</td>'
-      	            	   text += '<td scope="col" id="order_date">'+value.order_date+'</td><td scope="col" id="pay">'+value.pay+'</td>'
-      	            	   text += '<td scope="col" class="span1" id=""><button id="btn_click" class="btn btn-success"><span><strong>교환/반품</strong></span></button></td></tr>'
-      	               })
-      	        	   tbody.append(text);
+      	        var calendarEl = document.getElementById('calendar'); 
+      	        var calendar;
+	
+      	        	  calendar = new FullCalendar.Calendar(calendarEl, {
+            	        	editable: true,
+            	          	selectable: true,
+            	          	nowIndicator: true,
+            	          	dayMaxEvents: true,
+            	          	//캘린더에 물품 구매 날짜별로 물품리스트 띄움 (재원/21.01.04)
+      	        	  		events: function(start, end, successCallback) {
+      	        	  			
+      	        	  			$.ajax({
+      	        	  				
+      	        	  				url:'/confirmation',
+      	        	  				method:'POST',
+      	        	  				dataType: 'JSON',
+      	        	  				success: function(data) {
+      	        	  					$.each(data, function(key, value) {
+      	        	  						
+      	        	  					});
+      	        	  					successCallback();
+      	        	  				}
+      	        	
+      	        	  			
+      	        	  			})
+      	        	  		},
+      	        	  		
+            	        	 // 캘린더 이벤트 클릭 시 이벤트 발생 (재원/21.01.04)            	        	 
+            	           /*   eventClick: function(info) {
+            	            	  tbody.empty();
+            	            	  let text = '';
+//            	                   alert('Date: ' + info.dateStr);
+//            	                   alert('Resource ID: ' + info.resource.id);
+            				// ajax 로 주문날짜와 현재날짜를 비교하여 가져온다
+            	           		$.ajax({
+            	            	    url :'clickDate?order_date=' + info.dateStr,
+            	               		type : 'get',
+            	               		dataType : 'JSON',
+            	               		success : function(data){
+            	              		console.log(data);
+            	            		let result = '';
+            	            		   $.each(data,function(key,value){
+            	            	  		 text += '<tr><td scope="col" id="ono">'+value.ono+'</td><td scope="col" id="u_id">'+value.u_id+'</td>'
+            	            	   	   	 text += '<td scope="col" id="p_name">'+value.pname+'</td><td scope="col" id="content" data-content="'+value.content+'"data-toggle="modal" data-target="#exampleModalCenter">'
+            	            	  		if(value.content.length >2){
+            						result =	value.content.substring(0,2) +'...<small>더보기</small>';
+            							console.log("if문 실행",result);
+            	            	   }else{
+            	            		  result= value.content;
+            							console.log("else문 실행",result);
+            	            		   
+            	            	   }
+            	            	   text += ''+result+'</td>'
+            	            	   text += '<td scope="col" id="order_date">'+value.order_date+'</td><td scope="col" id="pay">'+value.pay+'</td>'
+            	            	   text += '<td scope="col" class="span1" id=""><button id="btn_click" class="btn btn-success"><span><strong>교환/반품</strong></span></button></td></tr>'
+            	               })
+            	        	   tbody.append(text);
 
-      	               },
-      	               error : function(){	
-      	                  console.log("통신실패");
-      	               }
-      	               
-      	              
-      	            })
-      	            
-      	              }, */
+            	               },
+            	               error : function(){	
+            	                  console.log("통신실패");
+            	               }
+            	               
+            	              
+            	            })
+            	            
+            	              },  */
 
-      	        initialView: 'dayGridMonth'
+            	        initialView: 'dayGridMonth'
 
-      	          
-      	        });
-      	        calendar.render();
-      	        
-      	        
-      	      });
+            	          
+            	        });
+            	        calendar.render();
+            	        
+            	     });
+      	        	
+      	    
+
 </script>
 <style>
 #calendar { /* 달력 크기 */

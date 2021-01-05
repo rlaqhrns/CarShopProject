@@ -1,5 +1,7 @@
 package com.shop.controller.product;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +24,14 @@ public class ConfirmationController {
 	private ConfirmationService service;
 	
 	@GetMapping("/confirmation")
-	public String getConfirmation(Model model, Order_Histroy_Tbl order, User_Tbl user) {
+	public String getConfirmation(Model model, HttpSession session, Order_Histroy_Tbl order, User_Tbl user) {
 		
-		String u_id = "something";
+		//String u_id = "something";
+		String getId = (String)session.getAttribute("id"); // 이미 세션의 set attribute로 id가 설정 되어 있기 때문에 바로 get attribute로 id 가져옴 (재원/20.12.31)
+		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
+		user.setU_id(getId);
 		
-		user.setU_id(u_id);
-		
-		//model.addAttribute("buylist", service.orderList(user.getU_id()));
+		model.addAttribute("buylist", service.orderList(user.getU_id()));
 		return "carshop/confirmation";
 	}
 	
