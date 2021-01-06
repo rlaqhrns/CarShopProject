@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../include/header.jsp"%>
 
 	<title>Aroma Shop</title>
@@ -9,6 +10,7 @@
 	<link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 	<link href='/resources/lib/main.css' rel='stylesheet' />
+	<script src='/resources/lib/main.min.js'></script>
 	<script src='/resources/lib/main.js'></script>
 <body>
 	<!-- ================ start banner area ================= -->	
@@ -111,7 +113,7 @@
 	  
       		$(document).ready(function(){
       			
-      			getCalendarDataDB();
+      		//	getCalendarDataDB();
       			
       		    $("#getItemChange").click(function(){
       		        $("#exampleModal").appendTo("body").modal();
@@ -121,7 +123,18 @@
     		        $("#exampleModal").appendTo("body").modal();
     		    });
       		  
-      		  	
+      		var result = new Array();
+  			
+            <c:forEach items="${buylist}" var ="buylist"> 
+            	var json = new Object();
+            	<c:set var ="order_date" value="${buylist.order_date}"/>
+	            json.title = "${buylist.pname}";    
+       		 	json.start = "${fn:substring(order_date,0,10)}";
+       		 	json.end = "${fn:substring(order_date,0,10)}";
+       		 	result.push(json);
+    		</c:forEach>
+    		
+      			//calendar.addEventSource(result);
       		});
       		
       		
@@ -154,14 +167,18 @@
         		var dataJson = JSON.stringify(result);
         		
       			$.ajax({
-      		        contentType:'application/json',
-      		        dataType:'post',
+      		        contentType:'application/json;charset=utf-8',
+      		        dataType:'json',
       		        url:'calendar/getAll',
-      		        type:'get',
+      		        type:'post',
       		        async: false,
       		        data:dataJson,
       		        success:function(data) {
+      		        	console.log("들어오냐");
       		        	console.log(data);
+      		        }, 
+      		        error:function() {
+      		        	console.log("저장되지 않음");
       		        }
 
       			})
@@ -172,7 +189,26 @@
       	    document.addEventListener('DOMContentLoaded', function() {
       	    	let tbody = $('#tbodyid');
       	    	let str = '';
+      	    	//calendar.addEvent( {'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06'});
       	    	
+				var result = new Array();
+      			
+                <c:forEach items="${buylist}" var ="buylist"> 
+                	var json = new Object();
+                	<c:set var ="order_date" value="${buylist.order_date}"/>
+		            json.title = "${buylist.pname}";    
+	       		 	json.start = "${fn:substring(order_date,0,10)}";
+	       		 	json.end = "${fn:substring(order_date,0,10)}";
+	       		 	result.push(json);
+        		</c:forEach>
+        		
+        		//var str = JSON.stringify(json, replacer);
+        		//var newValue = JSON.parse(str, reviver);
+        		console.log("caljson = " + json.pname);
+        		console.log("caljsoninfo = " + JSON.stringify(result));
+      			
+        		var dataJson = JSON.stringify(result);
+      	    	console.log("dataJson" + dataJson);
       	        var calendarEl = document.getElementById('calendar'); 
       	        var calendar;
 	
@@ -182,23 +218,51 @@
             	          	nowIndicator: true,
             	          	dayMaxEvents: true,
             	          	//캘린더에 물품 구매 날짜별로 물품리스트 띄움 (재원/21.01.04)
-      	        	  		events: function(start, end, successCallback) {
+ 	   
+            	          	events: [
+            	                {
+            	                    title : 'evt1',
+            	                    start : '2019-09-03'
+            	                },
+            	                {
+            	                    title    :    'evt2',
+            	                    start    :    '2019-09-10',
+            	                    end    :    '2019-09-20'
+            	                },
+            	                {
+            	                    title    :    'evt3',
+            	                    start    :    '2019-09-25T12:30:00',
+            	                    allDay    :    false
+            	                }
+            	            ],
       	        	  			
-      	        	  			$.ajax({
-      	        	  				
-      	        	  				url:'/confirmation',
-      	        	  				method:'POST',
+      	        	  			/*  $.ajax({
+      	        	  			  	contentType:'application/json;charset=utf-8',
+      	        	  				//url:'/carshop/confirmation',
+      	        	  				type:'post',
       	        	  				dataType: 'JSON',
+      	        	  				async: false,
+      	        	  				data:encodeURIComponent(dataJson),
       	        	  				success: function(data) {
-      	        	  					$.each(data, function(key, value) {
-      	        	  						
+      	        	  				calendar.addEventSource(data);
+      	        	  					 var events = [];
+      	        	  				$(doc).find('event').each(function() {
+      	        	  						events.push({
+      	        	  							title: $(this).attr('title'),
+      	        	  							start: $(this).attr('start')
+      	        	  						});
       	        	  					});
-      	        	  					successCallback();
-      	        	  				}
+      	        	  					successCallback(events); 
+      	        	  				},
+      	        		        error:function() {
+      	        		        	console.log("들어가지 않음");
+      	        		        }
+
       	        	
       	        	  			
-      	        	  			})
-      	        	  		},
+      	        	  			});  */
+      	        	  			//console.log(result[0]);
+      	        	  			//calendar.addEventSource(result[0]);
       	        	  		
             	        	 // 캘린더 이벤트 클릭 시 이벤트 발생 (재원/21.01.04)            	        	 
             	           /*   eventClick: function(info) {
@@ -245,7 +309,12 @@
 
             	          
             	        });
+      	        	  
+      	        		calendar.addEventSource(result);
             	        calendar.render();
+            	        
+            	       // calendar.addEventSource( dataJson );
+      	        	  	
             	        
             	     });
       	        	
