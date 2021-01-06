@@ -31,7 +31,7 @@ function email_check(email){
 <script>
 function sendFormUsingAjax(){
 
-	var queryString = $('#email').val();                 //email의 id값을 넣을것(form의 id값 x)
+	var queryString = $('#email').val();              
 	
 	//이메일체크
 	if (!email_check(queryString)) {
