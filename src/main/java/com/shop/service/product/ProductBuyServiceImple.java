@@ -35,10 +35,10 @@ public class ProductBuyServiceImple implements ProductBuyService {
 	}
 
 	@Override
-	public List<ProductCategoryJoin> getProductCategory(Integer categoryParents, Integer categoryDetails,String object,String direction) {
+	public List<ProductCategoryJoin> getProductCategory(Integer categoryParents, Integer categoryDetails,String sorting) {
 		// TODO Auto-generated method stub
 		//System.out.println(" service 부모 카테고리 : " + categoryParents + ", 자식 카테고리 : " +  categoryDetails + "direction :  " + direction);
-		return mapper.getProductCategory(categoryParents, categoryDetails, object, direction);
+		return mapper.getProductCategory(categoryParents, categoryDetails, sorting);
 	}
 
 	@Override

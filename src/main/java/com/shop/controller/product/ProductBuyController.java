@@ -49,16 +49,16 @@ public class ProductBuyController {
 		model.addAttribute("category", categoryService.category());
 		return "carshop/productList";
 	}
-	@ResponseBody
-	@PostMapping("/product/defaultCategory")
-	public List<Prod_Tbl> defaultCategory() {
-		return productBuyService.getProductAll();
-	}
+//	@ResponseBody
+//	@PostMapping("/product/defaultCategory")
+//	public List<Prod_Tbl> defaultCategory() {
+//		return productBuyService.getProductAll();
+//	}
 	@ResponseBody
 	@PostMapping("/product/selectCategory")
-	public List<ProductCategoryJoin> selcetlist(Integer categoryParents, Integer categoryDetails,String object,String direction) {
+	public List<ProductCategoryJoin> selcetlist(Integer categoryParents, Integer categoryDetails,String sorting) {
 		//System.out.println(categoryParents+ ", "+ categoryDetails + object + direction);
-		return productBuyService.getProductCategory(categoryParents,categoryDetails,object,direction);
+		return productBuyService.getProductCategory(categoryParents,categoryDetails,sorting);
 	}
 //	@ResponseBody
 //	@PostMapping("/product/selectCategoryDetail")
