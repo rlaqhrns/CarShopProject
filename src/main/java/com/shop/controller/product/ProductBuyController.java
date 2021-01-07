@@ -2,6 +2,8 @@ package com.shop.controller.product;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import com.shop.service.product.LikeService;
 import com.shop.service.product.ProductBuyService;
 import com.shop.vo.Prod_Tbl;
 import com.shop.vo.ProductCategoryJoin;
+import com.shop.vo.User_Tbl;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -43,17 +46,22 @@ public class ProductBuyController {
 		return "carshop/productdetails";
 	}
 	@GetMapping("/product/list")
-	public String list(Model model) {
+	public String list(Model model, HttpSession session) {
 		model.addAttribute("list", productBuyService.getProductAll());
 		model.addAttribute("cateParent", categoryService.cateParent());
 		model.addAttribute("category", categoryService.category());
+		String getId = (String)session.getAttribute("id");
+		try {
+			model.addAttribute("UserID", getId );
+			model.addAttribute("UserCar", productBuyService.getUser(getId).getCars());
+			
+		}catch(Exception e) {
+			System.out.println("ProductBuyController : 세션정보 없거나, 차량정보없음");
+		}
+		
 		return "carshop/productList";
 	}
-//	@ResponseBody
-//	@PostMapping("/product/defaultCategory")
-//	public List<Prod_Tbl> defaultCategory() {
-//		return productBuyService.getProductAll();
-//	}
+
 	@ResponseBody
 	@PostMapping("/product/selectCategory")
 	public List<ProductCategoryJoin> selcetlist(Integer categoryParents, Integer categoryDetails,String sorting) {
