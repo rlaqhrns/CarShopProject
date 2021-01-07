@@ -187,6 +187,8 @@
 function addCartEvent(p_no) { //장바구니
 	let userId = getUserId();
 	if(sessoinExistenceChecked()){
+		$(".modal-body").html("로그인 후 이용해주세요.");
+		$('#notice').modal('show');
 		return false;
 	}
 	
@@ -212,6 +214,8 @@ function addCartEvent(p_no) { //장바구니
 function addLikeEvent(p_no,$obj) { //찜목록추가
 	let userId = getUserId();
 	if(sessoinExistenceChecked()){
+		$(".modal-body").html("로그인 후 이용해주세요.");
+		$('#notice').modal('show');
 		return false;
 	}
 
@@ -237,6 +241,8 @@ function removeLikeEvent(p_no,$obj) { //찜목록삭제
 	//console.log("상품번호 : " + p_no);
 	let userId = getUserId();
 	if(sessoinExistenceChecked()){
+		$(".modal-body").html("로그인 후 이용해주세요.");
+		$('#notice').modal('show');
 		return false;
 	}
 	$.ajax({
@@ -260,6 +266,10 @@ function removeLikeEvent(p_no,$obj) { //찜목록삭제
 
 function checkLiked(){
 	let userId = getUserId();
+	if(sessoinExistenceChecked()){
+		return false;
+	}
+
 	$(".btn_like_toggle").each(function(index){
 		let $obj = $(this);
 		let p_no = $(this).val();
@@ -416,7 +426,12 @@ function setProductList() { //상품을 그려주는 함수
 }
 
 function clickEvent(){ //찜, 장바구니 버튼 클릭 이벤트
-	$(".btn_like_toggle").click(function(){ //찜목록 추가 삭제
+	
+	let likeToggle = $(".btn_like_toggle");
+	let shoppingCart = $(".btn_shopping-cart");
+	likeToggle.off("click");
+	shoppingCart.off("click");
+	likeToggle.click(function(){ //찜목록 추가 삭제
 		let $obj = $(this);
 		//하트클래스 포함여부
 		if($obj.children().hasClass("heart_white_full")){
@@ -426,14 +441,17 @@ function clickEvent(){ //찜, 장바구니 버튼 클릭 이벤트
 			addLikeEvent($(this).val(),$obj);
 		}
 	});
-	$(".btn_shopping-cart").click(function(){ //장바구니 add
+	shoppingCart.click(function(){ //장바구니 add
 		addCartEvent($(this).val());
 	})
 	
 }
 // -- 처음에는 클릭이벤트와 같이있었지만 상품리스트출력후 클릭이벤트를 다시등록해줄때에 루프를 돌아서 따로 분리하였다.
 function categoryParentChange(){ //부모 카테고리
-	$("input[type=radio][name=brand]").change(function(){
+	
+	let radioBrand = $("input[type=radio][name=brand]");
+	radioBrand.off("change");
+	radioBrand.change(function(){
 		var obj = $(this);
 		//아래의 코드는 버그 fix 상세카테고리가 선택되어있을때(상세카티고리의 값이 0이 아닐 때) 부모카테고리를 바꾸면 없는 카테고리를 참조하여 데이터를 가져오지 못한다.
 		//부모카테고리가 바뀔때 상세부품카테고리의 값을 강제로 0(default)으로바꾸어 주었다. 
@@ -448,35 +466,45 @@ function categoryParentChange(){ //부모 카테고리
 	})
 }
 function categoryDetailChange(){//상세 카테고리
-	$("input[type=radio][name=details-parts]").change(function(){
+	
+	let radioDetails = $("input[type=radio][name=details-parts]");
+	radioDetails.off("change");
+	radioDetails.change(function(){
 		setProductList();//상품을 그려주는 함수
 	})
 }
 function search(){ //검색(프론트에서 구현)
 	let searchInputBox = $("#search-input-box"); //검색창
 	let productArea = $(".product-area"); //상품
+	searchInputBox.off('keyup'); //키업이벤트 삭제..
 	searchInputBox.keyup(function(){
 		let text = $(this).val(); //키보드입력에따라 매 순간 text값을 받아온다.
 		if(text===''){
-			setProductList();
+			productArea.show();
+			pagingEvent();
+		}else{
+			//console.log("keyup 동작");
+			productArea.hide(); //키보드가 입력 될때에 모든 상품을 숨긴다.
+			let searchProduct = $(".product-area[data-product-name*='"+text+"']"); //상품클래스 중 date-product-name속성에 text가 포함(contains이용)
+			$(searchProduct).show(); //검색어를 포함하면 다시 보여준다.
+			let searchCompa = $(".product-area[data-compa-name*='"+text+"']"); //상품클래스 중 date-compa-name속성에 text가 포함( *= 는 포함이다.(매우중요))
+			$(searchCompa).show(); //검색어를 포함하면 다시 보여준다.
+			$("#pagination-parent").empty(); //페이지 버튼이 들어갈 곳을 비워준다.
 		}
-		productArea.hide(); //키보드가 입력 될때에 모든 상품을 숨긴다.
-		let searchProduct = $(".product-area[data-product-name*='"+text+"']"); //상품클래스 중 date-product-name속성에 text가 포함(contains이용)
-		$(searchProduct).show(); //검색어를 포함하면 다시 보여준다.
-		let searchCompa = $(".product-area[data-compa-name*='"+text+"']"); //상품클래스 중 date-compa-name속성에 text가 포함( *= 는 포함이다.(매우중요))
-		$(searchCompa).show(); //검색어를 포함하면 다시 보여준다.
-		$("#pagination-parent").empty(); //페이지 버튼이 들어갈 곳을 비워준다.
 	})
 }
 
 function sortOption(){ //정렬 
 	let sortingAmountOrName = $("#sortingAmountOrName"); //정렬 방법 선택창
+	sortingAmountOrName.off("change");
 	sortingAmountOrName.change(function(){
 		setProductList();//상품을 그려주는 함수
 	})
 }
 function ProductViewEvent(){//몇개씩 볼것인지 선택
-	$("#viewProduct").change(function(){
+	let viewProduct = $("#viewProduct");
+	viewProduct.off("change");
+	viewProduct.change(function(){
 		setProductList();//상품을 그려주는 함수
 	})
 }
@@ -551,8 +579,7 @@ function sessoinExistenceChecked(){
 	let userId = getUserId();
 
 	if(userId === "" || typeof userId === "undefined" || userId === null){
-		$(".modal-body").html("로그인 후 이용해주세요.");
-		$('#notice').modal('show');
+		
 		return true;
 	}
 	return false;
@@ -561,7 +588,7 @@ function init(){ //이벤트함수 init
 	setProductList(); // 최초 상품목록 불러오기
 	categoryParentChange(); //부모카테고리 값이 바뀌면 동작하는 이벤트
 	sortOption();//정렬옵션함수
-	search();//검색
+	//search();//검색 
 	ProductViewEvent();//몇개씩 볼것인지
 	getUserId();//유저아이디 getter
 	
@@ -575,6 +602,7 @@ function carSearchCheckEvent(){
 	}else{
 		mycarSearchCheckBoxArea.show();
 	}
+	mycarSearch.off("change");
 	mycarSearch.change(function(){
 		
 		if(mycarSearch.is(":checked")){
