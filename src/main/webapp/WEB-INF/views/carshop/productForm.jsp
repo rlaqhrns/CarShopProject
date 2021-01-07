@@ -106,8 +106,7 @@ input:checked+.slider:before {
 		<div class="col-lg-12">
 			<div class="panel panel-default"></div>
 			<div class="panel-body">
-				<form action="productForm" role="form" method="post"
-					enctype="multipart/form-data">
+				<form action="productForm" role="form" method="post">
 					<div class="col-xl-3 col-lg-4 col-md-5">
 						<div class="sidebar-categories">
 							<div class="head">카테고리</div>
@@ -135,28 +134,25 @@ input:checked+.slider:before {
 						</div>
 					</div>
 					<div class="form-group">
-						<label>상품명</label><input class="form-control" name="p_name">
+						<label>상품명</label><input class="form-control" name="title">
 					</div>
 					<div class="form-group">
-						<label>상품가격</label><input class="form-control" name="amount"
+						<label>상품가격</label><input class="form-control" name="title"
 							id="amount">
 					</div>
 					<div class="form-group">
-						<label>남은수량</label><input class="form-control" name="quantity"
-							id="quantity">
+						<label>남은수량</label><input class="form-control" name="title">
 					</div>
 
 					<div class="form-group">
 						<label>상세설명</label>
-						<textarea class="form-control" rows=3 name="discribe"></textarea>
+						<textarea class="form-control" rows=3 name="content"></textarea>
 					</div>
 					<div class="form-group">
 						<label>이미지</label> <input type="file" class="form-control"
 							name="prod_img" multiple="multiple" id="image"
 							onchange="setThumbnail(event);" data-width="500" data-heihgt="500">
 						<div id="image_container"></div>
-
-
 					</div>
 					<div class="col-md-6">
 						<div class="card" style="margin: 50px 0">
@@ -166,27 +162,27 @@ input:checked+.slider:before {
 
 								<li class="list-group-item">소나타 <label class="switch ">
 										<input type="checkbox" class="info" value="소나타" id="check"
-										name="compa"> <span class="slider round"></span>
+										name="check"> <span class="slider round"></span>
 								</label>
 								</li>
 								<li class="list-group-item">그랜저<label class="switch ">
 										<input type="checkbox" class="info" value="그랜저" id="check"
-										name="compa"> <span class="slider round"></span>
+										name="check"> <span class="slider round"></span>
 								</label>
 								</li>
 								<li class="list-group-item">카니발<label class="switch ">
 										<input type="checkbox" class="info" value="카니발" id="check"
-										name="compa"> <span class="slider round"></span>
+										name="check"> <span class="slider round"></span>
 								</label>
 								</li>
 								<li class="list-group-item">소울<label class="switch ">
 										<input type="checkbox" class="info" value="소울" id="check"
-										name="compa"> <span class="slider round"></span>
+										name="check"> <span class="slider round"></span>
 								</label>
 								</li>
 								<li class="list-group-item">마티즈<label class="switch ">
 										<input type="checkbox" class="info" value="마티즈" id="check"
-										name="compa"> <span class="slider round"></span>
+										name="check"> <span class="slider round"></span>
 								</label>
 								</li>
 							</ul>
@@ -200,29 +196,13 @@ input:checked+.slider:before {
 	</div>
 </body>
 <script>
-    	$(document).ready(function(){
-    	
-			$("#amount").on("keyup",function(){
-			    $(this).val($(this).val().replace(/[^0-9]/g,""));
-
-			})
-			
-			$("#quantity").on("keyup",function(){
-			    $(this).val($(this).val().replace(/[^0-9]/g,""));
-
-			})
-    			
-    			
-    		})
-
-
 	// onchange 로 input 태그 클릭 시 이벤트 발생
 	function setDisplay(obj) {
 		console.log("obj : " + obj);
 		let cateParent = $('#cateParent');
 		// 상위카테고리 name
 		let cateName = $(obj).val();
-		console.log("objVal", cateName);
+		console.log("objVal",cateName);
 		// 하위카테고리 id
 		let cateId = $(obj).attr('id');
 		// ajax 
@@ -246,10 +226,9 @@ input:checked+.slider:before {
 											console.log("key의 값 : " + key + " "
 													+ "value의 값 : "
 													+ value.c_name);
-											text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio" type="radio" id="'+value.c_no+'" name="c_no"value="'+value.c_no+'"><label for="headlight">'
+											text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="'+value.c_no+'"value=""><label for="headlight">'
 													+ value.c_name
 													+ '</label></li></ul>';
-
 										})
 						radio.append(text);
 
@@ -286,7 +265,6 @@ input:checked+.slider:before {
 				
 			}
 
-		
 </script>
 
 <%@ include file="../include/footer.jsp"%>
