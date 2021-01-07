@@ -3,6 +3,8 @@
 [![GitHub forks](https://img.shields.io/github/forks/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject/network)
 [![GitHub stars](https://img.shields.io/github/stars/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject/stargazers)
 [![GitHub license](https://img.shields.io/github/license/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject)
+![GitHub forks](https://img.shields.io/github/forks/lee-bomi/CarShopProject?label=fork&style=social)
 ![WordPress Theme Last Updated](https://img.shields.io/wordpress/theme/last-updated/one)
+
 
 저리카숍
