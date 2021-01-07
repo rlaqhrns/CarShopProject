@@ -31,9 +31,6 @@
 <!-- yun.hj 2020/01/07 main1 img change , 메인 배너 이미지 수정  -->
 	<!--================ Hero banner end =================-->
 
-
-
-
 	<!--================ Hero Carousel start =================-->
 	<section class="section-margin mt-0">
 		<div class="owl-carousel owl-theme hero-carousel">
