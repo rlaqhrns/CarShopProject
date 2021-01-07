@@ -7,7 +7,10 @@
 
 	<insert id="productForm">
 		insert into
-		prod_tbl(s_id,p_name,c_no,amount,quantity,discribe,compa,img)
-		values(#{s_id},#{p_name},#{c_no},#{amount},#{quantity},#{discribe},#{compa},#{img})
+		prod_tbl(s_id,p_name,c_no,amount,quantity,discribe,compa,img1,img2,img3)
+		values(#{s_id},#{p_name},#{c_no},#{amount},#{quantity},#{discribe},#{compa},
+		<foreach collection="imgList" item="item" separator="," close=")" >
+		"${item}"  
+		</foreach>
 	</insert>
 </mapper>

@@ -42,11 +42,6 @@ public class LoginController {
 	
 	@Setter(onMethod_=@Autowired)
 	private JavaMailSenderImpl mailSender;
-	
-//	@GetMapping("/index") 
-//	public String index() {
-//		return "carshop/index";
-//	}
 
 	@GetMapping("/login")
 	public String login() {
@@ -54,44 +49,43 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login") 
-	public String login_success( HttpSession session, Login logvo) {
-		
+	@ResponseBody
+	public String login_success( HttpSession session,@RequestBody Login logvo) {
+		String back = "";
+		System.out.println("login정보는  " + logvo);
 		//입력받은 id,pw확인
 		System.out.println("id = " + logvo.getId() + " pw = " + logvo.getPw());
 		
 		boolean result = loginservice.login(logvo.getId(), logvo.getPw(), session);
 		
 		if(result == true) {
-//			if(logvo.getId() == "admin"){
-//			return "carshop/adminpage";                  -- 관리자페이지로 랜딩할경우
-//			}
-			return "carshop/indexlogin";
+			// 관리자페이지로 랜딩할경우
+			if(logvo.getId() == "admin"){
+				back = "0";
+			}
+			System.out.println("111111");
+			back = "0";
+		}else {
+			System.out.println("22222");
+			back = "-1";
 		}
-		else return "/carshop/loginerror";
+		return back;
 	}
 	  
 	@GetMapping("/logout")
-	public String login2() {
-		System.out.println("logout들어옴");
-		
+	public String login2(HttpSession session) {
+		session.invalidate();
+		System.out.println("세션아이디는 : " + session.getId());
 		return "carshop/login";
 	}
-
-//	@PostMapping("/logout") 
-//	public String login_success3(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-//		
-//		System.out.println("logout들어옴");
-//		if() {    	
-//			return "/carshop/indexlogin";  						 
-//		} else {	
-//			return "/carshop/loginerror";
-//		}    
-//	}
 	
 	@GetMapping("/indexlogin")
 	public String indexlogin(HttpSession session) {
 		String sessionid = session.getId();
 		System.out.println("세션아이디는222  : " + sessionid);
+		
+		String memberId = (String)session.getAttribute("id");
+		System.out.println("세션으로 아이디 가져오는지?" + memberId);
 		return "carshop/indexlogin";
 	}
 	
@@ -117,12 +111,13 @@ public class LoginController {
 	@PostMapping("/pwsearch")
 	@ResponseBody
 	public boolean pwsearch2 (@RequestBody All_User_Tbl aut, Model model) {
-
+		
 		boolean result =false;
 		String email = aut.getEmail();
 		All_User_Tbl db_id = loginservice.getid(email);
 			//db에 id가 없을경우
 			if(db_id == null) {
+				System.out.println("id없다=======");
 				return result;
 			}
 		String id = db_id.getId();
@@ -164,15 +159,12 @@ public class LoginController {
 		String email = login.getEmail();
 		String pw1 = login.getPw1();
 		String pw2 = login.getPw2();
-		System.out.println("pw1  " + pw1 + "pw2  " +  pw2 + " email : " + email);
 		
 		aut.setPw(login.getPw1());
-		System.out.println("aut = " + aut);
 		//hidden으로 email정보를 가져온다.
 		loginservice.pwsave(aut);
-		System.out.println("=======저장완료========");
-			return "/carshop/login";
 
+		return "/carshop/login";
 	}
 
 	

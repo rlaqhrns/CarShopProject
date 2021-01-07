@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.mapper.member.MyPageMapper;
 import com.shop.mapper.product.CartMapper;
 import com.shop.mapper.product.LikeMapper;
 import com.shop.mapper.product.ProductBuyMapper;
@@ -12,6 +13,7 @@ import com.shop.vo.Cart_Tbl;
 import com.shop.vo.Like_Tbl;
 import com.shop.vo.Prod_Tbl;
 import com.shop.vo.ProductCategoryJoin;
+import com.shop.vo.User_Tbl;
 
 import lombok.Setter;
 
@@ -23,6 +25,8 @@ public class ProductBuyServiceImple implements ProductBuyService {
 	private CartMapper cartMapper;
 	@Setter(onMethod_ = @Autowired)
 	private LikeMapper likeMapper;
+	@Setter(onMethod_ = @Autowired)
+	private MyPageMapper mypageMapper;
 	
 	@Override
 	public List<Prod_Tbl> getProductAll(){
@@ -35,9 +39,10 @@ public class ProductBuyServiceImple implements ProductBuyService {
 	}
 
 	@Override
-	public List<ProductCategoryJoin> getProductCategory(Integer c_parent,Integer c_no) {
+	public List<ProductCategoryJoin> getProductCategory(Integer categoryParents, Integer categoryDetails,String sorting) {
 		// TODO Auto-generated method stub
-		return mapper.getProductCategory(c_parent, c_no);
+		//System.out.println(" service 부모 카테고리 : " + categoryParents + ", 자식 카테고리 : " +  categoryDetails + "direction :  " + direction);
+		return mapper.getProductCategory(categoryParents, categoryDetails, sorting);
 	}
 
 	@Override
@@ -62,4 +67,11 @@ public class ProductBuyServiceImple implements ProductBuyService {
 		int addLikeBoolean = likeMapper.addLike(like);
 		return addLikeBoolean == 1;
 	}
+
+	@Override
+	public User_Tbl getUser(String u_id) {
+		
+		return mypageMapper.getuser(u_id);
+	}
+
 }

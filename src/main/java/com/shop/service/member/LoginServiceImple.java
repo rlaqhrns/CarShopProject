@@ -30,37 +30,33 @@ public class LoginServiceImple implements LoginService{
 	public boolean login(String id, String pw, HttpSession session) {
 
 		try {
-			
-//			if(id == "admin" && pw == "admin") {           //관리자로 로그인 시 프리패스
-//				return true;
-//			}
-			
+			if(id == "admin" && pw == "admin") {           //관리자로 로그인 시 프리패스
+				return true;
+				}
+		//id+pw를 db와 비교	
 		All_User_Tbl db_id = logmapper.idpwcheck(id);
-		
-//		System.out.println("id는 : " + id + "pw는" + pw );
-//		System.out.println("dbid는 : " + db_id.getId() + "  dbpw는" + db_id.getPw() );
-		
+
 			//로그인성공하면 세션생성
 			if(id.equals(db_id.getId()) && pw.equals(db_id.getPw())) {  
 	
 				session.setAttribute("id" , id);
 				session.setAttribute("pw", pw);
-				
-				String sessionid = session.getId();
-				System.out.println("세션아이디는  : " + sessionid);
-	
+
+				session.setAttribute("user", db_id);
 				String memberId = (String)session.getAttribute("id");
 				boolean login = memberId == null ? false : true;
+
 				
-				System.out.println("memberId는 : " + memberId);
-				System.out.println("login세션결과는 : " + login);		
+				String sessionid = session.getId();
+//				System.out.println("세션아이디는  : " + sessionid);
+					
 				return true;
 			} else {
 				return false;
 			}
 			
 		} catch(Exception e) {
-//			System.out.println("로그인실패================");
+//			System.out.println("로그인실패");
 			e.printStackTrace();
 			return false;
 		}
@@ -102,17 +98,6 @@ public class LoginServiceImple implements LoginService{
 		All_User_Tbl id = logmapper.getid(email);
 		return id;
 	}
-	
-	//비밀번호가 같은지 확인, 안썼는지 확인
-//	@Override
-//	public boolean pwsetting(String pw1, String pw2) {
-//		
-//		if(pw1 == "" || pw2 == "" || pw1 != pw2) {
-//			return false;
-//		}else {
-//			return true;
-//		}
-//	}
 	
 	//세션정보로 email,id값을 가진상태여야 함
 	//새 비밀번호를 db에 저장

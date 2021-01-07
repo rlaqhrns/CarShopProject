@@ -136,75 +136,30 @@ function ValidatePW(pw1) {
 </script>
 <script> <!--"비번재설정"클릭시 실행되는 함수 -->
 $(document).ready(function(){
-	$(".btn").click(function(){
+	$(".btn").click(function(e){
 		 var pw1 = $('#pw1').val();
 	     var pw2 = $('#pw2').val();
-	      console.log("1111111111")
 		//비번이 제대로 입력이 되지않은경우
 		if(pw1==' ' || pw2==' ') {
-			console.log("2222222")
 			swal("Please write", "Password를 기입해주세요!", "info");
 			return;
 		}
 		//이메일 유효성 검사
-		if (!ValidatePW(pw1)) {
-			console.log("333333333")
-	        swal("Oops", "영문,숫자,특수기호포함 8자 이상 기입해주세요", "error");
-	         return
-	    }
-	    if(pw1 != pw2) {
-	    	console.log("444444")
+		if(pw1 != pw2) {
 	    	swal("Oops", "Password가 일치하지않아요:-(", "error");
-			return
+	    	e.preventDefault();
+			return;
 	    }	
+		if (!ValidatePW(pw1)) {
+	        swal("Oops", "영문,숫자,특수기호포함 8자 이상 기입해주세요", "error");
+			e.preventDefault();
+	         return;
+	    }
+		alert("Good", "비밀번호 재설정완료! 로그인창으로 이동합니다", "success");
+
+		return;
 	});
 });
-// function pwcheckAjax(){
-// 	 var pw1 = $('#pw1').val();
-//      var pw2 = $('#pw2').val();
-//       console.log("1111111111")
-// 	//비번이 제대로 입력이 되지않은경우
-// 	if(pw1==' ' || pw2==' ') {
-// 		console.log("2222222")
-// 		swal("Please write", "Password를 기입해주세요!", "info");
-// 		return;
-// 	}
-// 	//이메일 유효성 검사
-// 	if (!ValidatePW(pw1)) {
-// 		console.log("333333333")
-//         swal("Oops", "영문,숫자,특수기호포함 8자 이상 기입해주세요", "error");
-//          return
-//     }
-//     if(pw1 != pw2) {
-//     	console.log("444444")
-//     	swal("Oops", "Password가 일치하지않아요:-(", "error");
-// 		return
-//     }	
-    //위의 조건이 모두 만족하면 pwsetting2로 돌아가는방법
-    //location.href=""
-    
-// 	$.ajax({
-// 		url: '/carshop/pwsetting2',
-// 		type : 'post',
-// 		dataType : "json",
-// 	    contentType: "application/json; charset=utf-8",
-// 	    data : JSON.stringify({
-// 	    	'pw1' : pw1,
-// 	    	'pw2' : pw2,
-// 	    }),
-	    
-// 		success:function(data){
-// 			if(data == "0"){
-// 				console.log("성공함");
-// 			}else {
-// 				console.log("모냐이거");
-// 			}
-// 		},
-// 		error :function(){
-// 			console.log("실패함");
-// 		}
-// 	})
-// }	
 </script>
   
 
