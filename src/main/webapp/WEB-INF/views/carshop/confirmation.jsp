@@ -55,13 +55,15 @@
             </thead>
             <tbody>
              <c:forEach items="${buylist}" var ="buylist" varStatus="status"> 
-                    <tr>                   
+                    <tr>
+                                      
                       <td><c:out value="${buylist.pname}"></c:out></td>
                       <td><c:out value="${buylist.quantity}"></c:out></td>
                       <td><c:out value="${buylist.amount}"></c:out></td>
                       <td><c:out value="${buylist.pay}"></c:out></td>
-                      <td><button id="getItemChange" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' onclick="" data-toggle="modal" data-target="#exampleModalCenter">교환</button></td>
-                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' onclick="" data-toggle="modal" data-target="#exampleModalCenter">반품</button></td>
+                      <td><button id="getItemChange" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' onclick="passValue(this.value)" data-toggle="modal" data-target="#exampleModalCenter">교환</button></td>
+                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' onclick="passValue(this.value)" data-toggle="modal" data-target="#exampleModalCenter">반품</button></td>
+             		 
              		  <td><c:out value="${buylist.order_date}"></c:out></td> 
              		</tr>
               </c:forEach> 
@@ -86,7 +88,7 @@
 			      <div class="modal-body">
 			        <form id="returnFormAjax" method="post">
 			        <div class="form-group">
-						<label for="user-name" class="col-form-label">주문번호</label><input type="text" value='<c:out value = "${getForms.ono}"/>' class="form-control" id="ono" name="ono">
+						<label for="user-name" class="col-form-label">주문번호</label><input type="text" class="form-control" id="ono" name="ono">
 					</div>
 					<div class="form-group">
 						<label for="user-name" class="col-form-label">유저</label><input type="text" class="form-control" value='<c:out value = "${getForms.u_id}"/>' id="user-name" name="u_id">
@@ -135,6 +137,48 @@
       		  $("#getItemRefund").click(function(){
     		        $("#exampleModal").appendTo("body").modal();
     		    });
+      		  
+      		  $('.btn-warning').click(function() {
+      			 	$('#ono').val($(this).val());
+      			 	
+      			 	var ono = $('#ono').val();
+      			 	console.log("ono = " + ono);
+      			 	
+      			 	$.ajax({
+		            	    url :'returnForms?ono=' + ono,
+		               		//url :'clickdateOrder?u_id=' + u_id,
+		            	    type : 'get',
+		               		dataType : 'JSON',
+		               		success : function(data){
+		              		console.log(data);
+		            		let result = '';
+		            		  /*  $.each(data,function(key,value){
+		            	  		 text += '<tr><td scope="col" id="ono">'+value.ono+'</td><td scope="col" id="u_id">'+value.u_id+'</td>'
+		            	   	   	 text += '<td scope="col" id="p_name">'+value.pname+'</td><td scope="col" id="content" data-content="'+value.content+'"data-toggle="modal" data-target="#exampleModalCenter">'
+		            	  		if(value.content.length >2){
+							result =	value.content.substring(0,2) +'...<small>더보기</small>';
+								console.log("if문 실행",result);
+		            	   }else{
+		            		  result= value.content;
+								console.log("else문 실행",result);
+		            		   
+		            	   }
+		            	   text += ''+result+'</td>'
+		            	   text += '<td scope="col" id="order_date">'+value.order_date+'</td><td scope="col" id="pay">'+value.pay+'</td>'
+		            	   text += '<td scope="col" class="span1" id=""><button id="btn_click" class="btn btn-success"><span><strong>교환/반품</strong></span></button></td></tr>'
+		               })
+		        	   tbody.append(text); */
+
+		               },
+		               error : function(){	
+		                  console.log("통신실패");
+		               }
+		               
+		              
+		            })
+						
+      		  });
+      		  
       		  
       		var result = new Array();
   			

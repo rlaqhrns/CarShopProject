@@ -15,7 +15,7 @@
 	]]>
  	</select>
 
- 	<select id ="orderList" resultType="com.shop.vo.Order_Histroy_Tbl">
+ 	<select id ="getReturn" resultType="com.shop.vo.Order_Histroy_Tbl">
 
 		select ono, u_id, pname from order_history_tbl where ono = #{ono}
 

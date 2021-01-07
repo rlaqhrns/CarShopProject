@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shop.service.product.ConfirmationService;
 import com.shop.vo.Order_Histroy_Tbl;
+import com.shop.vo.Prod_Tbl;
 import com.shop.vo.Return_Tbl;
 import com.shop.vo.User_Tbl;
 
@@ -31,7 +32,7 @@ public class ConfirmationController {
 	private ConfirmationService service;
 	
 	@GetMapping("/confirmation")
-	public String getConfirmation(Model model, HttpSession session, Order_Histroy_Tbl order, User_Tbl user) {
+	public String getConfirmation(Model model, HttpSession session, Order_Histroy_Tbl order, User_Tbl user, Prod_Tbl prod) {
 		
 		//String u_id = "something";
 		String getId = (String)session.getAttribute("id"); // 이미 세션의 set attribute로 id가 설정 되어 있기 때문에 바로 get attribute로 id 가져옴 (재원/20.12.31)
@@ -39,12 +40,30 @@ public class ConfirmationController {
 		user.setU_id(getId);
 		
 		model.addAttribute("buylist", service.orderList(user.getU_id()));
+				
+		//int p_no = service.orderList(user.getU_id()).get(ono).getP_no();
+		//System.out.println("상품 번호는 : " +p_no);
+				
+		//model.addAttribute("findSid", service.findSid(p_no));
+		//model.addAttribute("getForms", service.getReturn(ono));
 		return "carshop/confirmation";
 	}
 	
-	@GetMapping("/getReturn")
-	public String getReturn() {
-		return null;
+	@GetMapping("/returnForms")
+	public String getReturn(Model model, HttpSession session, Order_Histroy_Tbl order, @RequestParam("ono") int ono, Prod_Tbl prod, User_Tbl user) {
+		System.out.println("주문번호는" + ono);
+		
+		//String u_id = "something";
+		String getId = (String)session.getAttribute("id"); // 이미 세션의 set attribute로 id가 설정 되어 있기 때문에 바로 get attribute로 id 가져옴 (재원/20.12.31)
+		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
+		user.setU_id(getId);
+		int p_no = service.orderList(user.getU_id()).get(ono).getP_no();
+		System.out.println("상품 번호는 : " +p_no);
+		
+		model.addAttribute("findSid", service.findSid(p_no));
+		model.addAttribute("getForms", service.getReturn(ono));
+		
+		return "carshop/returnForms";
 	}
 	
 	@PostMapping("/returnForms")
