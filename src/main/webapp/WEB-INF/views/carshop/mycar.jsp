@@ -1,80 +1,11 @@
+<%@ include file="../include/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
-<html lang="UTF-8">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Type" content="text/html">
-<title>저기 카</title>
-
 <style>
 .login_box_img:before{ /* 파란색 커버 지움 */
 	display: none;
 }
 </style>
-
-<link rel="icon" href="/resources/img/Fevicon.png" type="image/png">
-<link rel="stylesheet"
-	href="/resources/vendors/bootstrap/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/resources/vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet"
-	href="/resources/vendors/themify-icons/themify-icons.css">
-<link rel="stylesheet"
-	href="/resources/vendors/nice-select/nice-select.css">
-<link rel="stylesheet"
-	href="/resources/vendors/owl-carousel/owl.theme.default.min.css">
-<link rel="stylesheet"
-	href="/resources/vendors/owl-carousel/owl.carousel.min.css">
-
-<link rel="stylesheet" href="/resources/css/style.css">
-
-</head>
-
-<body>
-	<!--================ Start Header Menu Area =================-->
-	<header class="header_area">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light">
-				<div class="container">
-					<a class="navbar-brand logo_h" href="index.html"><img
-						src="/resources/img/logo2.png" alt="로고"></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-							<li class="nav-item active"><a class="nav-link"
-								href="index.html">Home</a></li>
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">MyPage</a>
-							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-						</ul>
-
-						<ul class="nav-shop">
-
-							<li class="nav-item"><button>
-									<i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span>
-								</button></li>
-							<li class="nav-item"><a class="button button-header"
-								href="register">회원가입</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</header>
   
 	<div class="row">
 		<div class="container">
@@ -130,50 +61,15 @@
 	<script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			/* $("div.login_box_img").css({  //페이지 시작시 사진 적용
-				'background' : 'url(/resources/img/carnival.jpg)',
-				'background-size' : 'cover'
-			}); */
-			var model = '${usercar}';
-			
-			changepic(model);
-			
-			
+			var model = '${usercar}';  //페이지가 로드되면 현재 유저의 자동차 정보 가져옴 -성연 2021.01.07
+			changepic(model); //유저차에 따른 이미지와 셀렉트 기본값 변화 -성연 2021.01.07
 
 			$("select").change(function() {  //select의 값이 바꼈을때(차종이 선택됐을때)
 				let model = $(this).val();
 				changepic(model);
-			
-				/* if(model == "소나타"){
-					$("div.login_box_img").css({
-						'background' : 'url(/resources/img/sonata.jpg)',
-						'background-size' : 'cover'
-					});
-				} else if (model == "그랜저"){
-					$("div.login_box_img").css({
-						'background' : 'url(/resources/img/grandeur.jpg)',
-						'background-size' : 'cover'
-					});
-				} else if (model == "카니발"){
-					$("div.login_box_img").css({
-						'background' : 'url(/resources/img/carnival.jpg)',
-						'background-size' : 'cover'
-					});
-				} else if (model == "소울"){
-					$("div.login_box_img").css({
-						'background' : 'url(/resources/img/soul.jpg)',
-						'background-size' : 'cover'
-					});
-				} else if (model == "마티즈"){
-					$("div.login_box_img").css({
-						'background' : 'url(/resources/img/matiz.jpg)',
-						'background-size' : 'cover'
-					});
-				} */
-
 			});
 			
-			function changepic(model) {
+			function changepic(model) {  //선택 된 차에 따른 이미지 변화 -성연 2021.01.07
 				if(model == "소나타"){
 					$("div.login_box_img").css({
 						'background' : 'url(/resources/img/sonata.jpg)',
@@ -197,6 +93,7 @@
 						'background' : 'url(/resources/img/soul.jpg)',
 						'background-size' : 'cover'
 					});
+					$("option[value='소울']").attr("selected", true);
 				} else if (model == "마티즈"){
 					$("div.login_box_img").css({
 						'background' : 'url(/resources/img/matiz.jpg)',

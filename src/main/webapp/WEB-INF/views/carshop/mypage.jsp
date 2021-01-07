@@ -50,7 +50,7 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 			var calendarEl = document.getElementById('calendar');
 
 			calendar = new FullCalendar.Calendar(calendarEl, {
-				initialDate : '2020-12-17',
+				//initialDate : '2020-12-17',
 				editable : true,
 				selectable : true,
 				businessHours : true,
@@ -200,37 +200,26 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 				});
 			 </c:forEach>
 			 
-			 var askprint = $(".askhere");
-			//console.log("제이쿼리 되는거냥");
+			var askprint = $(".askhere");
+			showaskList(1);  //기본적으로 첫번째 페이지 출력 -성연 2021.01.07
 			
-			showaskList(1);
-			
-			function showaskList(pageNum) {
-				getasklist({pageNum: pageNum || 1}, function(askCnt, askList) {
-					console.log("askCnt: " + askCnt);
+			function showaskList(pageNum) { //아이디에 따른 문의글 목록 출력 -성연 2021.01.07
+				getasklist({pageNum: pageNum || 1}, function(askCnt, askList) {  //콜백, json데이터가 잘 받아졌을 경우에 -성연 2021.01.07
+					//console.log("askCnt: " + askCnt);
 					var str = '';
-/* 					<div class="media post_item">
-					<img src="/resources/img/upload/#"
-						alt="post">
-					<div class="media-body">
-						<a href="/carshop/product/details?p_no=#">
-							<h3>여기에</h3>
-						</a>
-						<p>여기는</p>
-					</div>
-				</div> */
-				str += '<h3 class="widget_title"style="padding-top: 20px; padding-bottom: 20px">문의 내역</h3>';
-				for(var i = 0; i < askList.length; i++){
-					str += '<div class="media post_item">';
-					str += '<img class="prod_pic" src="/resources/img/upload/' + askList[i].img + '"alt="post">';
-					str += '<div class="media-body">';
-					str += '<a href="/carshop/product/details?p_no=' + askList[i].p_no + '"><h3>' + askList[i].ask_title + '</h3></a>';
-					str += '<p>' + askList[i].ask_date + '</p></div></div>';
-				}
-				str += '<div class="br"></div>';
+					str += '<h3 class="widget_title"style="padding-top: 20px; padding-bottom: 20px">문의 내역</h3>'; //반복출력 전 맨 위에 한번 추가 
+					for(var i = 0; i < askList.length; i++){
+						str += '<div class="media post_item">';
+						str += '<img class="prod_pic" src="/resources/img/upload/' + askList[i].img1 + '"alt="post">';  //문의를 남긴 상품의 사진 -성연 2021.01.07
+						str += '<div class="media-body">';
+						str += '<a href="/carshop/product/details?p_no=' + askList[i].p_no + '"><h3>' + askList[i].ask_title + '</h3></a>';  //문의제목에 상품detail로 가는 링크 -성연 2021.01.07
+						str += '<p>' + askList[i].ask_date + '</p></div></div>';
+					}
+					
+					str += '<div class="br"></div>';  //목록글을 출력 한 후 마지막에 추가
 					askprint.html(str);
 					//console.log(str);
-					showAskPage(askCnt);
+					showAskPage(askCnt);  //문의 페이징 풀력
 					
 				});
 			}
@@ -254,14 +243,14 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 			
 			var pageNum =1;
 			var askpageFooter = $(".ask_list_page");
-			function showAskPage(askCnt) {
-				var endNum = Math.ceil(pageNum/5.0)*5;
+			function showAskPage(askCnt) {  //문의페이징출력 -성연 2021.01.07
+				var endNum = Math.ceil(pageNum/5.0)*5; //다섯페이지 단위로 끊음 -성연 2021.01.07
 				var startNum = endNum -4;
 				
 				var prev = startNum != 1;
 				var next = false;
 				
-				if(endNum*4 >= askCnt){
+				if(endNum*4 >= askCnt){  //한 페이지당 문의글 4개이기때문에 *4 -성연 2021.01.07
 					endNum = Math.ceil(askCnt/4.0);
 				}
 				if(endNum*4 < askCnt){
@@ -287,7 +276,7 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 				askpageFooter.html(str);
 			}
 			
-			askpageFooter.on("click", "li a", function(e) {
+			askpageFooter.on("click", "li a", function(e) {  //페이징 번호가 클릭되면 문의목록페이지 이동 -성연 2021.01.07
 				e.preventDefault();
 				
 				console.log("page clicked");
@@ -406,7 +395,7 @@ button {
 									<i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span>
 								</button></li>
 							<li class="nav-item"><a class="button button-header"
-								href="register">회원가입</a></li>
+								href="register">회원가입</a></li> <!-- 로그아웃으로 전환 필요 -성연 2021.01.07 -->
 						</ul>
 					</div>
 				</div>
@@ -511,67 +500,79 @@ button {
 					<div class="categories_post">
 						<img class="card-img rounded-0"
 							src="/resources/img/blog/cat-post/cat-post-3.jpg" alt="post">
-						<div class="categories_details" onclick="location.href='/carshop/mycar'">
-							<div class="categories_text">
-								<!-- <a href="/carshop/mycar"> -->
-									<h5>My Car</h5>
-								<!--  </a> -->
-								<div class="border_line"></div>
-								<p>내 차 정보 관리하기</p>
-							</div>
-						</div>
+							<!-- 셀러인 경우 또는 유저인 경우 -성연 2021.01.07 -->
+						<c:choose>
+							<c:when test="${status == 'seller' }">  
+								<div class="categories_details" onclick="location.href='/carshop/bsnspage'">
+									<div class="categories_text">
+										<h5>My Business</h5>
+										<div class="border_line"></div>
+										<p>내 사업정보 관리하기</p>
+									</div>
+								</div>
+							</c:when>
+							<c:when test="${status == 'user' }">
+								<div class="categories_details" onclick="location.href='/carshop/mycar'">
+									<div class="categories_text">
+										<h5>My Car</h5>
+										<div class="border_line"></div>
+										<p>내 차 정보 관리하기</p>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 				<div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
 					<div class="categories_post">
 						<img class="card-img rounded-0"
 							src="/resources/img/blog/cat-post/cat-post-2.jpg" alt="post">
-						<div class="categories_details">
 						<c:choose>
-							<c:when test="${status == 'seller' }"><div class="categories_text">
-								<a href="/carshop/salelist">  <!-- 장바구니페이지로 이동url 필요 -->
-									<h5>내 판매 목록</h5>
-								</a>
-								<div class="border_line"></div>
-								<p>판매목록 관리하기</p>
-							</div></c:when>
-									<c:when test="${status == 'user' }"><div class="categories_text">
-								<a href="/carshop/cart">  <!-- 장바구니페이지로 이동url 필요 -->
-									<h5>장바구니</h5>
-								</a>
-								<div class="border_line"></div>
-								<p>장바구니 관리하기</p>
-							</div></c:when>
+							<c:when test="${status == 'seller' }">
+								<div class="categories_details" onclick="location.href='/carshop/salelist'">
+									<div class="categories_text">
+										<h5>내 판매 목록</h5>
+										<div class="border_line"></div>
+										<p>판매목록 관리하기</p>
+									</div>
+								</div>
+							</c:when>
+							<c:when test="${status == 'user' }">
+								<div class="categories_details" onclick="location.href='/carshop/cart'">
+									<div class="categories_text">
+										<h5>장바구니</h5>
+										<div class="border_line"></div>
+										<p>장바구니 관리하기</p>
+									</div>
+								</div>
+							</c:when>
 						</c:choose>
-						</div>
 					</div>
 				</div>
 				<div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
 					<div class="categories_post">
 						<img class="card-img rounded-0"
 							src="/resources/img/blog/cat-post/cat-post-1.jpg" alt="post">
-						<div class="categories_details">
 						<c:choose>
 							<c:when test="${status == 'seller' }">
-								<div class="categories_text">
-								<a href="/carshop/retrun_end">  <!-- 리턴페이지로 이동url 필요 -->
-									<h5>교환반품</h5>
-								</a>
-								<div class="border_line"></div>
-								<p>교환반품 관리</p>
-							</div>
+								<div class="categories_details" onclick="location.href='/carshop/retrun_end'">
+									<div class="categories_text">
+										<h5>교환반품</h5>
+										<div class="border_line"></div>
+										<p>교환반품 관리</p>
+									</div>
+								</div>
 							</c:when>
 							<c:when test="${status == 'user' }">
-								<div class="categories_text">
-								<a href="/carshop/confirmation">  <!-- 리턴페이지로 이동url 필요 -->
-									<h5>주문 이력</h5>
-								</a>
-								<div class="border_line"></div>
-								<p>교환/반품하기</p>
-							</div>
+								<div class="categories_details" onclick="location.href='/carshop/confirmation'">
+									<div class="categories_text">
+										<h5>주문 이력</h5>
+										<div class="border_line"></div>
+										<p>교환/반품하기</p>
+									</div>
+								</div>
 							</c:when>
 						</c:choose>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -590,7 +591,7 @@ button {
 						
 						
 						<article class="row blog_item">
-							<!-- 1대1문의 보여줌 -->
+							<!-- 이곳에 문의 목록 출력 -성연 2021.01.07 -->
 							<div class="askhere">
 								<h3 class="widget_title"
 									style="padding-top: 20px; padding-bottom: 20px">문의 내역</h3><div class="br"></div>
@@ -607,16 +608,18 @@ button {
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<!-- 회원프로필 -->
+							  <!-- 셀러/일반유저 아이콘 표시 -성연 2021.01.07 -->
 							<c:choose>
-								<c:when test="${status == 'seller' }"><img class="author_img rounded-circle"
+								<c:when test="${status == 'seller' }"><img class="author_img rounded-circle"  
 								src="/resources/img/sellericon.png" alt="" style="width: 200px; height: 200px"></c:when>
-									<c:when test="${status == 'user' }"><img class="author_img rounded-circle"
+									<c:when test="${status == 'user' }"><img class="author_img rounded-circle"  
 								src="/resources/img/buyericon.png" alt="" style="width: 200px; height: 200px"></c:when>
 							</c:choose>
-							<h4 class='username'><c:out value="${user.name }"></c:out> </h4>
+							<h4 class='username'><c:out value="${userinfo.name }"></c:out> </h4>  <!-- 유저 이름 표시 -->
 							<p class='userstatus'>
+							<!-- 판매회원은 상호명 같이 표시 -성연 2021.01.07 -->
 								<c:choose>
-									<c:when test="${status == 'seller' }">판매회원+<c:out value="${user.b_name }" /></c:when>
+									<c:when test="${status == 'seller' }">판매회원+<c:out value="${userinfo.b_name }" /></c:when> 
 									<c:when test="${status == 'user' }">일반회원</c:when>
 								</c:choose> </p>
 							<div class="social_icon">
@@ -629,10 +632,10 @@ button {
 						</aside>
 						<aside class="single_sidebar_widget popular_post_widget">
 							<!-- best상품 창 -->
-							<h3 class="widget_title">Best 상품 또 봐라</h3>
-							<c:forEach items="${bestpord }" var="best">
+							<h3 class="widget_title">베스트조회수 상품</h3>
+							<c:forEach items="${bestpord }" var="best">  <!-- 조회수 순으로 4개 뽑아온 상품목록 반복문으로 출력 -성연 2021.01.07 -->
 								<div class="media post_item">
-									<img src="/resources/img/upload/${best.img }" alt="post" style="width: 100px; height: 60px">
+									<img src="/resources/img/upload/${best.img1 }" alt="post" style="width: 100px; height: 60px">
 									<div class="media-body">
 										<a href="/carshop/product/details?p_no=${best.p_no }">
 											<h3><c:out value="${best.p_name }" /></h3>
