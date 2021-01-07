@@ -10,4 +10,10 @@
 	<select id="emailcheck" resultType="com.shop.vo.All_User_Tbl">
 		select email from all_user_tbl where email = #{email}
 	</select>
+	<select id="getid" resultType="com.shop.vo.All_User_Tbl">
+		select id from all_user_tbl where email = #{email}
+	</select>
+	<update id="updatepw">
+		update all_user_tbl set pw = #{pw} where email=#{email}
+	</update>
 </mapper>

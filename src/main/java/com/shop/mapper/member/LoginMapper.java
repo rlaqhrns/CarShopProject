@@ -9,4 +9,6 @@ import com.shop.vo.All_User_Tbl;
 public interface LoginMapper {
 	public All_User_Tbl idpwcheck(String id);
 	public All_User_Tbl emailcheck(String email);
+	public All_User_Tbl getid(String email);
+	public int updatepw(All_User_Tbl aut);
 }

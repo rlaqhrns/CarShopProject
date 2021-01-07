@@ -7,8 +7,10 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
 	rel="stylesheet">
-<link href='/resources/lib/fullcalendar/main.css' rel='stylesheet' />
-<script src='/resources/lib/fullcalendar/main.js'></script>
+<link href='/resources/lib/main.css' rel='stylesheet' />  <!-- 캘린더 경로 바꿈 -성연 2020.12.31 -->
+<!-- 달력 css -->
+<script src='/resources/lib/main.js'></script>  <!-- 캘린더 경로 바꿈 -성연 2020.12.31 -->
+<!-- 달력 js  -->
 
 <%@ include file="../include/header.jsp"%>
 

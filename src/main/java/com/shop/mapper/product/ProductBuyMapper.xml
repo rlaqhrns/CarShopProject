@@ -14,8 +14,9 @@
 			from prod_tbl p 
 				left outer join cat_tbl c 
 					on p.c_no = c.c_no
-						<if test="c_parent != null and c_parent != ''">where c.c_parent = #{c_parent} </if>
-						<if test="c_no != null and c_no != ''">where c.c_no = #{c_no} </if>
+						<if test="c_parent != null and c_parent != 0">where c.c_parent = #{c_parent} </if>
+						<if test="c_no != null and c_no != 0 ">and c.c_no = #{c_no} </if>
+						<if test="sorting != null and sorting != ''">order by ${sorting}</if>
 							
 	</select>
 </mapper>
