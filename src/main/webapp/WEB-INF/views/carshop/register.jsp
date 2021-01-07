@@ -62,7 +62,7 @@
 									type="button" value="중복확인" class="check_btn" id="id_check">
 							</div>
 							<div class="tip_massage_div">
-								<input type="text" value="" class="tip_massage" id="mid"
+								<input type="text" value="" class="tip_massage" id="mid" style="width:250px"
 									tabindex="-1" readonly>
 							</div>
 							<div class="col-md-12 form-group registerForm_input">

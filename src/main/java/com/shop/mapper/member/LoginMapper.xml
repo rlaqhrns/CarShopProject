@@ -5,9 +5,15 @@
 
 <mapper namespace="com.shop.mapper.member.LoginMapper">
 	<select id="idpwcheck" resultType="com.shop.vo.All_User_Tbl">
-		select id, pw from all_user_tbl where id = #{id}
+		select id, pw, seller from all_user_tbl where id = #{id}
 	</select>
 	<select id="emailcheck" resultType="com.shop.vo.All_User_Tbl">
 		select email from all_user_tbl where email = #{email}
 	</select>
+	<select id="getid" resultType="com.shop.vo.All_User_Tbl">
+		select id from all_user_tbl where email = #{email}
+	</select>
+	<update id="updatepw">
+		update all_user_tbl set pw = #{pw} where email=#{email}
+	</update>
 </mapper>

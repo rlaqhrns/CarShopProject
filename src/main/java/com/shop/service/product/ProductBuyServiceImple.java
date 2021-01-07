@@ -35,9 +35,10 @@ public class ProductBuyServiceImple implements ProductBuyService {
 	}
 
 	@Override
-	public List<ProductCategoryJoin> getProductCategory(Integer c_parent,Integer c_no) {
+	public List<ProductCategoryJoin> getProductCategory(Integer categoryParents, Integer categoryDetails,String sorting) {
 		// TODO Auto-generated method stub
-		return mapper.getProductCategory(c_parent, c_no);
+		//System.out.println(" service 부모 카테고리 : " + categoryParents + ", 자식 카테고리 : " +  categoryDetails + "direction :  " + direction);
+		return mapper.getProductCategory(categoryParents, categoryDetails, sorting);
 	}
 
 	@Override
@@ -62,4 +63,10 @@ public class ProductBuyServiceImple implements ProductBuyService {
 		int addLikeBoolean = likeMapper.addLike(like);
 		return addLikeBoolean == 1;
 	}
+
+//	@Override
+//	public List<Prod_Tbl> getSortProduct(String object, String direction) {
+//		// TODO Auto-generated method stub
+//		return mapper.getSortProduct(object,direction);
+//	}
 }
