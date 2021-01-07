@@ -41,6 +41,11 @@ public class LoginServiceImple implements LoginService{
 	
 				session.setAttribute("id" , id);
 				session.setAttribute("pw", pw);
+
+				session.setAttribute("user", db_id);
+				String memberId = (String)session.getAttribute("id");
+				boolean login = memberId == null ? false : true;
+
 				
 				String sessionid = session.getId();
 //				System.out.println("세션아이디는  : " + sessionid);
