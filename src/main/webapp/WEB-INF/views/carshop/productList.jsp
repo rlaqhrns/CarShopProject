@@ -132,45 +132,6 @@
 				<section class="lattest-product-area pb-40 category-list">
 					<div class="row" id="product-list-area">
 
-						<!-- list forEach start-->
-						<c:forEach items="${list}" var="product">
-							<%-- <div class="product-area" data-product-amount="${product.amount }" data-product-name="${product.p_name }"> --%>
-							<div class="col-md-6 col-lg-4 product-area" data-product-amount="${product.amount }" data-product-name="${product.p_name }">
-							<input type="hidden" value="${product.p_no}">
-								<div class="card text-center card-product">
-									<div class="card-product__img">
-										<img class="card-img" src="${product.img1 } "
-											onClick="location.href='/carshop/product/details?p_no=${product.p_no}'"
-											alt="">
-										<ul class="card-product__imgOverlay">
-											<li><button
-													onClick="location.href='/carshop/product/details?p_no=${product.p_no}'">
-													<i class="ti-search"></i>
-												</button></li>
-											<li><button class="btn_shopping-cart" value="${product.p_no }">
-													<i class="ti-shopping-cart"></i>
-												</button></li>
-											<li><button class="btn_like_toggle" value="${product.p_no }">
-													<i class="ti-heart"></i>
-												</button></li>
-										</ul>
-									</div>
-									<div class="card-body">
-
-										<p>Accessories</p>
-										<h4 class="card-product__title">
-											<a href="/carshop/product/details?p_no=${product.p_no}">${product.p_name}</a>
-										</h4>
-										<p class="card-product__price"><fmt:formatNumber type="number" value="${product.amount}"/>원</p>
-
-									</div>
-								</div>
-							</div>
-							<!-- </div> -->
-						</c:forEach>
-						<!-- list forEach end -->
-
-
 						<!-- 상품 리스트가 들어갈 곳이다. -->
 					</div>
 					<!-- 페이지  -->
