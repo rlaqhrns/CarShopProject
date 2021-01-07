@@ -527,13 +527,22 @@ button {
 						<img class="card-img rounded-0"
 							src="/resources/img/blog/cat-post/cat-post-2.jpg" alt="post">
 						<div class="categories_details">
-							<div class="categories_text">
+						<c:choose>
+							<c:when test="${status == 'seller' }"><div class="categories_text">
+								<a href="/carshop/salelist">  <!-- 장바구니페이지로 이동url 필요 -->
+									<h5>내 판매 목록</h5>
+								</a>
+								<div class="border_line"></div>
+								<p>판매목록 관리하기</p>
+							</div></c:when>
+									<c:when test="${status == 'user' }"><div class="categories_text">
 								<a href="/carshop/cart">  <!-- 장바구니페이지로 이동url 필요 -->
 									<h5>장바구니</h5>
 								</a>
 								<div class="border_line"></div>
 								<p>장바구니 관리하기</p>
-							</div>
+							</div></c:when>
+						</c:choose>
 						</div>
 					</div>
 				</div>
@@ -542,13 +551,26 @@ button {
 						<img class="card-img rounded-0"
 							src="/resources/img/blog/cat-post/cat-post-1.jpg" alt="post">
 						<div class="categories_details">
-							<div class="categories_text">
+						<c:choose>
+							<c:when test="${status == 'seller' }">
+								<div class="categories_text">
 								<a href="/carshop/retrun_end">  <!-- 리턴페이지로 이동url 필요 -->
+									<h5>교환반품</h5>
+								</a>
+								<div class="border_line"></div>
+								<p>교환반품 관리</p>
+							</div>
+							</c:when>
+							<c:when test="${status == 'user' }">
+								<div class="categories_text">
+								<a href="/carshop/confirmation">  <!-- 리턴페이지로 이동url 필요 -->
 									<h5>주문 이력</h5>
 								</a>
 								<div class="border_line"></div>
 								<p>교환/반품하기</p>
 							</div>
+							</c:when>
+						</c:choose>
 						</div>
 					</div>
 				</div>
@@ -572,46 +594,6 @@ button {
 							<div class="askhere">
 								<h3 class="widget_title"
 									style="padding-top: 20px; padding-bottom: 20px">문의 내역</h3><div class="br"></div>
-								<!-- <div class="media post_item">
-									<img src="/resources/img/upload/#"
-										alt="post">
-									<div class="media-body">
-										<a href="/carshop/product/details?p_no=#">
-											<h3>여기에</h3>
-										</a>
-										<p>여기는</p>
-									</div>
-								</div>
-								<div class="media post_item">
-									<img src="/resources/img/blog/popular-post/post2.jpg"
-										alt="post">
-									<div class="media-body">
-										<a href="single-blog.html">
-											<h3>1대1 문의 내용(일반회원, 판매자회원 모두)</h3>
-										</a>
-										<p>문의를</p>
-									</div>
-								</div>
-								<div class="media post_item">
-									<img src="/resources/img/blog/popular-post/post3.jpg"
-										alt="post">
-									<div class="media-body">
-										<a href="single-blog.html">
-											<h3>들어갈</h3>
-										</a>
-										<p>넣은</p>
-									</div>
-								</div>
-								<div class="media post_item">
-									<img src="/resources/img/blog/popular-post/post4.jpg"
-										alt="post">
-									<div class="media-body">
-										<a href="single-blog.html">
-											<h3>거예요</h3>
-										</a>
-										<p>시간</p>
-									</div>
-								</div> -->
 								<div class="br"></div>
 							</div>
 							
@@ -627,9 +609,9 @@ button {
 							<!-- 회원프로필 -->
 							<c:choose>
 								<c:when test="${status == 'seller' }"><img class="author_img rounded-circle"
-								src="/resources/img/sellericon2.png" alt="" style="width: 200px; height: 200px"></c:when>
+								src="/resources/img/sellericon.png" alt="" style="width: 200px; height: 200px"></c:when>
 									<c:when test="${status == 'user' }"><img class="author_img rounded-circle"
-								src="/resources/img/buyericon2.jpg" alt="" style="width: 200px; height: 200px"></c:when>
+								src="/resources/img/buyericon.png" alt="" style="width: 200px; height: 200px"></c:when>
 							</c:choose>
 							<h4 class='username'><c:out value="${user.name }"></c:out> </h4>
 							<p class='userstatus'>

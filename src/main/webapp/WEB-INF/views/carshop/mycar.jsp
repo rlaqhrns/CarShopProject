@@ -93,7 +93,7 @@
 								<div class="login_form_inner register_form_inner">
 									<h3>Choose My Car</h3>
 									<!-- 폼 시작, class명은 css가 적용되니 바꾸지 말것, 폼 전송 위해 제이쿼리객체 생성때는 id명으로 하기 -->
-									<form class="row login_form" action="#/" id="mycar_form">   
+									<form class="row login_form" action="/carshop/updatemycar" id="mycar_form" method="post">   
 										<label for="cars">model</label>
 										<div class="col-md-12 form-group">
 											<select name="cars" id="cars" id="carselect">
@@ -105,14 +105,14 @@
 											</select>
 										</div>
 										<!-- 로그인 된 사용자의 다른 정보는 hidden, value는 jstl로 나중에 가져오기 -->
-										<div class="col-md-12 form-group">
+<!-- 										<div class="col-md-12 form-group">
 											<input type="hidden" name="u_id" value="">
 											<input type="hidden" name="u_pw" value="">
 											<input type="hidden" name="name" value="">
 											<input type="hidden" name="phone" value="">
 											<input type="hidden" name="email" value="">
 											<input type="hidden" name="addr" value="">
-										</div>
+										</div> -->
 											<!-- 전송 버튼 -->
 										<div class="col-md-12 form-group">
 											<button type="submit" value="submit"
@@ -130,14 +130,21 @@
 	<script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			$("div.login_box_img").css({  //페이지 시작시 사진 적용
+			/* $("div.login_box_img").css({  //페이지 시작시 사진 적용
 				'background' : 'url(/resources/img/carnival.jpg)',
 				'background-size' : 'cover'
-			});
+			}); */
+			var model = '${usercar}';
+			
+			changepic(model);
+			
+			
 
 			$("select").change(function() {  //select의 값이 바꼈을때(차종이 선택됐을때)
 				let model = $(this).val();
-				if(model == "소나타"){
+				changepic(model);
+			
+				/* if(model == "소나타"){
 					$("div.login_box_img").css({
 						'background' : 'url(/resources/img/sonata.jpg)',
 						'background-size' : 'cover'
@@ -162,9 +169,42 @@
 						'background' : 'url(/resources/img/matiz.jpg)',
 						'background-size' : 'cover'
 					});
-				}
+				} */
 
 			});
+			
+			function changepic(model) {
+				if(model == "소나타"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/sonata.jpg)',
+						'background-size' : 'cover'
+					});
+					$("option[value='소나타']").attr("selected", true);
+				} else if (model == "그랜저"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/grandeur.jpg)',
+						'background-size' : 'cover'
+					});
+					$("option[value='그랜저']").attr("selected", true);
+				} else if (model == "카니발"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/carnival.jpg)',
+						'background-size' : 'cover'
+					});
+					$("option[value='카니발']").attr("selected", true);
+				} else if (model == "소울"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/soul.jpg)',
+						'background-size' : 'cover'
+					});
+				} else if (model == "마티즈"){
+					$("div.login_box_img").css({
+						'background' : 'url(/resources/img/matiz.jpg)',
+						'background-size' : 'cover'
+					});
+					$("option[value='마티즈']").attr("selected", true);
+				}
+			}
 		});
 	</script>
 	<%@ include file="../include/footer.jsp"%>

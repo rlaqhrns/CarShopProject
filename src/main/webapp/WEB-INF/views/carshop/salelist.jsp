@@ -46,7 +46,7 @@
 							<input type="hidden" value="${product.p_no}">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
-										<img class="card-img" src="${product.img } "
+										<img class="card-img" src="/resources/img/upload/${product.img } "
 											onClick="location.href='/carshop/product/details?p_no=${product.p_no}'"
 											alt="">
 										

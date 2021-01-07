@@ -27,7 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/carshop/*")
-@Slf4j
 @AllArgsConstructor
 public class MyPageController {
 	
@@ -40,7 +39,8 @@ public class MyPageController {
 	@RequestMapping("/mypage")  //마이페이지 접근
 	public String mypage(Model model, HttpSession session) { //세션 받을 수 있게 HttpSession -Monica 2020.12.31
 		//session.setAttribute("id", "snd12"); 세션 없이 테스트 돌릴때 주석 풀고 사용할 것 -Monica 2020.12.31
-		session.setAttribute("id", "asdf");  //셀러
+		//session.setAttribute("id", "asdf");  //셀러
+		session.setAttribute("id", "2sn$g"); //일반유저
 		String uid = (String)session.getAttribute("id");
 		//System.out.println(uid);
 		model.addAttribute("schedules", calservice.getschdList(uid));
