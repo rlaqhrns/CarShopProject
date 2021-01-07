@@ -131,11 +131,13 @@
 				<!-- Start Best Seller -->
 				<section class="lattest-product-area pb-40 category-list">
 					<div class="row" id="product-list-area">
+
 						<!-- 상품 리스트가 들어갈 곳이다. -->
 					</div>
 					<!-- 페이지  -->
 					<div id="pagination-parent">
 						<div id='pagination-div'></div>
+
 					</div>
 				</section>
 				<!-- End Best Seller -->
