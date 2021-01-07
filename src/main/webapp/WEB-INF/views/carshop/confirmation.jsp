@@ -84,19 +84,19 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <form>
+			        <form id="returnFormAjax" method="post">
 			        <div class="form-group">
-						<label for="user-name" class="col-form-label">주문번호</label><input type="text" class="form-control" id="ono" name="ono">
+						<label for="user-name" class="col-form-label">주문번호</label><input type="text" value='<c:out value = "${getForms.ono}"/>' class="form-control" id="ono" name="ono">
 					</div>
 					<div class="form-group">
-						<label for="user-name" class="col-form-label">유저</label><input type="text" class="form-control" id="user-name" name="u_id">
+						<label for="user-name" class="col-form-label">유저</label><input type="text" class="form-control" value='<c:out value = "${getForms.u_id}"/>' id="user-name" name="u_id">
 					</div>
 					<div class="form-group">
-						<label for="product-name" class="col-form-label">상품명</label><input type="text" class="form-control" id="product-name" name="p_id">
+						<label for="product-name" class="col-form-label">상품명</label><input type="text" class="form-control" value='<c:out value = "${getForms.pname}"/>' id="product-name" name="pname">
 					<!-- p_id를 pname으로 변경해야함 vo도 -->
 					</div>
 					<div class="form-group">
-						<label for="seller-name" class="col-form-label">판매자</label><input type="text" class="form-control" id="seller-name" name="s_id">
+						<label for="seller-name" class="col-form-label">판매자</label><input type="text" class="form-control" value='<c:out value = "${findSid}"/>' id="seller-name" name="s_id">
 					</div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label">사유</label>
@@ -125,6 +125,8 @@
 	  
       		$(document).ready(function(){
       			$('[data-toggle="tooltip"]').tooltip();
+      			
+      			var form = $('#returnFormAjax')[0];
       			
       		    $("#getItemChange").click(function(){
       		        $("#exampleModal").appendTo("body").modal();
