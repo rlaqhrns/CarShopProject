@@ -127,7 +127,7 @@ input:checked+.slider:before {
 								</c:forEach>
 							</ul>
 						</div>
-						<input type="hidden" name="s_id" value="seller">
+						<input type="hidden" name="s_id" value="${user }">
 						<div class="sidebar-filter">
 							<div class="top-filter-head">하위 카테고리</div>
 							<div class="common-filter parts_radio" style="display: none">
@@ -152,7 +152,7 @@ input:checked+.slider:before {
 					</div>
 					<div class="form-group">
 						<label>이미지</label> <input type="file" class="form-control"
-							name="img1" multiple="multiple" id="image"
+							name="prod_img" multiple="multiple" id="image"
 							onchange="setThumbnail(event);" data-width="500" data-heihgt="500">
 						<div id="image_container"></div>
 
@@ -192,8 +192,8 @@ input:checked+.slider:before {
 							</ul>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-default">전송 버튼</button>
-					<button type="reset" class="btn btn-default">초기화 버튼</button>
+					<button type="submit" class="btn btn-default">등록</button>
+					<button type="reset" class="btn btn-default">초기화</button>
 				</form>
 			</div>
 		</div>
@@ -225,9 +225,6 @@ input:checked+.slider:before {
 		console.log("objVal", cateName);
 		// 하위카테고리 id
 		let cateId = $(obj).attr('id');
-		console.log(cateId);
-		console.log(cateName);
-
 		// ajax 
 		$
 				.ajax({
@@ -267,14 +264,27 @@ input:checked+.slider:before {
 
 	// 이미지 미리보기
 	function setThumbnail(event) {
+
 		$("#image_container").empty();
+		let size = event.target.files.length;
+		if(size>=4){
+			alert("최대 3개까지 가능합니다");
+			$("#image").val("");
+			return false;
+		}
 		for (var image of event.target.files) { 
-			var reader = new FileReader(); 
+			var reader = new FileReader();
 			reader.onload = function(event) { 
-				var img = document.createElement("img"); 
+				var img = document.createElement("img");				
 				img.setAttribute("src", event.target.result); 
-				document.querySelector("div#image_container").appendChild(img); }; 
-				console.log(image); reader.readAsDataURL(image); } }
+				img.setAttribute("width", "150px;"); 
+				img.setAttribute("height", "200px;"); 
+				document.querySelector("div#image_container").appendChild(img)
+				}; 
+				console.log(image); reader.readAsDataURL(image); } 
+
+				
+			}
 
 		
 </script>
