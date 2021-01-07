@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,11 +42,28 @@ public class ConfirmationController {
 		return "carshop/confirmation";
 	}
 	
-	@PostMapping("/calendar/getAll")
+	@PostMapping("/returnForms")
 	@ResponseBody
-	public List<Order_Histroy_Tbl> getCallenderDB() {
+	public List<Return_Tbl> returnForms() {
 		return null;
 		
+	}
+	
+	@GetMapping("/clickdateOrder")
+	@ResponseBody
+	public List<Order_Histroy_Tbl> order_dates(@RequestParam("order_date") String order_date, Model model, @RequestParam("u_id") String u_id, HttpSession session) {
+		System.out.println("클릭 날짜 : " + order_date);
+		System.out.println("아이디 : " + u_id);
+		//u_id = (String)session.getAttribute("id"); // 이미 세션의 set attribute로 id가 설정 되어 있기 때문에 바로 get attribute로 id 가져옴 (재원/20.12.31)
+		System.out.println("아이디 : " + u_id);
+		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
+//		user.setU_id(getId);
+//		System.out.println(user.getU_id());
+//		
+		model.addAttribute("order_date", service.orderListDate(u_id, order_date));
+//		//log.info(" service.order_date = " + service.orderListDate(getId, order_date));
+		return service.orderListDate(u_id, order_date);
+
 	}
 	
 	@PostMapping("/confirmation")

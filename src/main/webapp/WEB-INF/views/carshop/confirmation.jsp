@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -41,7 +41,7 @@
       <div class="order_details_table">
         <h2>주문 상세정보</h2>
         <div class="table-responsive">
-          <table class="table">
+          <table class="table" style="display:">
             <thead>
               <tr>
                 <th scope="col">구매물품</th>
@@ -60,8 +60,8 @@
                       <td><c:out value="${buylist.quantity}"></c:out></td>
                       <td><c:out value="${buylist.amount}"></c:out></td>
                       <td><c:out value="${buylist.pay}"></c:out></td>
-                      <td><button id="getItemChange" class="btn btn-warning" type="submit" onclick="" data-toggle="modal" data-target="#exampleModalCenter">교환</button></td>
-                      <td><button id="getItemRefund" class="btn btn-warning" type="submit" onclick="" data-toggle="modal" data-target="#exampleModalCenter">반품</button></td>
+                      <td><button id="getItemChange" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' onclick="" data-toggle="modal" data-target="#exampleModalCenter">교환</button></td>
+                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' onclick="" data-toggle="modal" data-target="#exampleModalCenter">반품</button></td>
              		  <td><c:out value="${buylist.order_date}"></c:out></td> 
              		</tr>
               </c:forEach> 
@@ -85,6 +85,9 @@
 			      </div>
 			      <div class="modal-body">
 			        <form>
+			        <div class="form-group">
+						<label for="user-name" class="col-form-label">주문번호</label><input type="text" class="form-control" id="ono" name="ono">
+					</div>
 					<div class="form-group">
 						<label for="user-name" class="col-form-label">유저</label><input type="text" class="form-control" id="user-name" name="u_id">
 					</div>
@@ -108,12 +111,20 @@
 			    </div>
 			  </div>
 			</div> 
+<!-- moment lib -->
+<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+
+<!-- fullcalendar bundle -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js'></script>
+
+<!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.5.0/main.global.min.js'></script>
+			
 <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	  
       		$(document).ready(function(){
-      			
-      		//	getCalendarDataDB();
+      			$('[data-toggle="tooltip"]').tooltip();
       			
       		    $("#getItemChange").click(function(){
       		        $("#exampleModal").appendTo("body").modal();
@@ -185,6 +196,8 @@
       			
       		}
       		
+      		//주문상세정보 pagination 10개마다 끊기 (재원/21.01.06)
+      		
     		// 캘린더 이벤트
       	    document.addEventListener('DOMContentLoaded', function() {
       	    	let tbody = $('#tbodyid');
@@ -199,6 +212,7 @@
 		            json.title = "${buylist.pname}";    
 	       		 	json.start = "${fn:substring(order_date,0,10)}";
 	       		 	json.end = "${fn:substring(order_date,0,10)}";
+	       		 	//json.allDay = false;
 	       		 	result.push(json);
         		</c:forEach>
         		
@@ -211,31 +225,93 @@
       	    	console.log("dataJson" + dataJson);
       	        var calendarEl = document.getElementById('calendar'); 
       	        var calendar;
-	
+      	      	var jsId = document.cookie.match(/JSESSIONID=[^;]+/);
+      	      	console.log(jsId);
+      	      	
+      	      	<% session = request.getSession();
+      	      	   
+      	      	%>
+      	      	
+      	      	var u_id = "<%=session.getAttribute("id")%>";
+      	      	console.log(u_id);
       	        	  calendar = new FullCalendar.Calendar(calendarEl, {
             	        	editable: true,
             	          	selectable: true,
             	          	nowIndicator: true,
             	          	dayMaxEvents: true,
-            	          	//캘린더에 물품 구매 날짜별로 물품리스트 띄움 (재원/21.01.04)
- 	   
-            	          	events: [
-            	                {
-            	                    title : 'evt1',
-            	                    start : '2019-09-03'
-            	                },
-            	                {
-            	                    title    :    'evt2',
-            	                    start    :    '2019-09-10',
-            	                    end    :    '2019-09-20'
-            	                },
-            	                {
-            	                    title    :    'evt3',
-            	                    start    :    '2019-09-25T12:30:00',
-            	                    allDay    :    false
-            	                }
-            	            ],
-      	        	  			
+
+            	          	
+            	          	//캘린더 이벤트 날짜별로 주문정보 확인 가능 (재원/21.01.06)
+            	      		eventClick:function (info) { //alert창 띄우는 기능 
+            	      			info.jsEvent.preventDefault(); // don't let the browser navigate
+            	      			console.log(info.event.start);
+            	      			var jsId = document.cookie.match(/JSESSIONID=[^;]+/);
+            	      			var start = moment(info.event.start).format("YYYY-MM-DD"); 
+            	      			console.log(jsId);
+            	      			console.log(start);
+            	      			
+            	      			tbody.empty();
+	      						let text = '';
+	      						
+	      						$.ajax({
+	      		            	    url :'clickdateOrder?order_date=' + start + '&' + 'u_id=' + u_id,
+	      		               		//url :'clickdateOrder?u_id=' + u_id,
+	      		            	    type : 'get',
+	      		               		dataType : 'JSON',
+	      		               		success : function(data){
+	      		              		console.log(data);
+	      		            		let result = '';
+	      		            		  /*  $.each(data,function(key,value){
+	      		            	  		 text += '<tr><td scope="col" id="ono">'+value.ono+'</td><td scope="col" id="u_id">'+value.u_id+'</td>'
+	      		            	   	   	 text += '<td scope="col" id="p_name">'+value.pname+'</td><td scope="col" id="content" data-content="'+value.content+'"data-toggle="modal" data-target="#exampleModalCenter">'
+	      		            	  		if(value.content.length >2){
+	      							result =	value.content.substring(0,2) +'...<small>더보기</small>';
+	      								console.log("if문 실행",result);
+	      		            	   }else{
+	      		            		  result= value.content;
+	      								console.log("else문 실행",result);
+	      		            		   
+	      		            	   }
+	      		            	   text += ''+result+'</td>'
+	      		            	   text += '<td scope="col" id="order_date">'+value.order_date+'</td><td scope="col" id="pay">'+value.pay+'</td>'
+	      		            	   text += '<td scope="col" class="span1" id=""><button id="btn_click" class="btn btn-success"><span><strong>교환/반품</strong></span></button></td></tr>'
+	      		               })
+	      		        	   tbody.append(text); */
+
+	      		               },
+	      		               error : function(){	
+	      		                  console.log("통신실패");
+	      		               }
+	      		               
+	      		              
+	      		            })
+	      						
+            	      			
+            	      		},
+            	      		
+            	      		//캘린더 날짜 클릭시 자동으로 밑으로 이동하면서 주문상세 정보 확인 가능 (재원/21.01.06)
+            	      		 dateClick: function(info) {
+            	      		    alert('Clicked on: ' + info.dateStr);
+            	      		    alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+            	      		    alert('Current view: ' + info.view.type);
+            	      		    // change the day's background color just for fun
+            	      		    info.dayEl.style.backgroundColor = 'red';
+
+            	      	  },
+            	      	  
+            	      		//캘린더 이벤트 hovering 날짜별로 주문정보 확인 가능 (재원/21.01.06)
+            	      		eventMouseEnter: function(el) {
+            	      			//console.log(event);
+            	      			console.log(this);
+            	      			console.log(el);
+            	      			$('a').attr("data-toggle","tooltip");
+            	      			$('a').attr("title", "클릭하여 상세를 확인하세요");
+            	      			//$('.fc-event-inner', this).append('<div id=\"'+el.event.id+'\" class=\"hover-end\">'+el.event.title+'</div>');
+            	      		 	//console.log(el.event);
+            	      		 	//console.log(el.event.title);
+            	      		 	//$('a').tooltip({title: el.event.title});
+            	      	      	           
+            	      	  },
       	        	  			/*  $.ajax({
       	        	  			  	contentType:'application/json;charset=utf-8',
       	        	  				//url:'/carshop/confirmation',
@@ -310,12 +386,10 @@
             	          
             	        });
       	        	  
+      	        		//캘린더에 물품 구매 날짜별로 물품리스트 띄움 (재원/21.01.04)
       	        		calendar.addEventSource(result);
             	        calendar.render();
-            	        
-            	       // calendar.addEventSource( dataJson );
-      	        	  	
-            	        
+  	        
             	     });
       	        	
       	    
@@ -325,6 +399,16 @@
 #calendar { /* 달력 크기 */
 	max-width: 750px;
 	margin: 0 auto;
+}
+.hover-end{
+padding:0;
+margin:0;
+font-size:75%;
+text-align:center;
+position:absolute;
+bottom:0;
+width:100%;
+opacity:.8
 }
 </style>	
 

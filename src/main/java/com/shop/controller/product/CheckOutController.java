@@ -70,7 +70,7 @@ public class CheckOutController {
 		//System.out.println(user.getU_id());
 		checkoutservice.deleteCartList(user.getU_id());
 
-		return "redirect:confirmation";
+		return "redirect:/carshop/confirmation";
 
 	}
 	

@@ -22,4 +22,10 @@ public class ConfirmationServiceImple implements ConfirmationService{
 		return mapper.orderList(u_id); //전체 구입물품 조회 (재원/20.12.30)
 	}
 
+	@Override
+	public List<Order_Histroy_Tbl> orderListDate(String u_id, String order_date) {
+		// TODO Auto-generated method stub
+		return mapper.orderDateLists(u_id, order_date);
+	}
+
 }

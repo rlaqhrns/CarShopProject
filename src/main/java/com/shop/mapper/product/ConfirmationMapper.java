@@ -2,6 +2,9 @@ package com.shop.mapper.product;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.shop.vo.Order_Histroy_Tbl;
 
 public interface ConfirmationMapper {
@@ -18,5 +21,6 @@ public interface ConfirmationMapper {
 	 */
 	
 	public List<Order_Histroy_Tbl> orderList(String u_id); //유저의 결제 목록 (재원/20.12.30)
+	public List<Order_Histroy_Tbl> orderDateLists(@Param("u_id") String u_id, @Param("order_date") String order_date); //유저의 날짜별 결제 목록 (재원/20.12.30)
 	
 }
