@@ -20,4 +20,3 @@ public class Cart_Tbl {
 	  // 오버라이드 
 	
 }
-

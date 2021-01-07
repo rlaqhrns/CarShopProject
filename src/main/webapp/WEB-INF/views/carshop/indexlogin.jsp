@@ -93,7 +93,7 @@
 						aria-label="Toggle navigation">
 						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
-					</button>
+					</button>					
 					<div class="collapse navbar-collapse offset"
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
