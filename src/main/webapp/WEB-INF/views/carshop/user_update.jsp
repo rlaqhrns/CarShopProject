@@ -14,7 +14,8 @@
 	rel="stylesheet"
 	integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
 	crossorigin="anonymous">
-
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <%@ include file="../include/header.jsp"%>
 
 <body>
@@ -66,18 +67,40 @@
 									<input class="form-control" type="email" name="email">
 								</div>
 							</div>
-							<form name="form" id="form" method="post">
 
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">주소
-										: </label>
-									<div class="col-lg-9">
-										<input type="text" id="roadFullAddr" name="roadFullAddr"
-											class="form-control" readonly="readonly" onclick="goPopup()"
-											placeholder="클릭하세요" value="roadFullAddr"/>
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label">주소
+									: </label>
+								<div class="col-lg-9">
+									<div style="display: flex">
+										<input type="text" id="sample2_postcode" class="form-control"
+											style="width: 200px; margin-bottom: 10px" placeholder="우편번호">
+										<input type="button" onclick="sample2_execDaumPostcode()"
+											value="우편번호 찾기" class="addr_search_btn"><br>
 									</div>
+									<input type="text" name="addr" class="form-control"
+										style="width: 300px; margin-bottom: 10px" id="sample2_address"
+										placeholder="주소"> <input type="text" name="addr2" class="form-control"
+										style="width: 300px; margin-bottom: 10px"
+										id="sample2_detailAddress" placeholder="상세주소"> <input
+										type="hidden" name="juso3"
+										style="width: 250px; margin-bottom: 10px"
+										id="sample2_extraAddress" placeholder="참고항목">
+
+									<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+									<div id="layer"
+										style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
+										<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+											id="btnCloseLayer"
+											style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
+											onclick="closeDaumPostcode()" alt="닫기 버튼">
+									</div>
+
+
+
 								</div>
-							</form>
+							</div>
+
 							<div class="form-group row" style="float: right">
 
 								<input type="button" class="btn btn-primary" value="수정">
@@ -93,25 +116,7 @@
 
 </body>
 
-<script>
-	function goPopup() {
-		// 주소검색을 수행할 팝업 페이지를 호출합니다.
-		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-		var pop = window.open("/popup/jusoPopup.jsp", "pop",
-				"width=570,height=420, scrollbars=yes, resizable=yes");
-
-		// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-		//var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
-	}
-
-	function jusoCallBack(roadFullAddr) {
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.form.roadFullAddr.value = roadFullAddr;
-
-	}
-</script>
-
-
+<script type="text/javascript" src="/resources/js/register_addrAPI.js"></script>
 <style>
 
 /************* GENERIC  *****************/
@@ -206,6 +211,16 @@ img {
 #social-em:hover {
 	color: #f39c12;
 	transition: all .25s;
+}
+#btnCloseLayer{
+	width:20px !important;
+	height: 20px;
+}
+.addr_search_btn{
+	width: 110px;
+    height: 30px;
+    margin: 5px;
+    font-size: 14px;
 }
 </style>
 <%@ include file="../include/footer.jsp"%>

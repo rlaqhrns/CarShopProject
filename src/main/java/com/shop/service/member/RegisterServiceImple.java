@@ -44,7 +44,6 @@ public class RegisterServiceImple implements RegisterService {
 		try {   
 			int a = rmapper.addseller(seller_tbl);
 			int b = rmapper.alluser_addseller(seller_tbl);
-			
 			return a == 1 && b == 1;
 			
 		} catch (Exception e) {

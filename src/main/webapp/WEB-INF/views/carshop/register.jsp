@@ -133,9 +133,9 @@
 									<input type="button" onclick="sample2_execDaumPostcode()"
 										value="우편번호 찾기" class="check_btn"><br>
 								</div>
-								<input type="text" name="juso1"
+								<input type="text" name="addr"
 									style="width: 300px; margin-bottom: 10px" id="sample2_address"
-									placeholder="주소"> <input type="text" name="juso2"
+									placeholder="주소"> <input type="text" name="addr2"
 									style="width: 300px; margin-bottom: 10px"
 									id="sample2_detailAddress" placeholder="상세주소"> <input
 									type="hidden" name="juso3"
