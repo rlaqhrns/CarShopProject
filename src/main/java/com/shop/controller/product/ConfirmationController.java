@@ -42,6 +42,11 @@ public class ConfirmationController {
 		return "carshop/confirmation";
 	}
 	
+	@GetMapping("/getReturn")
+	public String getReturn() {
+		return null;
+	}
+	
 	@PostMapping("/returnForms")
 	@ResponseBody
 	public List<Return_Tbl> returnForms() {

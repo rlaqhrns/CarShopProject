@@ -14,6 +14,19 @@
 		select * from order_history_tbl where u_id = #{u_id} and order_date like concat(#{order_date}, '%')
 	]]>
  	</select>
+
+ 	<select id ="orderList" resultType="com.shop.vo.Order_Histroy_Tbl">
+
+		select ono, u_id, pname from order_history_tbl where ono = #{ono}
+
+ 	</select>
+	
+	<insert id="insertForms">
+	
+		insert into return_tbl values (#{ono}, #{u_id}, #{pname}, #{content}, now(), #{s_id})
+	
+	</insert>
+
 	
 
 </mapper>
