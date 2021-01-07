@@ -3,7 +3,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject/network)
 [![GitHub stars](https://img.shields.io/github/stars/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject/stargazers)
 [![GitHub license](https://img.shields.io/github/license/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject)
-https://img.shields.io/badge/updated-today-yellow
+![Eclipse Marketplace](https://img.shields.io/eclipse-marketplace/last-update/update?color=yellow)
 ![GitHub forks](https://img.shields.io/github/forks/lee-bomi/CarShopProject?label=fork&style=social)
 
 
