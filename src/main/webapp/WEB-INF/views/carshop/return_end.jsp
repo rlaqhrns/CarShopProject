@@ -40,7 +40,7 @@
 								<th scope="col"><strong>구매자</strong></th>
 								<th scope="col"><strong>상품명</strong></th>
 								<th scope="col"><strong>사유</strong></th>
-								<th scope="col"><strong>날짜</strong></th>
+								<th scope="col"><strong>구매 날짜</strong></th>
 								<th scope="col"><strong>결제수단</strong></th>
 								<th scope="col"><strong>교환/환불</strong></th>
 							</tr>
@@ -96,7 +96,7 @@
 							</div>
 						</div>
 					</div>
-			</div>
+				</div>
 					<!-- /.modal -->
 
 
@@ -144,6 +144,7 @@
     	
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
+        	selectable: true,
         	// 캘린더 요일 클릭 시 이벤트 발생
               dateClick: function(info) {
             	  tbody.empty();

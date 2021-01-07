@@ -102,7 +102,7 @@
 				<div class="card text-center card-product">
 					<div class="card-product__img">
 						<img class="img-fluid"
-							src="/resources/img/upload/<c:out value="${list.img}" />" alt="">
+							src="/resources/img/upload/<c:out value="${list.img1}" />" alt="">
 						<ul class="card-product__imgOverlay">
 							<li><button>
 									<i class="ti-search"></i>
@@ -150,7 +150,7 @@
 					<div class="card text-center card-product">
 						<div class="card-product__img">
 						<img class="img-fluid"
-							src="/resources/img/upload/<c:out value="${list2.img}" />" alt="">
+							src="/resources/img/upload/<c:out value="${list2.img1}" />" alt="">
 							<ul class="card-product__imgOverlay">
 								<li><button>
 										<i class="ti-search"></i>
