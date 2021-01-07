@@ -4,4 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shop.mapper.member.MyPageMapper">
+	<select id="getuser" resultType="com.shop.vo.User_Tbl">
+		select * from user_tbl where u_id = #{u_id}
+	</select>
 </mapper>

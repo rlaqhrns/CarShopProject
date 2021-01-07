@@ -71,7 +71,7 @@ public class ProductBuyServiceImple implements ProductBuyService {
 	@Override
 	public User_Tbl getUser(String u_id) {
 		
-		return mypageMapper.getUser(u_id);
+		return mypageMapper.getuser(u_id);
 	}
 
 }
