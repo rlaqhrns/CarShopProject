@@ -10,5 +10,5 @@ public interface LoginMapper {
 	public All_User_Tbl idpwcheck(String id);
 	public All_User_Tbl emailcheck(String email);
 	public All_User_Tbl getid(String email);
-	public void updatepw(All_User_Tbl aut);
+	public int updatepw(All_User_Tbl aut);
 }

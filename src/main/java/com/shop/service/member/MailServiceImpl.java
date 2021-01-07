@@ -25,7 +25,7 @@ public class MailServiceImpl implements MailService{
 			MimeMessage msg = mailsender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 			helper.setTo(mail);
-			helper.setSubject("저리카shop 비밀번호 재설정메일3333");
+			helper.setSubject("저리카shop 비밀번호 재설정메일");
 			
 			String a = "<!DOCTYPE html>\r\n" + 
 					"<html lang=\"en\">\r\n" + 
