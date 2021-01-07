@@ -28,8 +28,6 @@ public class CategoryController {
 	@ResponseBody
 	public List<Cat_Tbl> cateChek(@RequestParam("cateId") int c_no, Model model) {
 		model.addAttribute("cateCheck", service.cateCheck(c_no));
-		System.out.println("移댄뀒怨좊━ no = " + c_no);
-		log.info(" 移댄뀒怨좊━�뒗 ?  " + service.cateCheck(c_no));
 		return service.cateCheck(c_no);
 
 	}

@@ -126,6 +126,7 @@ input:checked+.slider:before {
 								</c:forEach>
 							</ul>
 						</div>
+						<input type="hidden" name="s_id" value="${user }">
 						<div class="sidebar-filter">
 							<div class="top-filter-head">하위 카테고리</div>
 							<div class="common-filter parts_radio" style="display: none">
@@ -149,8 +150,9 @@ input:checked+.slider:before {
 					</div>
 					<div class="form-group">
 						<label>이미지</label> <input type="file" class="form-control"
-							name="inputFile" id="imgInput"> <img id="image_section"
-							src="#" alt="이미지">
+							name="prod_img" multiple="multiple" id="image"
+							onchange="setThumbnail(event);" data-width="500" data-heihgt="500">
+						<div id="image_container"></div>
 					</div>
 					<div class="col-md-6">
 						<div class="card" style="margin: 50px 0">
@@ -186,9 +188,8 @@ input:checked+.slider:before {
 							</ul>
 						</div>
 					</div>
-					<button type="button" class="btn btn-default" id="btnclick">전송
-						버튼</button>
-					<button type="reset" class="btn btn-default">초기화 버튼</button>
+					<button type="submit" class="btn btn-default">등록</button>
+					<button type="reset" class="btn btn-default">초기화</button>
 				</form>
 			</div>
 		</div>
@@ -204,9 +205,6 @@ input:checked+.slider:before {
 		console.log("objVal",cateName);
 		// 하위카테고리 id
 		let cateId = $(obj).attr('id');
-		console.log(cateId);
-		console.log(cateName);
-
 		// ajax 
 		$
 				.ajax({
@@ -243,64 +241,30 @@ input:checked+.slider:before {
 				})
 	}
 
-	$(document).ready(function() {
+	// 이미지 미리보기
+	function setThumbnail(event) {
 
-		// 이미지 미리보기
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					$('#image_section').attr('src', e.target.result);
-				}
-
-				reader.readAsDataURL(input.files[0]);
-			}
+		$("#image_container").empty();
+		let size = event.target.files.length;
+		if(size>=4){
+			alert("최대 3개까지 가능합니다");
+			$("#image").val("");
+			return false;
 		}
+		for (var image of event.target.files) { 
+			var reader = new FileReader();
+			reader.onload = function(event) { 
+				var img = document.createElement("img");				
+				img.setAttribute("src", event.target.result); 
+				img.setAttribute("width", "150px;"); 
+				img.setAttribute("height", "200px;"); 
+				document.querySelector("div#image_container").appendChild(img)
+				}; 
+				console.log(image); reader.readAsDataURL(image); } 
 
-		// 파일 업로드
-		// 		$("#imgInput").on("click", function(e) {
-		// 			let formData = new FormData();
-		// 			let inputFile = $("input[name='uploadFile']");
-		// 			console.log("여기서 inputFile은 무엇이길래 0번 인덱스를 가져올까 ? ", inputFile);
-		// 			let files = inputFile[0].files;
-		// 			console.log("file ? ", files);
-		// 			// filedate를 formdata에 추가함
-		// 			for (var i = 0; i < files.length; i++) {
-		// 				formData.append("uploadFile", files[i]);
-		// 			}
-		// 			console.log("formData : ", formData.get("uploadFile"));
-		// 			// 위의 formData를 ajax로 컨트롤러로 전송함
-		// 			$.ajax({
-		// 				url : '/uploadAjaxAction',
-		// 				proceedData : false,
-		// 				contentType : false,
-		// 				data : formData,
-		// 				type : 'POST',
-		// 				success : function(result) {
-		// 					alert("성공적으로 업로드 되었습니다");
-		// 				},
-		// 				errorr : function() {
-		// 					console.log("통신실패");
-		// 				}
-		// 			})
-		// 		});
-
-		// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행합니다.
-		$("#imgInput").change(function() {
-			readURL(this);
-		});
-
-		$('#btnclick').click(function(event) {
-			console.log("클릭");
-			let amount = $('#amount').val();
-			console.log(amount);
-			if (amount == null || amount != isNaN()) {
-				alert("숫자만 입력");
+				
 			}
-		})
 
-	})
 </script>
 
 <%@ include file="../include/footer.jsp"%>
