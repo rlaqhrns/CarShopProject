@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script
@@ -31,80 +32,115 @@
 							<h3 class="mb-0">회원 정보 수정</h3>
 						</div>
 						<div class="card-body">
-							<div class="form-group row">
-								<label class="col-lg-3 col-form-label form-control-label">회원
-									ID : </label>
-								<div class="col-lg-9">
-									<input class="form-control" type="text" name="u_id"
-										readonly="readonly">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-lg-3 col-form-label form-control-label">비밀번호
-									: </label>
-								<div class="col-lg-9">
-									<input class="form-control" type="password" name="u_pw">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-lg-3 col-form-label form-control-label">이름
-									:</label>
-								<div class="col-lg-9">
-									<input class="form-control" type="text" name="name">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-lg-3 col-form-label form-control-label">전화번호
-									:</label>
-								<div class="col-lg-9">
-									<input class="form-control" type="text" name="phone">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-lg-3 col-form-label form-control-label">이메일
-									: </label>
-								<div class="col-lg-9">
-									<input class="form-control" type="email" name="email">
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label class="col-lg-3 col-form-label form-control-label">주소
-									: </label>
-								<div class="col-lg-9">
-									<div style="display: flex">
-										<input type="text" id="sample2_postcode" class="form-control"
-											style="width: 200px; margin-bottom: 10px" placeholder="우편번호">
-										<input type="button" onclick="sample2_execDaumPostcode()"
-											value="우편번호 찾기" class="addr_search_btn"><br>
+							<c:choose>
+								<c:when test="${userType == 'user' }">
+									<form method="post" action="user_updateok">
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label form-control-label">회원
+												ID : </label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="u_id"
+													value="<c:out value="${user.u_id}"></c:out>"
+													readonly="readonly">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label form-control-label">비밀번호
+												: </label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="u_pw"
+													value="<c:out value="${user.u_pw}"></c:out>">
+											</div>
+										</div>
+								</c:when>
+								<c:when test="${userType == 'seller' }">
+									<form method="post" action="seller_updateok">
+									<div class="form-group row">
+										<label class="col-lg-3 col-form-label form-control-label">회원
+											ID : </label>
+										<div class="col-lg-9">
+											<input class="form-control" type="text" name="s_id"
+												value="<c:out value="${user.s_id}"></c:out>"
+												readonly="readonly">
+										</div>
 									</div>
-									<input type="text" name="addr" class="form-control"
-										style="width: 300px; margin-bottom: 10px" id="sample2_address"
-										placeholder="주소"> <input type="text" name="addr2" class="form-control"
-										style="width: 300px; margin-bottom: 10px"
-										id="sample2_detailAddress" placeholder="상세주소"> <input
-										type="hidden" name="juso3"
-										style="width: 250px; margin-bottom: 10px"
-										id="sample2_extraAddress" placeholder="참고항목">
-
-									<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
-									<div id="layer"
-										style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
-										<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
-											id="btnCloseLayer"
-											style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
-											onclick="closeDaumPostcode()" alt="닫기 버튼">
+									<div class="form-group row">
+										<label class="col-lg-3 col-form-label form-control-label">비밀번호
+											: </label>
+										<div class="col-lg-9">
+											<input class="form-control" type="text" name="s_pw"
+												value="<c:out value="${user.s_pw}"></c:out>">
+										</div>
 									</div>
-
-
-
+								</c:when>
+							</c:choose>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">이름
+										:</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="text" name="name"
+											value="<c:out value="${user.name}"></c:out>">
+									</div>
 								</div>
-							</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">전화번호
+										:</label>
+									<div class="col-lg-9">
+										<input class="form-control" type="text" name="phone"
+											value="<c:out value="${user.phone}"></c:out>">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">이메일
+										: </label>
+									<div class="col-lg-9">
+										<input class="form-control" type="email" name="email"
+											value="<c:out value="${user.email}"></c:out>">
+									</div>
+								</div>
 
-							<div class="form-group row" style="float: right">
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">주소
+										: </label>
+									<div class="col-lg-9">
+										<div style="display: flex">
+											<input type="text" id="sample2_postcode" class="form-control"
+												style="width: 200px; margin-bottom: 10px" placeholder="우편번호">
+											<input type="button" onclick="sample2_execDaumPostcode()"
+												value="우편번호 찾기" class="addr_search_btn"><br>
+										</div>
+										<input type="text" name="addr" class="form-control"
+											style="width: 300px; margin-bottom: 10px"
+											id="sample2_address" placeholder="주소"
+											value="<c:out value="${user.addr}"></c:out>"> <input
+											type="text" name="addr2" class="form-control"
+											style="width: 300px; margin-bottom: 10px"
+											id="sample2_detailAddress" placeholder="상세주소"
+											value="<c:out value="${user.addr2}"></c:out>"> <input
+											type="hidden" name="juso3"
+											style="width: 250px; margin-bottom: 10px"
+											id="sample2_extraAddress" placeholder="참고항목">
 
-								<input type="button" class="btn btn-primary" value="수정">
-							</div>
+										<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+										<div id="layer"
+											style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
+											<img
+												src="//t1.daumcdn.net/postcode/resource/images/close.png"
+												id="btnCloseLayer"
+												style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
+												onclick="closeDaumPostcode()" alt="닫기 버튼">
+										</div>
+
+
+
+									</div>
+								</div>
+
+								<div class="form-group row" style="float: right">
+
+									<input type="submit" class="btn btn-primary" value="수정">
+								</div>
+							</form>
 						</div>
 					</div>
 					<!-- /form user info -->
@@ -212,15 +248,17 @@ img {
 	color: #f39c12;
 	transition: all .25s;
 }
-#btnCloseLayer{
-	width:20px !important;
+
+#btnCloseLayer {
+	width: 20px !important;
 	height: 20px;
 }
-.addr_search_btn{
+
+.addr_search_btn {
 	width: 110px;
-    height: 30px;
-    margin: 5px;
-    font-size: 14px;
+	height: 30px;
+	margin: 5px;
+	font-size: 14px;
 }
 </style>
 <%@ include file="../include/footer.jsp"%>

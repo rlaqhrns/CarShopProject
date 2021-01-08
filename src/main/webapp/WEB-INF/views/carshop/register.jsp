@@ -159,7 +159,7 @@
 									style="min-width: 300px !important;">
 									<!-- 자동차 정보 수정 -->
 									<option value="소나타">소나타</option>
-									<option value="그린저">그린저</option>
+									<option value="그린저">그랜져</option>
 									<option value="카니발">카니발</option>
 									<option value="소울">소울</option>
 									<option value="마티즈">마티즈</option>

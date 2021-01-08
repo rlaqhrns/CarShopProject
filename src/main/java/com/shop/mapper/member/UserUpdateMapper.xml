@@ -4,7 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shop.mapper.member.UserUpdateMapper">
-	<update id="userUpdate">
-		
+	<select id="user_select" resultType="com.shop.vo.User_Tbl">
+		select * from user_tbl where u_id = #{id};	
+	</select>
+	<select id="seller_select" resultType="com.shop.vo.Seller_Tbl">
+		select * from seller_tbl where s_id = #{id};	
+	</select>
+	<update id="user_update">
+		update user_tbl set u_pw = #{u_pw}, name = #{name}, phone = #{phone}, email = #{email}, addr = #{addr}, addr2 = #{addr2} where u_id = #{u_id}
 	</update>
+	<update id="all_user_update">
+		update all_user_tbl set pw = #{u_pw}, name = #{name}, email = #{email} where id = #{u_id}
+	</update>
+	<update id="seller_update">
+		update seller_tbl set s_pw = #{s_pw}, name = #{name}, phone = #{phone}, email = #{email}, addr = #{addr}, addr2 = #{addr2} where s_id = #{s_id}
+	</update>
+	<update id="all_seller_update">
+		update all_user_tbl set pw = #{s_pw}, name = #{name}, email = #{email} where id = #{s_id}
+	</update>
+	
 </mapper>
