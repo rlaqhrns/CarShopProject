@@ -2,10 +2,13 @@ package com.shop.controller.product;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,22 +27,36 @@ public class ProductReturnController {
 	@Setter(onMethod_ = @Autowired)
 	private ProductReturnService service;
 
-	@RequestMapping("/retrun_end")
-	public String return_end(Model model) {
-		model.addAttribute("list", service.retrun_());
-		System.out.println("援먰솚諛섑뭹�럹�씠吏� �뱾�뼱�샂 ");
-		log.info("由ъ뒪�듃" + service.retrun_());
+	@RequestMapping("/return_end")
+	public String return_end(Model model,HttpSession session) {
+		String s_id = (String) session.getAttribute("id");
+		System.out.println("s_id : " + s_id);
+		model.addAttribute("list", service.retrun_(s_id));
+		model.addAttribute("count",service.count(s_id));
+		model.addAttribute("id",session.getAttribute("id"));		
 		return "carshop/return_end";
 	}
 
 	@GetMapping("/clickDate")
 	@ResponseBody
-	public List<Return_Tbl> order_date(@RequestParam("order_date") String order_date, Model model) {
-		System.out.println("클릭 날짜 : " + order_date);
-		model.addAttribute("order_date", service.order_date(order_date));
-		log.info("  service.order_date = " + service.order_date(order_date));
-		return service.order_date(order_date);
+	public List<Return_Tbl> order_date(@RequestParam("click_date") String click_date , @RequestParam("s_id")String s_id, Model model) {
+		System.out.println("클릭데이트 : " + click_date);
+		String str = click_date.substring(1);
+		System.out.println("클릭 날짜 : " +click_date.substring(1));
+		
+		System.out.println("아이디 : " +s_id) ;
+		log.info("  service.order_date = " + service.order_date(str,s_id));
+		model.addAttribute("order_date", service.order_date(str,s_id));
+		return service.order_date(str,s_id);
 
+	}
+	
+	@PostMapping("/delete")
+	@ResponseBody
+	public boolean delete(@RequestParam("ono") int ono ){
+		System.out.println("delete 들어옴" + ono);
+		service.insert_select(ono);
+		return true;
 	}
 
 }

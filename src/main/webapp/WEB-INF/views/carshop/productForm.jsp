@@ -16,12 +16,10 @@
 	height: 34px;
 	float: right;
 }
-
 /* Hide default HTML checkbox */
 .switch input {
 	display: none;
 }
-
 /* The slider */
 .slider {
 	position: absolute;
@@ -34,7 +32,6 @@
 	-webkit-transition: .4s;
 	transition: .4s;
 }
-
 .slider:before {
 	position: absolute;
 	content: "";
@@ -46,46 +43,36 @@
 	-webkit-transition: .4s;
 	transition: .4s;
 }
-
 input.default:checked+.slider {
 	background-color: #444;
 }
-
 input.primary:checked+.slider {
 	background-color: #2196F3;
 }
-
 input.success:checked+.slider {
 	background-color: #8bc34a;
 }
-
 input.info:checked+.slider {
 	background-color: #3de0f5;
 }
-
 input.warning:checked+.slider {
 	background-color: #FFC107;
 }
-
 input.danger:checked+.slider {
 	background-color: #f44336;
 }
-
 input:focus+.slider {
 	box-shadow: 0 0 1px #2196F3;
 }
-
 input:checked+.slider:before {
 	-webkit-transform: translateX(26px);
 	-ms-transform: translateX(26px);
 	transform: translateX(26px);
 }
-
 /* Rounded sliders */
 .slider.round {
 	border-radius: 34px;
 }
-
 .slider.round:before {
 	border-radius: 50%;
 }
@@ -106,7 +93,8 @@ input:checked+.slider:before {
 		<div class="col-lg-12">
 			<div class="panel panel-default"></div>
 			<div class="panel-body">
-				<form action="productForm" role="form" method="post">
+				<form action="productForm" role="form" method="post"
+					enctype="multipart/form-data">
 					<div class="col-xl-3 col-lg-4 col-md-5">
 						<div class="sidebar-categories">
 							<div class="head">카테고리</div>
@@ -134,25 +122,28 @@ input:checked+.slider:before {
 						</div>
 					</div>
 					<div class="form-group">
-						<label>상품명</label><input class="form-control" name="title">
+						<label>상품명</label><input class="form-control" name="p_name">
 					</div>
 					<div class="form-group">
-						<label>상품가격</label><input class="form-control" name="title"
+						<label>상품가격</label><input class="form-control" name="amount"
 							id="amount">
 					</div>
 					<div class="form-group">
-						<label>남은수량</label><input class="form-control" name="title">
+						<label>남은수량</label><input class="form-control" name="quantity"
+							id="quantity">
 					</div>
 
 					<div class="form-group">
 						<label>상세설명</label>
-						<textarea class="form-control" rows=3 name="content"></textarea>
+						<textarea class="form-control" rows=3 name="discribe"></textarea>
 					</div>
 					<div class="form-group">
 						<label>이미지</label> <input type="file" class="form-control"
 							name="prod_img" multiple="multiple" id="image"
 							onchange="setThumbnail(event);" data-width="500" data-heihgt="500">
 						<div id="image_container"></div>
+
+
 					</div>
 					<div class="col-md-6">
 						<div class="card" style="margin: 50px 0">
@@ -162,27 +153,27 @@ input:checked+.slider:before {
 
 								<li class="list-group-item">소나타 <label class="switch ">
 										<input type="checkbox" class="info" value="소나타" id="check"
-										name="check"> <span class="slider round"></span>
+										name="compa"> <span class="slider round"></span>
 								</label>
 								</li>
 								<li class="list-group-item">그랜저<label class="switch ">
 										<input type="checkbox" class="info" value="그랜저" id="check"
-										name="check"> <span class="slider round"></span>
+										name="compa"> <span class="slider round"></span>
 								</label>
 								</li>
 								<li class="list-group-item">카니발<label class="switch ">
 										<input type="checkbox" class="info" value="카니발" id="check"
-										name="check"> <span class="slider round"></span>
+										name="compa"> <span class="slider round"></span>
 								</label>
 								</li>
 								<li class="list-group-item">소울<label class="switch ">
 										<input type="checkbox" class="info" value="소울" id="check"
-										name="check"> <span class="slider round"></span>
+										name="compa"> <span class="slider round"></span>
 								</label>
 								</li>
 								<li class="list-group-item">마티즈<label class="switch ">
 										<input type="checkbox" class="info" value="마티즈" id="check"
-										name="check"> <span class="slider round"></span>
+										name="compa"> <span class="slider round"></span>
 								</label>
 								</li>
 							</ul>
@@ -196,13 +187,25 @@ input:checked+.slider:before {
 	</div>
 </body>
 <script>
+    	$(document).ready(function(){
+    	
+			$("#amount").on("keyup",function(){
+			    $(this).val($(this).val().replace(/[^0-9]/g,""));
+			})
+			
+			$("#quantity").on("keyup",function(){
+			    $(this).val($(this).val().replace(/[^0-9]/g,""));
+			})
+    			
+    			
+    		})
 	// onchange 로 input 태그 클릭 시 이벤트 발생
 	function setDisplay(obj) {
 		console.log("obj : " + obj);
 		let cateParent = $('#cateParent');
 		// 상위카테고리 name
 		let cateName = $(obj).val();
-		console.log("objVal",cateName);
+		console.log("objVal", cateName);
 		// 하위카테고리 id
 		let cateId = $(obj).attr('id');
 		// ajax 
@@ -226,24 +229,20 @@ input:checked+.slider:before {
 											console.log("key의 값 : " + key + " "
 													+ "value의 값 : "
 													+ value.c_name);
-											text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio"type="radio" id="'+value.c_no+'" name="'+value.c_no+'"value=""><label for="headlight">'
+											text += '<ul class="front_parts"><li class="filter-list"><input class="pixel-radio" type="radio" id="'+value.c_no+'" name="c_no"value="'+value.c_no+'"><label for="headlight">'
 													+ value.c_name
 													+ '</label></li></ul>';
 										})
 						radio.append(text);
-
 						radio.show();
-
 					},
 					error : function() {
 						console.log("통신실패");
 					}
 				})
 	}
-
 	// 이미지 미리보기
 	function setThumbnail(event) {
-
 		$("#image_container").empty();
 		let size = event.target.files.length;
 		if(size>=4){
@@ -261,10 +260,9 @@ input:checked+.slider:before {
 				document.querySelector("div#image_container").appendChild(img)
 				}; 
 				console.log(image); reader.readAsDataURL(image); } 
-
 				
 			}
-
+		
 </script>
 
 <%@ include file="../include/footer.jsp"%>

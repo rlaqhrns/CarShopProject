@@ -42,7 +42,7 @@
 				<div class="login_box_img">
 					<div class="hover">
 						<h4>Already have an account?</h4>
-						<br> <a class="button button-account" href="login.html">Login
+						<br> <a class="button button-account" href="login">Login
 							Now</a>
 					</div>
 				</div>
@@ -133,9 +133,9 @@
 									<input type="button" onclick="sample2_execDaumPostcode()"
 										value="우편번호 찾기" class="check_btn"><br>
 								</div>
-								<input type="text" name="juso1"
+								<input type="text" name="addr"
 									style="width: 300px; margin-bottom: 10px" id="sample2_address"
-									placeholder="주소"> <input type="text" name="juso2"
+									placeholder="주소"> <input type="text" name="addr2"
 									style="width: 300px; margin-bottom: 10px"
 									id="sample2_detailAddress" placeholder="상세주소"> <input
 									type="hidden" name="juso3"
@@ -159,7 +159,7 @@
 									style="min-width: 300px !important;">
 									<!-- 자동차 정보 수정 -->
 									<option value="소나타">소나타</option>
-									<option value="그린저">그린저</option>
+									<option value="그린저">그랜져</option>
 									<option value="카니발">카니발</option>
 									<option value="소울">소울</option>
 									<option value="마티즈">마티즈</option>
