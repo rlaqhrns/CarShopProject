@@ -163,7 +163,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger btn-creditcheck1">결제하기</button>
+        <button type="button" class="btn btn-danger btn-creditchecks">결제하기</button>
       </div>
     </div>
   </div>
@@ -264,7 +264,7 @@
   			});
   			
   			
-  			$('.btn-creditcheck1').click(function() {
+  			$('.btn-creditchecks').click(function() {
   				
   				if(totalPrice == 0) {
   					alert("구매하실 물품이 없습니다. 물품을 선택 후 구매해주세요");
