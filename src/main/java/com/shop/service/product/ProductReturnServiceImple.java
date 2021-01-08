@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shop.mapper.product.ProductReturnMapper;
 import com.shop.vo.Return_Tbl;
@@ -34,5 +35,15 @@ public class ProductReturnServiceImple implements ProductReturnService{
 		// TODO Auto-generated method stub
 		return mapper.return_(s_id);
 	}
+
+	
+	@Transactional
+	@Override
+	public int insert_select(int ono) {
+		
+		mapper.insert_select(ono);
+		return mapper.delete(ono);
+	}
+
 
 }

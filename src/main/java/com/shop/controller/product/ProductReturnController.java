@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +27,7 @@ public class ProductReturnController {
 	@Setter(onMethod_ = @Autowired)
 	private ProductReturnService service;
 
-	@RequestMapping("/retrun_end")
+	@RequestMapping("/return_end")
 	public String return_end(Model model,HttpSession session) {
 		String s_id = (String) session.getAttribute("id");
 		System.out.println("s_id : " + s_id);
@@ -39,6 +40,7 @@ public class ProductReturnController {
 	@GetMapping("/clickDate")
 	@ResponseBody
 	public List<Return_Tbl> order_date(@RequestParam("click_date") String click_date , @RequestParam("s_id")String s_id, Model model) {
+		System.out.println("클릭데이트 : " + click_date);
 		String str = click_date.substring(1);
 		System.out.println("클릭 날짜 : " +click_date.substring(1));
 		
@@ -47,6 +49,14 @@ public class ProductReturnController {
 		model.addAttribute("order_date", service.order_date(str,s_id));
 		return service.order_date(str,s_id);
 
+	}
+	
+	@PostMapping("/delete")
+	@ResponseBody
+	public boolean delete(@RequestParam("ono") int ono ){
+		System.out.println("delete 들어옴" + ono);
+		service.insert_select(ono);
+		return true;
 	}
 
 }

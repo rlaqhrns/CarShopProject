@@ -29,4 +29,18 @@
 		return_tbl as r join order_history_tbl as o on r.ono=o.ono where s_id=#{s_id} group by substr(o.order_date,1,10)
 		]]>
 		</select>
+		
+		<update id="insert_select">
+		<![CDATA[
+			INSERT INTO return_end_tbl
+			( u_id, p_id, content,s_id ,end_date)
+			SELECT u_id, pname, content, s_id,date
+			FROM return_tbl
+			WHERE ono=#{ono};	
+
+		]]>
+		</update>
+		<delete id="delete">
+		delete from return_tbl where ono=#{ono}
+		</delete>
 </mapper>

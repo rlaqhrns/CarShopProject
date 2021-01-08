@@ -44,7 +44,7 @@ public class LoginServiceImple implements LoginService{
 
 				session.setAttribute("user", db_id);
 				String memberId = (String)session.getAttribute("id");
-				boolean login = memberId == null ? false : true;
+				//boolean login = memberId == null ? false : true;
 
 				
 				String sessionid = session.getId();

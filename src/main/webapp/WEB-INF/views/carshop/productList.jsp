@@ -59,7 +59,7 @@
 						<li class="common-filter">
 							<ul>
 								<!-- default값으로 value = 0 을 설정, 전체 상품목록을 조회할때 사용한다 -->
-								<li style="display: none" class="filter-list">
+								<li class="filter-list">
 									<input
 										class="pixel-radio parts-radio parent-radio" type="radio"
 										name="brand"
@@ -198,11 +198,12 @@ function addCartEvent(p_no) { //장바구니
 		type : 'POST',
 		data : {
 			"u_id" : userId,
-			"p_no" : p_no
+			"p_no" : p_no,
+			"quantity":0
 		},
 		dataType : 'JSON',
 		success : function(stats) {
-			$(".modal-body").html("장바구니에 넣었습니다.");
+			$(".modal-body").html("\""+getUserId() + "\"님 장바구니에 넣었습니다.");
 			$('#notice').modal('show');
 
 		},
@@ -229,7 +230,7 @@ function addLikeEvent(p_no,$obj) { //찜목록추가
 		dataType : 'JSON',
 		success : function(stats) {
 			$obj.children(".ti-heart").addClass("heart_white_full");								
-			$(".modal-body").html("찜 목록에 넣었습니다.");
+			$(".modal-body").html("\""+getUserId() + "\"님 찜 목록에 넣었습니다.");
 			$('#notice').modal('show');
 		},
 		error : function() {
@@ -255,7 +256,7 @@ function removeLikeEvent(p_no,$obj) { //찜목록삭제
 		dataType : 'JSON',
 		success : function(stats) {
 			$obj.children(".ti-heart").removeClass("heart_white_full");
-			$(".modal-body").html("찜 목록에서 삭제되었습니다.");
+			$(".modal-body").html("\""+getUserId() + "\"님 찜 목록에서 삭제되었습니다.");
 			$('#notice').modal('show');
 		},
 		error : function() {
