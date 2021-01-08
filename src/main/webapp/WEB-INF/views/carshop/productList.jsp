@@ -59,7 +59,7 @@
 						<li class="common-filter">
 							<ul>
 								<!-- default값으로 value = 0 을 설정, 전체 상품목록을 조회할때 사용한다 -->
-								<li style="display: none" class="filter-list">
+								<li class="filter-list">
 									<input
 										class="pixel-radio parts-radio parent-radio" type="radio"
 										name="brand"
