@@ -41,19 +41,19 @@ public class ConfirmationController {
 		user.setU_id(getId);
 		int p_no = 0;
 		model.addAttribute("buylist", service.orderList(user.getU_id()));
-		System.out.println(service.orderList(user.getU_id()).get(0).getOno());
+//		System.out.println(service.orderList(user.getU_id()).get(0).getOno());
 		model.addAttribute("getforms", service.getReturn(service.orderList(user.getU_id()).get(0).getOno()));	
-		model.addAttribute("findSid", service.findSid(prod.getP_no()));
-		model.addAttribute("findSid", service.findSid(p_no).getS_id());	
-		System.out.println(order.getOno());
-		List<Prod_Tbl> sidList = new ArrayList<Prod_Tbl>();
+//		model.addAttribute("findSid", service.findSid(prod.getP_no()));
+//		model.addAttribute("findSid", service.findSid(p_no).getS_id());	
+//		System.out.println(order.getOno());
+
 		for(int i =0; i<service.orderList(user.getU_id()).size(); i++) {
 			model.addAttribute("getforms", service.getReturn(service.orderList(user.getU_id()).get(i).getOno()));	
 			p_no = service.orderList(user.getU_id()).get(i).getP_no();
-			//System.out.println("p_no는? " +  p_no);
-			//model.addAttribute("findSid", service.findSid(p_no).getS_id());		
-			//model.addAttribute("findSid", service.findSid(p_no));
-			//System.out.println(service.findList(p_no));
+//			//System.out.println("p_no는? " +  p_no);
+			model.addAttribute("findSid", service.findSid(p_no).getS_id());		
+//			model.addAttribute("findSid", service.findSid(p_no));
+//			//System.out.println(service.findList(p_no));
 		}
 
 		return "carshop/confirmation";
