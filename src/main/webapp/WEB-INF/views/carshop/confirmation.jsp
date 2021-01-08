@@ -62,7 +62,7 @@
                       <td><c:out value="${buylist.amount}"></c:out></td>
                       <td><c:out value="${buylist.pay}"></c:out></td>  
                       <td style="display:none"><input id="validationRequired" type="text" value='<c:out value = "${buylist.p_no}"/>' name="p_no" style="visibility: hidden;"></input></td>                  
-                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${findSid}" data-toggle="modal" data-target="#exampleModalCenter">교환/반품</button></td>	 
+                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}" data-toggle="modal" data-target="#exampleModalCenter">교환/반품</button></td>	 
              		  <td><c:out value="${buylist.order_date}"></c:out></td>              		
              		</tr>
               </c:forEach> 
@@ -148,8 +148,9 @@
       			 	notifyid= $(this).data('notifyid');
       			 	nnotifyid= $(this).data('nnotifyid');
       			 	nnnotifyid= $(this).data('nnnotifyid');
-      			 	$('#u_id').val(notifyid);
-      			 	$('#pname').val(nnotifyid);						
+      			 	$('#pname').val(notifyid);
+      			 	$('#u_id').val(nnotifyid);	
+      			 	$('#s_id').val(nnnotifyid);
       		  });
       		  
       		  $('.btn-primary').click(function() {
