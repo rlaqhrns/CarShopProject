@@ -72,7 +72,7 @@ public class ProductBuyController {
 		
 		return "carshop/productdetails";
 	}
-	@GetMapping("/product/list")
+	@GetMapping({"/product/list","/productList"})
 	public String list(Model model, HttpSession session) {
 		//model.addAttribute("list", productBuyService.getProductAll());
 		model.addAttribute("cateParent", categoryService.cateParent());
