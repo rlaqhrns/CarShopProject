@@ -46,7 +46,8 @@
 							<input type="hidden" value="${product.p_no}">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
-										<img class="card-img" src="${product.img } "
+										<!-- 이미지 변수명만 수정 -성연 2021.01.07 -->
+										<img class="card-img" src="/resources/img/upload/${product.img1 } "  
 											onClick="location.href='/carshop/product/details?p_no=${product.p_no}'"
 											alt="">
 										
