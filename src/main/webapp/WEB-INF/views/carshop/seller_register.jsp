@@ -136,7 +136,7 @@
 								</div>
 								<input type="text" name="addr"
 									style="width: 300px; margin-bottom: 10px" id="sample2_address"
-									placeholder="주소"> <input type="hidden" name="juso2"
+									placeholder="주소"> <input type="text" name="addr2"
 									style="width: 300px; margin-bottom: 10px"
 									id="sample2_detailAddress" placeholder="상세주소"> <input
 									type="hidden" name="juso3"
@@ -165,10 +165,10 @@
 							
 							<div class="col-md-12 form-group register_btn_div" style="margin-top:20px;">
 								<input type="button" value="이전"
-									class="register_btn_pre button button-register w-100 register_btn"
+									class="seller_register_btn_pre button button-register w-100 register_btn"
 									onclick="document.getElementById('registerForm2').style.visibility='hidden';document.getElementById('registerForm1').style.visibility='visible';">
 								<button type="submit" value="submit" id="submit"
-									class="register_btn_submit button button-register w-100 register_btn">가입완료</button>
+									class="seller_register_btn_submit button button-register w-100 register_btn">가입완료</button>
 							</div>
 						</div>
 
