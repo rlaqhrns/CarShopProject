@@ -38,23 +38,11 @@ public class ConfirmationController {
 		//String u_id = "something";
 		String getId = (String)session.getAttribute("id"); // 이미 세션의 set attribute로 id가 설정 되어 있기 때문에 바로 get attribute로 id 가져옴 (재원/20.12.31)
 		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
+		System.out.println(getId);
 		user.setU_id(getId);
-		int p_no = 0;
-		model.addAttribute("buylist", service.orderList(user.getU_id()));
-//		System.out.println(service.orderList(user.getU_id()).get(0).getOno());
-		model.addAttribute("getforms", service.getReturn(service.orderList(user.getU_id()).get(0).getOno()));	
-//		model.addAttribute("findSid", service.findSid(prod.getP_no()));
-//		model.addAttribute("findSid", service.findSid(p_no).getS_id());	
-//		System.out.println(order.getOno());
 
-		for(int i =0; i<service.orderList(user.getU_id()).size(); i++) {
-			model.addAttribute("getforms", service.getReturn(service.orderList(user.getU_id()).get(i).getOno()));	
-			p_no = service.orderList(user.getU_id()).get(i).getP_no();
-//			//System.out.println("p_no는? " +  p_no);
-			model.addAttribute("findSid", service.findSid(p_no).getS_id());		
-//			model.addAttribute("findSid", service.findSid(p_no));
-//			//System.out.println(service.findList(p_no));
-		}
+		model.addAttribute("buylist", service.formList(user.getU_id()));
+
 
 		return "carshop/confirmation";
 	}
