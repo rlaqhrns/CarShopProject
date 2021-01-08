@@ -28,8 +28,9 @@ public class LoginServiceImple implements LoginService{
 	
 	@Override
 	public boolean login(String id, String pw, HttpSession session) {
+
 		try {
-			if(id == "admin" && pw == "admin") {           //관리자로 로그인
+			if(id == "admin" && pw == "admin") {           //관리자로 로그인 시 프리패스
 				return true;
 				}
 		//id+pw를 db와 비교	
@@ -38,9 +39,17 @@ public class LoginServiceImple implements LoginService{
 			//로그인성공하면 세션생성
 			if(id.equals(db_id.getId()) && pw.equals(db_id.getPw())) {  
 	
-				session.setAttribute("sesisonId" , id);
-				session.setAttribute("sesisonPw", pw);
+				session.setAttribute("id" , id);
+				session.setAttribute("pw", pw);
 
+				session.setAttribute("user", db_id);
+				String memberId = (String)session.getAttribute("id");
+				//boolean login = memberId == null ? false : true;
+
+				
+				String sessionid = session.getId();
+//				System.out.println("세션아이디는  : " + sessionid);
+					
 				return true;
 			} else {
 				return false;
