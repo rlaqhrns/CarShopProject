@@ -16,10 +16,11 @@
 					<div class="single-footer-widget tp_widgets">
 						<h4 class="footer_title">Quick Links</h4>
 						<ul class="list">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Shop</a></li>
-							<li><a href="#">MyPage</a></li>
+							<li><a href="index">Home</a></li>
+							<li><a href="productList">Shop</a></li>
+							<li><a href="mypage">MyPage</a></li>
 							<li><a href="#">Contact</a></li>
+						<!-- 2020/01/08 yun.hj 경로설정 -->
 						</ul>
 					</div>
 				</div>
