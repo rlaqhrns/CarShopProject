@@ -52,7 +52,7 @@
 			<div class="col-lg-6">
 				<div class="owl-carousel owl-theme s_Product_carousel">
 					<div class="single-prd-item">
-						<img class="img-fluid" src="/resources/img/category/s-p1.jpg"
+						<img class="img-fluid" src="${product.img1}"
 							alt="">
 					</div>
 
@@ -69,24 +69,32 @@
 						원
 					</h2>
 					<ul class="list">
-						<li><span>카테고리 </span> : 사이드미러</li>
-						<li><span>재고 상태 </span> : 재고 있음</li>
+						<li><span>카테고리 </span> : ${product.c_name }</li>
+						<li><span>재고 상태 </span> : 재고 있음(<strong>${product.quantity}개</strong>)</li>
 					</ul>
-					<p>여러분들이 가고 싶은 무대에는 이미 그린 수료생들이 꿈을 이루고 있습니다. 직장인을 위한 환급제도 과정을
-						운용, 최대 80%까지 환급받으실 수 있게 해드리며 그 외에도 공무원 가산점인정, 학점은행제 등을 시행하여 여러분이
-						가고 싶은 무대로 더 빨리 갈 수 있게 도와드립니다.</p>
+					<p><c:out value="${product.discribe}" /></p>
 					<div class="card_area d-flex align-items-center">
+					
 						<div class="product_count"
 							style="margin-top: 20px; float: left; vertical-align: middle;">
-							<label for="qty" style="float: left">수량 : </label> <input
+							
+							<label for="qty" style="float: left">수량 : </label> 
+							<input
 								type="number" name="qty" id="sst" size="2" maxlength="12"
-								value="1" title="Quantity:" class="input-text qty"
-								style="float: left"> <label for=""
+								value="1" title="Quantity" class="input-text qty"
+								style="float: left"> 
+							
+							
+							<label for=""
 								style="margin-left: 15px; float: left">찜 : </label>
 							<div class="icon_heart_empty" style="float: left"></div>
-
-							<a class="button primary-btn" href="#" style="margin-left: 30px">장바구니</a>
+							
 						</div>
+							<div>
+								<button 
+									class="button primary-btn btn-shopping-cart" 
+									style="float:left;margin-left: 30px;background-color:blue;">장바구니</button>
+							</div>
 					</div>
 
 				</div>
@@ -116,14 +124,7 @@
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade" id="home" role="tabpanel"
 				aria-labelledby="home-tab">
-				<p>[ PASSION ] 여러분들이 가고 싶은 무대에는 이미 그린 수료생들이 꿈을 이루고 있습니다. 직장인을 위한
-					환급제도 과정을 운용, 최대 80%까지 환급받으실 수 있게 해드리며 그 외에도 공무원 가산점인정, 학점은행제 등을
-					시행하여 여러분이 가고 싶은 무대로 더 빨리 갈 수 있게 도와드립니다.</p>
-				<p>[ EMOTION ] 진심으로 사람과 사람을 연결합니다. 정규교육과정을 수료한 수강생에게 본사 취업지원실에서
-					취업을 성실하게 도와드리고 있습니다.</p>
-				<p>[ JOY ] 그린만의 수강할인과 기막힌 혜택이 있습니다. 지역문제로 강의를 들을 수 없는 분들을 위한 무료
-					온라인강좌, 수능수험생, 대학생, 국가유공자, 공무원 및 교직원 등을 위한 각종 할인제도를 시행, 협약된 병원, 음식점,
-					휘트니스, 미용실, 어학원 출력소 등을 통한 할인혜택을 받을 수 있습니다. (*할인혜택은 지점마다 상이할 수 있습니다.)</p>
+				<p><c:out value="${product.discribe}" /></p>
 
 			</div>
 			<div class="tab-pane fade" id="profile" role="tabpanel"
@@ -205,10 +206,10 @@
 					<div class="review_box">
 						<h4>상품문의</h4>
 						<div class="col-md-12">
-							제목  <input type="text" id="ask_title" class="form-control">
+							제목 <input type="text" id="ask_title" class="form-control">
 
 							<div class="form-group">
-								내용 
+								내용
 								<textarea class="form-control" name="" id="p_ask" cols="30"
 									rows="5"></textarea>
 							</div>
@@ -218,10 +219,10 @@
 						</div>
 					</div>
 				</div>
-					<div class="ask" id="ask">
-				<c:forEach items="${askList }" var="list">
+				<div class="ask" id="ask">
+					<c:forEach items="${askList }" var="list">
 						<div class="comment_list">
-							<div class="review_item" >
+							<div class="review_item">
 								<div class="media">
 									<div class="media-body">
 										<h4>
@@ -232,7 +233,8 @@
 											<small><c:out value="${list.ask_date }" /></small>
 										</h5>
 										<c:if test="${user.seller == 'Y' }">
-										<a class="reply_btn" id="askReply" data-ask_no="${list.ask_no }">Reply</a>
+											<a class="reply_btn" id="askReply"
+												data-ask_no="${list.ask_no }">Reply</a>
 										</c:if>
 									</div>
 								</div>
@@ -245,200 +247,268 @@
 									<c:out value="${list.ask_content }" />
 								</h6>
 								<div id="ask${list.ask_no }">
-								<c:if test="${list.ask_reply != null}">
-							<strong>답글 : <c:out value="${list.ask_reply }"></c:out></strong>
-								</c:if>
-								</div>									
+									<c:if test="${list.ask_reply != null}">
+										<strong>답글 : <c:out value="${list.ask_reply }"></c:out></strong>
+									</c:if>
+								</div>
 								<br>
 							</div>
 						</div>
 					</c:forEach>
-					</div>					
 				</div>
-	   <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
-               <div class="">
-                  <div class="col-lg-12">
-                     <div class="review_box">
-                        <h4>상품리뷰 작성</h4>
-                        <form action="replyForm" class="form-contact form-review mt-3" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="u_id" value="${user.id }">
-                        <input type="hidden" name="p_no" value="${product.p_no }">
-                        <input type="hidden" name="s_id" value="${product.s_id }">
-                           <div class="form-group">
-                       	    제목  <input type="text" id="ask_title" class="form-control" name="r_title">
-          	                            내용  <textarea class="form-control different-control w-100" name="r_content"
-                                 id="textarea" cols="30" rows="5"></textarea>
-                           </div>
-                           <div class="form-group text-center text-md-right mt-3">
-                              <input type="file" name="img" multiple="multiple" class="form-control" onchange="setThumbnail(event);">
-                              <div id="image_container"></div>
-                              <button type="submit" class="button button--active button-review">등록</button>
-                           </div>
-                        </form>
-                     </div>
-                  </div>
-                  <div class="col-lg-12">
-                     <div class="review_list">
-                     <c:forEach items="${replyList }" var="reply_list">
-                        <div class="review_item">
-                           <div class="media">
-                              <div class="media-body">
-                                 <h4>유저 ID :<c:out value="${reply_list.u_id }"></c:out></h4>
-								<small><c:out value="${reply_list.r_date }" /></small>
-								제목 : <small><c:out value="${reply_list.r_title }" /></small>
-										
-                              </div>
-                           </div>
-                           <p><c:out value="${reply_list.r_content }"></c:out></p>
-                           <c:if test="${reply_list.r_img1 != null}" >
-                           <img src="/resources/img/replyUpload/${reply_list.r_img1 }" width="150px;" height="200px;" onclick="fnImgPop(this.src)" alt="잘못된 이미지 입니다">
-                           </c:if>
-                           <c:if test="${reply_list.r_img2 != null}" >
-                           <img src="/resources/img/replyUpload/${reply_list.r_img2 }" width="150px;" height="200px;" onclick="fnImgPop(this.src)" alt="잘못된 이미지 입니다">
-                           </c:if>
-                           <c:if test="${reply_list.r_img3 != null}" >
-                           <img src="/resources/img/replyUpload/${reply_list.r_img3 }" width="150px;" height="200px;" onclick="fnImgPop(this.src)" alt="잘못된 이미지 입니다">
-                       	   </c:if>
-                        </div>  
-                        </c:forEach>                    
-                     </div>
-                  </div>
-               </div>
 			</div>
-      </div>
-    </div>
+			<div class="tab-pane fade show active" id="review" role="tabpanel"
+				aria-labelledby="review-tab">
+				<div class="">
+					<div class="col-lg-12">
+						<div class="review_box">
+							<h4>상품리뷰 작성</h4>
+							<form action="replyForm" class="form-contact form-review mt-3"
+								method="post" enctype="multipart/form-data">
+								<input type="hidden" name="u_id" value="${user.id }"> <input
+									type="hidden" name="p_no" value="${product.p_no }"> <input
+									type="hidden" name="s_id" value="${product.s_id }">
+								<div class="form-group">
+
+									<!-- 제목 <input type="text" id="ask_title" class="form-control" 아이디값중복으로 아이디삭 -->
+									제목 <input type="text" id="" class="form-control" name="r_title">
+									내용
+									<textarea class="form-control different-control w-100"
+										name="r_content" id="textarea" cols="30" rows="5"></textarea>
+								</div>
+								<div class="form-group text-center text-md-right mt-3">
+									<input type="file" name="img" multiple="multiple"
+										class="form-control" onchange="setThumbnail(event);">
+									<div id="image_container"></div>
+									<button type="submit"
+										class="button button--active button-review">등록</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="review_list">
+							<c:forEach items="${replyList }" var="reply_list">
+								<div class="review_item">
+									<div class="media">
+										<div class="media-body">
+											<h4>
+												유저 ID :
+												<c:out value="${reply_list.u_id }"></c:out>
+											</h4>
+											<small><c:out value="${reply_list.r_date }" /></small> 제목 :
+											<small><c:out value="${reply_list.r_title }" /></small>
+
+										</div>
+									</div>
+									<p>
+										<c:out value="${reply_list.r_content }"></c:out>
+									</p>
+									<c:if test="${reply_list.r_img1 != null}">
+										<img src="/resources/img/replyUpload/${reply_list.r_img1 }"
+											width="150px;" height="200px;" onclick="fnImgPop(this.src)"
+											alt="잘못된 이미지 입니다">
+									</c:if>
+									<c:if test="${reply_list.r_img2 != null}">
+										<img src="/resources/img/replyUpload/${reply_list.r_img2 }"
+											width="150px;" height="200px;" onclick="fnImgPop(this.src)"
+											alt="잘못된 이미지 입니다">
+									</c:if>
+									<c:if test="${reply_list.r_img3 != null}">
+										<img src="/resources/img/replyUpload/${reply_list.r_img3 }"
+											width="150px;" height="200px;" onclick="fnImgPop(this.src)"
+											alt="잘못된 이미지 입니다">
+									</c:if>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
-					<!--  Modal -->
-  		  	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			  <div class="modal-dialog modal-dialog-centered" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLongTitle">답글달기</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        <form>
+<!--  Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalCenterTitle"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">답글달기</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label">내용</label>
 						<textarea class="form-control" id="message-text" name="content"></textarea>
 					</div>
-			        </form>
-			      </div>
-			      <div class="modal-footer">
-			      	<button type="button" class="btn btn-primary" id="ask_replyBtn">답글달기</button>
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			      </div>
-			    </div>
-			  </div>
-			</div> 
-					<!-- /.modal -->
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="ask_replyBtn">답글달기</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /.modal -->
+<!-- Modal -->
+<div class="modal fade" id="notice" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">알림</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">...</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal end -->
 
 <!--================End Product Description Area =================-->
 
 <%@ include file="../include/topproduct.jsp"%>
 <%@ include file="../include/footer.jsp"%>
 <script>
-	$empty = $(".icon_heart_empty");
-
-	$empty.click(function() {
-		$empty.toggleClass("icon_heart_red");
+function clickEvent(){
+	//하트 토글 이벤
+	let p_no = getP_no();
+	let heart_empty = $(".icon_heart_empty");
+	heart_empty.off("click");
+	heart_empty.click(function(){ //찜목록 추가 삭제
+		let obj = $(this);
+		//하트클래스 포함여부
+		if(obj.hasClass("icon_heart_red")){
+			removeLikeEvent(p_no,obj);
+		}
+		else {
+			addLikeEvent(p_no,obj);
+		}
+	});
+		/* $heart_empty.toggleClass("icon_heart_red"); */
+	//장바구니 추가 이벤트
+	let btnShoppingCart = $(".btn-shopping-cart");
+	btnShoppingCart.click(function(){
+		
+		let quantity = $(".product_count").children("input").val();
+		addCartEvent(p_no,quantity);
 	})
+}
+function getUserId(){
+	let u_id = "${user.id}";
+	return u_id;
+}
+function getP_no(){
+	let p_no = "${product.p_no}";
+	return p_no;
+}
 
-		$(document).ready(function() {
-						let u_id = "${user.id}";
-						let seller ="${user.seller}";
-						let seller_id = "${product.s_id}";
-						let p_no = "${product.p_no}";
-						let s_id = "${product.s_id}";
-						let list = $("#ask");
-						let text = '';
-						
-		$(document).on("click","#product_ask",function() {
-							list.empty();
-							let ask_title = $("#ask_title").val();
-							let ask_content = $("#p_ask").val();
-					// 상품 문의 댓글 ajax 처리
-						$.ajax({url : "product_ask",
-								data : {
-										"p_no" : p_no,
-										"u_id" : u_id,
-										"s_id" : s_id,
-										"ask_title" : ask_title,
-										"ask_content" : ask_content},
-
-								dataType : "JSON",
-									type : "POST",
-								 success : function(data) {
-						$.each(data,function(index,value) {
-										text =  '<div class="comment_list">';
-										text += '<div class="review_item">';
-										text += '<div class="media">';
-										text += '<div class="media-body">';
-										text += '<h4>유저 ID : '+ value.u_id +'</h4>';
-										text += '<small><h5>' +value.ask_date + '</h5></small>';
-										
-										if(seller == 'Y'){
-										text += '<a class="reply_btn" id="askReply">Reply</a>';
-										}
-										
-										text += '</div></div>';
-										text += '<p>문의 제목 : ' +value.ask_title+ '</p>';
-										text += '<h6>문의 내용 : ' +value.ask_content+ '</h6>';
-										text += '<div id="ask'+value.ask_no+'">'
-										if(value.ask_reply !=null){
-										text +='<strong>답글 : '+value.ask_reply+'</strong>'
-										}
-										text +='</div><br></div></div>';
-										list.append(text);
-
-								})	
-								},error : function() {
-										console.log("통신실패");
-														}
-
-													})
-
-										})
-				let ask_no ='';
-				// reply(답글) 클릭 시 modal 이벤트 발생						
-				$(document).on("click","#askReply",function(){
-					ask_no = $(this).data("ask_no");
-					// 모달 
-					$("#exampleModalCenter").modal();
+$(document).ready(function() {
+					clickEvent();
+					checkLiked();
 					
-
+					let u_id = "${user.id}";
+					let seller ="${user.seller}";
+					let seller_id = "${product.s_id}";
+					let p_no = "${product.p_no}";
+					let s_id = "${product.s_id}";
+					let list = $("#ask");
+					let text = '';
 					
-						})
-				// modal 에서 작성 버튼 누를 시 이벤트 발생
-				$(document).on("click","#ask_replyBtn",function(){
-					let ask_reply = $("#message-text").val();
- 					let msg = "";
- 					
-					$.ajax({
-						url : "product_ask_reply",
-						data : {"ask_no" : ask_no,
-								"ask_reply" : ask_reply,
-								"p_no" : p_no},
-						dataType:"JSON",
-						type:"POST",
-						success : function(data){
- 						$("#ask"+ask_no).empty();
-						$("#ask"+ask_no).append('<strong>답글 : '+ ask_reply +'</strong>');
-						console.log("#ask"+ask_no);	 
-						},error : function(request,error){
-							console.log("통신실패", request.status,"\n",request.responseText);
-						}
-					})			
- 					
-				})
+	$(document).on("click","#product_ask",function() {
+						list.empty();
+						let ask_title = $("#ask_title").val();
+						let ask_content = $("#p_ask").val();
+				// 상품 문의 댓글 ajax 처리
+					$.ajax({url : "product_ask",
+							data : {
+									"p_no" : p_no,
+									"u_id" : u_id,
+									"s_id" : s_id,
+									"ask_title" : ask_title,
+									"ask_content" : ask_content},
 
-			
-
-			
+							dataType : "JSON",
+								type : "POST",
+							 success : function(data) {
+					$.each(data,function(index,value) {
+									text =  '<div class="comment_list">';
+									text += '<div class="review_item">';
+									text += '<div class="media">';
+									text += '<div class="media-body">';
+									text += '<h4>유저 ID : '+ value.u_id +'</h4>';
+									text += '<small><h5>' +value.ask_date + '</h5></small>';
+									
+									if(seller == 'Y'){
+									text += '<a class="reply_btn" id="askReply">Reply</a>';
+									}
+									
+									text += '</div></div>';
+									text += '<p>문의 제목 : ' +value.ask_title+ '</p>';
+									text += '<h6>문의 내용 : ' +value.ask_content+ '</h6>';
+									text += '<div id="ask'+value.ask_no+'">'
+									if(value.ask_reply !=null){
+									text +='<strong>답글 : '+value.ask_reply+'</strong>'
+									}
+									text +='</div><br></div></div>';
+									list.append(text);
+							})	
+							},error : function() {
+									console.log("통신실패");
+													}
+												})
+									})
+			let ask_no ='';
+			// reply(답글) 클릭 시 modal 이벤트 발생						
+			$(document).on("click","#askReply",function(){
+				ask_no = $(this).data("ask_no");
+				// 모달 
+				$("#exampleModalCenter").modal();
 				
+
+				
+					})
+	// modal 에서 작성 버튼 누를 시 이벤트 발생
+	$(document).on("click","#ask_replyBtn",function(){
+		let ask_reply = $("#message-text").val();
+			let msg = "";
+			
+		$.ajax({
+			url : "product_ask_reply",
+			data : {"ask_no" : ask_no,
+					"ask_reply" : ask_reply,
+					"p_no" : p_no},
+			dataType:"JSON",
+			type:"POST",
+			success : function(data){
+				$("#ask"+ask_no).empty();
+			$("#ask"+ask_no).append('<strong>답글 : '+ ask_reply +'</strong>');
+			console.log("#ask"+ask_no);	 
+			},error : function(request,error){
+				console.log("통신실패", request.status,"\n",request.responseText);
+			}
+		})			
+			
 	})
+
+		
+
+		
+			
+})
 	// 이미지 미리보기
 	function setThumbnail(event) {
 
@@ -473,4 +543,122 @@
 			  var OpenWindow=window.open('','_blank', 'width='+img_width+', height='+img_height+', menubars=no, scrollbars=auto');
 			  OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+win_width+"'>");
 			 }	
+	
+	
+	
+	 function addCartEvent(p_no,quantity) { //장바구니
+			let userId = getUserId();
+			if(sessoinExistenceChecked()){
+				$("#notice .modal-body").html("로그인 후 이용해주세요.");
+				$('#notice').modal('show');
+				return false;
+			}
+			
+	
+			$.ajax({
+				url : '/carshop/product/addcart',
+				type : 'POST',
+				data : {
+					"u_id" : userId,
+					"p_no" : p_no,
+					"quantity":quantity
+				},
+				dataType : 'JSON',
+				success : function(stats) {
+					$("#notice .modal-body").html("\""+ userId + "\"님 장바구니에 넣었습니다.");
+					$('#notice').modal('show');
+	
+				},
+				error : function() {
+					console.log("장바구니 통신실패");
+				}
+			})
+		}
+	function addLikeEvent(p_no,$obj) { //찜목록추가
+		let userId = getUserId();
+		if(sessoinExistenceChecked()){
+			$("#notice .modal-body").html("로그인 후 이용해주세요.");
+			$('#notice').modal('show');
+			return false;
+		}
+
+		$.ajax({
+			url : '/carshop/product/addlike',
+			type : 'POST',
+			data : {
+				"u_id" : userId,
+				"p_no" : p_no
+			},
+			dataType : 'JSON',
+			success : function(stats) {
+				$(".icon_heart_empty").addClass("icon_heart_red");								
+				$("#notice .modal-body").html("\""+ userId + "\"님 찜 목록에 넣었습니다.");
+				$('#notice').modal('show');
+			},
+			error : function() {
+				console.log("통신실패");
+			}
+		})
+	}
+	function removeLikeEvent(p_no,$obj) { //찜목록삭제
+		//console.log("상품번호 : " + p_no);
+		let userId = getUserId();
+		if(sessoinExistenceChecked()){
+			$("#notice .modal-body").html("로그인 후 이용해주세요.");
+			$('#notice').modal('show');
+			return false;
+		}
+		$.ajax({
+			url : '/carshop/product/removeLiked',
+			type : 'POST',
+			data : {
+				"u_id" : userId,
+				"p_no" : p_no
+			},
+			dataType : 'JSON',
+			success : function(stats) {
+				$(".icon_heart_empty").removeClass("icon_heart_red");
+				$("#notice .modal-body").html("\""+ userId + "\"님 찜 목록에서 삭제되었습니다.");
+				$('#notice').modal('show');
+			},
+			error : function() {
+				console.log("통신실패");
+			}
+		})
+	}
+	function checkLiked(){
+		let userId = getUserId();
+		let p_no = getP_no();
+		if(sessoinExistenceChecked()){
+			return false;
+		}
+
+			$.ajax({
+				url : '/carshop/product/checkLiked',
+				type : 'POST',
+				data : {
+					"u_id" : userId, //나중에 로그인완성되면 넣을것!
+					"p_no" : p_no
+				},
+				dataType : 'JSON',
+				success : function(data) {
+					if(data){
+						$(".icon_heart_empty").addClass("icon_heart_red");					
+					}
+				},
+				error : function() {
+					console.log("통신실패");
+				}
+			})
+		
+	} 
+	function sessoinExistenceChecked(){
+		let userId = getUserId();
+
+		if(userId === "" || typeof userId === "undefined" || userId === null){
+			
+			return true;
+		}
+		return false;
+	}
 </script>

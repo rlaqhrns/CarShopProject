@@ -19,4 +19,12 @@
 						<if test="sorting != null and sorting != ''">order by ${sorting}</if>
 							
 	</select>
+	<select id="getProductDetails" resultType="com.shop.vo.ProductCategoryJoin">
+		select p.*,c.c_name,c.c_parent 
+			from prod_tbl p 
+				left outer join cat_tbl c 
+					on p.c_no = c.c_no
+						where p.p_no = #{p_no}
+							
+	</select>
 </mapper>
