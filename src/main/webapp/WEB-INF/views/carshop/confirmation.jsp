@@ -44,27 +44,26 @@
           <table class="table" style="display:">
             <thead>
               <tr>
+              	<th scope="col">주문번호</th>
                 <th scope="col">구매물품</th>
                 <th scope="col">상품수량</th>
                 <th scope="col">상품가격</th>
                 <th scope="col">결제수단</th>
-                <th scope="col">교환</th>
-                <th scope="col">반품</th>
+                <th scope="col">교환/반품</th>
                 <th scope="col">구매날짜</th>
               </tr>
             </thead>
             <tbody>
              <c:forEach items="${buylist}" var ="buylist" varStatus="status"> 
                     <tr>
-                                      
+                      <td><c:out value="${buylist.ono}"></c:out></td>               
                       <td><c:out value="${buylist.pname}"></c:out></td>
                       <td><c:out value="${buylist.quantity}"></c:out></td>
                       <td><c:out value="${buylist.amount}"></c:out></td>
-                      <td><c:out value="${buylist.pay}"></c:out></td>
-                      <td><button id="getItemChange" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' onclick="passValue(this.value)" data-toggle="modal" data-target="#exampleModalCenter">교환</button></td>
-                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' onclick="passValue(this.value)" data-toggle="modal" data-target="#exampleModalCenter">반품</button></td>
-             		 
-             		  <td><c:out value="${buylist.order_date}"></c:out></td> 
+                      <td><c:out value="${buylist.pay}"></c:out></td>  
+                      <td style="display:none"><input id="validationRequired" type="text" value='<c:out value = "${buylist.p_no}"/>' name="p_no" style="visibility: hidden;"></input></td>                  
+                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${findSid}" data-toggle="modal" data-target="#exampleModalCenter">교환/반품</button></td>	 
+             		  <td><c:out value="${buylist.order_date}"></c:out></td>              		
              		</tr>
               </c:forEach> 
             </tbody>
@@ -86,19 +85,19 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <form id="returnFormAjax" method="post">
+			        <form name="returnFormAjax" action="confirmation" method="post">
 			        <div class="form-group">
-						<label for="user-name" class="col-form-label">주문번호</label><input type="text" class="form-control" id="ono" name="ono">
+						<label for="user-name" class="col-form-label">주문번호</label><input type="text" value='<c:out value = "${getForms.ono}"/>' class="form-control" id="ono" name="ono">
 					</div>
 					<div class="form-group">
-						<label for="user-name" class="col-form-label">유저</label><input type="text" class="form-control" value='<c:out value = "${getForms.u_id}"/>' id="user-name" name="u_id">
+						<label for="user-name" class="col-form-label">유저</label><input type="text" class="form-control" value='<c:out value = "${getForms.u_id}"/>' id="u_id" name="u_id">
 					</div>
 					<div class="form-group">
-						<label for="product-name" class="col-form-label">상품명</label><input type="text" class="form-control" value='<c:out value = "${getForms.pname}"/>' id="product-name" name="pname">
+						<label for="product-name" class="col-form-label">상품명</label><input type="text" class="form-control" value='<c:out value = "${getForms.pname}"/>' id="pname" name="pname">
 					<!-- p_id를 pname으로 변경해야함 vo도 -->
 					</div>
 					<div class="form-group">
-						<label for="seller-name" class="col-form-label">판매자</label><input type="text" class="form-control" value='<c:out value = "${findSid}"/>' id="seller-name" name="s_id">
+						<label for="seller-name" class="col-form-label">판매자</label><input type="text" class="form-control" value='<c:out value = "${findSid}"/>' id="s_id" name="s_id">
 					</div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label">사유</label>
@@ -125,6 +124,9 @@
 <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	  
+      		var notifyid="";
+      		var nnotifyid="";
+      		
       		$(document).ready(function(){
       			$('[data-toggle="tooltip"]').tooltip();
       			
@@ -144,39 +146,56 @@
       			 	var ono = $('#ono').val();
       			 	console.log("ono = " + ono);
       			 	
-      			 	$.ajax({
-		            	    url :'returnForms?ono=' + ono,
-		               		//url :'clickdateOrder?u_id=' + u_id,
-		            	    type : 'get',
-		               		dataType : 'JSON',
-		               		success : function(data){
-		              		console.log(data);
-		            		let result = '';
-		            		  /*  $.each(data,function(key,value){
-		            	  		 text += '<tr><td scope="col" id="ono">'+value.ono+'</td><td scope="col" id="u_id">'+value.u_id+'</td>'
-		            	   	   	 text += '<td scope="col" id="p_name">'+value.pname+'</td><td scope="col" id="content" data-content="'+value.content+'"data-toggle="modal" data-target="#exampleModalCenter">'
-		            	  		if(value.content.length >2){
-							result =	value.content.substring(0,2) +'...<small>더보기</small>';
-								console.log("if문 실행",result);
-		            	   }else{
-		            		  result= value.content;
-								console.log("else문 실행",result);
-		            		   
-		            	   }
-		            	   text += ''+result+'</td>'
-		            	   text += '<td scope="col" id="order_date">'+value.order_date+'</td><td scope="col" id="pay">'+value.pay+'</td>'
-		            	   text += '<td scope="col" class="span1" id=""><button id="btn_click" class="btn btn-success"><span><strong>교환/반품</strong></span></button></td></tr>'
-		               })
-		        	   tbody.append(text); */
+      			 	notifyid= $(this).data('notifyid');
+      			 	nnotifyid= $(this).data('nnotifyid');
+      			 	nnnotifyid= $(this).data('nnnotifyid');
+      			 	console.log(notifyid);
+      			 	console.log(nnotifyid);
+      			 	console.log(nnnotifyid);
+      			 	$('#u_id').val(notifyid);
+      			 	$('#pname').val(nnotifyid);						
+      		  });
+      		  
+      		  $('.btn-primary').click(function() {
+      			  var param = $("form[name=returnFormAjax]").serialize();
+      			  $.ajax({
+	            	    url :'confirmation',
+	               		//url :'clickdateOrder?u_id=' + u_id,
+	            	    type : 'post',
+	               		data : param,
+	               		success : function(data){
+	              		console.log(data);
+	            		//let result = '';
+	            		console.log($(this));
+	            		$('.btn-primary').attr('btn-primary', 'btn-success');
+	            		window.location.reload();
+	            		
+	            		  /*  $.each(data,function(key,value){
+	            	  		 text += '<tr><td scope="col" id="ono">'+value.ono+'</td><td scope="col" id="u_id">'+value.u_id+'</td>'
+	            	   	   	 text += '<td scope="col" id="p_name">'+value.pname+'</td><td scope="col" id="content" data-content="'+value.content+'"data-toggle="modal" data-target="#exampleModalCenter">'
+	            	  		if(value.content.length >2){
+						result =	value.content.substring(0,2) +'...<small>더보기</small>';
+							console.log("if문 실행",result);
+	            	   }else{
+	            		  result= value.content;
+							console.log("else문 실행",result);
+	            		   
+	            	   }
+	            	   text += ''+result+'</td>'
+	            	   text += '<td scope="col" id="order_date">'+value.order_date+'</td><td scope="col" id="pay">'+value.pay+'</td>'
+	            	   text += '<td scope="col" class="span1" id=""><button id="btn_click" class="btn btn-success"><span><strong>교환/반품</strong></span></button></td></tr>'
+	               })
+	        	   tbody.append(text); */
 
-		               },
-		               error : function(){	
-		                  console.log("통신실패");
-		               }
-		               
-		              
-		            })
-						
+	               },
+	               error : function(){	
+	                  console.log("통신실패");
+	               }
+	               
+	              
+	            })
+	            
+      		    
       		  });
       		  
       		  

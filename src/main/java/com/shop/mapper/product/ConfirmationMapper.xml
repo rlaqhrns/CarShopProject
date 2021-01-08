@@ -17,11 +17,17 @@
 
  	<select id ="getReturn" resultType="com.shop.vo.Order_Histroy_Tbl">
 
-		select ono, u_id, pname from order_history_tbl where ono = #{ono}
+		select * from order_history_tbl where ono = #{ono}
 
  	</select>
 
  	<select id ="findSid" resultType="com.shop.vo.Prod_Tbl">
+
+		select s_id from Prod_Tbl where p_no = #{p_no}
+
+ 	</select>
+
+ 	<select id ="findList" resultType="com.shop.vo.Prod_Tbl">
 
 		select s_id from Prod_Tbl where p_no = #{p_no}
 

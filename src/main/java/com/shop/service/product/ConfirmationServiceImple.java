@@ -49,4 +49,11 @@ public class ConfirmationServiceImple implements ConfirmationService{
 		mapper.insertForms(returntbl);
 	}
 
+	@Override
+	public List<Prod_Tbl> findList(int p_no) {
+		// TODO Auto-generated method stub
+		return mapper.findList(p_no);
+	}
+
+
 }
