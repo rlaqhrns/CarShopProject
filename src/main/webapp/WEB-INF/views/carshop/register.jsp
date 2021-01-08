@@ -42,7 +42,7 @@
 				<div class="login_box_img">
 					<div class="hover">
 						<h4>Already have an account?</h4>
-						<br> <a class="button button-account" href="login.html">Login
+						<br> <a class="button button-account" href="login">Login
 							Now</a>
 					</div>
 				</div>
