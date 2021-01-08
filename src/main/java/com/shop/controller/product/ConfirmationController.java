@@ -38,6 +38,7 @@ public class ConfirmationController {
 		//String u_id = "something";
 		String getId = (String)session.getAttribute("id"); // 이미 세션의 set attribute로 id가 설정 되어 있기 때문에 바로 get attribute로 id 가져옴 (재원/20.12.31)
 		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
+		System.out.println(getId);
 		user.setU_id(getId);
 		int p_no = 0;
 		model.addAttribute("buylist", service.orderList(user.getU_id()));
@@ -48,7 +49,7 @@ public class ConfirmationController {
 //		System.out.println(order.getOno());
 
 		for(int i =0; i<service.orderList(user.getU_id()).size(); i++) {
-			model.addAttribute("getforms", service.getReturn(service.orderList(user.getU_id()).get(i).getOno()));	
+	//		model.addAttribute("getforms", service.getReturn(service.orderList(user.getU_id()).get(i).getOno()));	
 			p_no = service.orderList(user.getU_id()).get(i).getP_no();
 //			//System.out.println("p_no는? " +  p_no);
 			model.addAttribute("findSid", service.findSid(p_no).getS_id());		
