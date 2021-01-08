@@ -10,10 +10,12 @@ import com.shop.vo.Cart_Tbl;
 public interface CartService {
 	public List<Cart_Tbl> getUserCart(String u_id);
 	public int addCart(Cart_Tbl cart); // 장바구니 추가 
+	
 
 	public List<Cart_Tbl> cartMoney(); //
 	public List<Cart_Tbl> listCart(String u_id); // 장바구니 목록
-	public int delete(int cart_id); // 장바구니 개별 삭제
+	public String delete(String u_id); // 장바구니 개별 삭제
+	// 칼럼 타입수정 2020/01/08 yun.hj
 	public int deleteAll(String u_id); // 장바구니 모두 삭제
 	public void update(int p_no); // 장바구니 업데이트 
 	public int sumTotal(String u_id); // 장바구니 total
