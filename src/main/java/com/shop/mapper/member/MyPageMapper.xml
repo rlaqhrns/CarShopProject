@@ -11,14 +11,14 @@
 	</select>
 	
 	<select id="getAskWithPaging" resultType="com.shop.vo.AskPrintVO">
-		SELECT ask_tbl.u_id, ask_tbl.s_id, ask_tbl.p_no, ask_tbl.ask_title, prod_tbl.img, ask_tbl.ask_date from ask_tbl JOIN prod_tbl ON ask_tbl.p_no = prod_tbl.p_no
+		SELECT ask_tbl.u_id, ask_tbl.s_id, ask_tbl.p_no, ask_tbl.ask_title, prod_tbl.img1, ask_tbl.ask_date from ask_tbl JOIN prod_tbl ON ask_tbl.p_no = prod_tbl.p_no
 			<if test="arg2 == null"> where ask_tbl.s_id = #{arg1} </if>
 			<if test='arg1 == null'> where ask_tbl.u_id = #{arg2} </if>
 			 ORDER BY ask_tbl.ask_date DESC LIMIT #{arg0.startNum}, #{arg0.amount}
 	</select>
-	<select id="checkId" resultType="string">
+<!-- 	<select id="checkId" resultType="string">
 		SELECT seller FROM all_user_tbl WHERE id = #{user}
-	</select>
+	</select> -->
 	<select id="getproducts" resultType="com.shop.vo.Prod_Tbl">
 		SELECT * FROM prod_tbl ORDER BY hit ASC LIMIT 0,4
 	</select>
@@ -28,5 +28,9 @@
 	<select id="getuser" resultType="com.shop.vo.User_Tbl">
 		SELECT * FROM user_tbl WHERE u_id = #{u_id}
 	</select>
+	
+	<update id="updatebsns">
+		UPDATE seller_tbl SET b_no = #{arg0}, b_name = #{arg1} WHERE s_id = #{arg2}
+	</update>
 
 </mapper>
