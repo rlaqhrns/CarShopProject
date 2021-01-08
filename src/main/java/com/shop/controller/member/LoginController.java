@@ -101,7 +101,8 @@ public class LoginController {
 	public String indexlogin(HttpSession session) {
 		String sessionid = session.getId();
 		System.out.println("로그인성공해서 새로생긴 세션id  : " + sessionid);
-
+		String memberId = (String)session.getAttribute("id");
+		System.out.println("세션으로 아이디 가져오는지?" + memberId);
 		return "carshop/indexlogin";
 	}
 	
