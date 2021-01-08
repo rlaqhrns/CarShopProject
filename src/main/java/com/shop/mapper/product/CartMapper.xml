@@ -11,12 +11,6 @@
 	</select>
 
 	<insert id="addCart">
-
-		insert into
-		cart_tbl(u_id, p_no, pname, quantity,
-		amount, total)
-		values(#{u_id},#{p_no},#{pname},#{quantity},#{amount},#{total})
-
 		insert into cart_tbl(u_id,p_no,pname,quantity,amount,total)
 			values(#{u_id},#{p_no},#{pname},#{quantity},#{amount},#{total})
 	</insert>

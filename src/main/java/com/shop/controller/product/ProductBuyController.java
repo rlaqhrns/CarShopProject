@@ -47,7 +47,7 @@ public class ProductBuyController {
 	
 	@GetMapping("/product/details")
 	public String detail(Model model,@Param("p_no") int p_no, HttpSession session) {
-		model.addAttribute("product", productBuyService.getProduct(p_no));
+		model.addAttribute("product", productBuyService.getProductDetails(p_no));
 		// session 에 담겨있는 id 를 가져와서 model 에 담음
 		model.addAttribute("askList",askService.ask(p_no));
 		model.addAttribute("user",session.getAttribute("user"));
@@ -74,7 +74,7 @@ public class ProductBuyController {
 	}
 	@GetMapping("/product/list")
 	public String list(Model model, HttpSession session) {
-		model.addAttribute("list", productBuyService.getProductAll());
+		//model.addAttribute("list", productBuyService.getProductAll());
 		model.addAttribute("cateParent", categoryService.cateParent());
 		model.addAttribute("category", categoryService.category());
 		String getId = (String)session.getAttribute("id");
@@ -103,8 +103,8 @@ public class ProductBuyController {
 //	}
 	@ResponseBody
 	@PostMapping("/product/addcart")
-	public boolean pushCart(int p_no, String u_id) {
-	    return productBuyService.pushCart(p_no, u_id);
+	public boolean pushCart(int p_no, String u_id,int quantity) {
+	    return productBuyService.pushCart(p_no, u_id, quantity);
 	}  
 
 	@ResponseBody
