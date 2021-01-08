@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../include/headerNoLogin.jsp"%>
+<%@ include file="../include/header.jsp"%>
 	<!--================ End Header Menu Area =================-->
 <!DOCTYPE html>
 <html lang="UTF-8">
