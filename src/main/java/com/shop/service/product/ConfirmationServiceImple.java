@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.shop.mapper.product.ConfirmationMapper;
 import com.shop.vo.Order_Histroy_Tbl;
+import com.shop.vo.Prod_Tbl;
+import com.shop.vo.Return_Tbl;
 
 import lombok.Setter;
 
@@ -21,5 +23,37 @@ public class ConfirmationServiceImple implements ConfirmationService{
 		// TODO Auto-generated method stub
 		return mapper.orderList(u_id); //전체 구입물품 조회 (재원/20.12.30)
 	}
+
+	@Override
+	public List<Order_Histroy_Tbl> orderListDate(String u_id, String order_date) {
+		// TODO Auto-generated method stub
+		return mapper.orderDateLists(u_id, order_date);
+	}
+
+	@Override
+	public Order_Histroy_Tbl getReturn(int ono) {
+		// TODO Auto-generated method stub
+		return mapper.getReturn(ono);
+	}
+
+	@Override
+	public Prod_Tbl findSid(int p_no) {
+		// TODO Auto-generated method stub
+		 
+		return mapper.findSid(p_no);
+	}
+
+	@Override
+	public void insertForms(Return_Tbl returntbl) {
+		// TODO Auto-generated method stub
+		mapper.insertForms(returntbl);
+	}
+
+	@Override
+	public List<Prod_Tbl> findList(int p_no) {
+		// TODO Auto-generated method stub
+		return mapper.findList(p_no);
+	}
+
 
 }

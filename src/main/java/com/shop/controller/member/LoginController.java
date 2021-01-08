@@ -1,5 +1,6 @@
 package com.shop.controller.member;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,22 @@ public class LoginController {
 	@Setter(onMethod_=@Autowired)
 	private JavaMailSenderImpl mailSender;
 
+	@GetMapping("/thankyou")
+	public String thankyou(HttpServletRequest request, HttpSession session) {
+		request.getSession().invalidate();
+		System.out.println("여기 세션값은1)  "+ request.getSession(false));
+		System.out.println("여기 세션값은2)  "+ session.getId());
+
+		return "carshop/thankyou";
+	}
+	
 	@GetMapping("/login")
 	public String login() {
+		//HttpSession session1 = request.getSession();
+		
+		//session1.invalidate();
+		//System.out.println("여기 에서의 세션은 " +session1);
+		//request.getSession(false);
 		return "carshop/login";
 	}
 	
@@ -52,6 +67,7 @@ public class LoginController {
 	@ResponseBody
 	public String login_success( HttpSession session,@RequestBody Login logvo) {
 		String back = "";
+		System.out.println("포스트 컨트롤러 로그인에서의 session값은? "+ session);
 		System.out.println("login정보는  " + logvo);
 		//입력받은 id,pw확인
 		System.out.println("id = " + logvo.getId() + " pw = " + logvo.getPw());
@@ -76,14 +92,15 @@ public class LoginController {
 	public String login2(HttpSession session) {
 		session.invalidate();
 		System.out.println("세션아이디는 : " + session.getId());
+//		request.getSession(true);    //사용자가 또 요청보내면 모든정보가 남아있다. 
 		return "carshop/login";
 	}
+	
 	
 	@GetMapping("/indexlogin")
 	public String indexlogin(HttpSession session) {
 		String sessionid = session.getId();
-		System.out.println("세션아이디는222  : " + sessionid);
-		
+		System.out.println("로그인성공해서 새로생긴 세션id  : " + sessionid);
 		String memberId = (String)session.getAttribute("id");
 		System.out.println("세션으로 아이디 가져오는지?" + memberId);
 		return "carshop/indexlogin";
