@@ -59,7 +59,8 @@
 
 </style>
 
-<link rel="icon" href="/resources/img/Fevicon.png" type="image/png">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/papicon.png">
+<!-- 파피콘 이미지 수정 2020/01/08 yunhj -->
 <link rel="stylesheet"
 	href="/resources/vendors/bootstrap/bootstrap.min.css">
 <link rel="stylesheet"
@@ -81,50 +82,61 @@
 </head>
 
 <body>
+
 	<!--================ Start Header Menu Area =================-->
-	
+
+	<header class="header_area">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<a class="navbar-brand logo_h" href="index.html"><img src="/resources/img/logo3.png" alt="로고" style= "width: 70px; height: 70px;"></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse"
+							data-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+						</button>					
+					<div class="collapse navbar-collapse offset"
+						id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="productList">Shop</a></li>
+							<li class="nav-item"><a class="nav-link" href="mypage">Mypage</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+						</ul>
+						<ul class="nav-shop">
+							<li class="nav-item"><a href="cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
+							<li class="nav-item2"><a class="button button-header"
+								href="index">logout</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
 
 <!--================ End Header Menu Area =================-->
-<div class="container h-100">
-	<div class="d-flex justify-content-center h-100">
-		<div class="searchbar">
-			<input class="search_input" type="text" name=""
-				placeholder="Search..."> <a href="#" class="search_icon"><i
-				class="fas fa-search"></i></a>
-		</div>
-	</div>
-</div>
 
-<main class="site-main"> <!--================ Hero banner start =================-->
-<section class="hero-banner">
-	<div class="container">
-		<div class="row no-gutters align-items-center pt-60px">
-			<div class="col-5 d-none d-sm-block">
-				<div class="hero-banner__img">
-					<img class="img-fluid" src="/resources/img/home/hero-banner.png"
-						alt="">
-				</div>
-			</div>
-			<div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
-				<div class="hero-banner__content">
-					<h4>Shop is fun</h4>
-					<h1>Browse Our Premium Product</h1>
-					<p>Us which over of signs divide dominion deep fill bring
-						they're meat beho upon own earth without morning over third. Their
-						male dry. They are great appear whose land fly grass.</p>
-					<a class="button button-hero" href="#">Browse Now</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!--================ Hero banner start =================--> <!--================ Hero Carousel start =================-->
+
+<main class="site-main"> 
+
+<!--================ Hero banner start =================-->
+	<section class="blog-banner-area" id="category">		
+		 <img class="img-fluid" src="/resources/img/home/main1.png"
+			alt="main배너"
+			style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding-bottom: 20px;"/>
+			
+	</section>
+<!-- yun.hj 2020/01/07 main1 img change , 메인 배너 이미지 수정  -->
+<!--================ Hero banner start =================--> 
 
 
 
 
 
 
+<!--================ Hero Carousel start =================-->
 <section class="section-margin mt-0">
 	<div class="owl-carousel owl-theme hero-carousel">
 		<div class="hero-carousel__slide">
@@ -258,30 +270,22 @@
 <!-- ================ trending product section end ================= -->
 
 
-<!-- ================ offer section start ================= -->
-<section class="offer" id="parallax-1" data-anchor-target="#parallax-1"
-	data-300-top="background-position: 20px 30px"
-	data-top-bottom="background-position: 0 20px">
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-5">
-				<div class="offer__content text-center">
-					<h3>Up To 50% Off</h3>
-					<h4>Winter Sale</h4>
-					<p>Him she'd let them sixth saw light</p>
-					<a class="button button--active mt-3 mt-xl-4" href="#">Shop Now</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+<<!-- ================ offer event section start ================= -->
+	<section class="offer" id="parallax-1" data-anchor-target="#parallax-1"
+		data-300-top="background-position: 20px 30px"
+		data-top-bottom="background-position: 0 20px">
+		<img class="img-fluid" src="/resources/img/home/event1.png"
+			alt="event배너" />
+	</section>
+	<!-- yun.hj 2020.01.07 : event1 img change 이밴트 배너 수정  -->
+
 
 
 <!-- ================ Blog section start ================= -->
 <section class="blog">
 	<div class="container">
 		<div class="section-intro pb-60px">
-			<p>Popular Item in the market</p>
+			
 			<h2>
 				Latest <span class="section-intro__style">News</span>
 			</h2>
@@ -292,20 +296,42 @@
 				<div class="card card-blog">
 					<div class="card-blog__img">
 						<img class="card-img rounded-0"
-							src="/resources/img/blog/blog1.png" alt="">
+							src="/resources/img/blog/news1.png" alt="">
 					</div>
 					<div class="card-body">
 						<ul class="card-blog__info">
-							<li><a href="#">By Admin</a></li>
-							<li><a href="#"><i class="ti-comments-smiley"></i> 2
-									Comments</a></li>
+							<li><a href="#">By JIPCOK</a></li>
+							<li><a href="#"><i class="ti-comments-smiley"></i> 117
+									LIKE</a></li>
 						</ul>
 						<h4 class="card-blog__title">
-							<a href="single-blog.html">The Richland Center Shooping News
-								and weekly shooper</a>
+							<a href="single-blog.html">비싼 보험료, 싸게 낮출 수 없을까?</a>
 						</h4>
-						<p>Let one fifth i bring fly to divided face for bearing
-							divide unto seed. Winged divided light Forth.</p>
+						<p> 30대 직장인 A씨, 높은 보험료 걱정에 'JIPCOK' 사무소 도움을 요청했다.
+						 'JIPCOK'이 알려주는 OOO 하나만으로 30%나 낮출 수 있었던 보험료 비결</p>
+						<a class="card-blog__link" href="#">Read More<i
+							class="ti-arrow-right"></i></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+				<div class="card card-blog">
+					<div class="card-blog__img">
+						<img class="card-img rounded-0"
+							src="/resources/img/blog/news2.jpg" alt="">
+					</div>
+					<div class="card-body">
+						<ul class="card-blog__info">
+							<li><a href="#">By JIPCOK</a></li>
+							<li><a href="#"><i class="ti-comments-smiley"></i> 321
+									LIKE</a></li>
+						</ul>
+						<h4 class="card-blog__title">
+							<a href="single-blog.html">[이색데이트] 차박하기 좋은 여행지 TOP 3! </a>
+						</h4>
+						<p> '나혼자 산다'로 유명해진 촬영지부터 에디터의 숨은 추천지 바로보기!
+							 </p>
 						<a class="card-blog__link" href="#">Read More <i
 							class="ti-arrow-right"></i></a>
 					</div>
@@ -316,44 +342,19 @@
 				<div class="card card-blog">
 					<div class="card-blog__img">
 						<img class="card-img rounded-0"
-							src="/resources/img/blog/blog2.png" alt="">
+							src="/resources/img/blog/news3.jpg" alt="">
 					</div>
 					<div class="card-body">
 						<ul class="card-blog__info">
-							<li><a href="#">By Admin</a></li>
-							<li><a href="#"><i class="ti-comments-smiley"></i> 2
-									Comments</a></li>
+							<li><a href="#">By JIPCOK</a></li>
+							<li><a href="#"><i class="ti-comments-smiley"></i> 29
+									LIKE</a></li>
 						</ul>
 						<h4 class="card-blog__title">
-							<a href="single-blog.html">The Shopping News also offers
-								top-quality printing services</a>
+							<a href="single-blog.html">멈출 수 없는 모험의 시작</a>
 						</h4>
-						<p>Let one fifth i bring fly to divided face for bearing
-							divide unto seed. Winged divided light Forth.</p>
-						<a class="card-blog__link" href="#">Read More <i
-							class="ti-arrow-right"></i></a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="card card-blog">
-					<div class="card-blog__img">
-						<img class="card-img rounded-0"
-							src="/resources/img/blog/blog3.png" alt="">
-					</div>
-					<div class="card-body">
-						<ul class="card-blog__info">
-							<li><a href="#">By Admin</a></li>
-							<li><a href="#"><i class="ti-comments-smiley"></i> 2
-									Comments</a></li>
-						</ul>
-						<h4 class="card-blog__title">
-							<a href="single-blog.html">Professional design staff and
-								efficient equipment you’ll find we offer</a>
-						</h4>
-						<p>Let one fifth i bring fly to divided face for bearing
-							divide unto seed. Winged divided light Forth.</p>
+						<p>세련된 디자인에 블랙이 더해져
+							더욱 완벽해진 Z71-X 미드나잇 에디션을 지금 만나보세요.(광고)</p>
 						<a class="card-blog__link" href="#">Read More <i
 							class="ti-arrow-right"></i></a>
 					</div>
@@ -362,9 +363,9 @@
 		</div>
 	</div>
 </section>
-<!-- ================ Blog section end ================= --> <!-- ================ Subscribe section start ================= -->
+<!-- ================ Blog section end ================= --> 
 
-<!-- ================ Subscribe section end ================= --> </main>
+ </main>
 
 
 <!--================ Start footer Area  =================-->

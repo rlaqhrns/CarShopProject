@@ -1,5 +1,7 @@
 package com.shop.vo;
 
+import org.apache.ibatis.session.SqlSession;
+
 import lombok.Data;
 
 @Data
@@ -8,6 +10,7 @@ public class Cart_Tbl {
 	private String u_id,pname;
 	private int p_no,quantity,amount,total;
 	// amount 총금액
+
 
 	
 	

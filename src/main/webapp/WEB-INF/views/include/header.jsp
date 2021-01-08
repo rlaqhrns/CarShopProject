@@ -55,8 +55,8 @@
 }
 
 </style> 
-
-<link rel="icon" href="/resources/img/Fevicon.png" type="image/png">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/papicon.png">
+<!-- 파피콘 이미지 수정 2020/01/08 yunhj -->
 <link rel="stylesheet"
 	href="/resources/vendors/bootstrap/bootstrap.min.css">
 <link rel="stylesheet"
@@ -74,6 +74,8 @@
 
 </head>
 
+
+
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<header class="header_area">
@@ -89,22 +91,20 @@
 					</button>
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-							<li class="nav-item active"><a class="nav-link"
-								href="index.html">Home</a></li>
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">MyPage</a>
-							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="productList">Shop</a></li>
+							<li class="nav-item"><a class="nav-link" href="mypage">Mypage</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
 						</ul>
 						<ul class="nav-shop">
-							<li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></button></li>
-							<li class="nav-item"><a class="button button-header" href="thankyou">logout</a></li>
+							<li class="nav-item"><a href="cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
+							<li class="nav-item"><a class="button button-header" href="register">login</a></li>
+							<!-- yun.hj 2020/01/07 장바구니 경로 설정 -->
+							<!-- uin.hj 2020/01/08 mypage, home, shop, contact 경로 설정 -->
 						</ul>
 					</div>
 				</div>
 			</nav>
 		</div>
 	</header>
+</body>

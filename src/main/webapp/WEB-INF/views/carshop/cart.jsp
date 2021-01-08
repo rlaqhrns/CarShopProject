@@ -1,184 +1,135 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+
+
+
+
 <!-- ================ start banner area ================= -->
-<script>
-
-	$(document).ready(function(){  
-		$("#btnList").click(function(){
-			
-			location.href="${path}/carshop/productList.do";
-		}
-		
-		
-	}
-	//  장바구니에서 삼품상세페이지로 이동
-
-
-	$(function() {
-
-		$("#btnDelete").click(function() {
-			if (confirm("장바구니를 모두 비우시겠습니까?")) {
-				location.href = "${path}/carshop/cart/deleteAll.do";
-				
-			}
-		});
-		// 모든 장바구니를 초기화 하는 쿼리문 작성 - 버튼 기능은 추후 구현 예정 
-		
-</script>
-
-
 <section class="blog-banner-area" id="category">
-	<div class="container h-100">
-		<div class="blog-banner">
-			<div class="text-center">
-				<h1>CART</h1>
-				<nav aria-label="breadcrumb" class="banner-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active" aria-current="page">장바구니에
-							담긴 상품은 10일 동안 보관됩니다.</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
-	</div>
+   
+   <img class="img-fluid" src="/resources/img/cart/title.png" alt="cart배너"
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" />
+      <div class="blog-banner">
+         <div class="text-center">
+            <h1>CART</h1>
+            <nav aria-label="breadcrumb" class="banner-breadcrumb">
+               <ol class="breadcrumb">
+                   <li class="breadcrumb-item active" aria-current="page">장바구니에 담긴 상품은 10일 동안 보관됩니다.</li>
+               </ol>
+            </nav>
+         </div>
+      </div>
 </section>
-<!-- ================ end banner area ================= -->
+<!-- ================== end banner area =================== -->
 
-<!--================Cart Area =================-->
+
+
+
+<!--=======================Cart Area ========================-->
 <section class="cart_area">
-	<div class="container">
-		<div class="cart_inner">
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
-						<tr align="center">
-							<th scope="col"><b>장바구니</b></th>
-							<th scope="col">price</th>
-							<th scope="col"><b>수량</b></th>
-							<th scope="col">total</th>
-							<th scope="col"><b>삭제 </b></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<c:choose>
-
-							<c:when test="${map.count eq 0 }">장바구니가 비었습니다.</c:when>
-							<!-- 장바구니가 0 비었을 때, 장바구니가 비었다고 뜬다. -->
+   <div class="container">
+      <div class="cart_inner">
+         <div class="table-responsive">
+            <table class="table">
+               <thead>
+                  <tr align="center">
+                     <th scope="col"><b>장바구니</b></th>
+                     <th scope="col">price</th>
+                     <th scope="col"><b>수량</b></th>
+                     <th scope="col">total</th>
+                     <th scope="col"><b>삭제 </b></th>
+                  </tr>
+               </thead>
 
 
-							<!-- 장바구니가 비어있지 않을 떄 -->
-							<c:otherwise>
-								<!-- map.count가 0이 아닐때, 즉 자료가 있을때 -->
-								<!-- form을 실행한다.  -->
-								
-								<!-- form의 id를 form1로 하고, method 방식을 post로 한다. 그리고 update.do페이지로 이동 -->
-								<form id="form1" name="form1" method="post" action="${path}/carshop/cart/update.do">
 
-									<!-- map에 있는 list출력하기 위해 forEach문을 사용해 row라는 변수에 넣는다. -->
-									<c:forEach var="row" items="${map.list}" varStatus="i">
-
-										<tr align="center">
-										
-											<td>${row.pname}</td>
-											<!-- 상품명 -->
-
-											<td>
-											<fmt:formatNumber value="${row.amount}" pattern="#,###,###" />원
-											</td>
-											<!-- fmt:formatNumber 태그는 숫자를 양식에 맞춰서 문자열로 변환해주는 태그이다 -->
-											<!-- 여기서는 금액을 표현할 때 사용 -->
-											<!-- ex) 5,000 / 10,000 등등등-->
-											<!-- 물건의 개수 (quantity)를 fmt태그를 사용해서 패턴의 형식에 맞춰서 문자열로 변환함 -->
-											<!--1,000 / 5,000 등등~  -->
-											<td>
-												<select name="quantity" value="${row.quantity}">
-													<c:forEach begin="1" end="10" var="i">
-														<option value="${i}">${i}</option>
-													</c:forEach>	
-												</select>
-												<input type = "hidden" name= p_no value="${row.p_no}"> 	
-											</td>
+               <tbody>
+                  <c:forEach items="${cartList}" var="cart">
+                     <tr align="center">
+                        <td>${cart.pname}</td>
+                        <td><fmt:formatNumber value="${cart.amount}" pattern="#,###,###" />원</td>
+                        <td>${cart.quantity}</td>
+                        <td><input type="hidden" class="product-total-amount" value='${cart.total}'><fmt:formatNumber value="${cart.total}" pattern="#,###,###" />원</td>
+                       	<!--  <td><input type="hidden" name="quantity" value="${row.quantity}"></td> -->
+                        <td><input type = "button" value="삭제" ><a href= "${path}/carshop/delete?u_id=${cart.u_id}"></a></td>
+                      	<!-- <a class="gray_btn" id="btnUpdate" href="delete">삭제</a> -->
+                       	<!-- delete 구현 -->
+                     </tr>
+                  </c:forEach>
 
 
-											<td>
-												<fmt:formatNumber value="${row.total}" pattern="#,###,###" />원</td>
 
-											<td>
-												<a href="${path}/carshop/cart/delete.do?p_no=${row.p_no}" type="button">삭제</a> <!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 p_no (삭제하길원하는 장바구니 p_no )를 보내서 삭제한다. -->
-											</td>
-										</tr>
-
-									</c:forEach>
-
-								</form>
-							</c:otherwise>
-						</c:choose>
-
-
-						<tr class="bottom_button">
-							
-							<td>
-								<input type="hidden" name="quantity" value="${row.quantity}">
-								<a class="gray_btn" id="btnUpdate" href="#">Update</a> 
-								<a class="gray_btn ml-2" id="btnDelete" href="#">비우기</a>
-							</td>
-
-							<!--btnUpdate와 btnDelete id는 위쪽에 있는 자바스크립트가 처리한다.  -->
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>
-								<h5>total</h5>
-							</td>
-
-							<td>
-								<fmt:formatNumber value="${map.total}" pattern="#,###,###" />원
-							</td>
+                  <tr>
+                   	
+                     <td> 
+                     	<div class="checkout_btn_inner d-flex align-items-center">
+                     		<a class="gray_btn ml-2" id="btnUpdate" href="#">Update</a> 
+                        	<a class="gray_btn ml-2" id="btnDelete" href="#">비우기</a>
+                        </div>
+                     </td>
+                    
+                    
+                  </tr>
 
 
-						</tr>
-						<tr class="shipping_area">
-							<td class="d-none d-md-block"></td>
+
+                  <tr class="total-amount_area">
+                     <td class="d-none d-md-block"></td>
+                     <td></td>
+                     <td></td>
+                     <td>
+                        <h5>total</h5>
+                     </td>
+                     <td  id="totalMoney"></td>
+                  </tr>
 
 
-							<td></td>
-							<td></td>
-
-							<td>
-								<h5>Shipping</h5>
-							</td>
-							<td>2,500원</td>
-						</tr>
-						<tr class="out_button_area">
-							<td class="d-none-l"></td>
-							<td class=""></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>
-								<div class="checkout_btn_inner d-flex align-items-center">
-									<a class="gray_btn" href="#" id="btnList">쇼핑계속하기</a> <a
-										class="primary-btn ml-2" href="#">전체상품주문</a>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-			</div>
-		</div>
-	</div>
+                  <tr class="out_button_area">
+                     <td class="d-none-l"></td>
+                     <td class=""></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td>
+                        <div class="checkout_btn_inner d-flex align-items-center">
+                           <a class="gray_btn" href="productList" id="btnList">쇼핑계속하기</a> 
+                           <a class="primary-btn ml-2" href="checkout">상품주문</a>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
 </section>
 <!--================End Cart Area =================-->
-
 <%@ include file="../include/footer.jsp"%>
+<!-- footer 안에 쿼리 링크가 있어서 하단에 쿼리문 작성 -->
+
+
+
+
+<!--================쿼리문 start Area ===============-->
+<script>
+
+   $(document).ready(function(){
+	   productTotalCalc();
+   })
+   
+   function productTotalCalc(){//장바구니 총 합계
+	   
+	  let productTotalAmount = 0; // 초기화 선언
+      console.log("ready 동작 ");
+      $(".product-total-amount").each(function(index,item){
+    	  console.log(parseInt($(item).val()));
+    	  productTotalAmount += parseInt($(item).val());
+      });
+      $("#totalMoney").html(productTotalAmount + "원");
+      //console.log("돈 : " + money);
+   }
+</script>
