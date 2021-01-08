@@ -50,7 +50,7 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 			var calendarEl = document.getElementById('calendar');
 
 			calendar = new FullCalendar.Calendar(calendarEl, {
-				initialDate : '2020-12-17',
+				//initialDate : '2020-12-17',
 				editable : true,
 				selectable : true,
 				businessHours : true,
@@ -71,7 +71,13 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 					var smonth = arg.start.getMonth() + 1;  //월 추출
 					var sday = arg.start.getDate();  //일 추출
 					var stime = arg.start.toTimeString().substring(0,8);  //시간 추출
-					
+					if(smonth < 10){
+						smonth = '0' + smonth;
+					}
+					if(sday < 10){
+						sday = '0' + sday;
+					}
+					console.log('sday: ' + sday);
 					schdstart = syear+ "-" + smonth + "-" + sday + " " + stime;  //맞는 형식으로 재조합
 					schdend = arg.end;
 					
@@ -140,6 +146,8 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 			});
 
 			calendar.render();  //달력 출력
+			
+			
 			document.querySelector(".closeBtnc").addEventListener("click", function() { //모달의 입력 버튼이 눌리면 -Monica 2020.12.31
 				  schdtitle = document.getElementById('schdtitle').value;  //입력한 일정제목 값 가져옴
 				  /* schdtitle = document.getElementById('schdtitle').value;
@@ -183,17 +191,106 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 		 
 		 $(document).ready(function() {  //제이쿼리 동작을 위한 구역 -Monica 2020.12.31
 			 
-			 
-			 
-			 <c:forEach items='${schedules}' var="schd">  //db에서 가져온 아이디에 해당하는 일정 반복문으로 달력에 입력 -Monica 2020.12.31
+			 <c:forEach items='${schedules}' var="schd">//db에서 가져온 아이디에 해당하는 일정 반복문으로 달력에 입력 -Monica 2020.12.31
+			 console.log('${schd.schdtitle}:${schd.schdstart}:${schd.schdend}');
 			 	calendar.addEvent({
 					title : "<c:out value='${schd.schdtitle}' />",
 					start : "<c:out value='${schd.schdstart}' />",
 					end : "<c:out value='${schd.schdend}' />"
 				});
 			 </c:forEach>
-
-			//console.log("제이쿼리 되는거냥");
+			 
+			var askprint = $(".askhere");
+			showaskList(1);  //기본적으로 첫번째 페이지 출력 -성연 2021.01.07
+			
+			function showaskList(pageNum) { //아이디에 따른 문의글 목록 출력 -성연 2021.01.07
+				getasklist({pageNum: pageNum || 1}, function(askCnt, askList) {  //콜백, json데이터가 잘 받아졌을 경우에 -성연 2021.01.07
+					//console.log("askCnt: " + askCnt);
+					var str = '';
+					str += '<h3 class="widget_title"style="padding-top: 20px; padding-bottom: 20px">문의 내역</h3>'; //반복출력 전 맨 위에 한번 추가 
+					for(var i = 0; i < askList.length; i++){
+						str += '<div class="media post_item">';
+						str += '<img class="prod_pic" src="/resources/img/upload/' + askList[i].img1 + '"alt="post">';  //문의를 남긴 상품의 사진 -성연 2021.01.07
+						str += '<div class="media-body">';
+						str += '<a href="/carshop/product/details?p_no=' + askList[i].p_no + '"><h3>' + askList[i].ask_title + '</h3></a>';  //문의제목에 상품detail로 가는 링크 -성연 2021.01.07
+						str += '<p>' + askList[i].ask_date + '</p></div></div>';
+					}
+					
+					str += '<div class="br"></div>';  //목록글을 출력 한 후 마지막에 추가
+					askprint.html(str);
+					//console.log(str);
+					showAskPage(askCnt);  //문의 페이징 풀력
+					
+				});
+			}
+			
+			
+			
+			function getasklist(param, callback, error) {
+				var pageNum = param.pageNum || 1;
+			
+				$.getJSON("/carshop/asklistget.json?pageNum=" + pageNum, //get json data through written url with pageNum -SungYeon 20.12.23
+					function(data) {
+						if(callback){
+							callback(data.askCnt, data.askList);  //when success, call callback fn with count no and list of json data -SungYeon 20.12.23
+					}
+				}).fail(function(xhr, status, err) { //if fail
+					if(error){
+						error();
+					}
+				});
+			}
+			
+			var pageNum =1;
+			var askpageFooter = $(".ask_list_page");
+			function showAskPage(askCnt) {  //문의페이징출력 -성연 2021.01.07
+				var endNum = Math.ceil(pageNum/5.0)*5; //다섯페이지 단위로 끊음 -성연 2021.01.07
+				var startNum = endNum -4;
+				
+				var prev = startNum != 1;
+				var next = false;
+				
+				if(endNum*4 >= askCnt){  //한 페이지당 문의글 4개이기때문에 *4 -성연 2021.01.07
+					endNum = Math.ceil(askCnt/4.0);
+				}
+				if(endNum*4 < askCnt){
+					next = true;
+				}
+				
+				var str = "<ul class='pagination pull-right'>";
+				
+				if(prev){ //if previous page exists
+					str += "<li class='page-item'><a class='page-link' href='" + (startNum -1) + "'>Previous</a></li>";
+				}
+				
+				for(var i = startNum; i<=endNum; i++){
+					var active = pageNum == i? "active" : ""; //make current page active
+					
+					str += "<li class='page-item " + active + "'><a class='page-link' href='" + i + "'>"+ i +"</a></li>";
+				}
+				
+				if(next){ //if next page exists
+					str += "<li class='page-item'><a class='page-link' href='" + (endNum +1) + "'>Next</a></li>";
+				}
+				str += "</ul>" //close ul
+				askpageFooter.html(str);
+			}
+			
+			askpageFooter.on("click", "li a", function(e) {  //페이징 번호가 클릭되면 문의목록페이지 이동 -성연 2021.01.07
+				e.preventDefault();
+				
+				console.log("page clicked");
+				var targetPageNum = $(this).attr("href");
+				
+				pageNum = targetPageNum;
+				showaskList(pageNum);
+			});
+			
+			
+			
+			
+			
+			
 			
 		});
 		 
@@ -255,6 +352,11 @@ button {
 	display: none;
 }
 
+.prod_pic {
+	height: 60px;
+	width: 100px;
+}
+
 </style>
 </head>
 <body>
@@ -293,7 +395,7 @@ button {
 									<i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span>
 								</button></li>
 							<li class="nav-item"><a class="button button-header"
-								href="register">회원가입</a></li>
+								href="register">회원가입</a></li> <!-- 로그아웃으로 전환 필요 -성연 2021.01.07 -->
 						</ul>
 					</div>
 				</div>
@@ -398,45 +500,79 @@ button {
 					<div class="categories_post">
 						<img class="card-img rounded-0"
 							src="/resources/img/blog/cat-post/cat-post-3.jpg" alt="post">
-						<div class="categories_details" onclick="location.href='/carshop/mycar'">
-							<div class="categories_text">
-								<!-- <a href="/carshop/mycar"> -->
-									<h5>My Car</h5>
-								<!--  </a> -->
-								<div class="border_line"></div>
-								<p>내 차 정보 관리하기</p>
-							</div>
-						</div>
+							<!-- 셀러인 경우 또는 유저인 경우 -성연 2021.01.07 -->
+						<c:choose>
+							<c:when test="${status == 'seller' }">  
+								<div class="categories_details" onclick="location.href='/carshop/bsnspage'">
+									<div class="categories_text">
+										<h5>My Business</h5>
+										<div class="border_line"></div>
+										<p>내 사업정보 관리하기</p>
+									</div>
+								</div>
+							</c:when>
+							<c:when test="${status == 'user' }">
+								<div class="categories_details" onclick="location.href='/carshop/mycar'">
+									<div class="categories_text">
+										<h5>My Car</h5>
+										<div class="border_line"></div>
+										<p>내 차 정보 관리하기</p>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 				<div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
 					<div class="categories_post">
 						<img class="card-img rounded-0"
 							src="/resources/img/blog/cat-post/cat-post-2.jpg" alt="post">
-						<div class="categories_details">
-							<div class="categories_text">
-								<a href="/carshop/cart">  <!-- 장바구니페이지로 이동url 필요 -->
-									<h5>장바구니</h5>
-								</a>
-								<div class="border_line"></div>
-								<p>장바구니 관리하기</p>
-							</div>
-						</div>
+						<c:choose>
+							<c:when test="${status == 'seller' }">
+								<div class="categories_details" onclick="location.href='/carshop/salelist'">
+									<div class="categories_text">
+										<h5>내 판매 목록</h5>
+										<div class="border_line"></div>
+										<p>판매목록 관리하기</p>
+									</div>
+								</div>
+							</c:when>
+							<c:when test="${status == 'user' }">
+								<div class="categories_details" onclick="location.href='/carshop/cart'">
+									<div class="categories_text">
+										<h5>장바구니</h5>
+										<div class="border_line"></div>
+										<p>장바구니 관리하기</p>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 				<div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
 					<div class="categories_post">
 						<img class="card-img rounded-0"
 							src="/resources/img/blog/cat-post/cat-post-1.jpg" alt="post">
-						<div class="categories_details">
-							<div class="categories_text">
-								<a href="/carshop/retrun_end">  <!-- 리턴페이지로 이동url 필요 -->
-									<h5>주문 이력</h5>
-								</a>
-								<div class="border_line"></div>
-								<p>교환/반품하기</p>
-							</div>
-						</div>
+						<c:choose>
+							<c:when test="${status == 'seller' }">
+								<div class="categories_details" onclick="location.href='/carshop/retrun_end'">
+									<div class="categories_text">
+										<h5>교환반품</h5>
+										<div class="border_line"></div>
+										<p>교환반품 관리</p>
+									</div>
+								</div>
+							</c:when>
+							<c:when test="${status == 'user' }">
+								<div class="categories_details" onclick="location.href='/carshop/confirmation'">
+									<div class="categories_text">
+										<h5>주문 이력</h5>
+										<div class="border_line"></div>
+										<p>교환/반품하기</p>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -455,66 +591,39 @@ button {
 						
 						
 						<article class="row blog_item">
-							<!-- 1대1문의 보여줌 -->
-							<div>
+							<!-- 이곳에 문의 목록 출력 -성연 2021.01.07 -->
+							<div class="askhere">
 								<h3 class="widget_title"
-									style="padding-top: 20px; padding-bottom: 20px">Popular
-									Posts</h3>
-								<div class="media post_item">
-									<img src="/resources/img/blog/popular-post/post1.jpg"
-										alt="post">
-									<div class="media-body">
-										<a href="single-blog.html">
-											<h3>여기에</h3>
-										</a>
-										<p>여기는</p>
-									</div>
-								</div>
-								<div class="media post_item">
-									<img src="/resources/img/blog/popular-post/post2.jpg"
-										alt="post">
-									<div class="media-body">
-										<a href="single-blog.html">
-											<h3>1대1 문의 내용(일반회원, 판매자회원 모두)</h3>
-										</a>
-										<p>문의를</p>
-									</div>
-								</div>
-								<div class="media post_item">
-									<img src="/resources/img/blog/popular-post/post3.jpg"
-										alt="post">
-									<div class="media-body">
-										<a href="single-blog.html">
-											<h3>들어갈</h3>
-										</a>
-										<p>넣은</p>
-									</div>
-								</div>
-								<div class="media post_item">
-									<img src="/resources/img/blog/popular-post/post4.jpg"
-										alt="post">
-									<div class="media-body">
-										<a href="single-blog.html">
-											<h3>거예요</h3>
-										</a>
-										<p>시간</p>
-									</div>
-								</div>
+									style="padding-top: 20px; padding-bottom: 20px">문의 내역</h3><div class="br"></div>
 								<div class="br"></div>
 							</div>
+							
 						</article>
+						<div class="ask_list_page pull-right" style="float : right"> <!-- showing page numbers -SungYeon 20.12.23 -->
+							</div>
 					</div>
+					
 				</div>
 				<div class="col-lg-4">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<!-- 회원프로필 -->
-							<img class="author_img rounded-circle"
-								src="/resources/img/blog/author.png" alt="">
-							<h4>Charlie Barber</h4>
-							<p>일반회원</p>
+							  <!-- 셀러/일반유저 아이콘 표시 -성연 2021.01.07 -->
+							<c:choose>
+								<c:when test="${status == 'seller' }"><img class="author_img rounded-circle"  
+								src="/resources/img/sellericon.png" alt="" style="width: 200px; height: 200px"></c:when>
+									<c:when test="${status == 'user' }"><img class="author_img rounded-circle"  
+								src="/resources/img/buyericon.png" alt="" style="width: 200px; height: 200px"></c:when>
+							</c:choose>
+							<h4 class='username'><c:out value="${userinfo.name }"></c:out> </h4>  <!-- 유저 이름 표시 -->
+							<p class='userstatus'>
+							<!-- 판매회원은 상호명 같이 표시 -성연 2021.01.07 -->
+								<c:choose>
+									<c:when test="${status == 'seller' }">판매회원+<c:out value="${userinfo.b_name }" /></c:when> 
+									<c:when test="${status == 'user' }">일반회원</c:when>
+								</c:choose> </p>
 							<div class="social_icon">
-								<a href="#"> <i class="fab fa-github"></i> 계정정보 수정하기
+								<a href="/carshop/userupdateform"> <i class="fab fa-github"></i> 계정정보 수정하기
 								</a> <a href="/carshop/like"> <i class="fab fa-behance"></i> 찜
 									목록
 								</a>
@@ -523,39 +632,17 @@ button {
 						</aside>
 						<aside class="single_sidebar_widget popular_post_widget">
 							<!-- best상품 창 -->
-							<h3 class="widget_title">Best 상품 또 봐라</h3>
-							<div class="media post_item">
-								<img src="/resources/img/blog/popular-post/post1.jpg" alt="post">
-								<div class="media-body">
-									<a href="single-blog.html">
-										<h3>상품1</h3>
-									</a>
+							<h3 class="widget_title">베스트조회수 상품</h3>
+							<c:forEach items="${bestpord }" var="best">  <!-- 조회수 순으로 4개 뽑아온 상품목록 반복문으로 출력 -성연 2021.01.07 -->
+								<div class="media post_item">
+									<img src="/resources/img/upload/${best.img1 }" alt="post" style="width: 100px; height: 60px">
+									<div class="media-body">
+										<a href="/carshop/product/details?p_no=${best.p_no }">
+											<h3><c:out value="${best.p_name }" /></h3>
+										</a>
+									</div>
 								</div>
-							</div>
-							<div class="media post_item">
-								<img src="/resources/img/blog/popular-post/post2.jpg" alt="post">
-								<div class="media-body">
-									<a href="single-blog.html">
-										<h3>상품2</h3>
-									</a>
-								</div>
-							</div>
-							<div class="media post_item">
-								<img src="/resources/img/blog/popular-post/post3.jpg" alt="post">
-								<div class="media-body">
-									<a href="single-blog.html">
-										<h3>상품3</h3>
-									</a>
-								</div>
-							</div>
-							<div class="media post_item">
-								<img src="/resources/img/blog/popular-post/post4.jpg" alt="post">
-								<div class="media-body">
-									<a href="single-blog.html">
-										<h3>상품4</h3>
-									</a>
-								</div>
-							</div>
+							</c:forEach>
 							<div class="br"></div>
 						</aside>
 					</div>

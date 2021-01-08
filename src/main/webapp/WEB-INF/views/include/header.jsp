@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="UTF-8">
 <head>
@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html">
 <title>저기 카</title>
-
+<script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
 <style>
 .searchbar {
 	margin-bottom: auto;
@@ -72,9 +72,6 @@
 
 <link rel="stylesheet" href="/resources/css/style.css">
 
-
-
-
 </head>
 
 <body>
@@ -104,7 +101,7 @@
 						</ul>
 						<ul class="nav-shop">
 							<li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></button></li>
-							<li class="nav-item"><a class="button button-header" href="register">login</a></li>
+							<li class="nav-item"><a class="button button-header" href="thankyou">logout</a></li>
 						</ul>
 					</div>
 				</div>
