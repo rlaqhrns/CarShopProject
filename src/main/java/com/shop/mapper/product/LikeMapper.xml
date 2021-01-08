@@ -15,6 +15,7 @@
 		insert into Like_Tbl(u_id,p_no)
 			values(#{u_id},#{p_no})
 	</insert>
+	<!-- 2020/01/08 yunhj 칼럼 추가에 따른 addlike 추가 -->
 	<delete id="deleteLike">
 		delete from like_tbl where u_id = #{u_id} and p_no = #{p_no}
 	</delete>
