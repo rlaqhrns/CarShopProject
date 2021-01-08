@@ -48,6 +48,7 @@
 							</tr>
 						</thead>
 						<tbody id="tbodyid">
+						
 							<c:forEach items="${list }" var="list">
 								<tr>
 									<td scope="col" id="ono"><c:out value="${list.ono}" /></td>
@@ -75,7 +76,7 @@
 										</button></td>
 								</tr>
 							</c:forEach>
-
+						
 						</tbody>
 					</table>
 					<!--  Modal -->
@@ -108,44 +109,15 @@
 	</section>
 </body>
 <script>
-	$(document).ready(function() {
-		
+let calendar =null;
 
-		
-		// id가 content인 td태그가 클릭 시 이벤트 발생 하여 모달창에 content(내용) 를 넣는다
-		 $(document).on("click","td#content",function() {
-			 
-			console.log("내용클릭");
-			let content = $(this).data("content");
-			console.log("data  :", content);
-			let conten = $('#modal_conten');
-			conten.append('<p>' + content + '</p>');
-
-		})
-		// 모달 이벤트가 발생하고 버튼 클릭 시  내용을 비워준다
-		$(document).on("click","#modalbtn",function() {
-			console.log("클릭확인");
-			$('#exampleModalCenter');
-			console.log("console : ",$('exampleModalCenter'));
-			$('#modal_conten').empty();
-			
-		})
-		
-		// 교환 반품 이벤트
-		$(document).on("click","#btn_click",function() {
-			console.log("버튼클릭");
-			
-			
-		})
-
-	});
 		// 캘린더 이벤트
     document.addEventListener('DOMContentLoaded', function() {
     	let tbody = $('#tbodyid');
     	let str = '';
     	
         var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+        calendar = new FullCalendar.Calendar(calendarEl, {
         	selectable: true,
         	// 캘린더 요일 클릭 시 이벤트 발생
               dateClick: function(info) {
@@ -155,7 +127,11 @@
 //                   alert('Resource ID: ' + info.resource.id);
 			// ajax 로 주문날짜와 현재날짜를 비교하여 가져온다
            			$.ajax({
-            	    url :'clickDate?order_date=' + info.dateStr,
+            	    url :'clickDate?click_date=' ,
+            	    data : {
+            	    		"click_date" : info.dateStr
+            	    		,"s_id" : '${id}'
+            	    		},
                		type : 'get',
                		dataType : 'JSON',
                		success : function(data){
@@ -187,15 +163,57 @@
             })
             
               },
+          
+
+
+
+              
 
         initialView: 'dayGridMonth'
 
           
         });
         calendar.render();
-        
-        
+
       });
+
+	$(document).ready(function() {
+
+		// id가 content인 td태그가 클릭 시 이벤트 발생 하여 모달창에 content(내용) 를 넣는다
+		 $(document).on("click","td#content",function() {
+			 
+			console.log("내용클릭");
+			let content = $(this).data("content");
+			console.log("data  :", content);
+			let conten = $('#modal_conten');
+			conten.append('<p>' + content + '</p>');
+
+		})
+		// 모달 이벤트가 발생하고 버튼 클릭 시  내용을 비워준다
+		$(document).on("click","#modalbtn",function() {
+			console.log("클릭확인");
+			$('#exampleModalCenter');
+			console.log("console : ",$('exampleModalCenter'));
+			$('#modal_conten').empty();
+			
+		})
+		
+		// 교환 반품 이벤트
+		$(document).on("click","#btn_click",function() {
+			console.log("버튼클릭");
+			
+			
+		})
+		<c:forEach items='${count}' var="schd">
+        calendar.addEvent({
+        	title : "<c:out value='${schd.count}건' />",
+			start : "<c:out value='${schd.order_date}' />",
+            allDay: true
+          });
+        </c:forEach>
+
+	});
+		
 </script>
 <style>
 #calendar { /* 달력 크기 */
