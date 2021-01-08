@@ -57,7 +57,7 @@
     height: 610px;
 }
 .registerForm2 {
-    top: -340px !important;
+    top: -380px !important;
     left: 0px !important;
 }
 /* 가빈 - 가입 폼 안의 모든 input담긴 div들 */
@@ -129,12 +129,24 @@
 /* 이전버튼의 위치 맞추기 */
 .register_btn_pre {
     position: relative;
-    top: 40px;
+    top: 81px;
     left: -170px;
 }
 /* 가입완료버튼의 위치 맞추기 */
 .register_btn_submit {
     position: relative;
-    top: 40px;
+    top: 81px;
+    left: 60px;
+}
+/* 이전버튼의 위치 맞추기 */
+.seller_register_btn_pre {
+    position: relative;
+    top: 31px;
+    left: -170px;
+}
+/* 가입완료버튼의 위치 맞추기 */
+.seller_register_btn_submit {
+    position: relative;
+    top: 31px;
     left: 60px;
 }

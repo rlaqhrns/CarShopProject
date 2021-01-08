@@ -37,11 +37,6 @@ public class CartServiceImple implements CartService {
 		return mapper.cartMoney();
 	}
 
-	@Override
-	public int delete(int cart_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int deleteAll(String u_id) {
@@ -78,5 +73,11 @@ public class CartServiceImple implements CartService {
 		// TODO Auto-generated method stub
 		return mapper.sumTotal(u_id);
 	}
+	
+	@Override
+	public String delete(String u_id) {
+		return mapper.delete(u_id);
+	}
+	
 
 }

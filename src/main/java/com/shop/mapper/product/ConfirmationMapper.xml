@@ -8,6 +8,37 @@
 		select * from order_history_tbl where u_id = #{u_id} order by order_date desc
 
  	</select>
+	
+	 <select id ="orderDateLists" resultType="com.shop.vo.Order_Histroy_Tbl">
+	<![CDATA[
+		select * from order_history_tbl where u_id = #{u_id} and order_date like concat(#{order_date}, '%')
+	]]>
+ 	</select>
 
+ 	<select id ="getReturn" resultType="com.shop.vo.Order_Histroy_Tbl">
+
+		select * from order_history_tbl where ono = #{ono}
+
+ 	</select>
+
+ 	<select id ="findSid" resultType="com.shop.vo.Prod_Tbl">
+
+		select s_id from Prod_Tbl where p_no = #{p_no}
+
+ 	</select>
+
+ 	<select id ="findList" resultType="com.shop.vo.Prod_Tbl">
+
+		select s_id from Prod_Tbl where p_no = #{p_no}
+
+ 	</select>
+	
+	<insert id="insertForms">
+	
+		insert into return_tbl values (#{ono}, #{u_id}, #{pname}, #{content}, now(), #{s_id})
+	
+	</insert>
+
+	
 
 </mapper>
