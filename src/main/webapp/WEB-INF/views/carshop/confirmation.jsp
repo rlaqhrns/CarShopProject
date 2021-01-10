@@ -145,34 +145,14 @@
       		  
       			writeRefundForms();
       		  
-      		  $('.btn-primary').click(function() {
-      			  var param = $("form[name=returnFormAjax]").serialize();
-      			  $.ajax({
-	            	    url :'confirmation',
-	            	    type : 'post',
-	               		data : param,
-	               		success : function(data){
-	              		//console.log(data);
-	            		//console.log($(this));
-	            		$('.btn-primary').attr('btn-primary', 'btn-success');
-	            		window.location.reload();
-
-	               },
-	               error : function(){	
-	                  console.log("통신실패");
-	               }
-	               
-	              
-	            })
-	            
-      		    
-      		  });
+      			
       		  
       		  $('#confirmationAllList').click(function() {
+      			    			
       			let originalTr = $('#originalTr');
       	    	let emptyTr = $('#emptyTr');
-      			 originalTr.css("display", "");
-      			 emptyTr.show();
+      			originalTr.css("display", "");
+      			emptyTr.empty();  
       		  
       		  });
       		  
@@ -229,12 +209,38 @@
       			
       		}
       		
+      		function getReloadSuccess() {
+      		  $('.btn-primary').click(function() {
+      			  var param = $("form[name=returnFormAjax]").serialize();
+      			  $.ajax({
+	            	    url :'confirmation',
+	            	    type : 'post',
+	               		data : param,
+	               		success : function(data){
+	              		//console.log(data);
+	            		//console.log($(this));
+	            		//$('.btn-primary').attr('btn-primary', 'btn-success');
+	            		window.location.reload();
+
+	               },
+	               error : function(){	
+	                  console.log("통신실패");
+	               }
+	               
+	              
+	            })
+	            
+      		    
+      		  });
+      		}
+      		
       		//주문상세정보 pagination 10개마다 끊기 (재원/21.01.06)
       		
     		// 캘린더 이벤트  (재원/21.01.06)
       		//The ready event occurs after the HTML document has been loaded, while the onload event occurs later, when all content (e.g. images) also has been loaded.
       	    //The onload event is a standard event in the DOM, while the ready event is specific to jQuery. The purpose of the ready event is that it should occur as early as possible after the document has loaded, so that code that adds functionality to the elements in the page doesn't have to wait for all content to load.
       		document.addEventListener('DOMContentLoaded', function() {
+      			getReloadSuccess();
       	    	let tbody = $('tbody');
       	    	let originalTr = $('#originalTr');
       	    	let emptyTr = $('#emptyTr');
@@ -304,6 +310,7 @@
 	      		            		emptyTr.append(text);
 	      		            		console.log(text);
 	      		            		writeRefundForms();
+	      		            		
 
 	      		               },
 	      		               error : function(){	
@@ -354,6 +361,7 @@
 	      		            		console.log(text);
 	      		            		writeRefundForms();
 	      		            		
+	      		            		
 	      		               },
 	      		               error : function(){	
 	      		                  console.log("통신실패");
@@ -380,6 +388,7 @@
             	        });
       	        	  
       	        		//캘린더에 물품 구매 날짜별로 물품리스트 띄움 (재원/21.01.04)
+      	        		
       	        		calendar.addEventSource(result);
             	        calendar.render();
   	        
