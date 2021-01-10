@@ -51,7 +51,7 @@ public class ConfirmationController {
 	@GetMapping("/clickdateOrder")
 	@ResponseBody
 	public List<Order_Histroy_Tbl> order_dates(@RequestParam("order_date") String order_date, Model model, @RequestParam("u_id") String u_id, HttpSession session) {
-		//System.out.println("클릭 날짜 : " + order_date);
+		System.out.println("클릭 날짜 : " + order_date);
 		//System.out.println("아이디 : " + u_id);
 		//System.out.println("아이디 : " + u_id);
 		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
@@ -59,6 +59,20 @@ public class ConfirmationController {
 		model.addAttribute("order_date", service.orderListDate(u_id, order_date));
 
 		return service.orderListDate(u_id, order_date);
+
+	}
+	
+	@GetMapping("/clickeventOrder")
+	@ResponseBody
+	public List<Order_Histroy_Tbl> order_events(@RequestParam("ono") int ono, @RequestParam("order_date") String order_date, Model model, @RequestParam("u_id") String u_id, HttpSession session) {
+		System.out.println("클릭 날짜 : " + order_date);
+		//System.out.println("아이디 : " + u_id);
+		//System.out.println("아이디 : " + u_id);
+		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
+	
+		model.addAttribute("order_event", service.orderEventLists(u_id, order_date, ono));
+
+		return service.orderEventLists(u_id, order_date, ono);
 
 	}
 	

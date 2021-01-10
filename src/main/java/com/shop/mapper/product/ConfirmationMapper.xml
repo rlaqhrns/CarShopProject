@@ -11,13 +11,19 @@
 	
 	 <select id ="orderDateLists" resultType="com.shop.vo.Order_Histroy_Tbl">
 	<![CDATA[
-		select * from order_history_tbl where u_id = #{u_id} and order_date like concat(#{order_date}, '%')
+		select order_history_tbl.ono, order_history_tbl.pname, order_history_tbl.quantity, order_history_tbl.amount, order_history_tbl.pay, order_history_tbl.order_date, order_history_tbl.u_id, prod_tbl.p_no, prod_tbl.s_id as seller from prod_tbl join order_history_tbl on prod_tbl.p_no = order_history_tbl.p_no where u_id = #{u_id} and order_date like concat( #{order_date}, '%')
+	]]>
+ 	</select>
+	 
+	<select id ="orderEventLists" resultType="com.shop.vo.Order_Histroy_Tbl">
+	<![CDATA[
+		select order_history_tbl.ono, order_history_tbl.pname, order_history_tbl.quantity, order_history_tbl.amount, order_history_tbl.pay, order_history_tbl.order_date, order_history_tbl.u_id, prod_tbl.p_no, prod_tbl.s_id as seller from prod_tbl join order_history_tbl on prod_tbl.p_no = order_history_tbl.p_no where u_id = #{u_id} and ono = #{ono} and order_date like concat('%',#{order_date}, '%')
 	]]>
  	</select>
 
  	<select id ="formList" resultType="com.shop.vo.Order_Histroy_Tbl">
 		
-		select order_history_tbl.ono, order_history_tbl.pname, order_history_tbl.quantity, order_history_tbl.amount, order_history_tbl.pay, order_history_tbl.order_date, order_history_tbl.u_id, prod_tbl.p_no, prod_tbl.s_id as seller from prod_tbl join order_history_tbl on prod_tbl.p_no = order_history_tbl.p_no where u_id = #{u_id};
+		select order_history_tbl.ono, order_history_tbl.pname, order_history_tbl.quantity, order_history_tbl.amount, order_history_tbl.pay, order_history_tbl.order_date, order_history_tbl.u_id, prod_tbl.p_no, prod_tbl.s_id as seller from prod_tbl join order_history_tbl on prod_tbl.p_no = order_history_tbl.p_no where u_id = #{u_id}
 
  	</select>
 
