@@ -78,26 +78,35 @@
 						<div class="product_count"
 							style="margin-top: 20px; float: left; vertical-align: middle;">
 							
-							<label for="qty" style="float: left">수량 : </label> 
+							<label for="qty" style="margin-top:10px;float: left">수량 : </label> 
 							<input
 								type="number" name="qty" id="sst" size="2" maxlength="12"
 								value="1" title="Quantity" class="input-text qty"
-								style="float: left"> 
+								style="margin-top:8px;float: left"> 
 							
 							
 							<label for=""
-								style="margin-left: 15px; float: left">찜 : </label>
+								style="margin-top:10px;margin-left: 15px; float: left">찜 : </label>
 							<div class="icon_heart_empty" style="float: left"></div>
 							
 						</div>
-							<div>
-								<button 
-									class="button primary-btn btn-shopping-cart" 
-									style="float:left;margin-left: 30px;background-color:blue;">장바구니</button>
-							</div>
 					</div>
+				</div><div>
+						<div>
+							<button class="button primary-btn btn-shopping-cart"
+								style="float: left; margin-left: 30px; background-color: blue;">장바구니</button>
+						</div>
+						<div>
+							<form action="/carshop/report?p_no=${product.p_no }" method='post' id = "formReport">
+							<input type="hidden" value="${product.s_id }" name="s_id"/>
+							<input type="hidden" value="${user.id }" name="u_id"/>
+							
+							<button class="button danger-btn" id="btn-report"
+								style="float: left; margin-left: 30px; background-color: red;">신고</button>
+							</form>
 
-				</div>
+						</div></div>
+						
 			</div>
 		</div>
 	</div>
@@ -111,9 +120,7 @@
 			<li class="nav-item"><a class="nav-link" id="home-tab"
 				data-toggle="tab" href="#home" role="tab" aria-controls="home"
 				aria-selected="true">상세설명</a></li>
-			<li class="nav-item"><a class="nav-link" id="profile-tab"
-				data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-				aria-selected="false">상품정보(규격)</a></li>
+			
 			<li class="nav-item"><a class="nav-link" id="contact-tab"
 				data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
 				aria-selected="false">상품문의</a></li>
@@ -125,80 +132,6 @@
 			<div class="tab-pane fade" id="home" role="tabpanel"
 				aria-labelledby="home-tab">
 				<p><c:out value="${product.discribe}" /></p>
-
-			</div>
-			<div class="tab-pane fade" id="profile" role="tabpanel"
-				aria-labelledby="profile-tab">
-				<div class="table-responsive">
-					<table class="table">
-						<tbody>
-							<tr>
-								<td>
-									<h5>Width</h5>
-								</td>
-								<td>
-									<h5>128mm</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Height</h5>
-								</td>
-								<td>
-									<h5>508mm</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Depth</h5>
-								</td>
-								<td>
-									<h5>85mm</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Weight</h5>
-								</td>
-								<td>
-									<h5>52gm</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Quality checking</h5>
-								</td>
-								<td>
-									<h5>yes</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Freshness Duration</h5>
-								</td>
-								<td>
-									<h5>03days</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>When packeting</h5>
-								</td>
-								<td>
-									<h5>Without touch of hand</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Each Box contains</h5>
-								</td>
-								<td>
-									<h5>60pcs</h5>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
 			</div>
 			<div class="tab-pane fade" id="contact" role="tabpanel"
 				aria-labelledby="contact-tab">
@@ -406,6 +339,12 @@ function clickEvent(){
 		let quantity = $(".product_count").children("input").val();
 		addCartEvent(p_no,quantity);
 	})
+	
+	let btnReport = $("#btn-report");
+	btnReport.click(function(){
+		console.log("report click!");
+		addReportEvent();
+	})
 }
 function getUserId(){
 	let u_id = "${user.id}";
@@ -415,7 +354,10 @@ function getP_no(){
 	let p_no = "${product.p_no}";
 	return p_no;
 }
-
+function getS_id(){
+	let s_id = "${product.s_id}";
+	return s_id;
+}
 $(document).ready(function() {
 					clickEvent();
 					checkLiked();
@@ -599,6 +541,16 @@ $(document).ready(function() {
 				console.log("통신실패");
 			}
 		})
+	}
+	function addReportEvent() { //찜목록추가
+		if(sessoinExistenceChecked()){
+			$("#notice .modal-body").html("로그인 후 이용해주세요.");
+			$('#notice').modal('show');
+			return false;
+		}else{
+			$("#formReport").submit();
+		}
+
 	}
 	function removeLikeEvent(p_no,$obj) { //찜목록삭제
 		//console.log("상품번호 : " + p_no);
