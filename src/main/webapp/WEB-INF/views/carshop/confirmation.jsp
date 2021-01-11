@@ -110,7 +110,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			        <button type="button" class="btn btn-primary" id="applyBtn">신청하기</button>
+			        <button type="button" class="btn btn-primary" id="applyBtn" onclick="changeRefundBtn();">신청하기</button>
 			      </div>
 			    </div>
 			  </div>
@@ -144,8 +144,8 @@
     		    });
       		  
       			writeRefundForms();
-      		  
-      			changeRefundBtn();
+      			
+      			
       		  
       		  $('#confirmationAllList').click(function() {
       			    			
@@ -211,6 +211,7 @@
       		
       		function getReloadSuccess() {
       		  $('.btn-primary').click(function() {
+      			changeRefundBtn();
       			  var param = $("form[name=returnFormAjax]").serialize();
       			  $.ajax({
 	            	    url :'confirmation',
@@ -220,8 +221,10 @@
 	              		//console.log(data);
 	            		//console.log($(this));
 	            		//$('.btn-primary').attr('btn-primary', 'btn-success');
-	            		window.location.reload();
+	            		
 
+	            		window.location.reload();
+	            		
 	               },
 	               error : function(){	
 	                  console.log("통신실패");
