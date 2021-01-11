@@ -36,7 +36,7 @@ function showSwal(){
 					$('#pwmessage').attr("type","text").css("color","red");
 				}else {
 					console.log("정상종료");
-					location.href="indexlogin"
+					location.href="index"
 				}
 			},
 			error :function(){
@@ -72,7 +72,7 @@ function showSwal(){
 }
 
 </style>
-
+</head>
   <!-- ================ start banner area ================= -->	
   <body>
 	<section class="blog-banner-area" id="category">
@@ -100,7 +100,7 @@ function showSwal(){
 					<div class="login_box_img">
 						<div class="hover">
 							<h4>New to our website?</h4>
-							<a class="button button-account" href="register.html">Create an Account</a>
+							<a class="button button-account" href="register">Create an Account</a>
 						</div>
 					</div>
 				</div>

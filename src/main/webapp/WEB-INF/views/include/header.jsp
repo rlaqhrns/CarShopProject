@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	String sessId = (String)session.getAttribute("id");
+%>
 <!DOCTYPE html>
 <html lang="UTF-8">
 <head>
@@ -53,7 +56,14 @@
 	color: white;
 	text-decoration: none;
 }
-
+.header_area .main_menu .navbar .container .collapse .nav-right{
+	display : flex;
+	align-items : center;
+}
+.header_area .main_menu .navbar .container .collapse .nav-right .nav-log .nav-login {
+	margin-top : 20px;
+	margin-bottom : 20px;
+}
 </style> 
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/papicon.png">
 <!-- 파피콘 이미지 수정 2020/01/08 yunhj -->
@@ -71,38 +81,28 @@
 	href="/resources/vendors/owl-carousel/owl.carousel.min.css">
 
 <link rel="stylesheet" href="/resources/css/style.css">
-<style>
-.header_area .main_menu .navbar .container .collapse .nav-log .nav-login {
-	margin-top : 50px;
-}
-.header_area .main_menu .navbar .container .collapse .nav-log .nav-logout {
-	
-}
-</style>
-<script>
-$(document).ready(function(){
+<script> 
 	$.ajax({
-		url: '/carshop/receive',
+		url: '/carshop/headerAjax',
 		type : 'get',
 		dataType : "json",
 	    contentType: "application/json; charset=utf-8",
-	    data : JSON.stringify({
-	
-	    	}),
 		success:function(data){
 			if(data){
 				console.log("if완료완료");
 			}else {
 				console.log("else완료");
-				$('.nav-logout').attr("style","show");
-				$('.nav-login').attr("style","hidden");
+				$('.nav-login').attr("style","show");
+				$('.nav-logout').hide();
 			}
 		},
 		error :function(){
 			console.log("실패함");
+		},
+		complete : function(){
+			console.log("ajax통신완료");
 		}
 	});
-});
 </script>
 </head>
 
@@ -123,16 +123,24 @@ $(document).ready(function(){
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
 							<li class="nav-item"><a class="nav-link" href="productList">Shop</a></li>
+<%
+	if(sessId != null){
+%>							
 							<li class="nav-item"><a class="nav-link" href="mypage">Mypage</a></li>
+<%
+	}
+%>
 							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
 						</ul>
-						<ul class="nav-shop">
-							<li class="nav-item"><a href="cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
-						</ul><!-- yun.hj 2020/01/07 장바구니 경로 설정 -->
-							<!-- uin.hj 2020/01/08 mypage, home, shop, contact 경로 설정 -->
-						<div class="nav-log">
-							<div class="nav-login" style="position:relative; visibility:hidden"><a class="button button-header" href="login" >login</a></div>
-							<div class="nav-logout" style="position:relative; left : 0px; top:-50px;"><a class="button button-header"  href="index" >logout</a></div>
+						<div class="nav-right">
+							<ul class="nav-shop">
+								<li class="nav-item"><a href="cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
+							</ul><!-- yun.hj 2020/01/07 장바구니 경로 설정 -->
+								<!-- uin.hj 2020/01/08 mypage, home, shop, contact 경로 설정 -->
+							<div class="nav-log">
+								<div class="nav-login" style="position:relative; visibility:hidden"><a class="button button-header" href="login" >login</a></div>
+								<div class="nav-logout" style="position:relative; left : 0px; top:-50px;"><a class="button button-header"  href="logout" >logout</a></div>
+							</div>
 						</div>
 					</div>
 				</div>
