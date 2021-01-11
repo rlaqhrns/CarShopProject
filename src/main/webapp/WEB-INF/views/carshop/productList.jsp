@@ -371,7 +371,7 @@ function setProductList() { //상품을 그려주는 함수
 											text += productNum + `"> 
 											<div class="card text-center card-product">
 											<div class="card-product__img">
-												<img class="card-img" src="`;
+												<img class="card-img" onerror="this.src='/resources/img/noimage.gif'"  src="/resources/img/upload/`;
 											text += product.img1;
 											text += `" onClick="location.href='/carshop/product/details?p_no='`;
 											text += product.p_no;
