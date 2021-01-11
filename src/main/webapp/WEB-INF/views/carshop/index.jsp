@@ -36,35 +36,35 @@
 		<div class="owl-carousel owl-theme hero-carousel">
 			<div class="hero-carousel__slide">
 				<img src="/resources/img/home/front.png" alt="" class="img-fluid">
-				<a href="home" class="hero-carousel__slideOverlay">
+				<a href="/carshop/product/list?cate_no=1&click=Y" class="hero-carousel__slideOverlay">
 					<h3>전면상품</h3>
 					<p>전체보기</p>
 				</a>
 			</div>
 			<div class="hero-carousel__slide">
 				<img src="/resources/img/home/side.png" alt="" class="img-fluid">
-				<a href="#" class="hero-carousel__slideOverlay">
+				<a href="/carshop/product/list?cate_no=2&click=Y" class="hero-carousel__slideOverlay">
 					<h3>측면상품</h3>
 					<p>전체보기</p>
 				</a>
 			</div>
 			<div class="hero-carousel__slide">
 				<img src="/resources/img/home/back.png" alt="" class="img-fluid">
-				<a href="#" class="hero-carousel__slideOverlay">
+				<a href="/carshop/product/list?cate_no=3&click=Y" class="hero-carousel__slideOverlay">
 					<h3>후면상품</h3>
 					<p>전체보기</p>
 				</a>
 			</div>
 			<div class="hero-carousel__slide">
 				<img src="/resources/img/home/inside.png" alt="" class="img-fluid">
-				<a href="#" class="hero-carousel__slideOverlay">
+				<a href="/carshop/product/list?cate_no=4&click=Y" class="hero-carousel__slideOverlay">
 					<h3>실내/전장/의장</h3>
 					<p>전체보기</p>
 				</a>
 			</div>
 			<div class="hero-carousel__slide">
 				<img src="/resources/img/home/engine.png" alt="" class="img-fluid">
-				<a href="#" class="hero-carousel__slideOverlay">
+				<a href="/carshop/product/list?cate_no=5&click=Y" class="hero-carousel__slideOverlay">
 					<h3>엔진/하체</h3>
 					<p>전체보기</p>
 				</a>
@@ -80,7 +80,7 @@
 			<div class="section-intro pb-60px">
 				<h2>
 					Best <span class="section-intro__style">Sellers</span> <img
-						src="/resources/img/home/1111.png" alt="">
+						src="/resources/img/home/1111.png" alt="" onerror="this.src='/resources/img/noimage.gif'">
 				</h2>
 			</div>
 			<div class="owl-carousel owl-theme" id="bestSellerCarousel">
@@ -89,7 +89,7 @@
 					<div class="card text-center card-product">
 						<div class="card-product__img">
 							<img class="img-fluid"
-								src="/resources/img/upload/<c:out value="${list.img1}" />" alt="">
+								src="/resources/img/upload/<c:out value="${list.img1}" />" alt="" onerror="this.src='/resources/img/noimage.gif'">
 							<ul class="card-product__imgOverlay">
 								<li><button>
 										<i class="ti-search"></i>
