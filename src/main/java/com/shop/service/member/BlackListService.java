@@ -6,6 +6,7 @@ import com.shop.vo.Black_Tbl;
 import com.shop.vo.BlkPageDTO;
 import com.shop.vo.Criteria;
 import com.shop.vo.Prod_Tbl;
+import com.shop.vo.Report_Tbl;
 
 public interface BlackListService {
 	//since decided using ajax for paging and listing, this service method is no longer neede -SungYeon 20.12.23
@@ -22,4 +23,6 @@ public interface BlackListService {
 	public boolean delete_allnseller(String s_id); //remove id from seller tbl & all user tbl at the same time -SungYeon 20.12.23
 
 	public Prod_Tbl getprod(int p_no);
+	
+	public void insert_report(Report_Tbl report);
 }

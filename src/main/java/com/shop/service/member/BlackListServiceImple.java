@@ -11,6 +11,7 @@ import com.shop.vo.Black_Tbl;
 import com.shop.vo.BlkPageDTO;
 import com.shop.vo.Criteria;
 import com.shop.vo.Prod_Tbl;
+import com.shop.vo.Report_Tbl;
 
 import lombok.AllArgsConstructor;
 
@@ -73,6 +74,12 @@ public class BlackListServiceImple implements BlackListService{
 	public Prod_Tbl getprod(int p_no) {
 		// TODO Auto-generated method stub
 		return prodmapper.getProduct(p_no);
+	}
+
+	@Override
+	public void insert_report(Report_Tbl report) {
+		mapper.insert_report(report);
+		
 	}
 
 }

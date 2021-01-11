@@ -229,7 +229,7 @@
 		function remove(s_id, callback, error) { //remove id from black tbl -SungYeon 20.12.23
 			$.ajax({
 				type: 'delete',  //restAPI type
-				url: '/carshop/blkremove?s_id=' + s_id,  //process through this url with s_id -SungYeon 20.12.23
+				url: '/carshop/blkremove/' + s_id,  //process through this url with s_id -SungYeon 20.12.23
 				success: function(deleteResult, status, xhr) {
 					if(callback){
 						callback(deleteResult);
@@ -247,7 +247,7 @@
 		function blkdelete(s_id, callback, error) {  //same as remove() above -SungYeon 20.12.23
 			$.ajax({
 				type: 'delete',
-				url: '/carshop/blkdelete?s_id=' + s_id,
+				url: '/carshop/blkdelete/' + s_id,
 				success: function(deleteResult, status, xhr) {
 					if(callback){
 						callback(deleteResult);

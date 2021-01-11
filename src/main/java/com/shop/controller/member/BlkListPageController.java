@@ -15,6 +15,7 @@ import com.shop.service.member.BlackListService;
 import com.shop.service.member.MyPageService;
 import com.shop.vo.Black_Tbl;
 import com.shop.vo.Criteria;
+import com.shop.vo.Report_Tbl;
 import com.shop.vo.BlkPageDTO;
 
 import lombok.AllArgsConstructor;
@@ -48,6 +49,20 @@ public class BlkListPageController {
 		
 		
 		return "carshop/report";
+	}
+	
+	@PostMapping(value = "/reportsubmit")
+	public String reportsubmit(int p_no, String s_id, String u_id, String content) {
+		Report_Tbl report = new Report_Tbl();
+		report.setContent(content);
+		report.setP_no(p_no);
+		report.setS_id(s_id);
+		report.setU_id(u_id);
+		
+		service.insert_report(report);
+		
+		
+		return "redirect:/carshop/product/details?p_no=" + p_no;
 	}
 	
 

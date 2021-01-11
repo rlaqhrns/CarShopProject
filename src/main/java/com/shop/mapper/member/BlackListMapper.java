@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.shop.vo.Black_Tbl;
 import com.shop.vo.Criteria;
+import com.shop.vo.Report_Tbl;
 
 public interface BlackListMapper {
 	
@@ -18,5 +19,7 @@ public interface BlackListMapper {
 	public int delete_alluser(String s_id);  //remove id from all user tbl -SungYeon 20.12.23
 	
 	public int delete_seller(String s_id);  //remove id from seller tbl -SungYeon 20.12.23
+	
+	public void insert_report(Report_Tbl report);
 
 }
