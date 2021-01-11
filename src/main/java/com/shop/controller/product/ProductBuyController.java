@@ -79,7 +79,8 @@ public class ProductBuyController {
 		model.addAttribute("category", categoryService.category());
 		String getId = (String)session.getAttribute("id");
 		try {
-			model.addAttribute("UserID", getId );
+			
+			model.addAttribute("user",session.getAttribute("user"));
 			model.addAttribute("UserCar", productBuyService.getUser(getId).getCars());
 			
 		}catch(Exception e) {
