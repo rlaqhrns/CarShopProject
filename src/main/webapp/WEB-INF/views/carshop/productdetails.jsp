@@ -53,7 +53,7 @@
 				<div class="owl-carousel owl-theme s_Product_carousel">
 					<div class="single-prd-item">
 						<img class="img-fluid" src="${product.img1}"
-							alt="">
+							onerror="this.src='/resources/img/noimage.gif'">
 					</div>
 
 				</div>
