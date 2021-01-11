@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shop.mapper.member.BlackListMapper;
+import com.shop.mapper.product.ProductBuyMapper;
 import com.shop.vo.Black_Tbl;
 import com.shop.vo.BlkPageDTO;
 import com.shop.vo.Criteria;
+import com.shop.vo.Prod_Tbl;
 
 import lombok.AllArgsConstructor;
 
@@ -17,6 +19,7 @@ import lombok.AllArgsConstructor;
 public class BlackListServiceImple implements BlackListService{
 	
 	private BlackListMapper mapper;
+	private ProductBuyMapper prodmapper;
 
 //	@Override  since i decided to work using ajax, this service method is no longer needed -SungYeon 20.12.23
 //	public List<Black_Tbl> getBlkList(Criteria crit) {
@@ -64,6 +67,12 @@ public class BlackListServiceImple implements BlackListService{
 			return false;
 		}
 
+	}
+
+	@Override
+	public Prod_Tbl getprod(int p_no) {
+		// TODO Auto-generated method stub
+		return prodmapper.getProduct(p_no);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.shop.controller.member;
 import java.util.List;
 
 import javax.print.attribute.standard.Media;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -67,6 +68,7 @@ public class BlackListController {
 				new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+
 	
 	
 	
