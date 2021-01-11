@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shop.mapper.product.IndexMapper;
+import com.shop.vo.Annc_Tbl;
 import com.shop.vo.Prod_Tbl;
 
 import lombok.Setter;
@@ -26,6 +27,12 @@ public class IndexServiceImple implements IndexService {
 	public List<Prod_Tbl> index2() {
 		// TODO Auto-generated method stub
 		return mapper.index2();
+	}
+
+	@Override
+	public List<Annc_Tbl> annc() {
+		// TODO Auto-generated method stub
+		return mapper.annc();
 	}
 
 	}

@@ -189,79 +189,30 @@
 			<div class="section-intro pb-60px">
 				
 				<h2>
-					Latest <span class="section-intro__style">News</span>
+					공지 사항
 				</h2>
 			</div>
 
 		<div class="row">
+		 <c:forEach items="${annc }" var="annc">
 			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
 				<div class="card card-blog">
-					<div class="card-blog__img">
-						<img class="card-img rounded-0"
-							src="/resources/img/blog/news1.png" alt="">
-					</div>
+<!-- 					<div class="card-blog__img"> -->
+<!-- 						<img class="card-img rounded-0" -->
+<!-- 							src="/resources/img/blog/news1.png" alt=""> -->
+<!-- 					</div> -->
 					<div class="card-body">
 						<ul class="card-blog__info">
-							<li><a href="#">By JIPCOK</a></li>
-							<li><a href="#"><i class="ti-comments-smiley"></i> 117
-									LIKE</a></li>
+							<li><c:out value="${annc.annc_date }"></c:out> </li>
 						</ul>
 						<h4 class="card-blog__title">
-							<a href="single-blog.html">비싼 보험료, 싸게 낮출 수 없을까?</a>
+							<c:out value="${annc.title }"></c:out>
 						</h4>
-						<p> 30대 직장인 A씨, 높은 보험료 걱정에 'JIPCOK' 사무소 도움을 요청했다.
-						 'JIPCOK'이 알려주는 OOO 하나만으로 30%나 낮출 수 있었던 보험료 비결</p>
-						<a class="card-blog__link" href="#">Read More<i
-							class="ti-arrow-right"></i></a>
+						<p> <c:out value="${annc.content }"/></p>
 					</div>
 				</div>
 			</div>
-
-			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="card card-blog">
-					<div class="card-blog__img">
-						<img class="card-img rounded-0"
-							src="/resources/img/blog/news2.jpg" alt="">
-					</div>
-					<div class="card-body">
-						<ul class="card-blog__info">
-							<li><a href="#">By JIPCOK</a></li>
-							<li><a href="#"><i class="ti-comments-smiley"></i> 321
-									LIKE</a></li>
-						</ul>
-						<h4 class="card-blog__title">
-							<a href="single-blog.html">[이색데이트] 차박하기 좋은 여행지 TOP 3! </a>
-						</h4>
-						<p> '나혼자 산다'로 유명해진 촬영지부터 에디터의 숨은 추천지 바로보기!
-							 </p>
-						<a class="card-blog__link" href="#">Read More <i
-							class="ti-arrow-right"></i></a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="card card-blog">
-					<div class="card-blog__img">
-						<img class="card-img rounded-0"
-							src="/resources/img/blog/news3.jpg" alt="">
-					</div>
-					<div class="card-body">
-						<ul class="card-blog__info">
-							<li><a href="#">By JIPCOK</a></li>
-							<li><a href="#"><i class="ti-comments-smiley"></i> 29
-									LIKE</a></li>
-						</ul>
-						<h4 class="card-blog__title">
-							<a href="single-blog.html">멈출 수 없는 모험의 시작</a>
-						</h4>
-						<p>세련된 디자인에 블랙이 더해져
-							더욱 완벽해진 Z71-X 미드나잇 에디션을 지금 만나보세요.(광고)</p>
-						<a class="card-blog__link" href="#">Read More <i
-							class="ti-arrow-right"></i></a>
-						</div>
-					</div>
-				</div>
+		</c:forEach>
 			</div>
 		</div>
 	</section>

@@ -356,8 +356,8 @@ function setProductList() { //상품을 그려주는 함수
 					$productListArea.empty(); //append하기전 비워준다.
 					$.each(data,function(index, product) {
 						text = '';
-						let productName = product.p_name; //상품이름 미리 저장 밑줄에서 대문자로 바뀌기 때문에
-						product.p_name = product.p_name.toUpperCase();//상품이름 검색위해 다 어퍼케이스
+						let productName = product.p_name;
+						product.p_name = product.p_name.toUpperCase();
 						productNum = index +1; //상품아이디 product + productNum 의 형식으로 아이디 지
 											//text는 백틱으로 처음부터 끝까지 해결하려했으나 태그 다음에 오류 ex) `src="${product.img}"`동작 안함
 										  	text += `<div class="`;
@@ -371,7 +371,7 @@ function setProductList() { //상품을 그려주는 함수
 											text += productNum + `"> 
 											<div class="card text-center card-product">
 											<div class="card-product__img">
-												<img class="card-img" src="/resources/img/upload/`;
+												<img class="card-img" onerror="this.src='/resources/img/noimage.gif'"  src="/resources/img/upload/`;
 											text += product.img1;
 											text += `" onClick="location.href='/carshop/product/details?p_no='`;
 											text += product.p_no;
