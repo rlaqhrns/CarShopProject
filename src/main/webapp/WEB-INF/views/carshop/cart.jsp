@@ -5,7 +5,44 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
+<style>
+/*팝업창 css style 생성 2021.01.09 yun.hj*/
 
+button {
+  height: 2.5em;
+  cursor: pointer;
+}
+
+#popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .7);
+  z-index: 1;
+}
+
+#popup.hide {
+  display: none;
+}
+
+#popup.has-filter {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+#popup .content {
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+}
+
+</style>
 
 
 <!-- ================ start banner area ================= -->
@@ -55,7 +92,7 @@
                         <td>${cart.quantity}</td>
                         <td><input type="hidden" class="product-total-amount" value='${cart.total}'><fmt:formatNumber value="${cart.total}" pattern="#,###,###" />원</td>
                        	<!--  <td><input type="hidden" name="quantity" value="${row.quantity}"></td> -->
-                        <td><input type = "button" value="삭제" ><a href= "${path}/carshop/delete?u_id=${cart.u_id}"></a></td>
+                        <td><a class= "gray_btn ml-2" href= "${path}/carshop/delete?u_id=${cart.u_id}">삭제</a></td>
                       	<!-- <a class="gray_btn" id="btnUpdate" href="delete">삭제</a> -->
                        	<!-- delete 구현 -->
                      </tr>
@@ -67,13 +104,12 @@
                    	
                      <td> 
                      	<div class="checkout_btn_inner d-flex align-items-center">
-                     		<a class="gray_btn ml-2" id="btnUpdate" href="#">Update</a> 
+                     		<a class="gray_btn ml-2" id="btnUpdate" href="#" onclick = "showPopup()">Update</a> 
                         	<a class="gray_btn ml-2" id="btnDelete" href="#">비우기</a>
                         </div>
                      </td>
-                    
-                    
                   </tr>
+                  
 
 
 
@@ -99,8 +135,18 @@
                            <a class="gray_btn" href="productList" id="btnList">쇼핑계속하기</a> 
                            <a class="primary-btn ml-2" href="checkout">상품주문</a>
                         </div>
+                        
+                        
+                        
+                        
                      </td>
                   </tr>
+					<div id="popup" class="hide">
+  						<div class="content">
+							<p>장바구니 물품이 업데이트 되었습니다.</p>
+								<button onclick="closePopup()">확인</button>
+						</div>
+					</div>              
                </tbody>
             </table>
          </div>
@@ -111,10 +157,8 @@
 <%@ include file="../include/footer.jsp"%>
 <!-- footer 안에 쿼리 링크가 있어서 하단에 쿼리문 작성 -->
 
-
-
-
 <!--================쿼리문 start Area ===============-->
+
 <script>
 
    $(document).ready(function(){
@@ -132,4 +176,24 @@
       $("#totalMoney").html(productTotalAmount + "원");
       //console.log("돈 : " + money);
    }
+      
+   
+   // 팝업창 쿼리 2021.01.09 yun.hj
+   function showPopup(hasFilter) {
+		const popup = document.querySelector('#popup');
+	  
+	  if (hasFilter) {
+	  	popup.classList.add('has-filter');
+	  } else {
+	  	popup.classList.remove('has-filter');
+	  }
+	  
+	  popup.classList.remove('hide');
+	}
+
+	function closePopup() {
+		const popup = document.querySelector('#popup');
+	  popup.classList.add('hide');
+	}
+   
 </script>
