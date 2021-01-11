@@ -125,15 +125,8 @@
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="productList">Shop</a></li>
-<%
-	if(sessId != null){
-%>							
-							<li class="nav-item"><a class="nav-link" href="mypage">Mypage</a></li>
-<%
-	}
-%>
-
+							<li class="nav-item"><a class="nav-link" href="productList">Shop</a></li>						
+							<li class="nav-item"><a class="nav-link" href="login">Mypage</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
 						</ul>
 						<div class="nav-right">
