@@ -59,7 +59,7 @@
 						<li class="common-filter">
 							<ul>
 								<!-- default값으로 value = 0 을 설정, 전체 상품목록을 조회할때 사용한다 -->
-								<li style="display: none" class="filter-list">
+								<li class="filter-list">
 									<input
 										class="pixel-radio parts-radio parent-radio" type="radio"
 										name="brand"
@@ -198,11 +198,12 @@ function addCartEvent(p_no) { //장바구니
 		type : 'POST',
 		data : {
 			"u_id" : userId,
-			"p_no" : p_no
+			"p_no" : p_no,
+			"quantity":0
 		},
 		dataType : 'JSON',
 		success : function(stats) {
-			$(".modal-body").html("장바구니에 넣었습니다.");
+			$(".modal-body").html("\""+getUserId() + "\"님 장바구니에 넣었습니다.");
 			$('#notice').modal('show');
 
 		},
@@ -229,7 +230,7 @@ function addLikeEvent(p_no,$obj) { //찜목록추가
 		dataType : 'JSON',
 		success : function(stats) {
 			$obj.children(".ti-heart").addClass("heart_white_full");								
-			$(".modal-body").html("찜 목록에 넣었습니다.");
+			$(".modal-body").html("\""+getUserId() + "\"님 찜 목록에 넣었습니다.");
 			$('#notice').modal('show');
 		},
 		error : function() {
@@ -255,7 +256,7 @@ function removeLikeEvent(p_no,$obj) { //찜목록삭제
 		dataType : 'JSON',
 		success : function(stats) {
 			$obj.children(".ti-heart").removeClass("heart_white_full");
-			$(".modal-body").html("찜 목록에서 삭제되었습니다.");
+			$(".modal-body").html("\""+getUserId() + "\"님 찜 목록에서 삭제되었습니다.");
 			$('#notice').modal('show');
 		},
 		error : function() {
@@ -379,7 +380,7 @@ function setProductList() { //상품을 그려주는 함수
 											<div class="card-product__img">
 												<img class="card-img" src="`;
 											text += product.img1;
-											text += `" onClick="location.href='/carshop/product/details?p_no='`;
+											text += `" onerror="this.src='/resources/img/noimage.gif'" onClick="location.href='/carshop/product/details?p_no='`;
 											text += product.p_no;
 											text += ` ">
 												<ul class="card-product__imgOverlay">
@@ -621,6 +622,15 @@ function carSearchCheckEvent(){
 $(document).ready(function() {
 	init();
 	carSearchCheckEvent();
+	// 인덱스 페이지 에서 카테고리 상품클릭하여 해당 no랑 구분자를 제이쿼리 객체를 만든다
+	let cate_no = "${param.cate_no}";
+	let click = "${param.click}";
+	// 클릭이 y였을시 라디오버튼을 해당 id에 맞게 체크하고 trigger를 이용해 강제로 발생하게한다
+	if(click =='Y'){
+		$("#"+cate_no).prop('checked',true);
+		$("#"+cate_no).trigger("change");
+		
+	}
 	
 })
 </script>

@@ -37,7 +37,7 @@
 	padding: 0 10px;
 	width: 450px;
 	caret-color: red;
-	transition: width 0.4s linear;
+	transition: width 0.4s linear;w
 }
 
 .searchbar:hover>.search_icon {
@@ -83,40 +83,7 @@
 
 <body>
 
-	<!--================ Start Header Menu Area =================-->
 
-	<header class="header_area">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light">
-				<div class="container">
-					<a class="navbar-brand logo_h" href="index.html"><img src="/resources/img/logo3.png" alt="로고" style= "width: 70px; height: 70px;"></a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent"
-							aria-controls="navbarSupportedContent" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-									class="icon-bar"></span>
-						</button>					
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="productList">Shop</a></li>
-							<li class="nav-item"><a class="nav-link" href="mypage">Mypage</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-						</ul>
-						<ul class="nav-shop">
-							<li class="nav-item"><a href="cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
-							<li class="nav-item2"><a class="button button-header"
-								href="index">logout</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</header>
-
-<!--================ End Header Menu Area =================-->
 
 
 <main class="site-main"> 
@@ -132,9 +99,7 @@
 <!--================ Hero banner start =================--> 
 
 
-
-
-
+fgu
 
 <!--================ Hero Carousel start =================-->
 <section class="section-margin mt-0">
@@ -217,7 +182,6 @@
 						</p>
 					</div>
 				</div>
-
 			</c:forEach>
 		</div>
 	</div>
