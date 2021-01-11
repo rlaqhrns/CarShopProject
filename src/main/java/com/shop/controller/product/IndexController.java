@@ -35,6 +35,7 @@ public class IndexController {
 	public String index(Model model) {
 		model.addAttribute("list", service.index());
 		model.addAttribute("list2",service.index2());
+		model.addAttribute("annc",service.annc());
 		System.out.println("index들어옴");
 		return "carshop/index";
 
