@@ -240,17 +240,17 @@
 									<c:if test="${reply_list.r_img1 != null}">
 										<img src="/resources/img/replyUpload/${reply_list.r_img1 }"
 											width="150px;" height="200px;" onclick="fnImgPop(this.src)"
-											alt="잘못된 이미지 입니다">
+											 onerror="this.src='/resources/img/noimage.gif'">
 									</c:if>
 									<c:if test="${reply_list.r_img2 != null}">
 										<img src="/resources/img/replyUpload/${reply_list.r_img2 }"
 											width="150px;" height="200px;" onclick="fnImgPop(this.src)"
-											alt="잘못된 이미지 입니다">
+											 onerror="this.src='/resources/img/noimage.gif'">
 									</c:if>
 									<c:if test="${reply_list.r_img3 != null}">
 										<img src="/resources/img/replyUpload/${reply_list.r_img3 }"
 											width="150px;" height="200px;" onclick="fnImgPop(this.src)"
-											alt="잘못된 이미지 입니다">
+											 onerror="this.src='/resources/img/noimage.gif'">
 									</c:if>
 								</div>
 							</c:forEach>
