@@ -26,7 +26,9 @@
 		</div>
 		<div class="register_type">
 			<input type="button" value="user register" class="register_type_btn"
-				id="user_type" onClick="#"> <input type="button"
+				id="user_type" onClick="#"> 
+				
+			<input type="button"
 				value="seller register" class="register_type_btn" id="seller_type"
 				onClick="location.href='seller_register'">
 		</div>
@@ -42,7 +44,7 @@
 				<div class="login_box_img">
 					<div class="hover">
 						<h4>Already have an account?</h4>
-						<br> <a class="button button-account" href="login.html">Login
+						<br> <a class="button button-account" href="login">Login
 							Now</a>
 					</div>
 				</div>
