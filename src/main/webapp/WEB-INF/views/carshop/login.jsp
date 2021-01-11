@@ -34,6 +34,9 @@ function showSwal(){
 				if(data == "-1"){
 					$('#idmessage').attr("type","text").css("color","red");
 					$('#pwmessage').attr("type","text").css("color","red");
+					
+						$('#login').text('logout');
+					
 				}else {
 					console.log("정상종료");
 					location.href="index"
