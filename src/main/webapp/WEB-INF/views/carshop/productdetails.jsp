@@ -377,7 +377,7 @@ $(document).ready(function() {
 					clickEvent();
 					checkLiked();
 					//getSellerCheck();
-					if(getSellerCheck()){
+					if(getSellerCheck() || sessoinExistenceChecked()){
 						$(".review_box").hide();
 					}
 					let u_id = "${user.id}";
