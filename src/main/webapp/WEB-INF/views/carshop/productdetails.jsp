@@ -70,7 +70,7 @@
 					</h2>
 					<ul class="list">
 						<li><span>카테고리 </span> : ${product.c_name }</li>
-						<li><span>재고 상태 </span> : 재고 있음(<strong>${product.quantity}개</strong>)</li>
+						<%-- <li><span>재고 상태 </span> : 재고 있음(<strong>${product.quantity}개</strong>)</li> --%>
 					</ul>
 					<p><c:out value="${product.discribe}" /></p>
 					<div class="card_area d-flex align-items-center">
@@ -98,11 +98,11 @@
 						</div>
 						<div>
 							<form action="/carshop/report?p_no=${product.p_no }" method='post' id = "formReport">
-							<input type="hidden" value="${product.s_id }" name="s_id"/>
-							<input type="hidden" value="${user.id }" name="u_id"/>
+								<input type="hidden" value="${product.s_id }" name="s_id"/>
+								<input type="hidden" value="${user.id }" name="u_id"/>
 							
-							<button class="button danger-btn" id="btn-report"
-								style="float: left; margin-left: 30px; background-color: red;">신고</button>
+								<button class="button danger-btn" id="btn-report"
+										style="float: left; margin-left: 30px; background-color: red;">신고</button>
 							</form>
 
 						</div></div>
@@ -165,7 +165,7 @@
 										<h5>
 											<small><c:out value="${list.ask_date }" /></small>
 										</h5>
-										<c:if test="${user.seller == 'Y' }">
+										<c:if test="${user.id == product.s_id }">
 											<a class="reply_btn" id="askReply"
 												data-ask_no="${list.ask_no }">Reply</a>
 										</c:if>
@@ -313,11 +313,11 @@
 
 <!--================End Product Description Area =================-->
 
-<%@ include file="../include/topproduct.jsp"%>
 <%@ include file="../include/footer.jsp"%>
 <script>
 function clickEvent(){
 	//하트 토글 이벤
+		
 	let p_no = getP_no();
 	let heart_empty = $(".icon_heart_empty");
 	heart_empty.off("click");
@@ -327,7 +327,7 @@ function clickEvent(){
 		if(obj.hasClass("icon_heart_red")){
 			removeLikeEvent(p_no,obj);
 		}
-		else {
+		else{
 			addLikeEvent(p_no,obj);
 		}
 	});
@@ -342,9 +342,14 @@ function clickEvent(){
 	
 	let btnReport = $("#btn-report");
 	btnReport.click(function(){
+		if(loginTypeCheck()){
+			return false;
+		}
+		btnReport.preventDefault();
 		console.log("report click!");
 		addReportEvent();
 	})
+	
 }
 function getUserId(){
 	let u_id = "${user.id}";
@@ -358,10 +363,23 @@ function getS_id(){
 	let s_id = "${product.s_id}";
 	return s_id;
 }
+function getSellerCheck(){
+	let sellerCheck = "${user.seller}"
+	//console.log("sellerCheck : " +  sellerCheck);
+	if(sellerCheck === 'N'){
+		return false;
+	}else if(sellerCheck === 'Y') {
+		return true;
+	}
+}
+
 $(document).ready(function() {
 					clickEvent();
 					checkLiked();
-					
+					//getSellerCheck();
+					if(getSellerCheck()){
+						$(".review_box").hide();
+					}
 					let u_id = "${user.id}";
 					let seller ="${user.seller}";
 					let seller_id = "${product.s_id}";
@@ -490,12 +508,10 @@ $(document).ready(function() {
 	
 	 function addCartEvent(p_no,quantity) { //장바구니
 			let userId = getUserId();
-			if(sessoinExistenceChecked()){
-				$("#notice .modal-body").html("로그인 후 이용해주세요.");
-				$('#notice').modal('show');
+			
+			if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 				return false;
 			}
-			
 	
 			$.ajax({
 				url : '/carshop/product/addcart',
@@ -518,9 +534,7 @@ $(document).ready(function() {
 		}
 	function addLikeEvent(p_no,$obj) { //찜목록추가
 		let userId = getUserId();
-		if(sessoinExistenceChecked()){
-			$("#notice .modal-body").html("로그인 후 이용해주세요.");
-			$('#notice').modal('show');
+		if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 			return false;
 		}
 
@@ -542,10 +556,8 @@ $(document).ready(function() {
 			}
 		})
 	}
-	function addReportEvent() { //찜목록추가
-		if(sessoinExistenceChecked()){
-			$("#notice .modal-body").html("로그인 후 이용해주세요.");
-			$('#notice').modal('show');
+	function addReportEvent() { //신고
+		if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 			return false;
 		}else{
 			$("#formReport").submit();
@@ -555,9 +567,7 @@ $(document).ready(function() {
 	function removeLikeEvent(p_no,$obj) { //찜목록삭제
 		//console.log("상품번호 : " + p_no);
 		let userId = getUserId();
-		if(sessoinExistenceChecked()){
-			$("#notice .modal-body").html("로그인 후 이용해주세요.");
-			$('#notice').modal('show');
+		if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 			return false;
 		}
 		$.ajax({
@@ -606,11 +616,24 @@ $(document).ready(function() {
 	} 
 	function sessoinExistenceChecked(){
 		let userId = getUserId();
-
 		if(userId === "" || typeof userId === "undefined" || userId === null){
 			
 			return true;
 		}
 		return false;
+	}
+	function loginTypeCheck(){
+		
+		let result = false;
+		if(sessoinExistenceChecked()){
+			$("#notice .modal-body").html("로그인 후 이용해주세요.");
+			$('#notice').modal('show');
+			result = true;
+		}else if(getSellerCheck()){
+			$("#notice .modal-body").html("판매자는 이용할수 없습니다. 일반유저 로그인 후 이용해주세요.");
+			$('#notice').modal('show');
+			result = true;
+		}
+		return result;
 	}
 </script>
