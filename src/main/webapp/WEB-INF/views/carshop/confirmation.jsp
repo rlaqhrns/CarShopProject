@@ -110,7 +110,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			        <button type="button" class="btn btn-primary">신청하기</button>
+			        <button type="button" class="btn btn-primary" id="applyBtn">신청하기</button>
 			      </div>
 			    </div>
 			  </div>
@@ -145,7 +145,7 @@
       		  
       			writeRefundForms();
       		  
-      			
+      			changeRefundBtn();
       		  
       		  $('#confirmationAllList').click(function() {
       			    			
@@ -232,7 +232,17 @@
 	            
       		    
       		  });
+      		  
+      		
       		}
+      		
+      		function changeRefundBtn() {
+    			  $('#applyBtn').click(function() {
+    				  console.log(this);
+    				$(this).attr('disabled', true);
+    				
+    			  });
+    		  }
       		
       		//주문상세정보 pagination 10개마다 끊기 (재원/21.01.06)
       		
@@ -241,6 +251,7 @@
       	    //The onload event is a standard event in the DOM, while the ready event is specific to jQuery. The purpose of the ready event is that it should occur as early as possible after the document has loaded, so that code that adds functionality to the elements in the page doesn't have to wait for all content to load.
       		document.addEventListener('DOMContentLoaded', function() {
       			getReloadSuccess();
+      			
       	    	let tbody = $('tbody');
       	    	let originalTr = $('#originalTr');
       	    	let emptyTr = $('#emptyTr');
