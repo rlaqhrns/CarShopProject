@@ -82,13 +82,6 @@
 <!-- <!-- </head> --> -->
 
 <!-- <!-- <body> --> -->
-
-<<<<<<< HEAD
-<!-- <!-- 	================ Start Header Menu Area ================= --> -->
-=======
->>>>>>> branch 'master' of https://github.com/lee-bomi/CarShopProject.git
-
-<<<<<<< HEAD
 <!-- <!-- 	<header class="header_area"> --> -->
 <!-- <!-- 		<div class="main_menu"> --> -->
 <!-- <!-- 			<nav class="navbar navbar-expand-lg navbar-light"> --> -->
@@ -121,24 +114,7 @@
 <!-- <!-- 	</header> --> -->
 
 <!-- <!-- ================ End Header Menu Area ================= --> -->
-=======
->>>>>>> branch 'master' of https://github.com/lee-bomi/CarShopProject.git
 
-
-<!-- <!-- <main class="site-main">  --> -->
-
-<!-- <!-- ================ Hero banner start ================= --> -->
-<!-- <!-- 	<section class="blog-banner-area" id="category">		 --> -->
-<!-- <!-- 		 <img class="img-fluid" src="/resources/img/home/main1.png" --> -->
-<!-- <!-- 			alt="main배너" --> -->
-<!-- <!-- 			style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding-bottom: 20px;"/> --> -->
-			
-<!-- <!-- 	</section> --> -->
-<!-- <!-- yun.hj 2020/01/07 main1 img change , 메인 배너 이미지 수정  --> -->
-<!-- <!-- ================ Hero banner start =================  --> -->
-
-
-fgu
 
 <!-- <!-- ================ Hero Carousel start ================= --> -->
 <!-- <!-- <section class="section-margin mt-0"> --> -->
@@ -227,39 +203,7 @@ fgu
 <!-- <!-- 		</div> --> -->
 <!-- <!-- 	</div> --> -->
 <!-- <!-- </section> --> -->
-=======
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid"
-							src="/resources/img/upload/<c:out value="${list.img}" />" alt="">
-						<ul class="card-product__imgOverlay">
-							<li><button>
-									<i class="ti-search"></i>
-								</button></li>
-							<li><button>
-									<i class="ti-shopping-cart"></i>
-								</button></li>
-							<li><button>
-									<i class="ti-heart"></i>
-								</button></li>
-						</ul>
-					</div>
-					<div class="card-body">
-						<p>상품</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html"><c:out value="${list.p_name}" />
-							</a>
-						</h4>
-						<p class="card-product__price">
-							<c:out value="${list.amount }" />
-						</p>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
-</section>
->>>>>>> branch 'master' of https://github.com/lee-bomi/CarShopProject.git
+
 
 <!-- <!-- ================ Best Selling item  carousel end ================= --> -->
 
