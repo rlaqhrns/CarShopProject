@@ -36,11 +36,21 @@ public class ReplyController {
 	@PostMapping("/product/replyForm")
 	public String reply_form(@RequestParam("img")MultipartFile[] file,Reply_Tbl reply,Model model) throws IllegalStateException, IOException {
 		System.out.println("file : " +file.length);
+		System.out.println("빈값체크" + file[0].isEmpty());
+		System.out.println("file 의 이름 : " + file[0].getOriginalFilename() );
+
+
 		UUID uuid = UUID.randomUUID();
 		String msg = uuid.toString().substring(0, 5);
 		
 		if(file.length ==1) {
-			reply.setR_img1((msg + file[0].getOriginalFilename()));  
+			if(file[0].getOriginalFilename().equals("")) {
+				System.out.println("빈값입니다");;
+				reply.setR_img1(null);
+			}else {
+				reply.setR_img1((msg + file[0].getOriginalFilename()));  
+
+			}
 		}else if(file.length ==2) {
 			reply.setR_img1(msg + file[0].getOriginalFilename());  
 			reply.setR_img2(msg + file[1].getOriginalFilename());
