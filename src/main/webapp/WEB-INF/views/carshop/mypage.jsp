@@ -89,6 +89,8 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 					  open();  //모달창 오픈
 					  
 						document.querySelector(".bgc").addEventListener("click", close);  //모달 창 배경이 클릭되면 아무 실행 없이 닫음 -Monica 2020.12.31
+						document.querySelector(".closeBtnc2").addEventListener("click", close);  //모달 창 배경이 클릭되면 아무 실행 없이 닫음 -Monica 2020.12.31
+
 						calendar.unselect() //달력 클릭 취소됨
 				},
 				eventClick : function(arg) {  //일정이 클릭되면
@@ -291,7 +293,6 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 			
 			
 			
-			
 		});
 		 
 </script>
@@ -415,9 +416,9 @@ button {
 				시작일: <input type="text" name="schdstart" id="schdstart" readonly><br>
 				마감일:<br>
 				<select name="cal_year" id="cal_year">  <!-- 연도 선택 -->
-					<option value="2020">2020</option>
 					<option value="2021">2021</option>
 					<option value="2022">2022</option>
+					<option value="2020">2023</option>
 				</select>
 				<select name="cal_month" id="cal_month"> <!-- 달 선택 -->
 					<option value="01">Jan</option>
@@ -467,7 +468,11 @@ button {
 					<option value="31">31</option>
 				</select>
 				 <br>
-				<button class="closeBtnc" type="submit">입력</button>
+				 <div style="pull-right; padding-left: 100px;">
+				 <button class="closeBtnc" type="submit" style="display: inline-block;">입력</button>
+				<button class="closeBtnc2" type="button" style="display: inline-block;">닫기</button>
+				 </div>
+				
 			</form>
 		</div>
 	</div>
@@ -555,7 +560,7 @@ button {
 							src="/resources/img/blog/cat-post/cat-post-1.jpg" alt="post">
 						<c:choose>
 							<c:when test="${status == 'seller' }">
-								<div class="categories_details" onclick="location.href='/carshop/retrun_end'">
+								<div class="categories_details" onclick="location.href='/carshop/return_end'">
 									<div class="categories_text">
 										<h5>교환반품</h5>
 										<div class="border_line"></div>
@@ -624,9 +629,19 @@ button {
 								</c:choose> </p>
 							<div class="social_icon">
 								<a href="/carshop/userupdateform"> <i class="fab fa-github"></i> 계정정보 수정하기
-								</a> <a href="/carshop/like"> <i class="fab fa-behance"></i> 찜
+								</a> 
+								<c:choose>
+									<c:when test="${status == 'seller' }">
+										<a href="/carshop/productForm"> <i class="fab fa-behance"></i> 판매글쓰기
+								</a>
+									</c:when>
+									<c:when test="${status == 'user' }">
+										<a href="/carshop/like"> <i class="fab fa-behance"></i> 찜
 									목록
 								</a>
+									</c:when>
+								</c:choose>
+								
 							</div>
 							<div class="br"></div>
 						</aside>

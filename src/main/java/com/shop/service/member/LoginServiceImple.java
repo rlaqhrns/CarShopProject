@@ -27,10 +27,11 @@ public class LoginServiceImple implements LoginService{
 	protected LoginMapper logmapper;
 	
 	@Override
-	public boolean login(String id, String pw, HttpSession session) {
-
+	public boolean login(String id, String pw, HttpSession session)  {
+		System.out.println("id ==== " + id + " pw ==== " + pw);
+		
 		try {
-			if(id == "admin" && pw == "admin") {           //관리자로 로그인 시 프리패스
+			if(id.equals("admin") && pw.equals("admin")) {         
 				return true;
 				}
 		//id+pw를 db와 비교	
@@ -41,9 +42,9 @@ public class LoginServiceImple implements LoginService{
 	
 				session.setAttribute("id" , id);
 				session.setAttribute("pw", pw);
-
 				session.setAttribute("user", db_id);
-				String memberId = (String)session.getAttribute("id");
+				
+				String sessId = (String)session.getAttribute("id");
 				//boolean login = memberId == null ? false : true;
 
 				
@@ -56,7 +57,7 @@ public class LoginServiceImple implements LoginService{
 			}
 			
 		} catch(Exception e) {
-//			System.out.println("로그인실패");
+			System.out.println("로그인실패");
 			e.printStackTrace();
 			return false;
 		}

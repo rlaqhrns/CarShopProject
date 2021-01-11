@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	String sessId = (String)session.getAttribute("id");
+%>
 <!DOCTYPE html>
 <html lang="UTF-8">
 <head>
@@ -9,6 +12,8 @@
 <meta http-equiv="Content-Type" content="text/html">
 <title>저기 카</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+
+
 <style>
 .searchbar {
 	margin-bottom: auto;
@@ -53,7 +58,14 @@
 	color: white;
 	text-decoration: none;
 }
-
+.header_area .main_menu .navbar .container .collapse .nav-right{
+	display : flex;
+	align-items : center;
+}
+.header_area .main_menu .navbar .container .collapse .nav-right .nav-log .nav-login {
+	margin-top : 20px;
+	margin-bottom : 20px;
+}
 </style> 
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/papicon.png">
 <!-- 파피콘 이미지 수정 2020/01/08 yunhj -->
@@ -71,10 +83,30 @@
 	href="/resources/vendors/owl-carousel/owl.carousel.min.css">
 
 <link rel="stylesheet" href="/resources/css/style.css">
-
+<script> 
+	$.ajax({
+		url: '/carshop/headerAjax',
+		type : 'get',
+		dataType : "json",
+	    contentType: "application/json; charset=utf-8",
+		success:function(data){
+			if(data){
+				console.log("if완료완료");
+			}else {
+				console.log("else완료");
+				$('.nav-login').attr("style","show");
+				$('.nav-logout').hide();
+			}
+		},
+		error :function(){
+			console.log("실패함");
+		},
+		complete : function(){
+			console.log("ajax통신완료");
+		}
+	});
+</script>
 </head>
-
-
 
 <body>
 	<!--================ Start Header Menu Area =================-->
@@ -83,6 +115,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container">
 					<a class="navbar-brand logo_h" href="/carshop/index"><img src="/resources/img/logo3.png" alt="로고" style= "width: 70px; height: 70px;"></a>
+
 					<!-- yun.hj 2020.01.07 logo img change & 규격이 상이해서 style 추가 함 -->
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
@@ -92,16 +125,29 @@
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 							<li class="nav-item"><a class="nav-link" href="/carshop/index">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="/carshop/product/list">Shop</a></li>
-							<li class="nav-item"><a class="nav-link" href="/carshop/mypage">Mypage</a></li>
+							<li class="nav-item"><a class="nav-link" href="/carshop/productList">Shop</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+							<!--  컨탠츠랑 mypage 위치 수정 2021.01.11 -->
+<%
+	if(sessId != null){
+%>							
+							<li class="nav-item"><a class="nav-link" href="/carshop/mypage">Mypage</a></li>
+<%
+	}
+%>
+							
 						</ul>
-						<ul class="nav-shop">
-							<li class="nav-item"><a href="cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
-							<li class="nav-item"><a class="button button-header" href="register" id="login">login</a></li>
-							<!-- yun.hj 2020/01/07 장바구니 경로 설정 -->
-							<!-- uin.hj 2020/01/08 mypage, home, shop, contact 경로 설정 -->
-						</ul>
+						<div class="nav-right">
+							<ul class="nav-shop">
+								<li class="nav-item"><a href="carshop/cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
+							</ul><!-- yun.hj 2020/01/07 장바구니 경로 설정 -->
+								<!-- uin.hj 2020/01/08 mypage, home, shop, contact 경로 설정 -->
+								<!-- 결로 버그 수정 2021.01.11 hyejeong -->
+							<div class="nav-log">
+								<div class="nav-login" style="position:relative; visibility:hidden"><a class="button button-header" href="login" >login</a></div>
+								<div class="nav-logout" style="position:relative; left : 0px; top:-50px;"><a class="button button-header"  href="logout" >logout</a></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</nav>
