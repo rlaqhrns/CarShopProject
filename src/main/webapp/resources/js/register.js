@@ -100,34 +100,48 @@ function emailcheck(){
 		$("#memail").val("이메일 형식이 맞지 않습니다.");
 		emailok=false;
 	} else {
-		//이메일 인증코드를 위한 난수 생성
-		emailcode = Math.floor(Math.random() * 1000000)+100000;
-		if(emailcode>1000000){
-			emailcode = emailcode - 100000;
-		}
+		
+		$.ajax({
+			url : 'toemailcheck?toemail=' + toemail,
+			type : 'get',
+			dataType : 'json',
+			success : function(data) {
+				$("#memail").css("color","red");
+				$("#memail").val("가입된 이메일이 있습니다");
+				emailok=false;
+			},
+			error : function() {
+				//이메일 인증코드를 위한 난수 생성
+				emailcode = Math.floor(Math.random() * 1000000)+100000;
+				if(emailcode>1000000){
+					emailcode = emailcode - 100000;
+				}
 
-		emailjs.init("user_rOnjfiky5XaIkAXuV0flv");
+				emailjs.init("user_rOnjfiky5XaIkAXuV0flv");
+				
+				//전달할 객체
+				var templateParams = {	
+					code : emailcode,
+					email : toemail
+				};
+				                    
+				//서비스id, 템플릿id, 객체를 파라미터로 전달. 이메일 전달 과정임.                	
+				emailjs.send('service_9s6rhbj', 'template_n0q4nwz', templateParams)
+				         	    .then(function(response) {
+				         	       console.log('SUCCESS!', response.status, response.text);
+				         	    }, function(error) {
+				         	       console.log('FAILED...', error);
+				         	    });
+				
+				
+				$("#memail").css("color","blue");
+				$("#memail").val("이메일 전송 완료");
+				$("#email_send").val("다시 보내기");
+				console.log(templateParams);
+				emailok=true;
+			}
+		})
 		
-		//전달할 객체
-		var templateParams = {	
-			code : emailcode,
-			email : toemail
-		};
-		                    
-		//서비스id, 템플릿id, 객체를 파라미터로 전달. 이메일 전달 과정임.                	
-		emailjs.send('service_9s6rhbj', 'template_n0q4nwz', templateParams)
-		         	    .then(function(response) {
-		         	       console.log('SUCCESS!', response.status, response.text);
-		         	    }, function(error) {
-		         	       console.log('FAILED...', error);
-		         	    });
-		
-		
-		$("#memail").css("color","blue");
-		$("#memail").val("이메일 전송 완료");
-		$("#email_send").val("다시 보내기");
-		console.log(templateParams);
-		emailok=true;
 	}
 }
 	
@@ -150,7 +164,7 @@ function emailcheck(){
 	
 	function phonecheck(){
 		phone = $("#phone").val();
-	if(!/(\d{2,4}).*(\d{3,4}).*(\d{4})/.test(phone)){
+	if(!/(\d{2,4}).*(\d{3,4}).*(\d{4,4})/.test(phone)){
 		$("#mphone").css("color","red");
 		$("#mphone").val("전화번호 형식이 맞지 않습니다.");
 		phoneok=false;
