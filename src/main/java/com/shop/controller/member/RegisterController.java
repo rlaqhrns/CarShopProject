@@ -65,14 +65,7 @@ public class RegisterController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 }
