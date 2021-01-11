@@ -88,13 +88,13 @@
 					<tbody>
 						<c:forEach items="${likeList}" var="like">
 							<tr align="center">
-								<td>${like.pname}</td>
-								<td><fmt:formatNumber value="${like.amount}" pattern="#,###,###" />원</td>
+								<td>${like.u_id}</td>
+								<td><fmt:formatNumber value="${like.p_no}" pattern="#,###,###" />원</td>
 								<td><a href="${path}/carshop/like/update?p_no=${like.p_no}" class="icon_cart"></a></td>
 								<td><a href="${path}/carshop/like/delete?p_no=${like.p_no}" class="icon_heart_red"></a></td>
 							</tr>
 						</c:forEach>
-						<!-- 2020/01/08 yunhj 찜목록 삭제와 장바구니 연동 아이콘 저장 -->
+						<!-- 2021/01/08 yunhj 찜목록 삭제와 장바구니 연동 아이콘 저장 -->
 
 
 							<!--btnUpdate와 btnDelete id는 위쪽에 있는 자바스크립트가 처리한다.  -->

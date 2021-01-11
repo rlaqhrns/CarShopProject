@@ -26,7 +26,9 @@
 		</div>
 		<div class="register_type">
 			<input type="button" value="user register" class="register_type_btn"
-				id="user_type" onClick="#"> <input type="button"
+				id="user_type" onClick="#"> 
+				
+			<input type="button"
 				value="seller register" class="register_type_btn" id="seller_type"
 				onClick="location.href='seller_register'">
 		</div>
