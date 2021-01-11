@@ -2,6 +2,7 @@ package com.shop.service.product;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.shop.vo.Prod_Tbl;
@@ -14,7 +15,8 @@ public interface ProductBuyService {
 	public List<Prod_Tbl> getProductAll();
 	public List<ProductCategoryJoin> getProductCategory(Integer categoryParents, Integer categoryDetails,String sorting);
 	public Prod_Tbl getProduct(int p_no);
-	public boolean pushCart(int p_no,String u_id);
+	public boolean pushCart(int p_no,String u_id,int quantity);
 	public boolean addLike(int p_no,String u_id);
 	public User_Tbl getUser(String u_id);
+	public ProductCategoryJoin getProductDetails(@Param("p_no")int p_no);
 }

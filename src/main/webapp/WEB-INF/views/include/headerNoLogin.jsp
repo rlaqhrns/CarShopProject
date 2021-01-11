@@ -100,7 +100,7 @@
 							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 						</ul>
 						<ul class="nav-shop">
-							<li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></button></li>
+							<li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></li>
 							<li class="nav-item"><a class="button button-header" href="login">login</a></li>
 						</ul>
 					</div>

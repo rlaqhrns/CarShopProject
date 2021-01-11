@@ -2,6 +2,7 @@ package com.shop.service.product;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,14 +47,16 @@ public class ProductBuyServiceImple implements ProductBuyService {
 	}
 
 	@Override
-	public boolean pushCart(int p_no, String u_id) {
+	public boolean pushCart(int p_no, String u_id,int quantity) {
 		Prod_Tbl product = getProduct(p_no);
-		Cart_Tbl cart = new Cart_Tbl(); 
+		Cart_Tbl cart = new Cart_Tbl();
+		System.out.println("product Name : " + product.getP_name());
 		cart.setP_no(product.getP_no()); //vo 객체 수정으로 (pno -> p_no) setPno => setP_no 수정 (재원/20.12.29)
 		cart.setU_id(u_id);
+		cart.setQuantity(quantity);
 		cart.setPname(product.getP_name());
 		cart.setAmount(product.getAmount());
-		cart.setTotal(0);
+		cart.setTotal(quantity * product.getAmount());
 		int addCartBoolean = cartMapper.addCart(cart);
 		return addCartBoolean == 1;
 	}
@@ -72,6 +75,12 @@ public class ProductBuyServiceImple implements ProductBuyService {
 	public User_Tbl getUser(String u_id) {
 		
 		return mypageMapper.getuser(u_id);
+	}
+
+	@Override
+	public ProductCategoryJoin getProductDetails(int p_no) {
+		// TODO Auto-generated method stub
+		return mapper.getProductDetails(p_no);
 	}
 
 }
