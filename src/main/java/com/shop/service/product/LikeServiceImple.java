@@ -32,7 +32,11 @@ public class LikeServiceImple implements LikeService {
 		// TODO Auto-generated method stub
 		return mapper.deleteLike(p_no, u_id);
 	}
-
+	
+	
+	
+	
+	
 	@Override
 	public boolean getUserLikeProduct(int p_no,String u_id) {
 		// TODO Auto-generated method stub

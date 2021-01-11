@@ -55,5 +55,17 @@ public class ConfirmationServiceImple implements ConfirmationService{
 		return mapper.findList(p_no);
 	}
 
+	@Override
+	public List<Order_Histroy_Tbl> formList(String u_id) {
+		// TODO Auto-generated method stub
+		return mapper.formList(u_id);
+	}
+
+	@Override
+	public List<Order_Histroy_Tbl> orderEventLists(String u_id, String order_date, int ono) {
+		// TODO Auto-generated method stub
+		return mapper.orderEventLists(u_id, order_date, ono);
+	}
+
 
 }
