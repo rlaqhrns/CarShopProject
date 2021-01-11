@@ -31,7 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoginController {
 	
-
 	@Setter(onMethod_=@Autowired)
 	MailServiceImpl mailservice;
 	
@@ -43,23 +42,23 @@ public class LoginController {
 	
 	@Setter(onMethod_=@Autowired)
 	private JavaMailSenderImpl mailSender;
+	
+	@GetMapping("/headerAjax")
+	@ResponseBody
+	public boolean receive(HttpServletRequest request, HttpSession session) {
 
-	@GetMapping("/thankyou")
-	public String thankyou(HttpServletRequest request, HttpSession session) {
-		request.getSession().invalidate();
-		System.out.println("여기 세션값은1)  "+ request.getSession(false));
-		System.out.println("여기 세션값은2)  "+ session.getId());
+		boolean result = false;
+		HttpSession session1 = request.getSession(false);		//세션이 있다면 저장, 없다면 null반환 
+		String sessId = (String)session.getAttribute("id"); 	//세션에 저장된 아이디가 있는지를 확인하고자함
+		System.out.println("sessId 세션에 저장된 아이디  = " + sessId);
 
-		return "carshop/thankyou";
+		if(sessId != null) result = true;    					//로그인된상태 = "로그아웃버튼보이게"
+		else result = false;
+		return result;
 	}
 	
 	@GetMapping("/login")
 	public String login() {
-		//HttpSession session1 = request.getSession();
-		
-		//session1.invalidate();
-		//System.out.println("여기 에서의 세션은 " +session1);
-		//request.getSession(false);
 		return "carshop/login";
 	}
 	
@@ -67,12 +66,13 @@ public class LoginController {
 	@ResponseBody
 	public String login_success( HttpSession session,@RequestBody Login logvo) {
 		String back = "";
-		System.out.println("포스트 컨트롤러 로그인에서의 session값은? "+ session);
-		System.out.println("login정보는  " + logvo);
 		//입력받은 id,pw확인
 		System.out.println("id = " + logvo.getId() + " pw = " + logvo.getPw());
 		
 		boolean result = loginservice.login(logvo.getId(), logvo.getPw(), session);
+		System.out.println("result : " + result);
+		String sessId = (String)session.getAttribute("id");    //key값이 "id"인 값을 가져온다
+		System.out.println("세션에 저장된 id : " + sessId);
 		
 		if(result == true) {
 			// 관리자페이지로 랜딩할경우
@@ -89,11 +89,10 @@ public class LoginController {
 	}
 	  
 	@GetMapping("/logout")
-	public String login2(HttpSession session) {
+	public String login2(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
-		System.out.println("세션아이디는 : " + session.getId());
-//		request.getSession(true);    //사용자가 또 요청보내면 모든정보가 남아있다. 
-		return "carshop/login";
+		HttpSession session1 = request.getSession(false);
+		return "carshop/index";
 	}
 	
 	
@@ -102,21 +101,12 @@ public class LoginController {
 		String sessionid = session.getId();
 		System.out.println("로그인성공해서 새로생긴 세션id  : " + sessionid);
 		String memberId = (String)session.getAttribute("id");
-		System.out.println("세션으로 아이디 가져오는지?" + memberId);
+		System.out.println("세션으로 indexlogin에 아이디 가져오는지?" + memberId);
 		return "carshop/indexlogin";
 	}
 	
 	@PostMapping("/indexlogin")
 	public String indexlogin2() {
-		return "carshop/indexlogin";
-	}
-	@GetMapping("/loginerror")
-	public String loginerror() {
-		return "carshop/loginerror";
-	}
-	
-	@PostMapping("/loginerror")
-	public String loginerror2() {
 		return "carshop/indexlogin";
 	}
 	
