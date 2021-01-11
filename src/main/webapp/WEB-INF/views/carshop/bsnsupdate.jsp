@@ -49,8 +49,9 @@ div.login_box_img {
 										</div>
 											<!-- 전송 버튼 -->
 										<div class="col-md-12 form-group">
+											<button type="button" class="button button-register w-35" onclick="location.href='/carshop/mypage'" style="display: inline-block;">돌아가기</button>
 											<button type="submit" value="submit"
-												class="button button-register w-100" id="bsnsbtn">사업자 등록</button>
+												class="button button-register w-35" id="bsnsbtn" style="display: inline-block;">사업자 등록</button>
 										</div>
 									</form>
 								</div>
