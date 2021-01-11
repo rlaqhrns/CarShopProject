@@ -131,12 +131,13 @@
 						</ul>
 						<div class="nav-right">
 							<ul class="nav-shop">
-								<li class="nav-item"><a href="cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
+								<li class="nav-item"><a href="/carshop/cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
 							</ul><!-- yun.hj 2020/01/07 장바구니 경로 설정 -->
 								<!-- uin.hj 2020/01/08 mypage, home, shop, contact 경로 설정 -->
+								<!-- 결로 버그 수정 2021.01.11 hyejeong -->
 							<div class="nav-log">
-								<div class="nav-login" style="position:relative; visibility:hidden"><a class="button button-header" href="login" >login</a></div>
-								<div class="nav-logout" style="position:relative; left : 0px; top:-50px;"><a class="button button-header"  href="logout" >logout</a></div>
+								<div class="nav-login" style="position:relative; visibility:hidden"><a class="button button-header" href="/carshop/login" >login</a></div>
+								<div class="nav-logout" style="position:relative; left : 0px; top:-50px;"><a class="button button-header"  href="/carshop/logout" >logout</a></div>
 							</div>
 						</div>
 					</div>
