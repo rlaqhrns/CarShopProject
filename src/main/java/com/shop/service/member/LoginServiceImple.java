@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shop.mapper.member.LoginMapper;
+import com.shop.vo.Admin_Tbl;
 import com.shop.vo.All_User_Tbl;
 
 import javax.swing.JButton;
@@ -26,40 +27,30 @@ public class LoginServiceImple implements LoginService{
 	@Setter(onMethod_=@Autowired)
 	protected LoginMapper logmapper;
 	
-	@Override
-	public boolean login(String id, String pw, HttpSession session)  {
-		System.out.println("id ==== " + id + " pw ==== " + pw);
-		
-		try {
-			if(id.equals("admin") && pw.equals("admin")) {         
-				return true;
-				}
-		//id+pw를 db와 비교	
-		All_User_Tbl db_id = logmapper.idpwcheck(id);
-
-			//로그인성공하면 세션생성
-			if(id.equals(db_id.getId()) && pw.equals(db_id.getPw())) {  
+	private String id;
+	private String pw;
+	private HttpSession session;
+	private Admin_Tbl db_admin;
+	private All_User_Tbl db_id;
 	
-				session.setAttribute("id" , id);
-				session.setAttribute("pw", pw);
-				session.setAttribute("user", db_id);
-				
-				String sessId = (String)session.getAttribute("id");
-				//boolean login = memberId == null ? false : true;
-
-				
-				String sessionid = session.getId();
-//				System.out.println("세션아이디는  : " + sessionid);
-					
-				return true;
-			} else {
-				return false;
+	@Override
+	public String login(String id, String pw, HttpSession session)  {
+		try {
+			if(logmapper.getAdmin(id) != null) {
+				db_admin = logmapper.getAdmin(id);
+				String resultAdmin = admin(id, pw, db_admin.getId(), db_admin.getPw(), session);       //관리자 세션생성되면 "1"을 반환
+				return resultAdmin;         //"1"
 			}
-			
+			if(logmapper.idpwcheck(id) != null) {
+				All_User_Tbl db_id = logmapper.idpwcheck(id);
+				String resultNormalUser = normalUser(id, pw, db_id.getId(), db_id.getPw(), session);   //일반유저 세션생성시 "2"반환
+				return resultNormalUser;        //"2" or "-1"
+			}
+			return "-1";
 		} catch(Exception e) {
 			System.out.println("로그인실패");
 			e.printStackTrace();
-			return false;
+			return "-1";
 		}
 	}
 
@@ -74,6 +65,7 @@ public class LoginServiceImple implements LoginService{
 				if(db_vo == null) {
 					return "-1";  //일치하는이메일없을때
 				}
+				
 			String db_email = db_vo.getEmail();
 			
 			if(email.equals(db_email)) {
@@ -108,4 +100,27 @@ public class LoginServiceImple implements LoginService{
 		logmapper.updatepw(aut);
 	}
 	
+	
+	
+	//관리자 세션생성메서드
+	public String admin(String id, String pw, String adminId, String adminPw, HttpSession session) {
+		if(id.equals(adminId) && pw.equals(adminPw)) {
+			session.setAttribute("id" , id);
+			session.setAttribute("pw", pw);
+			session.setAttribute("user", db_admin);
+		}
+		return "1";
+	}
+	
+	//일반유저 세션생성메서드
+	public String normalUser(String id, String pw, String userId, String userPw, HttpSession session) {
+		if(id.equals(userId) && pw.equals(userPw)) {  
+			session.setAttribute("id" , id);
+			session.setAttribute("pw", pw);
+			session.setAttribute("user", db_id);
+			return "2";
+		}else {
+			return "-1";     
+		}
+	}
 }

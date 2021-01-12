@@ -16,4 +16,7 @@
 	<update id="updatepw">
 		update all_user_tbl set pw = #{pw} where email=#{email}
 	</update>
+	<select id="getAdmin" resultType="com.shop.vo.Admin_Tbl">
+		select * from admin_tbl where id = #{id}
+	</select>
 </mapper>

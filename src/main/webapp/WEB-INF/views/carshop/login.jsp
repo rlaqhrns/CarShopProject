@@ -8,11 +8,61 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html">
-<title>Document</title>
+<title>저리카 | Login </title>
 <script src="https://kit.fontawesome.com/faeeff50dd.js" crossorigin="anonymous"></script>
 <script src = " https://unpkg.com/sweetalert/dist/sweetalert.min.js " ></script>     <!-- sweetAlert -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
 <script type="text/javascript"></script>	
+<script>
+$(document).ready(function(){
+	$('#id').keyup(function(){
+		console.log("id guide 나오나요");
+		var id = $('#id').val();  
+		$.ajax({
+			url: '/carshop/login',
+			type : 'post',
+			dataType : "json",
+		    contentType: "application/json; charset=utf-8",
+		    data : JSON.stringify({
+		    	'id' : id,
+		    	}),
+			success:function(data){
+				if(data == "-1"){
+					$('#idmessage').attr("type","text").css("color","red");
+				}
+			},
+			error :function(){
+				console.log("keyup id 실패함");
+			}
+		})
+	});
+});
+</script>
+<script>
+$(document).ready(function(){
+	$('#pw').keyup(function(){
+		console.log("pw guide 나오나요");
+		var pw = $('#pw').val();  
+		$.ajax({
+			url: '/carshop/login',
+			type : 'post',
+			dataType : "json",
+		    contentType: "application/json; charset=utf-8",
+		    data : JSON.stringify({
+		    	'pw' : pw,
+		    	}),
+			success:function(data){
+				if(data == "-1"){
+					$('#pwmessage').attr("type","text").css("color","red");
+				}
+			},
+			error :function(){
+				console.log("keyup pw 실패함");
+			}
+		})
+	});
+});
+</script>
 <script>
 function showSwal(){
 
@@ -34,8 +84,11 @@ function showSwal(){
 				if(data == "-1"){
 					$('#idmessage').attr("type","text").css("color","red");
 					$('#pwmessage').attr("type","text").css("color","red");
-				}else {
-					console.log("정상종료");
+				}else if(data == "1"){
+					console.log("관리자로 로그인 성공");
+					location.href="index"
+				}else if(data == "2"){
+					console.log("회원으로 로그인 성공");
 					location.href="index"
 				}
 			},
@@ -118,7 +171,7 @@ function showSwal(){
 								<input type="password" class="form-control" id="pw" name="pw" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
 							</div>
 							<div class="message2">
-								<input type="hidden" id="pwmessage" class="pwmessage" tabindex="-1" value="pw를 확인해주세요" readonly>
+								<input type="hidden" id="pwmessage" class="pwmessage" tabindex="-1" value="영문자/숫자조합 8~15자리로 입력해주세요" readonly>
 							</div>
 							<div class="col-md-12 form-group">
 

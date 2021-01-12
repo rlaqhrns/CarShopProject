@@ -66,25 +66,11 @@ public class LoginController {
 	@ResponseBody
 	public String login_success( HttpSession session,@RequestBody Login logvo) {
 		String back = "";
-		//입력받은 id,pw확인
-		System.out.println("id = " + logvo.getId() + " pw = " + logvo.getPw());
+		String result = loginservice.login(logvo.getId(), logvo.getPw(), session);
 		
-		boolean result = loginservice.login(logvo.getId(), logvo.getPw(), session);
-		System.out.println("result : " + result);
-		String sessId = (String)session.getAttribute("id");    //key값이 "id"인 값을 가져온다
-		System.out.println("세션에 저장된 id : " + sessId);
-		
-		if(result == true) {
-			// 관리자페이지로 랜딩할경우
-			if(logvo.getId() == "admin"){
-				back = "0";
-			}
-			System.out.println("111111");
-			back = "0";
-		}else {
-			System.out.println("22222");
-			back = "-1";
-		}
+		if(result == "1") back = "1";			//관리자로 로그인
+		else if(result == "2") back = "2";		//회원으로 로그인
+		else back = "-1";						//로그인정보가 틀릴경우
 		return back;
 	}
 	  
