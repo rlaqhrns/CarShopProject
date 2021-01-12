@@ -15,4 +15,9 @@
 		select * from prod_tbl order by p_no desc limit 4
 		]]>
 	</select>
+	<select id="annc" resultType="com.shop.vo.Annc_Tbl">
+		<![CDATA[
+		select * from annc_tbl order by annc_date desc limit 3
+		]]>
+	</select>
 </mapper>
