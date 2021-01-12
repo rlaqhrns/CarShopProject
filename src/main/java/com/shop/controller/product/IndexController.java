@@ -1,5 +1,7 @@
 package com.shop.controller.product;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -32,10 +34,11 @@ public class IndexController {
 	private IndexService service;
 
 	@GetMapping( "index" )
-	public String index(Model model) {
+	public String index(Model model,HttpSession session) {
 		model.addAttribute("list", service.index());
 		model.addAttribute("list2",service.index2());
 		model.addAttribute("annc",service.annc());
+		model.addAttribute("user",session.getAttribute("user"));
 		System.out.println("index들어옴");
 		return "carshop/index";
 
