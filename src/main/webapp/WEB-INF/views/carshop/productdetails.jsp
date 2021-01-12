@@ -52,8 +52,8 @@
 			<div class="col-lg-6">
 				<div class="owl-carousel owl-theme s_Product_carousel">
 					<div class="single-prd-item">
-						<img class="img-fluid" src="${product.img1}"
-							alt="">
+						<img class="img-fluid" src="/resources/img/upload/${product.img1}"
+							onerror="this.src='/resources/img/noimage.gif'">
 					</div>
 
 				</div>
@@ -70,7 +70,7 @@
 					</h2>
 					<ul class="list">
 						<li><span>카테고리 </span> : ${product.c_name }</li>
-						<li><span>재고 상태 </span> : 재고 있음(<strong>${product.quantity}개</strong>)</li>
+						<%-- <li><span>재고 상태 </span> : 재고 있음(<strong>${product.quantity}개</strong>)</li> --%>
 					</ul>
 					<p><c:out value="${product.discribe}" /></p>
 					<div class="card_area d-flex align-items-center">
@@ -78,26 +78,34 @@
 						<div class="product_count"
 							style="margin-top: 20px; float: left; vertical-align: middle;">
 							
-							<label for="qty" style="float: left">수량 : </label> 
+							<label for="qty" style="margin-top:10px;float: left">수량 : </label> 
 							<input
 								type="number" name="qty" id="sst" size="2" maxlength="12"
 								value="1" title="Quantity" class="input-text qty"
-								style="float: left"> 
+								style="margin-top:8px;float: left"> 
 							
 							
 							<label for=""
-								style="margin-left: 15px; float: left">찜 : </label>
+								style="margin-top:10px;margin-left: 15px; float: left">찜 : </label>
 							<div class="icon_heart_empty" style="float: left"></div>
 							
 						</div>
-							<div>
-								<button 
-									class="button primary-btn btn-shopping-cart" 
-									style="float:left;margin-left: 30px;background-color:blue;">장바구니</button>
-							</div>
 					</div>
+				</div><div>
+						<div>
+							<button class="button primary-btn btn-shopping-cart"
+								style="float: left; margin-left: 30px; background-color: blue;">장바구니</button>
+						</div>
+						<div>
+							<form action="/carshop/report" method='get' id = "formReport">
+								<input type="hidden" value="${product.p_no }" name="p_no">
+							
+								<button class="button danger-btn" id="btn-report"
+										style="float: left; margin-left: 30px; background-color: red;">신고</button>
+							</form>
 
-				</div>
+						</div></div>
+						
 			</div>
 		</div>
 	</div>
@@ -111,9 +119,7 @@
 			<li class="nav-item"><a class="nav-link" id="home-tab"
 				data-toggle="tab" href="#home" role="tab" aria-controls="home"
 				aria-selected="true">상세설명</a></li>
-			<li class="nav-item"><a class="nav-link" id="profile-tab"
-				data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-				aria-selected="false">상품정보(규격)</a></li>
+			
 			<li class="nav-item"><a class="nav-link" id="contact-tab"
 				data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
 				aria-selected="false">상품문의</a></li>
@@ -125,80 +131,6 @@
 			<div class="tab-pane fade" id="home" role="tabpanel"
 				aria-labelledby="home-tab">
 				<p><c:out value="${product.discribe}" /></p>
-
-			</div>
-			<div class="tab-pane fade" id="profile" role="tabpanel"
-				aria-labelledby="profile-tab">
-				<div class="table-responsive">
-					<table class="table">
-						<tbody>
-							<tr>
-								<td>
-									<h5>Width</h5>
-								</td>
-								<td>
-									<h5>128mm</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Height</h5>
-								</td>
-								<td>
-									<h5>508mm</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Depth</h5>
-								</td>
-								<td>
-									<h5>85mm</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Weight</h5>
-								</td>
-								<td>
-									<h5>52gm</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Quality checking</h5>
-								</td>
-								<td>
-									<h5>yes</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Freshness Duration</h5>
-								</td>
-								<td>
-									<h5>03days</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>When packeting</h5>
-								</td>
-								<td>
-									<h5>Without touch of hand</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h5>Each Box contains</h5>
-								</td>
-								<td>
-									<h5>60pcs</h5>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
 			</div>
 			<div class="tab-pane fade" id="contact" role="tabpanel"
 				aria-labelledby="contact-tab">
@@ -232,7 +164,7 @@
 										<h5>
 											<small><c:out value="${list.ask_date }" /></small>
 										</h5>
-										<c:if test="${user.seller == 'Y' }">
+										<c:if test="${user.id == product.s_id }">
 											<a class="reply_btn" id="askReply"
 												data-ask_no="${list.ask_no }">Reply</a>
 										</c:if>
@@ -372,6 +304,7 @@
 			<div class="modal-body">...</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				<div id = "cart-btn-area"></div>
 			</div>
 		</div>
 	</div>
@@ -380,11 +313,11 @@
 
 <!--================End Product Description Area =================-->
 
-<%@ include file="../include/topproduct.jsp"%>
 <%@ include file="../include/footer.jsp"%>
 <script>
 function clickEvent(){
 	//하트 토글 이벤
+		
 	let p_no = getP_no();
 	let heart_empty = $(".icon_heart_empty");
 	heart_empty.off("click");
@@ -394,7 +327,7 @@ function clickEvent(){
 		if(obj.hasClass("icon_heart_red")){
 			removeLikeEvent(p_no,obj);
 		}
-		else {
+		else{
 			addLikeEvent(p_no,obj);
 		}
 	});
@@ -406,6 +339,17 @@ function clickEvent(){
 		let quantity = $(".product_count").children("input").val();
 		addCartEvent(p_no,quantity);
 	})
+	
+	let btnReport = $("#btn-report");
+	btnReport.click(function(){
+		if(loginTypeCheck()){
+			return false;
+		}
+		btnReport.preventDefault();
+		console.log("report click!");
+		addReportEvent();
+	})
+	
 }
 function getUserId(){
 	let u_id = "${user.id}";
@@ -415,11 +359,27 @@ function getP_no(){
 	let p_no = "${product.p_no}";
 	return p_no;
 }
+function getS_id(){
+	let s_id = "${product.s_id}";
+	return s_id;
+}
+function getSellerCheck(){
+	let sellerCheck = "${user.seller}"
+	//console.log("sellerCheck : " +  sellerCheck);
+	if(sellerCheck === 'N'){
+		return false;
+	}else if(sellerCheck === 'Y') {
+		return true;
+	}
+}
 
 $(document).ready(function() {
 					clickEvent();
 					checkLiked();
-					
+					//getSellerCheck();
+					if(getSellerCheck() || sessoinExistenceChecked()){
+						$(".review_box").hide();
+					}
 					let u_id = "${user.id}";
 					let seller ="${user.seller}";
 					let seller_id = "${product.s_id}";
@@ -548,12 +508,10 @@ $(document).ready(function() {
 	
 	 function addCartEvent(p_no,quantity) { //장바구니
 			let userId = getUserId();
-			if(sessoinExistenceChecked()){
-				$("#notice .modal-body").html("로그인 후 이용해주세요.");
-				$('#notice').modal('show');
+			
+			if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 				return false;
 			}
-			
 	
 			$.ajax({
 				url : '/carshop/product/addcart',
@@ -566,6 +524,8 @@ $(document).ready(function() {
 				dataType : 'JSON',
 				success : function(stats) {
 					$("#notice .modal-body").html("\""+ userId + "\"님 장바구니에 넣었습니다.");
+					$("#cart-btn-area").empty().append(`<button type="button" onClick="location.href='/carshop/cart'"
+						class="btn btn-primary" data-dismiss="modal">장바구니로 이동</button>`);
 					$('#notice').modal('show');
 	
 				},
@@ -576,9 +536,7 @@ $(document).ready(function() {
 		}
 	function addLikeEvent(p_no,$obj) { //찜목록추가
 		let userId = getUserId();
-		if(sessoinExistenceChecked()){
-			$("#notice .modal-body").html("로그인 후 이용해주세요.");
-			$('#notice').modal('show');
+		if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 			return false;
 		}
 
@@ -600,12 +558,18 @@ $(document).ready(function() {
 			}
 		})
 	}
+	function addReportEvent() { //신고
+		if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
+			return false;
+		}else{
+			$("#formReport").submit();
+		}
+
+	}
 	function removeLikeEvent(p_no,$obj) { //찜목록삭제
 		//console.log("상품번호 : " + p_no);
 		let userId = getUserId();
-		if(sessoinExistenceChecked()){
-			$("#notice .modal-body").html("로그인 후 이용해주세요.");
-			$('#notice').modal('show');
+		if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 			return false;
 		}
 		$.ajax({
@@ -654,11 +618,24 @@ $(document).ready(function() {
 	} 
 	function sessoinExistenceChecked(){
 		let userId = getUserId();
-
 		if(userId === "" || typeof userId === "undefined" || userId === null){
 			
 			return true;
 		}
 		return false;
+	}
+	function loginTypeCheck(){
+		
+		let result = false;
+		if(sessoinExistenceChecked()){
+			$("#notice .modal-body").html("로그인 후 이용해주세요.");
+			$('#notice').modal('show');
+			result = true;
+		}else if(getSellerCheck()){
+			$("#notice .modal-body").html("판매자는 이용할수 없습니다. 일반유저 로그인 후 이용해주세요.");
+			$('#notice').modal('show');
+			result = true;
+		}
+		return result;
 	}
 </script>

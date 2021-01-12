@@ -49,8 +49,9 @@ div.login_box_img {
 										</div>
 											<!-- 전송 버튼 -->
 										<div class="col-md-12 form-group">
+											<button type="button" class="button button-register w-35" onclick="location.href='/carshop/mypage'" style="display: inline-block;">돌아가기</button>
 											<button type="submit" value="submit"
-												class="button button-register w-100" id="bsnsbtn">사업자 등록</button>
+												class="button button-register w-35" id="bsnsbtn" style="display: inline-block;">사업자 등록</button>
 										</div>
 									</form>
 								</div>
@@ -64,6 +65,8 @@ div.login_box_img {
 	<script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
+			$("title").html("저기 카 | Business");
+			
 			console.log("사업자 콘솔로그");
 			
 			$("#bsnsbtn").on("click", function(e) {  //전송버튼 클릭되면

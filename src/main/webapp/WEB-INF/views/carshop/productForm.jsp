@@ -179,7 +179,8 @@ input:checked+.slider:before {
 							</ul>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-default">등록</button>
+					<input type="button" class="btn btn-default" value="등록" id="btsCk">
+<!-- 					<button onchange="btsCk" class="btn btn-default">등록</button> -->
 					<button type="reset" class="btn btn-default">초기화</button>
 				</form>
 			</div>
@@ -196,9 +197,22 @@ input:checked+.slider:before {
 			$("#quantity").on("keyup",function(){
 			    $(this).val($(this).val().replace(/[^0-9]/g,""));
 			})
-    			
+			
+    		$("#btsCk").click(function(){
+    			console.log("클릭됨");
+    			let length = $("#image")[0].files.length;
+    			console.log("imgae : " ,length);
+    			if(length==0){
+    				alert("등록된 이미지가 없습니다");
+    			}else{
+    				$("#btsCk").attr({type : "submit"});
+    			}
+    		
+    		})
     			
     		})
+
+    		
 	// onchange 로 input 태그 클릭 시 이벤트 발생
 	function setDisplay(obj) {
 		console.log("obj : " + obj);
