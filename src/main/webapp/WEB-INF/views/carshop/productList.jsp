@@ -165,6 +165,7 @@
 			<div class="modal-body">...</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				<div id = "cart-btn-area"></div>
 			</div>
 		</div>
 	</div>
@@ -181,7 +182,7 @@
 <script>
 
 
-function addCartEvent(p_no) { //장바구니
+function addCartEvent(p_no,quantity) { //장바구니
 	let userId = getUserId();
 	if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 		return false;
@@ -194,11 +195,14 @@ function addCartEvent(p_no) { //장바구니
 		data : {
 			"u_id" : userId,
 			"p_no" : p_no,
-			"quantity":0
+			"quantity":quantity
 		},
 		dataType : 'JSON',
 		success : function(stats) {
 			$(".modal-body").html("\""+getUserId() + "\"님 장바구니에 넣었습니다.");
+			
+			$("#cart-btn-area").empty().append(`<button type="button" onClick="location.href='/carshop/cart'"
+											class="btn btn-primary" data-dismiss="modal">장바구니로 이동</button>`);
 			$('#notice').modal('show');
 
 		},
@@ -436,7 +440,7 @@ function clickEvent(){ //찜, 장바구니 버튼 클릭 이벤트
 		}
 	});
 	shoppingCart.click(function(){ //장바구니 add
-		addCartEvent($(this).val());
+		addCartEvent($(this).val(),1);
 	})
 	
 }
