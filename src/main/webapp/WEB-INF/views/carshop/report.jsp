@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../include/header.jsp"%>
 <c:set var="now" value="<%= new java.util.Date() %>"></c:set>
-<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm" /> </c:set>
+<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm" /> </c:set>  <!-- 하단에서 신고 날짜 출력을 위해 필요 -성연 20.01.12 -->
 
 <div class="content py-5  bg-light">
 	<div class="container">
@@ -17,7 +17,9 @@
 						<h3 class="mb-0">신고글 작성</h3>
 					</div>
 					<div class="card-body">
-						<form method="post" action="/carshop/reportsubmit">
+						<!-- 신고 폼 시작 -성연 20.01.12 -->
+						<form method="post" action="/carshop/reportsubmit" id="reportform">
+							<!-- 신고 제품의 정보 -->
 							<div class="media post_item">
 								<img class="prod_pic" src="/resources/img/upload/${prod.img1 }" alt="post" style="width: 100px; height: 60px;">
 								<div class="media-body">
@@ -54,13 +56,13 @@
 
 							<div class="form-group row" style="float: right">
 
-								<input type="submit" class="btn btn-primary" value="신고">
+								<input type="button" class="btn btn-primary" id="report" value="신고">
 							</div>
 						</form>
+						<!-- 신고폼 끝 -->
 					</div>
 				</div>
-				<!-- /form user info -->
-
+				<!-- 신고폼 div 끝 -성연 20.01.12 -->
 			</div>
 		</div>
 	</div>
@@ -68,4 +70,26 @@
 
 </body>
 
+
 <%@ include file="../include/footer.jsp"%>
+<script>
+	$(document).ready(function() {
+		
+		$("title").html("저기 카 | REPORT");
+		
+		$("#report").on("click", function(e) {
+			var content = $("textarea[name='content']").val();
+			if(content.length == 0){  //신고 본문 내용이 없으면 alert생성, 폼 전달 안됨 -성연 20.01.12
+				e.preventDefault();
+				alert("신고내용을 작성해주세요.");
+			} else if(content.length > 0){ //본문 내용이 있으면 폼 전송 -성연 20.01.12
+				e.preventDefault();
+				alert("신고가 접수되었습니다.");
+				$("#reportform").submit();
+			}
+
+		});
+		
+	});
+
+</script>

@@ -60,6 +60,7 @@ public class BlackListServiceImple implements BlackListService{
 		try {   //try-catch to process the exception during transaction -SungYeon 20.12.23
 			int a = mapper.delete_alluser(s_id);
 			int b = mapper.delete_seller(s_id);
+			mapper.setzero(s_id);  //추가 -성연 20.01.12
 			
 			return a == 1 && b == 1;
 			
@@ -71,13 +72,13 @@ public class BlackListServiceImple implements BlackListService{
 	}
 
 	@Override
-	public Prod_Tbl getprod(int p_no) {
+	public Prod_Tbl getprod(int p_no) {  //pno에 해당하는 상품 정보 조회 -성연 20.01.12
 		// TODO Auto-generated method stub
 		return prodmapper.getProduct(p_no);
 	}
 
 	@Override
-	public void insert_report(Report_Tbl report) {
+	public void insert_report(Report_Tbl report) { //신고 db에 저장 -성연 20.01.12
 		mapper.insert_report(report);
 		
 	}

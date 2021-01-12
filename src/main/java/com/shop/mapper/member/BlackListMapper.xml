@@ -31,4 +31,8 @@
 	<insert id="insert_report">
 		insert into report_tbl VALUES(#{u_id}, #{s_id}, #{p_no}, now(), #{content})
 	</insert>
+	
+	<update id="setzero">
+		UPDATE prod_tbl SET quantity = 0 WHERE s_id = #{s_id}
+	</update>
 </mapper>

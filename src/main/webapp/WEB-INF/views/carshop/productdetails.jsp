@@ -97,9 +97,8 @@
 								style="float: left; margin-left: 30px; background-color: blue;">장바구니</button>
 						</div>
 						<div>
-							<form action="/carshop/report?p_no=${product.p_no }" method='post' id = "formReport">
-								<input type="hidden" value="${product.s_id }" name="s_id"/>
-								<input type="hidden" value="${user.id }" name="u_id"/>
+							<form action="/carshop/report" method='get' id = "formReport">
+								<input type="hidden" value="${product.p_no }" name="p_no">
 							
 								<button class="button danger-btn" id="btn-report"
 										style="float: left; margin-left: 30px; background-color: red;">신고</button>

@@ -51,7 +51,7 @@
                       <td class="s_id" id="${no }"></td> <!-- will be found by class and id and get <p> from script -SungYeon 20.12.23 -->
                       <td class="date" id="${no }"></td> <!-- will be found by class and id and get <p> from script -SungYeon 20.12.23 -->
                       <td><button id="removebtn" onclick="">내리기</button></td> <!-- btn to call removeblk() -SungYeon 20.12.23 -->
-                      <td><button id="deletebtn" onclick="'">삭제</button></td> <!-- btn to call deleteblk() -SungYeon 20.12.23 -->
+                      <td><button id="deletebtn" onclick="">삭제</button></td> <!-- btn to call deleteblk() -SungYeon 20.12.23 -->
                    </c:forEach> 
             </tbody>
           </table>
@@ -69,6 +69,7 @@
 <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("title").html("저기 카 | BlackList");
 		
 		var blklist = $(".blk_list");  //tbl query object to list json data -SungYeon 20.12.23
 		
@@ -230,6 +231,7 @@
 			$.ajax({
 				type: 'delete',  //restAPI type
 				url: '/carshop/blkremove/' + s_id,  //process through this url with s_id -SungYeon 20.12.23
+													//특수문자 포함한 아이디도 문제 없이 전달되도록 jsp, 컨트롤러 수정 -성연 20.01.12
 				success: function(deleteResult, status, xhr) {
 					if(callback){
 						callback(deleteResult);
