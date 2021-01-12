@@ -40,11 +40,19 @@ public class ConfirmationController {
 		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
 		System.out.println(getId);
 		user.setU_id(getId);
-
+		
 		model.addAttribute("buylist", service.formList(user.getU_id()));
 
 
 		return "carshop/confirmation";
+	}
+	
+	@PostMapping("/isRefundTrue") 
+	@ResponseBody
+	public boolean isRefundTrue (@RequestParam(value = "ono") int ono) {
+		//@RequestParam(value = "ono", required = false)
+		return service.returnOne(ono);
+		
 	}
 	
 

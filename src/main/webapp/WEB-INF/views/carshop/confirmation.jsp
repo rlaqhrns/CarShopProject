@@ -61,9 +61,8 @@
                       <td><c:out value="${buylist.pname}"></c:out></td>
                       <td><c:out value="${buylist.quantity}"></c:out></td>
                       <td><c:out value="${buylist.amount}"></c:out></td>
-                      <td><c:out value="${buylist.pay}"></c:out></td>  
-                      <td style="display:none"><input id="validationRequired" type="text" value='<c:out value = "${buylist.p_no}"/>' name="p_no" style="visibility: hidden;"></input></td>                  
-                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}" data-toggle="modal" data-target="#exampleModalCenter">교환/반품</button></td>	 
+                      <td><c:out value="${buylist.pay}"></c:out></td>                                         
+                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}">교환/반품</button></td>	 
              		  <td><c:out value="${buylist.order_date}"></c:out></td>              		
              		</tr>
               </c:forEach> 
@@ -110,7 +109,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			        <button type="button" class="btn btn-primary" id="applyBtn" onclick="changeRefundBtn();">신청하기</button>
+			        <button type="button" class="btn btn-primary" id="applyBtn">신청하기</button>
 			      </div>
 			    </div>
 			  </div>
@@ -133,19 +132,57 @@
       		$(document).ready(function(){
       			$('[data-toggle="tooltip"]').tooltip();
       			
+      			
       			var form = $('#returnFormAjax')[0];
-      			
-      		    $("#getItemChange").click(function(){
-      		        $("#exampleModal").appendTo("body").modal();
-      		    });
-      		    
-      		  $("#getItemRefund").click(function(){
-    		        $("#exampleModal").appendTo("body").modal();
-    		    });
+
+/* 	      		 $(".btn-warning").click(function(){
+	      			console.log("되냐");
+					$('#ono').val($(this).val());
+       			 	var btn = $(this);
+       			 	console.log(btn);
+       			 	var ono = $('#ono').val();
+       			 	
+       			 	notifyid= $(this).data('notifyid');
+       			 	nnotifyid= $(this).data('nnotifyid');
+       			 	nnnotifyid= $(this).data('nnnotifyid');
+       			 	$('#pname').val(notifyid);
+       			 	$('#u_id').val(nnotifyid);	
+       			 	$('#s_id').val(nnnotifyid);
+	      			
+	  				//var ono = $(this).val();
+	  				$.ajax({
+	            	    url :'isRefundTrue?ono=' + ono,
+	            	    type : 'post',
+		               	dataType : 'JSON',
+	               		success : function(data){
+	              		console.log(data);
+	            		//console.log($(this));
+	            		//$('.btn-primary').attr('btn-primary', 'btn-success');
+	            		if(data == false) {
+	            			console.log(btn);
+	            			btn.addClass('btn-success');
+	            			btn.removeClass('btn-warning');	            			
+	            			btn.attr('disabled', 'true');
+	            		}
+	            		else {
+	            			console.log("들어온다?");
+	            			$("#exampleModalCenter").modal('show');
+	            			//$("#exampleModal").appendTo("body").modal();
+	            		}
+	            		//$("#exampleModal").appendTo("body").modal();
+	               },
+	               error : function(){	
+	                  console.log("아이템통신실패");
+	               }
+	               
+	              
+	            });  				
+  			
+    		    //$("#exampleModal").appendTo("body").modal();
+    		   }); */
       		  
-      			writeRefundForms();
-      			
-      			
+      			//writeRefundForms();
+      		
       		  
       		  $('#confirmationAllList').click(function() {
       			    			
@@ -156,21 +193,11 @@
       		  
       		  });
       		  
-      		  
-      		var result = new Array();
-  			
-            <c:forEach items="${buylist}" var ="buylist"> 
-            	var json = new Object();
-            	<c:set var ="order_date" value="${buylist.order_date}"/>
-	            json.title = "${buylist.pname}";    
-       		 	json.start = "${fn:substring(order_date,0,10)}";
-       		 	json.end = "${fn:substring(order_date,0,10)}";
-       		 	result.push(json);
-    		</c:forEach>
+      	    		       		  
 
       		});
       		
-      		function writeRefundForms() {
+      		 function writeRefundForms() {
       			 $('.btn-warning').click(function() {
        			 	$('#ono').val($(this).val());
        			 	
@@ -183,35 +210,12 @@
        			 	$('#u_id').val(nnotifyid);	
        			 	$('#s_id').val(nnnotifyid);
        		  });
-      		}
+      		} 
       		
-      		function getCalendarDataDB() { 
-      			//캘린더에 띄울 정보를 배열로 받아옵니다. (재원/21.01.04)
-      			//Json 배열 만들기 (..) (재원/21.01.04)
-      			
-      			var result = new Array();
-      			
-                <c:forEach items="${buylist}" var ="buylist"> 
-                	var json = new Object();    
-		            json.pname = "${buylist.pname}";    
-	                json.quantity = "${buylist.quantity}";
-	                json.amount = "${buylist.amount}";
-	                json.pay = "${buylist.pay}";
-	       		 	json.order_date = "${buylist.order_date}";
-	       		 	result.push(json);
-        		</c:forEach>
-        		
-        		console.log("json = " + json.pname);
-        		console.log("jsoninfo = " + JSON.stringify(result));
-      			
-        		var dataJson = JSON.stringify(result);
-        	
-      			
-      		}
       		
       		function getReloadSuccess() {
       		  $('.btn-primary').click(function() {
-      			changeRefundBtn();
+      			
       			  var param = $("form[name=returnFormAjax]").serialize();
       			  $.ajax({
 	            	    url :'confirmation',
@@ -221,9 +225,9 @@
 	              		//console.log(data);
 	            		//console.log($(this));
 	            		//$('.btn-primary').attr('btn-primary', 'btn-success');
-	            		
+	            		$('#modal').modal('toggle');
 
-	            		window.location.reload();
+	            		//window.location.reload();
 	            		
 	               },
 	               error : function(){	
@@ -239,13 +243,96 @@
       		
       		}
       		
-      		function changeRefundBtn() {
+      		function refundChangeModal() {
+      			 $(".btn-warning").click(function(){
+ 	      			console.log("되냐");
+ 					$('#ono').val($(this).val());
+        			 	var btn = $(this);
+        			 	console.log(btn);
+        			 	var ono = $('#ono').val();
+        			 	
+        			 	notifyid= $(this).data('notifyid');
+        			 	nnotifyid= $(this).data('nnotifyid');
+        			 	nnnotifyid= $(this).data('nnnotifyid');
+        			 	$('#pname').val(notifyid);
+        			 	$('#u_id').val(nnotifyid);	
+        			 	$('#s_id').val(nnnotifyid);
+ 	      			
+ 	  				//var ono = $(this).val();
+ 	  				$.ajax({
+ 	            	    url :'isRefundTrue?ono=' + ono,
+ 	            	    type : 'post',
+ 		               	dataType : 'JSON',
+ 	               		success : function(data){
+ 	              		console.log(data);
+ 	            		//console.log($(this));
+ 	            		//$('.btn-primary').attr('btn-primary', 'btn-success');
+ 	            		if(data == false) {
+ 	            			console.log(btn);
+ 	            			btn.addClass('btn-success');
+ 	            			btn.removeClass('btn-warning');	            			
+ 	            			btn.attr('disabled', 'true');
+ 	            		}
+ 	            		else {
+ 	            			console.log("들어온다?");
+ 	            			$("#exampleModalCenter").modal('show');
+ 	            			//$("#exampleModal").appendTo("body").modal();
+ 	            		}
+ 	            		//$("#exampleModal").appendTo("body").modal();
+ 	               },
+ 	               error : function(){	
+ 	                  console.log("아이템통신실패");
+ 	               }
+ 	               
+ 	              
+ 	            });  				
+   			
+     		    //$("#exampleModal").appendTo("body").modal();
+     		   });
+      		}
+      		
+      		/* function isRefundAccess() {
+      			$("#getItemRefund").click("btn-warning",function() {
+      				console.log("되냐");
+      				var ono = $(this).val();
+      				$.ajax({
+	            	    url :'isRefundTrue?ono=' + ono,
+	            	    type : 'post',
+		               	dataType : 'JSON',
+	               		success : function(data){
+	              		console.log(data);
+	            		//console.log($(this));
+	            		//$('.btn-primary').attr('btn-primary', 'btn-success');
+	            		if(data == true) {
+	            			$('#getItemRefund').removeClass('btn-warning');
+	            			$('#getItemRefund').addClass('btn-success');
+	            			$('#getItemRefund').attr('disabled', 'true');
+	            		}
+	            		
+	            		
+	               },
+	               error : function(){	
+	                  console.log("아이템통신실패");
+	               }
+	               
+	              
+	            });
+      				
+      				e.preventDefault();
+      				
+      			})
+      			 
+	            
+ 	 
+      		} */
+      		
+/*       		function changeRefundBtn() {
     			  $('#applyBtn').click(function() {
     				  console.log(this);
     				$(this).attr('disabled', true);
     				
     			  });
-    		  }
+    		  } */
       		
       		//주문상세정보 pagination 10개마다 끊기 (재원/21.01.06)
       		
@@ -254,6 +341,8 @@
       	    //The onload event is a standard event in the DOM, while the ready event is specific to jQuery. The purpose of the ready event is that it should occur as early as possible after the document has loaded, so that code that adds functionality to the elements in the page doesn't have to wait for all content to load.
       		document.addEventListener('DOMContentLoaded', function() {
       			getReloadSuccess();
+      			//isRefundAccess();
+      			refundChangeModal();
       			
       	    	let tbody = $('tbody');
       	    	let originalTr = $('#originalTr');
@@ -317,14 +406,14 @@
 	      		            		
 	      		            		$.each(data,function(key,value){
 	      		            			text+= '<tr id='+ start +'><td>'+ value.ono + '</td>' +'<td>'+value.pname+'</td>'+'<td>'+value.quantity+'</td>'+'<td>'+value.amount+'</td>'+'<td>'+value.pay+'</td>'
-	      		            			text += '<td> <button id="getItemRefund" class="btn btn-warning" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' data-toggle="modal" data-target="#exampleModalCenter">교환/반품</button></td>'
+	      		            			text += '<td> <button id="getItemRefund" class="btn btn-warning" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+'>교환/반품</button></td>'
 	      		            			text += '<td>'+value.order_date+'</td>'
 	      		            			text += '</tr>'
 	      		            		});
 	      		            		emptyTr.append(text);
 	      		            		console.log(text);
 	      		            		writeRefundForms();
-	      		            		
+	      		            		refundChangeModal();
 
 	      		               },
 	      		               error : function(){	
@@ -367,14 +456,16 @@
 	      		            		
 	      		            		$.each(data,function(key,value){
 	      		            			text+= '<tr id='+ start +'><td>'+ value.ono + '</td>' +'<td>'+value.pname+'</td>'+'<td>'+value.quantity+'</td>'+'<td>'+value.amount+'</td>'+'<td>'+value.pay+'</td>'
-	      		            			text += '<td> <button id="getItemRefund" class="btn btn-warning" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' data-toggle="modal" data-target="#exampleModalCenter">교환/반품</button></td>'
+	      		            			text += '<td> <button id="getItemRefund" class="btn btn-warning" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+'>교환/반품</button></td>'
 	      		            			text += '<td>'+value.order_date+'</td>'
 	      		            			text += '</tr>'
 	      		            		});
 	      		            		emptyTr.append(text);
 	      		            		console.log(text);
-	      		            		writeRefundForms();
 	      		            		
+	      		            		writeRefundForms();
+	      		            		//getReloadSuccess();
+	      		            		refundChangeModal();
 	      		            		
 	      		               },
 	      		               error : function(){	
@@ -405,6 +496,8 @@
       	        		
       	        		calendar.addEventSource(result);
             	        calendar.render();
+            	        
+            	           			
   	        
             	     });
       	        	

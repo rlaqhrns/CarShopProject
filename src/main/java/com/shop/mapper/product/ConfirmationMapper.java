@@ -31,5 +31,6 @@ public interface ConfirmationMapper {
 	public Prod_Tbl findSid(@Param("p_no") int p_no); //상품번호로 판매자 확인 (재원/21.01.07)
 	public List<Prod_Tbl> findList(@Param("p_no") int p_no); //상품번호로 판매자 확인 (재원/21.01.07)
 	public void insertForms(Return_Tbl returntbl); //교환 반품 폼 작성시 교환 반품 db로 insert (재원/21.01.07)
-	public Return_Tbl returnOne(Return_Tbl returntbl);
+	public Return_Tbl returnOne(@Param("ono") int ono); //교환 반품 테이블로 들어갔는지 확인 (재원/21.01.11)
+	//교환 반품 완료 테이블로 들어갔는지 확인 (재원/21.01.11)
 }

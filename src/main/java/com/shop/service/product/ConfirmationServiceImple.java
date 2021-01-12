@@ -67,5 +67,22 @@ public class ConfirmationServiceImple implements ConfirmationService{
 		return mapper.orderEventLists(u_id, order_date, ono);
 	}
 
+	@Override
+	public boolean returnOne(int ono) {
+		// TODO Auto-generated method stub
+		
+		boolean hasData = true;
+		
+		Return_Tbl returntbl = mapper.returnOne(ono);
+		if(returntbl == null) {
+			hasData = true;
+		}
+		else {
+			hasData = false;
+		}
+		
+		return hasData;
+	}
+
 
 }

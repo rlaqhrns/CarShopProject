@@ -51,6 +51,11 @@
 	
 	</insert>
 
+ 	<select id ="returnOne" resultType="com.shop.vo.Return_Tbl">
+
+		select * from return_tbl where ono = #{ono}
+
+ 	</select>
 	
 
 </mapper>
