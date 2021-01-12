@@ -27,11 +27,27 @@ public class LoginServiceImple implements LoginService{
 	@Setter(onMethod_=@Autowired)
 	protected LoginMapper logmapper;
 	
+<<<<<<< HEAD
 	private String id;
 	private String pw;
 	private HttpSession session;
 	private Admin_Tbl db_admin;
 	private All_User_Tbl db_id;
+=======
+	@Override
+	public boolean login(String id, String pw, HttpSession session)  {
+		System.out.println("id ==== " + id + " pw ==== " + pw);
+		
+		try {
+			if(id.equals("admin") && pw.equals("admin")) {         
+				return true;
+				}
+		//id+pw를 db와 비교	
+		All_User_Tbl db_id = logmapper.idpwcheck(id);
+		
+			//로그인성공하면 세션생성
+			if(id.equals(db_id.getId()) && pw.equals(db_id.getPw())) {  
+>>>>>>> branch 'master' of https://github.com/lee-bomi/CarShopProject.git
 	
 	@Override
 	public String login(String id, String pw, HttpSession session)  {
