@@ -8,6 +8,12 @@
 		select * from order_history_tbl where u_id = #{u_id} order by order_date desc
 
  	</select>
+
+ 	<select id ="isUser" resultType="com.shop.vo.User_Tbl">
+
+		select * from user_tbl where u_id = #{u_id}
+
+ 	</select>
 	
 	 <select id ="orderDateLists" resultType="com.shop.vo.Order_Histroy_Tbl">
 	<![CDATA[
@@ -56,6 +62,19 @@
 		select * from return_tbl where ono = #{ono}
 
  	</select>
+
+ 	<select id ="findRefund" resultType="com.shop.vo.Return_Tbl">
+
+		select * from return_tbl where u_id = #{u_id}
+
+ 	</select>
+
+ 	<select id ="findrealRefund" resultType="com.shop.vo.Return_End_Tbl">
+
+		select * from return_end_tbl where u_id = #{u_id}
+
+ 	</select>
+	
 	
 
 </mapper>

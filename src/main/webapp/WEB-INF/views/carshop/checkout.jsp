@@ -300,32 +300,18 @@
 			            buyer_addr : address			           
 			      }, function (rsp) { // callback
 			    	 if ( rsp.success ) {
- 			    	/*   $.ajax({
-			            url: "/checkout", // 가맹점 서버
-			            type: "POST",
-			            contentType: "application/json; charset=utf-8",
-			            data: formData
-			        }).done(function (data) { 
-			          // 가맹점 서버 결제 API 성공시 로직
-			        	 msg = '결제가 완료되었습니다.';
-                      //msg += '\n고유ID : ' + rsp.imp_uid;
-                      //msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                      msg += '\결제 금액 : ' + rsp.paid_amount;
-                      //msg += '카드 승인번호 : ' + rsp.apply_num;
-                      alert(msg);
-                      
-                      
-                      
-			        });  */
+
 			        $('#checkoutform').submit();
 			        
-			    	 //  $('#checkoutform').ajaxForm({url:'/checkout', type:'post', contentType: 'application/json; charset=utf-8'});
-			    		//console.log("들어오나");
-			    	  //유저 아이디 넣은 경로 생성 필요 (재원/20.12.29)
-			    	 //	location.href='/checkout/confirmation/';
 			      } else {
-	 			        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-	 			       	location.href="/checkout/";
+	 			        //alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+	      				Swal.fire({
+	        				  icon: 'error',
+	        				  title: '결제에 실패했습니다.',
+	        				  text: rsp.error_msg,      				  
+	        			});
+	 			        
+	 			        location.href="/checkout/";
 			      	}
 			      }); 
   			});

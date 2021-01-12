@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shop.service.product.ConfirmationService;
 import com.shop.vo.Order_Histroy_Tbl;
 import com.shop.vo.Prod_Tbl;
+import com.shop.vo.Return_End_Tbl;
 import com.shop.vo.Return_Tbl;
 import com.shop.vo.User_Tbl;
 
@@ -36,13 +37,42 @@ public class ConfirmationController {
 	public String getConfirmation(Model model, HttpSession session, Order_Histroy_Tbl order, User_Tbl user, Prod_Tbl prod) {
 		
 		//String u_id = "something";
+		
 		String getId = (String)session.getAttribute("id"); // 이미 세션의 set attribute로 id가 설정 되어 있기 때문에 바로 get attribute로 id 가져옴 (재원/20.12.31)
 		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
 		System.out.println(getId);
 		user.setU_id(getId);
 		
-		model.addAttribute("buylist", service.formList(user.getU_id()));
-
+		//교환 반품 폼 작성 확인용 (재원/21.01.12)
+		List<Order_Histroy_Tbl> list = service.formList(user.getU_id());
+		List<Return_Tbl> listr = service.findRefund(user.getU_id());
+		List<Return_End_Tbl> listre = service.findrealRefund(user.getU_id());
+		//List<Order_Histroy_Tbl> newList = new ArrayList<Order_Histroy_Tbl>();
+		for(int i=0; i<list.size();i++) {
+			//System.out.println("들어오는지");
+			for(int j=0; j<listr.size(); j++) {
+				if(listr.get(j).getOno() == list.get(i).getOno())
+				{
+					list.get(i).setO_no(list.get(i).getOno());
+					System.out.println(list.get(i).getO_no());
+				}
+			}
+			
+			for(int k=0; k<listre.size(); k++) {
+				if(listre.get(k).getOno() == list.get(i).getO_no())
+				{
+					
+					list.get(i).setO_no2(list.get(i).getO_no());
+				}
+			}
+		}
+		//service.formList(user.getU_id())
+		list.stream().forEach(System.out::println);
+		//listr.stream().forEach(System.out::println);
+		
+		
+		model.addAttribute("buylist",  list);
+		//model.addAttribute("findRefund", service.findRefund(user.getU_id()));
 
 		return "carshop/confirmation";
 	}
@@ -63,10 +93,32 @@ public class ConfirmationController {
 		//System.out.println("아이디 : " + u_id);
 		//System.out.println("아이디 : " + u_id);
 		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
-	
-		model.addAttribute("order_date", service.orderListDate(u_id, order_date));
+		List<Order_Histroy_Tbl> odr = service.orderListDate(u_id, order_date);
+		List<Return_Tbl> listr = service.findRefund(u_id);
+		List<Return_End_Tbl> listre = service.findrealRefund(u_id);
 
-		return service.orderListDate(u_id, order_date);
+		for(int i=0; i<odr.size();i++) {
+			//System.out.println("들어오는지");
+			for(int j=0; j<listr.size(); j++) {
+				if(listr.get(j).getOno() == odr.get(i).getOno())
+				{
+					odr.get(i).setO_no(odr.get(i).getOno());
+					System.out.println(odr.get(i).getO_no());
+				}
+			}
+			
+			for(int k=0; k<listre.size(); k++) {
+				if(listre.get(k).getOno() == odr.get(i).getO_no())
+				{
+					
+					odr.get(i).setO_no2(odr.get(i).getO_no());
+				}
+			}
+		}
+		//odr.stream().forEach(System.out::println);		
+		//model.addAttribute("order_date", odr);
+
+		return odr;
 
 	}
 	
@@ -77,10 +129,32 @@ public class ConfirmationController {
 		//System.out.println("아이디 : " + u_id);
 		//System.out.println("아이디 : " + u_id);
 		// 유저 vo 의 id 를 setter로 getId 설정 (재원/20.12.31)
-	
-		model.addAttribute("order_event", service.orderEventLists(u_id, order_date, ono));
+		
+		List<Order_Histroy_Tbl> odr = service.orderEventLists(u_id, order_date, ono);
+		List<Return_Tbl> listr = service.findRefund(u_id);
+		List<Return_End_Tbl> listre = service.findrealRefund(u_id);
 
-		return service.orderEventLists(u_id, order_date, ono);
+		for(int i=0; i<odr.size();i++) {
+			//System.out.println("들어오는지");
+			for(int j=0; j<listr.size(); j++) {
+				if(listr.get(j).getOno() == odr.get(i).getOno())
+				{
+					odr.get(i).setO_no(odr.get(i).getOno());
+					System.out.println(odr.get(i).getO_no());
+				}
+			}
+			
+			for(int k=0; k<listre.size(); k++) {
+				if(listre.get(k).getOno() == odr.get(i).getO_no())
+				{
+					
+					odr.get(i).setO_no2(odr.get(i).getO_no());
+				}
+			}
+		}
+		//odr.stream().forEach(System.out::println);
+
+		return odr;
 
 	}
 	

@@ -5,9 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shop.vo.All_User_Tbl;
 import com.shop.vo.Order_Histroy_Tbl;
 import com.shop.vo.Prod_Tbl;
+import com.shop.vo.Return_End_Tbl;
 import com.shop.vo.Return_Tbl;
+import com.shop.vo.User_Tbl;
 
 public interface ConfirmationMapper {
 	
@@ -32,5 +35,8 @@ public interface ConfirmationMapper {
 	public List<Prod_Tbl> findList(@Param("p_no") int p_no); //상품번호로 판매자 확인 (재원/21.01.07)
 	public void insertForms(Return_Tbl returntbl); //교환 반품 폼 작성시 교환 반품 db로 insert (재원/21.01.07)
 	public Return_Tbl returnOne(@Param("ono") int ono); //교환 반품 테이블로 들어갔는지 확인 (재원/21.01.11)
+	public List<Return_Tbl> findRefund(String u_id); //아이디로 교환폼 확인 (재원/21.01.12)
+	public List<Return_End_Tbl> findrealRefund(String u_id); //아이디로 환불 확인 (재원/21.01.12)
+	public List<User_Tbl> isUser(String u_id); //아이디 예외처리
 	//교환 반품 완료 테이블로 들어갔는지 확인 (재원/21.01.11)
 }
