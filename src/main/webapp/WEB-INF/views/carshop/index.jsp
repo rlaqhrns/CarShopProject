@@ -261,6 +261,7 @@
 			<div class="modal-body">...</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				<div id = "cart-btn-area"></div>
 			</div>
 		</div>
 	</div>
@@ -324,6 +325,8 @@ function addCartEvent(p_no,quantity) { //장바구니
 		dataType : 'JSON',
 		success : function(stats) {
 			$(".modal-body").html("\""+userId + "\"님 장바구니에 넣었습니다.");
+			$("#cart-btn-area").empty().append(`<button type="button" onClick="location.href='/carshop/cart'"
+				class="btn btn-primary" data-dismiss="modal">장바구니로 이동</button>`);
 			$('#notice').modal('show');
 
 		},
