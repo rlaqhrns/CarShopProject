@@ -29,7 +29,7 @@ public class UserUpdateController {
 
 			// 일반유저인지 판매자유저인지 확인. user에 Y or N 담김.
 			String user = ((All_User_Tbl) session.getAttribute("user")).getSeller();
-			System.out.println("user : " + user);
+			System.out.println("user_update user : " + user);
 			if (user.equals("N")) {
 				model.addAttribute("user", uservice.user_select(((All_User_Tbl) session.getAttribute("user")).getId()));
 				model.addAttribute("userType", "user");

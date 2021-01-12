@@ -8,4 +8,5 @@ import com.shop.vo.Prod_Tbl;
 public interface SalelistService {
 
 	public List<Prod_Tbl> selectall(String s_id);
+	public String usercheck(String id);
 }
