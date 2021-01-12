@@ -181,7 +181,7 @@
 <script>
 
 
-function addCartEvent(p_no) { //장바구니
+function addCartEvent(p_no,quantity) { //장바구니
 	let userId = getUserId();
 	if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 		return false;
@@ -194,7 +194,7 @@ function addCartEvent(p_no) { //장바구니
 		data : {
 			"u_id" : userId,
 			"p_no" : p_no,
-			"quantity":0
+			"quantity":quantity
 		},
 		dataType : 'JSON',
 		success : function(stats) {
@@ -436,7 +436,7 @@ function clickEvent(){ //찜, 장바구니 버튼 클릭 이벤트
 		}
 	});
 	shoppingCart.click(function(){ //장바구니 add
-		addCartEvent($(this).val());
+		addCartEvent($(this).val(),1);
 	})
 	
 }
