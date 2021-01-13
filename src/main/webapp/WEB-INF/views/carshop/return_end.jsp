@@ -230,19 +230,26 @@ let calendar =null;
     			  if(data.errorCode ==1){
     	    			$('#tr'+ono+'').remove();
     	    			Swal.fire({
-    	    				  icon: 'success',
-    	    				  title: 'Good job!',
-    	    				  text: '처리되었습니다'	
-
+    	    				  title: '처리 되었습니다',
+    	    				  text: 'Success',
+    	    				  confirmButtonText: `확인`
+    	    				}).then((result) => {
+    	    				  /* Read more about isConfirmed, isDenied below */
+    	    				  if (result.isConfirmed) {
+    	    					  location.reload();
+    	    				  }
     	    				})
-    	    				document.loacation.href="/carshop/return_end";
-//      	     			location.reload();
+//       	     			location.reload();
     			  }else{
-      				Swal.fire({
-  					  icon: 'error',
-  					  title: 'Oops...',
-  					  text: '삭제에 실패하였습니다'
-  					})
+  	    			Swal.fire({
+	    				  title: '처리되지 않았습니다',
+	    				  confirmButtonText: `확인`
+	    				}).then((result) => {
+	    				  /* Read more about isConfirmed, isDenied below */
+	    				  if (result.isConfirmed) {
+	    					  location.reload();
+	    				  }
+	    				})
     			  }
 
     		  },

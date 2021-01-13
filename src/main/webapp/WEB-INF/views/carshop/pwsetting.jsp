@@ -155,7 +155,7 @@ $(document).ready(function(){
 			e.preventDefault();
 	         return;
 	    }
-		alert("Good", "비밀번호 재설정완료! 로그인창으로 이동합니다", "success");
+		alert("비밀번호 재설정완료! 로그인창으로 이동합니다");
 
 		return;
 	});

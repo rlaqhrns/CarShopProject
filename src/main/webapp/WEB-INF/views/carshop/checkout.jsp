@@ -14,10 +14,10 @@
 
 </style>
 
-  <title>carshop - checkout</title>
+  <title>저리카 | 주문창</title>
 	<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
-  <link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
-
+  	<link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.13.0/dist/sweetalert2.all.min.js"></script>
 
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
@@ -95,7 +95,7 @@
                         </ul>
                         <hr>
                         <ul class="list list_2">
-                            <li><a href="#">총 금액<span><c:out value="${col_sum}"></c:out></span></a></li>
+                            <li><a href="#">총 금액<span><fmt:setLocale value="ko_kr"/><fmt:formatNumber type="currency" maxFractionDigits="3" value="${col_sum}"></fmt:formatNumber></span></a></li>
                         </ul>
                         <!-- Todo : 결제 수단 (pay)가 구매이력(buylist) 테이블에 들어가야함 (2020.12.18 재원) -->
                         <div class="payment_item">
@@ -141,7 +141,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/carshop/mypage'">이동</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/carshop/userupdateform'">이동</button>
       </div>
     </div>
   </div>
@@ -250,40 +250,58 @@
   			
   			$('.button-paypal').click(function() {
   				
-  				if($('#f-option5').is(":checked")){
-  						$("#exampleModalCenter2").modal('show'); //신용카드결제 modal 창 보여줌 (재원/20.12.29)	
+  				//구매 가격 제한을 둠 (재원/21.01.13)
+  				if(0 < totalPrice && totalPrice < 10000000) {
+  				
+	  	  			if($('#f-option5').is(":checked")){
+	  						$("#exampleModalCenter2").modal('show'); //신용카드결제 modal 창 보여줌 (재원/20.12.29)	
+	  				}
+	  				else if($('#f-option6').is(":checked")){
+	  						$("#exampleModalCenter4").modal('show'); //카카오페이결제 modal 창 보여줌 (재원/20.12.29)
+	  				}
+	  				else {
+	  					
+	  					$("#exampleModalCenter3").modal('show'); //구매 방법 선택 modal창 띄움(재원/20.12.29)
+	  					
+	  				}
+  					
   				}
-  				else if($('#f-option6').is(":checked")){
-  						$("#exampleModalCenter4").modal('show'); //카카오페이결제 modal 창 보여줌 (재원/20.12.29)
+  				else if(totalPrice <= 0){
+      				Swal.fire({
+        				  icon: 'error',
+        				  title:'0원 이상부터 구매할 수 있습니다.',
+        				  text: '물품이 선택되어 있는지 확인 부탁드립니다',      				  
+        			});
   				}
   				else {
-  					
-  					$("#exampleModalCenter3").modal('show'); //구매 방법 선택 modal창 띄움(재원/20.12.29)
-  					
+      				Swal.fire({
+      				  icon: 'error',
+      				  title:'한도초과',
+      				  text: '10,000,000 이상은 구매할 수 없습니다.',      				  
+      			});
   				}
+  				
   			});
   			
   			
+  			//form submit(재원/20.12.29)	
   			$('.btn-creditchecks').click(function() {
   				
   				if(totalPrice == 0) {
   					alert("구매하실 물품이 없습니다. 물품을 선택 후 구매해주세요");
   				}
   				else {
-  					$('#checkoutform').submit(); //form submit(재원/20.12.29)	
+  					$('#checkoutform').submit(); 
   				}				
   				
   			});
 
 
   			
-  		 	//iamport 일반 결제 api 사용 https://docs.iamport.kr/implementation/payment?lang=ko (재원/20.12.30)
-  		 	
+  		 	//iamport 일반 결제 api 사용 https://docs.iamport.kr/implementation/payment?lang=ko (재원/20.12.30)  		 	
   			$("#kakaoPayCheck").click(function() {
-  				 //console.log("들어오나?");
   				 	var form = $("form")[1];
   				 	var formData = new FormData(form);
-  				 	//console.log(formData);
   				 
 	 		        var IMP = window.IMP; // 생략가능
 	 		        IMP.init('imp20831122'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -300,32 +318,18 @@
 			            buyer_addr : address			           
 			      }, function (rsp) { // callback
 			    	 if ( rsp.success ) {
- 			    	/*   $.ajax({
-			            url: "/checkout", // 가맹점 서버
-			            type: "POST",
-			            contentType: "application/json; charset=utf-8",
-			            data: formData
-			        }).done(function (data) { 
-			          // 가맹점 서버 결제 API 성공시 로직
-			        	 msg = '결제가 완료되었습니다.';
-                      //msg += '\n고유ID : ' + rsp.imp_uid;
-                      //msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                      msg += '\결제 금액 : ' + rsp.paid_amount;
-                      //msg += '카드 승인번호 : ' + rsp.apply_num;
-                      alert(msg);
-                      
-                      
-                      
-			        });  */
+
 			        $('#checkoutform').submit();
 			        
-			    	 //  $('#checkoutform').ajaxForm({url:'/checkout', type:'post', contentType: 'application/json; charset=utf-8'});
-			    		//console.log("들어오나");
-			    	  //유저 아이디 넣은 경로 생성 필요 (재원/20.12.29)
-			    	 //	location.href='/checkout/confirmation/';
 			      } else {
-	 			        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-	 			       	location.href="/checkout/";
+	 			        //alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+	      				Swal.fire({
+	        				  icon: 'error',
+	        				  title: '결제에 실패했습니다.',
+	        				  text: rsp.error_msg,      				  
+	        			});
+	 			        
+	 			        location.href="/checkout/";
 			      	}
 			      }); 
   			});

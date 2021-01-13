@@ -35,10 +35,12 @@ public class IndexController {
 
 	@GetMapping( "index" )
 	public String index(Model model,HttpSession session) {
+		System.out.println("들어오나 ) 77");
 		model.addAttribute("list", service.index());
 		model.addAttribute("list2",service.index2());
 		model.addAttribute("annc",service.annc());
 		model.addAttribute("user",session.getAttribute("user"));
+		System.out.println("user : " + session.getAttribute("user"));
 		System.out.println("index들어옴");
 		return "carshop/index";
 

@@ -26,9 +26,7 @@
 		</div>
 		<div class="register_type">
 			<input type="button" value="user register" class="register_type_btn"
-				id="user_type" onClick="#"> 
-				
-			<input type="button"
+				id="user_type" onClick="#"> <input type="button"
 				value="seller register" class="register_type_btn" id="seller_type"
 				onClick="location.href='seller_register'">
 		</div>
@@ -52,20 +50,19 @@
 			<div class="col-lg-6 col-log-6_registerForm">
 				<div class="login_form_inner register_form_inner">
 					<h3>user register</h3>
-					<form class="row login_form" action="onregister" id="register_form" method="post"
-						onsubmit="return finalcheck()">
+					<form class="row login_form" action="onregister" id="register_form"
+						method="post" onsubmit="return finalcheck()">
 						<div class="registerForm1" id="registerForm1"
 							style="position: relative; visibility: visible; background: 'white';">
 							<div class="col-md-12 form-group registerForm_input">
-								<input type="text" class="form-control" id="userid"
-									name="u_id" placeholder="User ID"
-									onfocus="this.placeholder = ''"
+								<input type="text" class="form-control" id="userid" name="u_id"
+									placeholder="User ID" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = 'User ID'"> <input
 									type="button" value="중복확인" class="check_btn" id="id_check">
 							</div>
 							<div class="tip_massage_div">
-								<input type="text" value="" class="tip_massage" id="mid" style="width:250px"
-									tabindex="-1" readonly>
+								<input type="text" value="" class="tip_massage" id="mid"
+									style="width: 250px" tabindex="-1" readonly>
 							</div>
 							<div class="col-md-12 form-group registerForm_input">
 								<input type="text" class="form-control" id="password"

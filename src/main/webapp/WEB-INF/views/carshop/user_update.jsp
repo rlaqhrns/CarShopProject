@@ -6,6 +6,7 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -17,6 +18,7 @@
 	crossorigin="anonymous">
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <%@ include file="../include/header.jsp"%>
 
 <body>
@@ -34,7 +36,8 @@
 						<div class="card-body">
 							<c:choose>
 								<c:when test="${userType == 'user' }">
-									<form method="post" action="user_updateok">
+									<form method="post" action="user_updateok"
+										onsubmit="return finalcheck()">
 										<div class="form-group row">
 											<label class="col-lg-3 col-form-label form-control-label">회원
 												ID : </label>
@@ -44,102 +47,121 @@
 													readonly="readonly">
 											</div>
 										</div>
-										<div class="form-group row">
+										<div class="form-group row" style="margin-bottom: 0.1rem">
 											<label class="col-lg-3 col-form-label form-control-label">비밀번호
 												: </label>
 											<div class="col-lg-9">
-												<input class="form-control" type="text" name="u_pw"
+												<input class="form-control" type="text" name="u_pw" id="pwd"
 													value="<c:out value="${user.u_pw}"></c:out>">
+												<div class="tip_massage_div">
+													<input type="text" value="" class="tip_massage" id="mpwd"
+														style="width: 250px" tabindex="-1" readonly>
+												</div>
 											</div>
 										</div>
 								</c:when>
 								<c:when test="${userType == 'seller' }">
-									<form method="post" action="seller_updateok">
-									<div class="form-group row">
-										<label class="col-lg-3 col-form-label form-control-label">회원
-											ID : </label>
-										<div class="col-lg-9">
-											<input class="form-control" type="text" name="s_id"
-												value="<c:out value="${user.s_id}"></c:out>"
-												readonly="readonly">
+									<form method="post" action="seller_updateok"
+										onsubmit="return finalcheck()">
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label form-control-label">회원
+												ID : </label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="s_id"
+													value="<c:out value="${user.s_id}"></c:out>"
+													readonly="readonly">
+											</div>
 										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-lg-3 col-form-label form-control-label">비밀번호
-											: </label>
-										<div class="col-lg-9">
-											<input class="form-control" type="text" name="s_pw"
-												value="<c:out value="${user.s_pw}"></c:out>">
+										<div class="form-group row" style="margin-bottom: 0.1rem">
+											<label class="col-lg-3 col-form-label form-control-label">비밀번호
+												: </label>
+											<div class="col-lg-9">
+												<input class="form-control" type="text" name="s_pw" id="pwd"
+													value="<c:out value="${user.s_pw}"></c:out>">
+												<div class="tip_massage_div">
+													<input type="text" value="" class="tip_massage" id="mpwd"
+														style="width: 250px" tabindex="-1" readonly>
+												</div>
+											</div>
 										</div>
-									</div>
 								</c:when>
 							</c:choose>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">이름
-										:</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text" name="name"
-											value="<c:out value="${user.name}"></c:out>">
+							<div class="form-group row" style="margin-bottom: 0.1rem">
+								<label class="col-lg-3 col-form-label form-control-label">이름
+									:</label>
+								<div class="col-lg-9">
+									<input class="form-control" type="text" name="name" id="name"
+										value="<c:out value="${user.name}"></c:out>">
+									<div class="tip_massage_div">
+										<input type="text" value="" class="tip_massage" id="mname"
+											style="width: 250px" tabindex="-1" readonly>
 									</div>
 								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">전화번호
-										:</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text" name="phone"
-											value="<c:out value="${user.phone}"></c:out>">
+							</div>
+							<div class="form-group row" style="margin-bottom: 0.1rem">
+								<label class="col-lg-3 col-form-label form-control-label">전화번호
+									:</label>
+								<div class="col-lg-9">
+									<input class="form-control" type="text" name="phone" id="phone"
+										value="<c:out value="${user.phone}"></c:out>">
+									<div class="tip_massage_div">
+										<input type="text" value="" class="tip_massage" id="mphone"
+											style="width: 250px" tabindex="-1" readonly>
 									</div>
 								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">이메일
-										: </label>
-									<div class="col-lg-9">
-										<input class="form-control" type="email" name="email"
-											value="<c:out value="${user.email}"></c:out>">
+							</div>
+							<div class="form-group row" style="margin-bottom: 0.1rem">
+								<label class="col-lg-3 col-form-label form-control-label">이메일
+									: </label>
+								<div class="col-lg-9">
+									<input class="form-control" type="email" name="email"
+										id="email" value="<c:out value="${user.email}"></c:out>">
+									<div class="tip_massage_div">
+										<input type="text" value="" class="tip_massage" id="memail"
+											style="width: 250px" tabindex="-1" readonly>
 									</div>
 								</div>
+							</div>
 
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">주소
-										: </label>
-									<div class="col-lg-9">
-										<div style="display: flex">
-											<input type="text" id="sample2_postcode" class="form-control"
-												style="width: 200px; margin-bottom: 10px" placeholder="우편번호">
-											<input type="button" onclick="sample2_execDaumPostcode()"
-												value="우편번호 찾기" class="addr_search_btn"><br>
-										</div>
-										<input type="text" name="addr" class="form-control"
-											style="width: 300px; margin-bottom: 10px"
-											id="sample2_address" placeholder="주소"
-											value="<c:out value="${user.addr}"></c:out>"> <input
-											type="text" name="addr2" class="form-control"
-											style="width: 300px; margin-bottom: 10px"
-											id="sample2_detailAddress" placeholder="상세주소"
-											value="<c:out value="${user.addr2}"></c:out>"> <input
-											type="hidden" name="juso3"
-											style="width: 250px; margin-bottom: 10px"
-											id="sample2_extraAddress" placeholder="참고항목">
-
-										<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
-										<div id="layer"
-											style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
-											<img
-												src="//t1.daumcdn.net/postcode/resource/images/close.png"
-												id="btnCloseLayer"
-												style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
-												onclick="closeDaumPostcode()" alt="닫기 버튼">
-										</div>
-
-
-
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label">주소
+									: </label>
+								<div class="col-lg-9">
+									<div style="display: flex">
+										<input type="text" id="sample2_postcode" class="form-control"
+											style="width: 200px; margin-bottom: 10px" placeholder="우편번호">
+										<input type="button" onclick="sample2_execDaumPostcode()"
+											value="우편번호 찾기" class="addr_search_btn"><br>
 									</div>
-								</div>
+									<input type="text" name="addr" class="form-control"
+										style="width: 300px; margin-bottom: 10px" id="sample2_address"
+										placeholder="주소" value="<c:out value="${user.addr}"></c:out>">
+									<input type="text" name="addr2" class="form-control"
+										style="width: 300px; margin-bottom: 10px"
+										id="sample2_detailAddress" placeholder="상세주소"
+										value="<c:out value="${user.addr2}"></c:out>"> <input
+										type="hidden" name="juso3"
+										style="width: 250px; margin-bottom: 10px"
+										id="sample2_extraAddress" placeholder="참고항목">
 
-								<div class="form-group row" style="float: right">
+									<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+									<div id="layer"
+										style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
+										<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+											id="btnCloseLayer"
+											style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
+											onclick="closeDaumPostcode()" alt="닫기 버튼">
+									</div>
 
-									<input type="submit" class="btn btn-primary" value="수정">
+
+
 								</div>
+							</div>
+
+							<div class="form-group row" style="float: right">
+
+								<input type="submit" class="btn btn-primary" value="수정">
+							</div>
 							</form>
 						</div>
 					</div>
@@ -153,6 +175,8 @@
 </body>
 
 <script type="text/javascript" src="/resources/js/register_addrAPI.js"></script>
+<script type="text/javascript" src="/resources/js/user_update.js"></script>
+
 <style>
 
 /************* GENERIC  *****************/
@@ -259,6 +283,17 @@ img {
 	height: 30px;
 	margin: 5px;
 	font-size: 14px;
+}
+
+/* 툴팁 실패 -> 인풋박스 밑에 만든 div. 이 안에 인풋있음 */
+.tip_massage_div {
+	font-size: 12px;
+	float: left;
+}
+/* div안에 있는 인풋들 */
+.tip_massage {
+	border: none;
+	color: red;
 }
 </style>
 <%@ include file="../include/footer.jsp"%>
