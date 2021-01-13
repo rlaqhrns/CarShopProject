@@ -53,7 +53,7 @@
 			<div class="col-lg-6">
 				<div class="owl-carousel owl-theme s_Product_carousel">
 					<div class="single-prd-item">
-						<img class="img-fluid" src="${product.img1}"
+						<img class="img-fluid" src="/resources/img/upload/${product.img1}"
 							onerror="this.src='/resources/img/noimage.gif'">
 					</div>
 
@@ -98,9 +98,8 @@
 								style="float: left; margin-left: 30px; background-color: blue;">장바구니</button>
 						</div>
 						<div>
-							<form action="/carshop/report?p_no=${product.p_no }" method='post' id = "formReport">
-								<input type="hidden" value="${product.s_id }" name="s_id"/>
-								<input type="hidden" value="${user.id }" name="u_id"/>
+							<form action="/carshop/report" method='get' id = "formReport">
+								<input type="hidden" value="${product.p_no }" name="p_no">
 							
 								<button class="button danger-btn" id="btn-report"
 										style="float: left; margin-left: 30px; background-color: red;">신고</button>
@@ -306,6 +305,7 @@
 			<div class="modal-body">...</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				<div id = "cart-btn-area"></div>
 			</div>
 		</div>
 	</div>
@@ -543,6 +543,8 @@ $(document).ready(function() {
 				dataType : 'JSON',
 				success : function(stats) {
 					$("#notice .modal-body").html("\""+ userId + "\"님 장바구니에 넣었습니다.");
+					$("#cart-btn-area").empty().append(`<button type="button" onClick="location.href='/carshop/cart'"
+						class="btn btn-primary" data-dismiss="modal">장바구니로 이동</button>`);
 					$('#notice').modal('show');
 	
 				},
