@@ -11,8 +11,6 @@ public class Cart_Tbl {
 	private int p_no,quantity,amount,total;
 	// amount 총금액
 
-
-	
 	
 	  @Override
 	    public String toString() {
