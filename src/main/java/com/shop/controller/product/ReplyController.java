@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/carshop/*")
 public class ReplyController {
-	private static final String FILE_SERVER_PATH = "E:\\GreenComputerPro\\CarShopProject\\src\\main\\webapp\\resources\\img\\upload";
+	private static final String FILE_SERVER_PATH = "C:\\Users\\ssw74\\git\\CarShopProject\\src\\main\\webapp\\resources\\img\\replyUpload";
 
 	
 	@Setter(onMethod_ = @Autowired)
