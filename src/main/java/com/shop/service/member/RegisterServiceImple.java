@@ -52,6 +52,11 @@ public class RegisterServiceImple implements RegisterService {
 		}
 		
 	}
+
+	@Override
+	public All_User_Tbl toemailcheck(String toemail) {
+		return rmapper.toemailcheck(toemail);
+	}
 	
 	
 }

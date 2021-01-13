@@ -36,7 +36,6 @@ public class AskController {
 			if (result == 1) {
 				map.put("list", service.ask(p_no));
 				map.put("code", 1);
-				
 			} else {
 				map.put("code", 2);
 			}
@@ -50,8 +49,8 @@ public class AskController {
 
 	@PostMapping("/product/product_ask_reply")
 	@ResponseBody
-	public List<Ask_Tbl> ask_reply(Ask_Tbl ask) {
-		System.out.println("ask 컨트롤러 들어옴" + ask);
+	public Map<String,Object> ask_reply(Ask_Tbl ask) {
+		Map<String, Object> map = new HashMap<String, Object>();
 
 //		int result = serv	ice.ask_reply(ask_no);
 //		if(result ==1) {
@@ -60,8 +59,13 @@ public class AskController {
 //			System.out.println("else");
 //			return null;
 //		}
-		service.ask_reply(ask);
-		return service.ask(ask.getP_no());
+		try {
+			map.put("list", service.ask(ask.getP_no()));
+			map.put("code", 1);
+		} catch (Exception e) {
+			map.put("code", 2);
+		}
+		return map;
 
 	}
 
