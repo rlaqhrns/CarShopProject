@@ -1,5 +1,7 @@
 package com.shop.controller.member;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shop.service.member.AnnclistService;
+import com.shop.vo.Admin_Tbl;
 import com.shop.vo.Annc_Tbl;
 
 import lombok.Setter;
@@ -22,9 +25,29 @@ public class AnnclistController {
 	@Setter(onMethod_=@Autowired)
 	private AnnclistService service;
 	
+	@Setter(onMethod_ = @Autowired)
+	private AnnclistService anncservice;
+	
+	
 	@RequestMapping("/annclist")
-	public String annclist(Model model) {
-		model.addAttribute("annclist",service.selectall());
+	public String annclist(Model model, HttpSession session) {
+		
+		//session.setAttribute("id", "asdf");
+		//session.setAttribute("id", "admin");
+		String admin = (String)session.getAttribute("id");
+
+		
+		try {
+			Admin_Tbl adminvo = anncservice.adminCheck(admin);
+			if (adminvo.getId().equals("admin")) {
+				model.addAttribute("annclist",service.selectall());
+
+			}
+		} catch (Exception e) {
+			System.out.println("관리자권한 없음." + e.getMessage());
+			return "redirect:/carshop/error";
+		}
+
 		return "carshop/annclist";
 	}
 	

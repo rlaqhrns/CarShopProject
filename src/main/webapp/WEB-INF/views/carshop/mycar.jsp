@@ -61,6 +61,8 @@
 	<script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
+			$("title").html("저기 카 | MY CAR");
+			
 			var model = '${usercar}';  //페이지가 로드되면 현재 유저의 자동차 정보 가져옴 -성연 2021.01.07
 			changepic(model); //유저차에 따른 이미지와 셀렉트 기본값 변화 -성연 2021.01.07
 
@@ -72,13 +74,13 @@
 			function changepic(model) {  //선택 된 차에 따른 이미지 변화 -성연 2021.01.07
 				if(model == "소나타"){
 					$("div.login_box_img").css({
-						'background' : 'url(/resources/img/sonata.jpg)',
+						'background' : 'url(/resources/img/sonatacar.jpg)',
 						'background-size' : 'cover'
 					});
 					$("option[value='소나타']").attr("selected", true);
 				} else if (model == "그랜저"){
 					$("div.login_box_img").css({
-						'background' : 'url(/resources/img/grandeur.jpg)',
+						'background' : 'url(/resources/img/grandeurcar.png)',
 						'background-size' : 'cover'
 					});
 					$("option[value='그랜저']").attr("selected", true);
@@ -90,7 +92,7 @@
 					$("option[value='카니발']").attr("selected", true);
 				} else if (model == "소울"){
 					$("div.login_box_img").css({
-						'background' : 'url(/resources/img/soul.jpg)',
+						'background' : 'url(/resources/img/soulcar.jpeg)',
 						'background-size' : 'cover'
 					});
 					$("option[value='소울']").attr("selected", true);

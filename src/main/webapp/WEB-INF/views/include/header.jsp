@@ -126,16 +126,24 @@
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 							<li class="nav-item"><a class="nav-link" href="/carshop/index">Home</a></li>
 							<li class="nav-item"><a class="nav-link" href="/carshop/productList">Shop</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+					        <li class="nav-item submenu dropdown">
+              		  		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+			                  aria-expanded="false">Admin</a>
+			            <ul class="dropdown-menu">
+			                  <li class="nav-item"><a class="nav-link" href="/carshop/blacklist">Black List</a></li>
+			                  <li class="nav-item"><a class="nav-link" href="/carshop/annclist">Announcement</a></li>
+			           </ul>		
+							
 							<!--  컨탠츠랑 mypage 위치 수정 2021.01.11 -->
 <%
 	if(sessId != null){
 %>							
 							<li class="nav-item"><a class="nav-link" href="/carshop/mypage">Mypage</a></li>
+							
 <%
 	}
 %>
-							
+						
 						</ul>
 						<div class="nav-right">
 							<ul class="nav-shop">
@@ -144,8 +152,8 @@
 								<!-- uin.hj 2020/01/08 mypage, home, shop, contact 경로 설정 -->
 								<!-- 결로 버그 수정 2021.01.11 hyejeong -->
 							<div class="nav-log">
-								<div class="nav-login" style="position:relative; visibility:hidden"><a class="button button-header" href="login" >login</a></div>
-								<div class="nav-logout" style="position:relative; left : 0px; top:-50px;"><a class="button button-header"  href="logout" >logout</a></div>
+								<div class="nav-login" style="position:relative; visibility:hidden"><a class="button button-header" href="/carshop/login" >login</a></div>
+								<div class="nav-logout" style="position:relative; left : 0px; top:-50px;"><a class="button button-header"  href="/carshop/logout" >logout</a></div>
 							</div>
 						</div>
 					</div>

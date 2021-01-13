@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shop.mapper.member.LoginMapper;
+import com.shop.vo.Admin_Tbl;
 import com.shop.vo.All_User_Tbl;
 
 import javax.swing.JButton;
@@ -36,7 +37,7 @@ public class LoginServiceImple implements LoginService{
 				}
 		//id+pw를 db와 비교	
 		All_User_Tbl db_id = logmapper.idpwcheck(id);
-
+		
 			//로그인성공하면 세션생성
 			if(id.equals(db_id.getId()) && pw.equals(db_id.getPw())) {  
 	
