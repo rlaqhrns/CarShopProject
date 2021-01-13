@@ -40,6 +40,7 @@ public class IndexController {
 		model.addAttribute("list2",service.index2());
 		model.addAttribute("annc",service.annc());
 		model.addAttribute("user",session.getAttribute("user"));
+		System.out.println("user : " + session.getAttribute("user"));
 		System.out.println("index들어옴");
 		return "carshop/index";
 

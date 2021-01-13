@@ -428,20 +428,24 @@ $(document).ready(function() {
 											}
 											text +='</div><br></div></div>';
 											list.append(text);
-										
+											
 											Swal.fire({
 												  icon: 'success',
 												  title: 'Wow...',
 												  text: '문의가 등록되었습니다'
+												  
 												})
 									})	
 								 }else{
-										Swal.fire({
-											  icon: 'error',
-											  title: 'Oops...',
-											  text: '등록에 실패하였습니다.'
-											})
-									document.location.href="/carshop/error";
+					  	    			Swal.fire({
+						    				  title: '처리되지 않았습니다',
+						    				  confirmButtonText: `확인`
+						    				}).then((result) => {
+						    				  /* Read more about isConfirmed, isDenied below */
+						    				  if (result.isConfirmed) {
+						    					  location.reload();
+						    				  }
+						    				})
 									 
 								 }
 
@@ -462,6 +466,9 @@ $(document).ready(function() {
 					})
 	// modal 에서 작성 버튼 누를 시 이벤트 발생
 	$(document).on("click","#ask_replyBtn",function(){
+		
+		
+		
 		let ask_reply = $("#message-text").val();
 			let msg = "";
 			
@@ -473,9 +480,27 @@ $(document).ready(function() {
 			dataType:"JSON",
 			type:"POST",
 			success : function(data){
-				$("#ask"+ask_no).empty();
-			$("#ask"+ask_no).append('<strong>답글 : '+ ask_reply +'</strong>');
-			console.log("#ask"+ask_no);	 
+				if(data.code ==1){
+					$("#ask"+ask_no).empty();
+					$("#ask"+ask_no).append('<strong>답글 : '+ ask_reply +'</strong>');
+					console.log("#ask"+ask_no);
+					Swal.fire({
+						  icon: 'success',
+						  text: '등록되었습니다'
+						})
+				}else{
+  	    			Swal.fire({
+  	    				  
+	    				  title: '처리되지 않았습니다',
+	    				  confirmButtonText: `확인`
+	    				}).then((result) => {
+	    				  /* Read more about isConfirmed, isDenied below */
+	    				  if (result.isConfirmed) {
+	    					  location.reload();
+	    				  }
+	    				})
+				}
+				 
 			},error : function(request,error){
 				console.log("통신실패", request.status,"\n",request.responseText);
 			}
