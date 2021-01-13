@@ -91,9 +91,9 @@
 	    contentType: "application/json; charset=utf-8",
 		success:function(data){
 			if(data){
-				console.log("if완료완료");
+				console.log("header if완료완료");
 			}else {
-				console.log("else완료");
+				console.log("header else완료");
 				$('.nav-login').attr("style","show");
 				$('.nav-logout').hide();
 			}
@@ -139,11 +139,13 @@
 	if(sessId != null){
 %>							
 							<li class="nav-item"><a class="nav-link" href="/carshop/mypage">Mypage</a></li>
-							
 <%
-	}
+}else {
 %>
-
+							<li class="nav-item"><a class="nav-link" href="login">Mypage</a></li>
+<%
+}
+%>
 						
 						</ul>
 
