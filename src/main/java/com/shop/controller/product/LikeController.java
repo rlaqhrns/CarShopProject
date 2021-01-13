@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.shop.service.product.LikeService;
 import com.shop.vo.Like_Tbl;
 
@@ -28,9 +30,39 @@ public class LikeController {
 		
 		String getId = (String)session.getAttribute("id");
 		List<Like_Tbl> likeList = likeService.getUserLikedList(getId);
+		List<Like_Tbl> likeList_like = likeService.getCartUpdate(getId);
 		model.addAttribute("likeList", likeList);
+		model.addAttribute("likeList_like", likeList_like);
+		model.addAttribute("u_id", getId);
 		
 		return "carshop/like";
 	}
+	
+	
+	// 장바구니 개별 삭제 controller 2020.01.08 yun.hj
+		@RequestMapping("/like_delete")
+		public String delete(@RequestParam int p_no, @RequestParam String u_id) {
+			// 문자열을 리턴 
+			System.out.println("id는" + u_id + "p_no는" + p_no);
+			//찍어보기
+			
+			likeService.delete(p_no, u_id);
+			
+			return "redirect:/carshop/like";
+		}
+		
+		// 장바구니 전체 삭제
+		
+		  @RequestMapping("/like_deleteAll")
+		  public String deleteAll(@RequestParam String u_id) {
+		  
+		  System.out.println(u_id + " cart_controller 들어 왔습니다."); 
+		  System.out.println(
+		  "like 출력 "+likeService.deleteAll(u_id)); //cartService.deleteAll(u_id);
+		  
+		  return "redirect:/carshop/like"; }
+		 
+	
+	
 
 }
