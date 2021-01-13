@@ -14,10 +14,10 @@
 
 </style>
 
-  <title>carshop - checkout</title>
+  <title>저리카 | 주문창</title>
 	<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
-  <link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
-
+  	<link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.13.0/dist/sweetalert2.all.min.js"></script>
 
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
@@ -95,7 +95,7 @@
                         </ul>
                         <hr>
                         <ul class="list list_2">
-                            <li><a href="#">총 금액<span><c:out value="${col_sum}"></c:out></span></a></li>
+                            <li><a href="#">총 금액<span><fmt:setLocale value="kor"/><fmt:formatNumber type="number" maxFractionDigits="3" value="${col_sum}"></fmt:formatNumber></span></a></li>
                         </ul>
                         <!-- Todo : 결제 수단 (pay)가 구매이력(buylist) 테이블에 들어가야함 (2020.12.18 재원) -->
                         <div class="payment_item">
@@ -141,7 +141,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/carshop/mypage'">이동</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/carshop/userupdateform'">이동</button>
       </div>
     </div>
   </div>
@@ -250,17 +250,36 @@
   			
   			$('.button-paypal').click(function() {
   				
-  				if($('#f-option5').is(":checked")){
-  						$("#exampleModalCenter2").modal('show'); //신용카드결제 modal 창 보여줌 (재원/20.12.29)	
+  				if(0 < totalPrice && totalPrice < 10000000) {
+  				
+	  	  			if($('#f-option5').is(":checked")){
+	  						$("#exampleModalCenter2").modal('show'); //신용카드결제 modal 창 보여줌 (재원/20.12.29)	
+	  				}
+	  				else if($('#f-option6').is(":checked")){
+	  						$("#exampleModalCenter4").modal('show'); //카카오페이결제 modal 창 보여줌 (재원/20.12.29)
+	  				}
+	  				else {
+	  					
+	  					$("#exampleModalCenter3").modal('show'); //구매 방법 선택 modal창 띄움(재원/20.12.29)
+	  					
+	  				}
+  					
   				}
-  				else if($('#f-option6').is(":checked")){
-  						$("#exampleModalCenter4").modal('show'); //카카오페이결제 modal 창 보여줌 (재원/20.12.29)
+  				else if(totalPrice <= 0){
+      				Swal.fire({
+        				  icon: 'error',
+        				  title:'0원 이상부터 구매할 수 있습니다.',
+        				  text: '물품이 선택되어 있는지 확인 부탁드립니다',      				  
+        			});
   				}
   				else {
-  					
-  					$("#exampleModalCenter3").modal('show'); //구매 방법 선택 modal창 띄움(재원/20.12.29)
-  					
+      				Swal.fire({
+      				  icon: 'error',
+      				  title:'한도초과',
+      				  text: '10,000,000 이상은 구매할 수 없습니다.',      				  
+      			});
   				}
+  				
   			});
   			
   			

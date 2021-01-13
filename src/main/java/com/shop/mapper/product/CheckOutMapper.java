@@ -30,5 +30,7 @@ public interface CheckOutMapper {
 	public List<Cart_Tbl> cartList(String u_id); //cart_tbl에서 cart정보 가져옴 -- 테스트용(재원/20.12.22)  
 	public void insertBuyList(Order_Histroy_Tbl order); //구매이력 insert(재원/20.12.22)  
 	public void deleteCartList(String u_id); // 장바구니 이력 없애기 (재원/20.12.28)
+	public User_Tbl isUser(String u_id); //아이디 예외처리(재원/21.01.13)
+
 	
 }

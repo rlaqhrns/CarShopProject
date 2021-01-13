@@ -93,7 +93,7 @@ public class ConfirmationServiceImple implements ConfirmationService{
 	}
 
 	@Override
-	public List<User_Tbl> isUser(String u_id) {
+	public User_Tbl isUser(String u_id) {
 		// TODO Auto-generated method stub
 		return mapper.isUser(u_id);
 	}

@@ -37,6 +37,6 @@ public interface ConfirmationMapper {
 	public Return_Tbl returnOne(@Param("ono") int ono); //교환 반품 테이블로 들어갔는지 확인 (재원/21.01.11)
 	public List<Return_Tbl> findRefund(String u_id); //아이디로 교환폼 확인 (재원/21.01.12)
 	public List<Return_End_Tbl> findrealRefund(String u_id); //아이디로 환불 확인 (재원/21.01.12)
-	public List<User_Tbl> isUser(String u_id); //아이디 예외처리
+	public User_Tbl isUser(String u_id); //아이디 예외처리(재원/21.01.13)
 	//교환 반품 완료 테이블로 들어갔는지 확인 (재원/21.01.11)
 }
