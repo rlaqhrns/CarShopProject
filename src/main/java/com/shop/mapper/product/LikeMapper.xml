@@ -43,7 +43,7 @@
 
 
 	<!-- like의 출력하는 쿼리문 yunhj 2021/01/13 -->
-	<select id="getCartUpdate" resultType="package com.shop.vo" >
+	<select id="getCartUpdate" resultType="com.shop.vo.LikeVO" >
 
 		SELECT
 		p.p_name,

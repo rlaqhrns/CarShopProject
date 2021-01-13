@@ -8,7 +8,7 @@
 
 
 <!-- ================ start banner area ================= -->
-<title>CarShop - like</title>
+<title>저리카 | 찜목록</title>
 <link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 
 <!-- hraet 아이콘 css 생성 2020.12.22 -->
@@ -89,7 +89,7 @@
 						<c:forEach items="${likeList_like}" var="like">
 							<tr align="center">
 								<td>${like.p_name}</td>
-								<td><fmt:formatNumber value="${like.p_no}" pattern="#,###,###" />원</td>
+								<td><fmt:formatNumber value="${like.amount}" pattern="#,###,###" />원</td>
 								<td><a href="${path}/carshop/like/update?p_no=${like.p_no}" class="icon_cart"></a></td>
 								<td><a href="${path}/carshop/like_delete?u_id=${like.u_id}&p_no=${like.p_no}" class="icon_heart_red"></a></td>
 								<!-- <td><a href="${path}/carshop/like/delete?p_no=${like.p_no}" class="icon_heart_red"></a></td> -->
