@@ -100,7 +100,7 @@ public class LoginController {
 	public String login2(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
 		HttpSession session1 = request.getSession(false);
-		return "carshop/index";
+		return "redirect:/carshop/index"; //return "carshop/index"로 두면 jsp만 보이고 컨트롤러는 실행이 안되서 물품들이 보이지 않음 (성연/21.01.14)
 	}
 	
 	
