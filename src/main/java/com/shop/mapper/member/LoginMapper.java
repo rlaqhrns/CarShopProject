@@ -13,4 +13,6 @@ public interface LoginMapper {
 	public All_User_Tbl getid(String email);
 	public int updatepw(All_User_Tbl aut);
 	public Admin_Tbl getAdmin(String id);
+	public All_User_Tbl getIdById(String id);
+	public All_User_Tbl getPwById(String id);
 }

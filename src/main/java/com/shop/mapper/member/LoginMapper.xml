@@ -19,4 +19,10 @@
 	<select id="getAdmin" resultType="com.shop.vo.Admin_Tbl">
 		select * from admin_tbl where id = #{id}
 	</select>
+	<select id="getIdById" resultType="com.shop.vo.All_User_Tbl">
+		select * from all_user_tbl where id = #{id}
+	</select>
+	<select id="getPwById" resultType="com.shop.vo.All_User_Tbl">
+		select * from all_user_tbl where id = #{id}
+	</select>
 </mapper>

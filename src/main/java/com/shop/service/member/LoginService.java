@@ -13,4 +13,6 @@ public interface LoginService {
 	public All_User_Tbl emailcheck(String email);
 	public All_User_Tbl getid(String email);
 	public void pwsave(All_User_Tbl aut);
+	public String getId(String id);
+	public String getPw(String id, String pw);
 }

@@ -14,89 +14,88 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
 <script type="text/javascript"></script>	
 <script>
-$(document).ready(function(){
-	$('#id').keyup(function(){
-		console.log("id guide 나오나요");
-		var id = $('#id').val();  
-		$.ajax({
-			url: '/carshop/login',
-			type : 'post',
-			dataType : "json",
-		    contentType: "application/json; charset=utf-8",
-		    data : JSON.stringify({
-		    	'id' : id,
-		    	}),
-			success:function(data){
-				if(data == "-1"){
-					$('#idmessage').attr("type","text").css("color","red");
-				}
-			},
-			error :function(){
-				console.log("keyup id 실패함");
-			}
-		})
-	});
-});
-</script>
-<script>
-$(document).ready(function(){
-	$('#pw').keyup(function(){
-		console.log("pw guide 나오나요");
-		var pw = $('#pw').val();  
-		$.ajax({
-			url: '/carshop/login',
-			type : 'post',
-			dataType : "json",
-		    contentType: "application/json; charset=utf-8",
-		    data : JSON.stringify({
-		    	'pw' : pw,
-		    	}),
-			success:function(data){
-				if(data == "-1"){
-					$('#pwmessage').attr("type","text").css("color","red");
-				}
-			},
-			error :function(){
-				console.log("keyup pw 실패함");
-			}
-		})
-	});
-});
-</script>
-<script>
+function aaa(){
+	var id = $('#id').val();   
+	var pw = $('#pw').val();  
+	$.ajax({
+        url: '/carshop/login',
+        type : 'post',
+        async : false,
+        dataType : "json",
+         contentType: "application/json; charset=utf-8",
+         data : JSON.stringify({
+            'id' : id,
+            'pw' : pw,
+            }),
+        success:function(data){
+           if(data == "-1"){
+              preventDefault;
+           }else if(data == "1"){
+              console.log("관리자로 로그인 성공");
+              location.href="/carshop/index";
+           }else if(data == "2"){
+              console.log("회원으로 로그인 성공");
+              location.href="/carshop/index";
+           }
+        },
+        error :function(){
+           console.log("실패함");
+        }
+  });// ajax
+};// aaa
 function showSwal(){
 
 	var id = $('#id').val();   
 	var pw = $('#pw').val();  
 	
-	console.log("정상동작");
-	console.log(id + pw);
+	console.log("id guide ajax 정상동작");
 	$.ajax({
-			url: '/carshop/login',
+		url: '/carshop/onlyId',
+		type : 'post',
+		async : false,
+		dataType : "json",
+	    contentType: "application/json; charset=utf-8",
+	    data : JSON.stringify({
+	    	'id' : id,
+	    	}),
+		success:function(data){
+			if(data == "-1"){
+				$('#idmessage').attr("type","text").css("color","red");
+				 preventDefault;
+			}
+		},
+		error :function(){
+			console.log("아이디만 가져오기 성공");
+		}
+	});
+	console.log("pw guide ajax 정상동작");
+	$.ajax({
+			url: '/carshop/onlyPw',
 			type : 'post',
+			async : false,
 			dataType : "json",
-		    contentType: "application/json; charset=utf-8",
+		    contentType: "application/json; charset=utf-8", 
 		    data : JSON.stringify({
 		    	'id' : id,
 		    	'pw' : pw,
 		    	}),
 			success:function(data){
+				console.log("success 들어옴")
 				if(data == "-1"){
-					$('#idmessage').attr("type","text").css("color","red");
 					$('#pwmessage').attr("type","text").css("color","red");
-				}else if(data == "1"){
-					console.log("관리자로 로그인 성공");
-					location.href="index"
-				}else if(data == "2"){
-					console.log("회원으로 로그인 성공");
-					location.href="index"
+			        //비밀번호가 틀릴경우 다음 ajax로 넘어가지 않고 머무르도록
+				}
+				else if(data=="2"){
+					aaa();
 				}
 			},
 			error :function(){
-				console.log("실패함");
+				console.log("pw만 가져오기 성공");
 			}
-	})
-}	
+	});
+	
+	};//showSwal
+
 </script>	
 <style>
 .login_box_area .container .row .col-lg-6 .login_form_inner .login_form .message {
@@ -112,12 +111,12 @@ function showSwal(){
 	font-size : 12px;
 }
 .login_box_area .container .row .col-lg-6 .login_form_inner .login_form .message2 {
-	margin-left : 260px;
+	margin-left : 190px;
 	margin-top : -23px;
 }
 .login_box_area .container .row .col-lg-6 .login_form_inner .login_form .message2 .pwmessage{
 
-	width : 130px;
+	width : 180px;
 	color : red;
 	border : none;
 	border-radius : 10px;
@@ -162,16 +161,16 @@ function showSwal(){
 						<h3>Log in to enter</h3>
 						<form class="row login_form" action="" id="contactForm" method="post">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="id" name="id" placeholder="UserID" onfocus="this.placeholder = ''" onblur="this.placeholder = 'UserID'">
+								<input type="text" class="form-control" id="id" name="id" placeholder="UserID" onfocus="this.placeholder = ''" onblur="">
 							</div>
 							<div class="message">
 								<input type="hidden" id="idmessage" class="idmessage" tabindex="-1" value="ID를 확인해주세요" readonly>
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="password" class="form-control" id="pw" name="pw" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<input type="password" class="form-control" id="pw" name="pw" placeholder="Password" onfocus="this.placeholder = ''" onblur="">
 							</div>
 							<div class="message2">
-								<input type="hidden" id="pwmessage" class="pwmessage" tabindex="-1" value="영문자/숫자조합 8~15자리로 입력해주세요" readonly>
+								<input type="hidden" id="pwmessage" class="pwmessage" tabindex="-1" value="영문/숫자조합 8~15자리로 입력" readonly>
 							</div>
 							<div class="col-md-12 form-group">
 
