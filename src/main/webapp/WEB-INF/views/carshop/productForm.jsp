@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="/resources/vendors/nouislider/nouislider.min.js"></script>
 
@@ -179,7 +180,8 @@ input:checked+.slider:before {
 							</ul>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-default">등록</button>
+					<input type="button" class="btn btn-default" value="등록" id="btsCk">
+<!-- 					<button onchange="btsCk" class="btn btn-default">등록</button> -->
 					<button type="reset" class="btn btn-default">초기화</button>
 				</form>
 			</div>
@@ -196,9 +198,26 @@ input:checked+.slider:before {
 			$("#quantity").on("keyup",function(){
 			    $(this).val($(this).val().replace(/[^0-9]/g,""));
 			})
-    			
+			
+    		$("#btsCk").click(function(){
+    			console.log("클릭됨");
+    			let length = $("#image")[0].files.length;
+    			console.log("imgae : " ,length);
+    			if(length==0){
+    				Swal.fire({
+    					  icon: 'error',
+    					  title: 'Oops...',
+    					  text: '등록된 이미지가 없습니다'
+    					})
+    			}else{
+    				$("#btsCk").attr({type : "submit"});
+    			}
+    		
+    		})
     			
     		})
+
+    		
 	// onchange 로 input 태그 클릭 시 이벤트 발생
 	function setDisplay(obj) {
 		console.log("obj : " + obj);
@@ -246,7 +265,11 @@ input:checked+.slider:before {
 		$("#image_container").empty();
 		let size = event.target.files.length;
 		if(size>=4){
-			alert("최대 3개까지 가능합니다");
+			Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: '최대 3개까지 가능합니다'
+				})
 			$("#image").val("");
 			return false;
 		}

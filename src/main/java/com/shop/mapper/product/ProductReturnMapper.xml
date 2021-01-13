@@ -33,8 +33,8 @@
 		<update id="insert_select">
 		<![CDATA[
 			INSERT INTO return_end_tbl
-			( u_id, p_id, content,s_id ,end_date)
-			SELECT u_id, pname, content, s_id,date
+			(ono, u_id, p_id, content,s_id ,end_date)
+			SELECT ono, u_id, pname, content, s_id,now()
 			FROM return_tbl
 			WHERE ono=#{ono};	
 

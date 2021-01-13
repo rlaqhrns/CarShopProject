@@ -18,14 +18,15 @@
 	background-position: center;
 	background-image: url(/resources/img/heart/heart_white_full.png);
 }
- .heart_white_full{
-    margin: 0;
+
+.heart_white_full {
+	margin: 0;
 	width: 15px;
 	height: 15.2px;
 	background-size: cover;
 	background-position: center;
 	background-image: url(/resources/img/heart/heart_white_full.png);
-	}
+}
 </style>
 
 <!-- ================ start banner area ================= -->
@@ -59,25 +60,19 @@
 						<li class="common-filter">
 							<ul>
 								<!-- default값으로 value = 0 을 설정, 전체 상품목록을 조회할때 사용한다 -->
-								<li class="filter-list">
-									<input
-										class="pixel-radio parts-radio parent-radio" type="radio"
-										name="brand"
-										id="cateParentDefault"
-										value="0" checked>
-									<label for="cateParentDefault">전체보기</label>
-								</li>
+								<li class="filter-list"><input
+									class="pixel-radio parts-radio parent-radio" type="radio"
+									name="brand" id="cateParentDefault" value="0" checked>
+									<label for="cateParentDefault">전체보기</label></li>
 								<!-- 카테고리를 each문으로 출력 -->
 								<c:forEach items="${cateParent }" var="cateParent">
-									<li class="filter-list">
-										<input
-											class="pixel-radio parts-radio parent-radio" type="radio"
-											id="${cateParent.c_no}" name="brand"
-											value="${cateParent.c_no}">
-										 <label for="${cateParent.c_no}"> 
-										 	<c:out value="${cateParent.c_name}" />
-										</label>
-									</li>
+									<li class="filter-list"><input
+										class="pixel-radio parts-radio parent-radio" type="radio"
+										id="${cateParent.c_no}" name="brand"
+										value="${cateParent.c_no}"> <label
+										for="${cateParent.c_no}"> <c:out
+												value="${cateParent.c_name}" />
+									</label></li>
 								</c:forEach>
 							</ul>
 						</li>
@@ -88,10 +83,9 @@
 					<div class="common-filter parts_radio">
 						<!-- 전면부품 체크시 나타날 radio -->
 						<ul class="main-categories" id="details-parts">
-							<li class="filter-list">
-								<input class="pixel-radio"type="radio"name="details-parts" value="0" id="detailDefault" checked>
-								<label for="detailDefault">전체보기</label>
-							</li>
+							<li class="filter-list"><input class="pixel-radio"
+								type="radio" name="details-parts" value="0" id="detailDefault"
+								checked> <label for="detailDefault">전체보기</label></li>
 						</ul>
 					</div>
 
@@ -117,8 +111,11 @@
 						</select>
 					</div>
 					<!-- 내 차량 검색 체크박스 -->
-					<div id = "mycarSearchCheckBoxArea" style="margin:25px 15px 0 0">
-						<input style="zoom:1.5" type="checkbox" name="mycarSearch" id="mycarSearch"><label style="position:relative;top:-4.5px;margin-left:10px;" for="mycarSearch">내 차량 검색</label>
+					<div id="mycarSearchCheckBoxArea" style="margin: 25px 15px 0 0">
+						<input style="zoom: 1.5" type="checkbox" name="mycarSearch"
+							id="mycarSearch"><label
+							style="position: relative; top: -4.5px; margin-left: 10px;"
+							for="mycarSearch">내 차량 검색</label>
 					</div>
 					<!-- 검 색 창 -->
 					<div>
@@ -168,6 +165,7 @@
 			<div class="modal-body">...</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				<div id = "cart-btn-area"></div>
 			</div>
 		</div>
 	</div>
@@ -184,11 +182,9 @@
 <script>
 
 
-function addCartEvent(p_no) { //장바구니
+function addCartEvent(p_no,quantity) { //장바구니
 	let userId = getUserId();
-	if(sessoinExistenceChecked()){
-		$(".modal-body").html("로그인 후 이용해주세요.");
-		$('#notice').modal('show');
+	if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 		return false;
 	}
 	
@@ -199,11 +195,14 @@ function addCartEvent(p_no) { //장바구니
 		data : {
 			"u_id" : userId,
 			"p_no" : p_no,
-			"quantity":0
+			"quantity":quantity
 		},
 		dataType : 'JSON',
 		success : function(stats) {
 			$(".modal-body").html("\""+getUserId() + "\"님 장바구니에 넣었습니다.");
+			
+			$("#cart-btn-area").empty().append(`<button type="button" onClick="location.href='/carshop/cart'"
+											class="btn btn-primary" data-dismiss="modal">장바구니로 이동</button>`);
 			$('#notice').modal('show');
 
 		},
@@ -214,9 +213,7 @@ function addCartEvent(p_no) { //장바구니
 }
 function addLikeEvent(p_no,$obj) { //찜목록추가
 	let userId = getUserId();
-	if(sessoinExistenceChecked()){
-		$(".modal-body").html("로그인 후 이용해주세요.");
-		$('#notice').modal('show');
+	if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 		return false;
 	}
 
@@ -241,9 +238,7 @@ function addLikeEvent(p_no,$obj) { //찜목록추가
 function removeLikeEvent(p_no,$obj) { //찜목록삭제
 	//console.log("상품번호 : " + p_no);
 	let userId = getUserId();
-	if(sessoinExistenceChecked()){
-		$(".modal-body").html("로그인 후 이용해주세요.");
-		$('#notice').modal('show');
+	if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 		return false;
 	}
 	$.ajax({
@@ -267,7 +262,7 @@ function removeLikeEvent(p_no,$obj) { //찜목록삭제
 
 function checkLiked(){
 	let userId = getUserId();
-	if(sessoinExistenceChecked()){
+	if(sessoinExistenceChecked() || getSellerCheck()){
 		return false;
 	}
 
@@ -365,6 +360,8 @@ function setProductList() { //상품을 그려주는 함수
 					$productListArea.empty(); //append하기전 비워준다.
 					$.each(data,function(index, product) {
 						text = '';
+						let productName = product.p_name;
+						product.p_name = product.p_name.toUpperCase();
 						productNum = index +1; //상품아이디 product + productNum 의 형식으로 아이디 지
 											//text는 백틱으로 처음부터 끝까지 해결하려했으나 태그 다음에 오류 ex) `src="${product.img}"`동작 안함
 										  	text += `<div class="`;
@@ -378,9 +375,9 @@ function setProductList() { //상품을 그려주는 함수
 											text += productNum + `"> 
 											<div class="card text-center card-product">
 											<div class="card-product__img">
-												<img class="card-img" src="`;
+												<img class="card-img" onerror="this.src='/resources/img/noimage.gif'"  src="/resources/img/upload/`;
 											text += product.img1;
-											text += `" onerror="this.src='/resources/img/noimage.gif'" onClick="location.href='/carshop/product/details?p_no='`;
+											text += `" onClick="location.href='/carshop/product/details?p_no='`;
 											text += product.p_no;
 											text += ` ">
 												<ul class="card-product__imgOverlay">
@@ -404,7 +401,7 @@ function setProductList() { //상품을 그려주는 함수
 														<a href="/carshop/product/details?p_no=`;
 											text += product.p_no;
 											text += `">`;
-											text += product.p_name;
+											text += productName;
 											text += `</a></h4><p class="card-product__price">`;
 											text += product.amount;
 											text += `원</p></div></div></div>`;
@@ -443,7 +440,7 @@ function clickEvent(){ //찜, 장바구니 버튼 클릭 이벤트
 		}
 	});
 	shoppingCart.click(function(){ //장바구니 add
-		addCartEvent($(this).val());
+		addCartEvent($(this).val(),1);
 	})
 	
 }
@@ -485,6 +482,7 @@ function search(){ //검색(프론트에서 구현)
 			pagingEvent();
 		}else{
 			//console.log("keyup 동작");
+			text=text.toUpperCase();
 			productArea.hide(); //키보드가 입력 될때에 모든 상품을 숨긴다.
 			let searchProduct = $(".product-area[data-product-name*='"+text+"']"); //상품클래스 중 date-product-name속성에 text가 포함(contains이용)
 			$(searchProduct).show(); //검색어를 포함하면 다시 보여준다.
@@ -569,7 +567,7 @@ function pagingEvent(){//페이지 함수(프론트에서 구현)
 	
 }
  function getUserId(){ //유저아이디 getter
-		var u_id = '<c:out value="${UserID}"></c:out>'; //js파일에서 읽히지 않는다. jstl임포트 불가능 (해결방안 : js파일을 jsp로 변환 or json을 이용)
+		var u_id = '<c:out value="${user.id}"></c:out>'; //js파일에서 읽히지 않는다. jstl임포트 불가능 (해결방안 : js파일을 jsp로 변환 or json을 이용)
 		return u_id;
 }
 function getUserCar(){
@@ -585,15 +583,7 @@ function sessoinExistenceChecked(){
 	}
 	return false;
 }
-function init(){ //이벤트함수 init
-	setProductList(); // 최초 상품목록 불러오기
-	categoryParentChange(); //부모카테고리 값이 바뀌면 동작하는 이벤트
-	sortOption();//정렬옵션함수
-	//search();//검색 
-	ProductViewEvent();//몇개씩 볼것인지
-	getUserId();//유저아이디 getter
-	
-}
+
 function carSearchCheckEvent(){
 	let mycarSearch = $("#mycarSearch");
 	let userCar = getUserCar();
@@ -618,19 +608,42 @@ function carSearchCheckEvent(){
 		}
 	}) 
 }
+function getSellerCheck(){
+	let sellerCheck = "${user.seller}"
+	//console.log("sellerCheck : " +  sellerCheck);
+	if(sellerCheck === 'N'){
+		return false;
+	}else if(sellerCheck === 'Y') {
+		return true;
+	}
+}
 
+function loginTypeCheck(){ //비회원, 판매자 접속시 모달창
+	
+	let result = false;
+	if(sessoinExistenceChecked()){
+		$("#notice .modal-body").html("로그인 후 이용해주세요.");
+		$('#notice').modal('show');
+		result = true;
+	}else if(getSellerCheck()){
+		$("#notice .modal-body").html("판매자는 이용할수 없습니다. 일반유저 로그인 후 이용해주세요.");
+		$('#notice').modal('show');
+		result = true;
+	}
+	return result;
+}
+function init(){ //이벤트함수 init
+	setProductList(); // 최초 상품목록 불러오기
+	categoryParentChange(); //부모카테고리 값이 바뀌면 동작하는 이벤트
+	sortOption();//정렬옵션함수
+	//search();//검색 
+	ProductViewEvent();//몇개씩 볼것인지
+	getUserId();//유저아이디 getter
+	
+}
 $(document).ready(function() {
 	init();
 	carSearchCheckEvent();
-	// 인덱스 페이지 에서 카테고리 상품클릭하여 해당 no랑 구분자를 제이쿼리 객체를 만든다
-	let cate_no = "${param.cate_no}";
-	let click = "${param.click}";
-	// 클릭이 y였을시 라디오버튼을 해당 id에 맞게 체크하고 trigger를 이용해 강제로 발생하게한다
-	if(click =='Y'){
-		$("#"+cate_no).prop('checked',true);
-		$("#"+cate_no).trigger("change");
-		
-	}
 	
 })
 </script>
