@@ -143,8 +143,10 @@
 <%
 	}
 %>
+
 						
 						</ul>
+
 						<div class="nav-right">
 							<ul class="nav-shop">
 								<li class="nav-item"><a href="/carshop/cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>

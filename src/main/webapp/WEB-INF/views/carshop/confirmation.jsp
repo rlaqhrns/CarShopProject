@@ -5,13 +5,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../include/header.jsp"%>
 
-	<title>Aroma Shop</title>
+	<title>저리카 | 주문이력</title>
 	<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 	<link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 	<link href='/resources/lib/main.css' rel='stylesheet' />
 	<script src='/resources/lib/main.min.js'></script>
 	<script src='/resources/lib/main.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.13.0/dist/sweetalert2.all.min.js"></script>
 <body>
 	<!-- ================ start banner area ================= -->	
  	<section class="blog-banner-area" id="category">
@@ -55,18 +56,30 @@
               </tr>
             </thead>
             <tbody id="originalTr">
-             <c:forEach items="${buylist}" var ="buylist" varStatus="status"> 
-                    <tr>
+             <c:forEach items="${buylist}" var ="buylist" varStatus="status">              
+                  <tr>
                       <td><c:out value="${buylist.ono}"></c:out></td>               
                       <td><c:out value="${buylist.pname}"></c:out></td>
                       <td><c:out value="${buylist.quantity}"></c:out></td>
                       <td><c:out value="${buylist.amount}"></c:out></td>
-                      <td><c:out value="${buylist.pay}"></c:out></td>  
-                      <td style="display:none"><input id="validationRequired" type="text" value='<c:out value = "${buylist.p_no}"/>' name="p_no" style="visibility: hidden;"></input></td>                  
-                      <td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}" data-toggle="modal" data-target="#exampleModalCenter">교환/반품</button></td>	 
-             		  <td><c:out value="${buylist.order_date}"></c:out></td>              		
+                      <td><c:out value="${buylist.pay}"></c:out></td>
+                      <c:choose>
+                      	<c:when test="${buylist.o_no == 0 && buylist.o_no2 == 0}">             	               
+                      		<td><button id="getItemRefund" class="btn btn-warning" value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}">교환/반품</button></td>	 
+             		  	</c:when>
+             		  	<c:when test="${buylist.o_no != 0 && buylist.o_no2 == 0}">
+             		  		<td><button id="getItemRefund" class="btn btn-success" disabled value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}">교환/반품</button></td>	 
+             		  	</c:when>
+             		  	<c:when test="${buylist.o_no != 0 && buylist.o_no2 != 0}">
+             		  		<td><button id="getItemRefund" class="btn btn-secondary" disabled value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}">환불 완료</button></td>	 
+             		  	</c:when>
+             		  	<c:otherwise>
+             		  		<td><button id="getItemRefund" class="btn btn-secondary" disabled value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}">환불 완료</button></td>	 
+             		  	</c:otherwise>
+             		  </c:choose> 
+             		  <td><c:out value="${buylist.order_date}"></c:out></td>              		             		
              		</tr>
-              </c:forEach> 
+             	</c:forEach>	      
             </tbody>
             <tbody id="emptyTr">
             </tbody>
@@ -90,17 +103,17 @@
 			      <div class="modal-body">
 			        <form name="returnFormAjax" action="confirmation" method="post">
 			        <div class="form-group">
-						<label for="user-name" class="col-form-label">주문번호</label><input type="text" value='<c:out value = "${getForms.ono}"/>' class="form-control" id="ono" name="ono">
+						<label for="user-name" class="col-form-label">주문번호</label><input type="text" class="form-control" id="ono" name="ono" readonly>
 					</div>
 					<div class="form-group">
-						<label for="user-name" class="col-form-label">유저</label><input type="text" class="form-control" value='<c:out value = "${getForms.u_id}"/>' id="u_id" name="u_id">
+						<label for="user-name" class="col-form-label">유저</label><input type="text" class="form-control"id="u_id" name="u_id" readonly>
 					</div>
 					<div class="form-group">
-						<label for="product-name" class="col-form-label">상품명</label><input type="text" class="form-control" value='<c:out value = "${getForms.pname}"/>' id="pname" name="pname">
+						<label for="product-name" class="col-form-label">상품명</label><input type="text" class="form-control"id="pname" name="pname" readonly>
 					<!-- p_id를 pname으로 변경해야함 vo도 -->
 					</div>
 					<div class="form-group">
-						<label for="seller-name" class="col-form-label">판매자</label><input type="text" class="form-control" value='<c:out value = "${findSid}"/>' id="s_id" name="s_id">
+						<label for="seller-name" class="col-form-label">판매자</label><input type="text" class="form-control" id="s_id" name="s_id" readonly>
 					</div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label">사유</label>
@@ -110,7 +123,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			        <button type="button" class="btn btn-primary">신청하기</button>
+			        <button type="button" class="btn btn-primary" id="applyBtn">신청하기</button>
 			      </div>
 			    </div>
 			  </div>
@@ -127,50 +140,37 @@
 <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	  
-      		var notifyid="";
-      		var nnotifyid="";
+      		
+      		//세션을 받아옵니다. (재원/21.01.13)
+  	      	<% 
+  	      	
+  	      		session = request.getSession();
+	      	   
+  	      	%>
+  	    	//세션 id를 u_id로 설정합니다. (재원/21.01.13)
+  	      	var u_id = "<%=session.getAttribute("id")%>";
       		
       		$(document).ready(function(){
-      			$('[data-toggle="tooltip"]').tooltip();
-      			
-      			var form = $('#returnFormAjax')[0];
-      			
-      		    $("#getItemChange").click(function(){
-      		        $("#exampleModal").appendTo("body").modal();
-      		    });
-      		    
-      		  $("#getItemRefund").click(function(){
-    		        $("#exampleModal").appendTo("body").modal();
-    		    });
+		     	
+	      			//hovering을 위함 (재원/21.01.13)
+	      			$('[data-toggle="tooltip"]').tooltip();
+	  		
+	      		  //주문이력 전체를 볼 수 있게 함 (재원/21.01.13)
+	      		  $('#confirmationAllList').click(function() {
+	      			    			
+	      			let originalTr = $('#originalTr');
+	      	    	let emptyTr = $('#emptyTr');
+	      			originalTr.css("display", "");
+	      			emptyTr.empty();  
+	      		  
+	      		  });
       		  
-      			writeRefundForms();
-      		  
-      			
-      		  
-      		  $('#confirmationAllList').click(function() {
-      			    			
-      			let originalTr = $('#originalTr');
-      	    	let emptyTr = $('#emptyTr');
-      			originalTr.css("display", "");
-      			emptyTr.empty();  
-      		  
-      		  });
-      		  
-      		  
-      		var result = new Array();
-  			
-            <c:forEach items="${buylist}" var ="buylist"> 
-            	var json = new Object();
-            	<c:set var ="order_date" value="${buylist.order_date}"/>
-	            json.title = "${buylist.pname}";    
-       		 	json.start = "${fn:substring(order_date,0,10)}";
-       		 	json.end = "${fn:substring(order_date,0,10)}";
-       		 	result.push(json);
-    		</c:forEach>
-
+      	    		       		 
       		});
       		
-      		function writeRefundForms() {
+      		//교환반품 버튼을 클릭하면 모달에 해당 주문번호에 맞게 데이터를 띄웁니다. (재원/21.01.13)
+      		//function으로 만들어서 다양하게 사용하도록 만듬 (재원/21.01.13)
+      		 function writeRefundForms() {
       			 $('.btn-warning').click(function() {
        			 	$('#ono').val($(this).val());
        			 	
@@ -183,70 +183,105 @@
        			 	$('#u_id').val(nnotifyid);	
        			 	$('#s_id').val(nnnotifyid);
        		  });
-      		}
+      		} 
       		
-      		function getCalendarDataDB() { 
-      			//캘린더에 띄울 정보를 배열로 받아옵니다. (재원/21.01.04)
-      			//Json 배열 만들기 (..) (재원/21.01.04)
-      			
-      			var result = new Array();
-      			
-                <c:forEach items="${buylist}" var ="buylist"> 
-                	var json = new Object();    
-		            json.pname = "${buylist.pname}";    
-	                json.quantity = "${buylist.quantity}";
-	                json.amount = "${buylist.amount}";
-	                json.pay = "${buylist.pay}";
-	       		 	json.order_date = "${buylist.order_date}";
-	       		 	result.push(json);
-        		</c:forEach>
-        		
-        		console.log("json = " + json.pname);
-        		console.log("jsoninfo = " + JSON.stringify(result));
-      			
-        		var dataJson = JSON.stringify(result);
-        	
-      			
-      		}
       		
+      		//사유가 없으면 신청하지 못합니다. (재원/21.01.13)
+      		//교환반품 form post를 성공적으로 마치면 윈도우를 relaod합니다. (재원/21.01.13)
       		function getReloadSuccess() {
       		  $('.btn-primary').click(function() {
-      			  var param = $("form[name=returnFormAjax]").serialize();
-      			  $.ajax({
-	            	    url :'confirmation',
-	            	    type : 'post',
-	               		data : param,
-	               		success : function(data){
-	              		//console.log(data);
-	            		//console.log($(this));
-	            		//$('.btn-primary').attr('btn-primary', 'btn-success');
-	            		window.location.reload();
-
-	               },
-	               error : function(){	
-	                  console.log("통신실패");
-	               }
-	               
-	              
-	            })
+      			  if(!$("#message-text").val()) {
+      				Swal.fire({
+      				  icon: 'error',
+      				  title: 'Oops...',
+      				  text: '사유를 적어주세요.',      				  
+      				});
+      			 }
+      			  else{
+          			  var param = $("form[name=returnFormAjax]").serialize();
+          			  $.ajax({
+    	            	    url :'confirmation',
+    	            	    type : 'post',
+    	               		data : param,
+    	               		success : function(data){
+    	              		console.log(data);	
+    	            		window.location.reload();
+    	            		
+    	               },
+    	               error : function(){	
+    	                  console.log("통신실패");
+    	               }    	               
+    	              
+    	            })
+      				  
+      			  }
 	            
       		    
       		  });
+      		  
+      		
       		}
       		
-      		//주문상세정보 pagination 10개마다 끊기 (재원/21.01.06)
+      		//교환 반품 신청하기를 진행합니다. (재원/21.01.13)
+      		//교환 반품 신청을 완료하면 버튼의 색깔을 초록색으로 바꾸고 버튼을 더이상 누를 수 없도록 합니다. (재원/21.01.13) 
+      		function refundChangeModal() {
+      			 $(".btn-warning").click(function(){
+ 					$('#ono').val($(this).val());
+        			 	var btn = $(this);
+        			 	console.log(btn);
+        			 	var ono = $('#ono').val();
+        			 	
+        			 	notifyid= $(this).data('notifyid');
+        			 	nnotifyid= $(this).data('nnotifyid');
+        			 	nnnotifyid= $(this).data('nnnotifyid');
+        			 	$('#pname').val(notifyid);
+        			 	$('#u_id').val(nnotifyid);	
+        			 	$('#s_id').val(nnnotifyid);
+
+ 	  				$.ajax({
+ 	            	    url :'isRefundTrue?ono=' + ono,
+ 	            	    type : 'post',
+ 		               	dataType : 'JSON',
+ 	               		success : function(data){
+ 	              		console.log(data);
+
+ 	            		if(data == false) {
+ 	            			console.log(btn);
+ 	            			btn.addClass('btn-success');
+ 	            			btn.removeClass('btn-warning');	            			
+ 	            			btn.attr('disabled', 'true');
+ 	            		}
+ 	            		else {
+ 	            			$("#exampleModalCenter").modal('show');
+
+ 	            		}
+
+ 	               },
+ 	               error : function(){	
+ 	                  console.log("아이템통신실패");
+ 	               }
+ 	               
+ 	              
+ 	            });  				
+   			
+     		   });
+      		}     	
       		
     		// 캘린더 이벤트  (재원/21.01.06)
       		//The ready event occurs after the HTML document has been loaded, while the onload event occurs later, when all content (e.g. images) also has been loaded.
       	    //The onload event is a standard event in the DOM, while the ready event is specific to jQuery. The purpose of the ready event is that it should occur as early as possible after the document has loaded, so that code that adds functionality to the elements in the page doesn't have to wait for all content to load.
       		document.addEventListener('DOMContentLoaded', function() {
       			getReloadSuccess();
+      			refundChangeModal();
+      			
+      			//테이블 안에 <td>들을 숨기거나 없앰(재원/21.01.13)
       	    	let tbody = $('tbody');
       	    	let originalTr = $('#originalTr');
       	    	let emptyTr = $('#emptyTr');
       	    	let allTr = $('tbody tr');
       	    	let str = '';
       	    
+      	    	//이벤트 추가를 위해 배열로 데이터를 저장함.(재원/21.01.13)
 				var result = new Array();
       			
                 <c:forEach items="${buylist}" var ="buylist"> 
@@ -259,18 +294,11 @@
 	       		 	result.push(json);
         		</c:forEach>
 
-      			
-        		var dataJson = JSON.stringify(result);
+        		//캘린더 api -> fullcalendar.io(재원/21.01.13)
       	        var calendarEl = document.getElementById('calendar'); 
       	        var calendar;
       	      	var jsId = document.cookie.match(/JSESSIONID=[^;]+/);
       	      	
-      	      	<% session = request.getSession();
-      	      	   
-      	      	%>
-      	      	
-      	      	var u_id = "<%=session.getAttribute("id")%>";
-      	      	console.log(u_id);
       	        	  calendar = new FullCalendar.Calendar(calendarEl, {
             	        	editable: true,
             	          	selectable: true,
@@ -278,8 +306,8 @@
             	          	dayMaxEvents: true,
             	          
             	          	
-            	          	//캘린더 이벤트 날짜별로 주문정보 확인 가능 - 미완성 (재원/21.01.06)
-            	      		eventClick:function (info) { //alert창 띄우는 기능 
+            	          	//캘린더 이벤트별로 주문정보 확인 가능 (재원/21.01.06)
+            	      		eventClick:function (info) { 
             	      			info.jsEvent.preventDefault(); // don't let the browser navigate
             	      			originalTr.hide();
             	      		  	emptyTr.empty();
@@ -289,7 +317,6 @@
             	      			var jsId = document.cookie.match(/JSESSIONID=[^;]+/);
             	      			
             	      			var start = moment(info.event.start).format("YYYY-MM-DD"); 
-            	      			//tbody.empty();
 	      						let text = '';
 	      						
 	      						$.ajax({
@@ -300,17 +327,28 @@
 	      		               		success : function(data){
 	      		              		console.log(data);
 	      		            		let result = '';
-	      		            		
+	      		            		//교환반품이 되었는지에 따라 버튼 색깔과 disabled를 적용합니다. (재원/21.01.13)
 	      		            		$.each(data,function(key,value){
 	      		            			text+= '<tr id='+ start +'><td>'+ value.ono + '</td>' +'<td>'+value.pname+'</td>'+'<td>'+value.quantity+'</td>'+'<td>'+value.amount+'</td>'+'<td>'+value.pay+'</td>'
-	      		            			text += '<td> <button id="getItemRefund" class="btn btn-warning" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' data-toggle="modal" data-target="#exampleModalCenter">교환/반품</button></td>'
+	      		            			if(value.o_no == 0 && value.o_no2 == 0) {
+	      		            				text += '<td> <button id="getItemRefund" class="btn btn-warning" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+'>교환/반품</button></td>'
+	      		            			}
+	      		            			else if(value.o_no !=0 && value.o_no2 == 0) {
+	      		            				text += '<td> <button id="getItemRefund" class="btn btn-success" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>교환/반품</button></td>'
+	      		            			}
+	      		            			else if(value.o_no !=0 && value.o_no2 !=0 ) {
+	      		            				text += '<td> <button id="getItemRefund" class="btn btn-secondary" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>환불 완료</button></td>'
+	      		            			}
+	      		            			else {
+	      		            				text += '<td> <button id="getItemRefund" class="btn btn-secondary" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>환불 완료</button></td>'
+	      		            			}	      		            			
 	      		            			text += '<td>'+value.order_date+'</td>'
 	      		            			text += '</tr>'
 	      		            		});
 	      		            		emptyTr.append(text);
-	      		            		console.log(text);
+	      		            		//console.log(text);
 	      		            		writeRefundForms();
-	      		            		
+	      		            		refundChangeModal();
 
 	      		               },
 	      		               error : function(){	
@@ -323,24 +361,14 @@
             	      			
             	      		},
             	      		
-            	      		//캘린더 날짜 클릭시 자동으로 밑으로 이동하면서 주문상세 정보 확인 가능 - 미완성 (재원/21.01.06)
+            	      		//캘린더 날짜 클릭시 해당 날짜 주문상세 정보 확인 가능 (재원/21.01.06)
             	      		 dateClick: function(info) {
-            	      			 info.jsEvent.preventDefault(); // don't let the browser navigate
-            	      			 //alert('Clicked on: ' + info.dateStr);
-            	      		    //alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-            	      		    //alert('Current view: ' + info.view.type);
-            	      		    // change the day's background color just for fun
-            	      		    //info.dayEl.style.backgroundColor = 'red';
+            	      			info.jsEvent.preventDefault(); // don't let the browser navigate
             	      		    originalTr.hide();
             	      		  	emptyTr.empty();
             	      		    let text = '';
-            	      		   
-            	      		   
+            	      		               	      		   
             	      		    var start = info.dateStr;
-            	      		    //var arrCal = resources.getEvents();
-            	      		    console.log(info.dateStr);
-            	      		    console.log(info.dayEl);
-            	      		    console.log(info.view.title);
             	      		    
             	      		  	$.ajax({
 	      		            	    url :'clickdateOrder?order_date=' + start + '&' + 'u_id=' + u_id,
@@ -350,17 +378,27 @@
 	      		               		success : function(data){
 	      		              		console.log(data);
 	      		            		let result = '';
-	      		            		
+	      		            		//교환반품이 되었는지에 따라 버튼 색깔과 disabled를 적용합니다. (재원/21.01.13)
 	      		            		$.each(data,function(key,value){
 	      		            			text+= '<tr id='+ start +'><td>'+ value.ono + '</td>' +'<td>'+value.pname+'</td>'+'<td>'+value.quantity+'</td>'+'<td>'+value.amount+'</td>'+'<td>'+value.pay+'</td>'
-	      		            			text += '<td> <button id="getItemRefund" class="btn btn-warning" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' data-toggle="modal" data-target="#exampleModalCenter">교환/반품</button></td>'
+	      		            			if(value.o_no == 0 && value.o_no2 == 0) {
+	      		            				text += '<td> <button id="getItemRefund" class="btn btn-warning" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+'>교환/반품</button></td>'
+	      		            			}
+	      		            			else if(value.o_no !=0 && value.o_no2 == 0) {
+	      		            				text += '<td> <button id="getItemRefund" class="btn btn-success" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>교환/반품</button></td>'
+	      		            			}
+	      		            			else if(value.o_no !=0 && value.o_no2 !=0 ) {
+	      		            				text += '<td> <button id="getItemRefund" class="btn btn-secondary" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>환불 완료</button></td>'
+	      		            			}
+	      		            			else {
+	      		            				text += '<td> <button id="getItemRefund" class="btn btn-secondary" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>환불 완료</button></td>'
+	      		            			}	      		            			
 	      		            			text += '<td>'+value.order_date+'</td>'
 	      		            			text += '</tr>'
 	      		            		});
-	      		            		emptyTr.append(text);
-	      		            		console.log(text);
+	      		            		emptyTr.append(text);	      		            		
 	      		            		writeRefundForms();
-	      		            		
+	      		            		refundChangeModal();
 	      		            		
 	      		               },
 	      		               error : function(){	
@@ -372,10 +410,10 @@
 
             	      	  },
             	      	  
-            	      		//캘린더 이벤트 hovering 날짜별로 주문정보 확인 가능 (재원/21.01.06)
+            	      		//캘린더 이벤트 hovering 클릭하여 상세 확인 띄움 (재원/21.01.06)
             	      		eventMouseEnter: function(el) {
-            	      			console.log(this);
-            	      			console.log(el);
+            	      			//console.log(this);
+            	      			//console.log(el);
             	      			$('a').attr("data-toggle","tooltip");
             	      			$('a').attr("title", "클릭하여 상세를 확인하세요");
             	      	      	           
@@ -391,6 +429,8 @@
       	        		
       	        		calendar.addEventSource(result);
             	        calendar.render();
+            	        
+            	           			
   	        
             	     });
       	        	
