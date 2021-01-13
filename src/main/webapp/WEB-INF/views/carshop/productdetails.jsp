@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <%@ include file="../include/header.jsp"%>
 
 <title>CarShop - Product Details</title>
@@ -404,28 +405,46 @@ $(document).ready(function() {
 							dataType : "JSON",
 								type : "POST",
 							 success : function(data) {
-					$.each(data,function(index,value) {
-									text =  '<div class="comment_list">';
-									text += '<div class="review_item">';
-									text += '<div class="media">';
-									text += '<div class="media-body">';
-									text += '<h4>유저 ID : '+ value.u_id +'</h4>';
-									text += '<small><h5>' +value.ask_date + '</h5></small>';
-									
-									if(seller == 'Y'){
-									text += '<a class="reply_btn" id="askReply">Reply</a>';
-									}
-									
-									text += '</div></div>';
-									text += '<p>문의 제목 : ' +value.ask_title+ '</p>';
-									text += '<h6>문의 내용 : ' +value.ask_content+ '</h6>';
-									text += '<div id="ask'+value.ask_no+'">'
-									if(value.ask_reply !=null){
-									text +='<strong>답글 : '+value.ask_reply+'</strong>'
-									}
-									text +='</div><br></div></div>';
-									list.append(text);
-							})	
+								 console.log("data : " , data);
+								 if(data.code == 1){
+										$.each(data.list,function(index,value) {
+											text =  '<div class="comment_list">';
+											text += '<div class="review_item">';
+											text += '<div class="media">';
+											text += '<div class="media-body">';
+											text += '<h4>유저 ID : '+ value.u_id +'</h4>';
+											text += '<small><h5>' +value.ask_date + '</h5></small>';
+											
+											if(seller == 'Y'){
+											text += '<a class="reply_btn" id="askReply">Reply</a>';
+											}
+											
+											text += '</div></div>';
+											text += '<p>문의 제목 : ' +value.ask_title+ '</p>';
+											text += '<h6>문의 내용 : ' +value.ask_content+ '</h6>';
+											text += '<div id="ask'+value.ask_no+'">'
+											if(value.ask_reply !=null){
+											text +='<strong>답글 : '+value.ask_reply+'</strong>'
+											}
+											text +='</div><br></div></div>';
+											list.append(text);
+										
+											Swal.fire({
+												  icon: 'success',
+												  title: 'Wow...',
+												  text: '문의가 등록되었습니다'
+												})
+									})	
+								 }else{
+										Swal.fire({
+											  icon: 'error',
+											  title: 'Oops...',
+											  text: '등록에 실패하였습니다.'
+											})
+									document.location.href="/carshop/error";
+									 
+								 }
+
 							},error : function() {
 									console.log("통신실패");
 													}

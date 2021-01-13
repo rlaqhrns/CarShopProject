@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
@@ -47,10 +47,10 @@
 		</property>
 	</bean>
 	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>  <!-- SungYeon blacklist page transaction 20.12.23 -->
-	<tx:annotation-driven/> <!-- SungYeon blacklist page transaction 20.12.23 -->
+<!-- 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
+<!-- 		<property name="dataSource" ref="dataSource"></property> -->
+<!-- 	</bean>  SungYeon blacklist page transaction 20.12.23 -->
+<!-- 	<tx:annotation-driven/> SungYeon blacklist page transaction 20.12.23 -->
 
 	<mybatis-spring:scan
 		base-package="com.shop.mapper.member" />
@@ -61,8 +61,9 @@
 	<mybatis-spring:scan base-package="com.shop.mapper" />
 	<mybatis-spring:scan base-package="com.shop.mapper.member" />
 	<mybatis-spring:scan base-package="com.shop.mapper.product" />
-
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
 	<task:annotation-driven />
+		
+	
 	
 </beans>

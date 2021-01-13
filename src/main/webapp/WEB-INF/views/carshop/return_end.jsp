@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link
 	href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
@@ -134,23 +136,30 @@ let calendar =null;
                		type : 'get',
                		dataType : 'JSON',
                		success : function(data){
-              		console.log(data);
-            		let result = '';
-            		   $.each(data,function(key,value){
-            	  		 text += '<tr id="tr'+value.ono+'"><td scope="col" id="ono">'+value.ono+'</td><td scope="col" id="u_id">'+value.u_id+'</td>'
-            	   	   	 text += '<td scope="col" id="p_name">'+value.pname+'</td><td scope="col" id="content" data-content="'+value.content+'"data-toggle="modal" data-target="#exampleModalCenter">'
-            	  		if(value.content.length >2){
-					result =	value.content.substring(0,2) +'...<small>더보기</small>';
+                  		console.log("data : ",data);
 
-            	   }else{
-            		  result= value.content;
-            		   
-            	   }
-            	   text += ''+result+'</td>'
-            	   text += '<td scope="col" id="order_date">'+value.order_date+'</td><td scope="col" id="pay">'+value.pay+'</td>'
-            	   text += '<td scope="col" class="span1" id=""><button id="btn_click" class="btn btn-success" data-ono='+value.ono+'><span><strong>교환/반품</strong></span></button></td></tr>'
-               })
-        	   tbody.append(text);
+               			if(data.errorCode ==1){
+                    		let result = '';
+                    		   $.each(data.list,function(key,value){
+                    	  		 text += '<tr id="tr'+value.ono+'"><td scope="col" id="ono">'+value.ono+'</td><td scope="col" id="u_id">'+value.u_id+'</td>'
+                    	   	   	 text += '<td scope="col" id="p_name">'+value.pname+'</td><td scope="col" id="content" data-content="'+value.content+'"data-toggle="modal" data-target="#exampleModalCenter">'
+                    	  		if(value.content.length >2){
+        					result =	value.content.substring(0,2) +'...<small>더보기</small>';
+
+                    	   }else{
+                    		  result= value.content;
+                    		   
+                    	   }
+                    	   text += ''+result+'</td>'
+                    	   text += '<td scope="col" id="order_date">'+value.order_date+'</td><td scope="col" id="pay">'+value.pay+'</td>'
+                    	   text += '<td scope="col" class="span1" id=""><button id="btn_click" class="btn btn-success" data-ono='+value.ono+'><span><strong>교환/반품</strong></span></button></td></tr>'
+                       })
+                	   tbody.append(text);
+               			}else{
+               				location.href="/carshop/error";
+               				
+               			}
+
 
                },
                error : function(){	
@@ -218,8 +227,24 @@ let calendar =null;
     		  type : 'POST',
     		  success : function(data){
     			  console.log(data);
-    			$('#tr'+ono+'').remove();
-    			location.reload();
+    			  if(data.errorCode ==1){
+    	    			$('#tr'+ono+'').remove();
+    	    			Swal.fire({
+    	    				  icon: 'success',
+    	    				  title: 'Good job!',
+    	    				  text: '처리되었습니다'	
+
+    	    				})
+    	    				document.loacation.href="/carshop/return_end";
+//      	     			location.reload();
+    			  }else{
+      				Swal.fire({
+  					  icon: 'error',
+  					  title: 'Oops...',
+  					  text: '삭제에 실패하였습니다'
+  					})
+    			  }
+
     		  },
     		  error : function(){
     			  console.log("통신실패");

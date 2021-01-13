@@ -30,6 +30,6 @@
 	
 	 <!-- 장바구니 개별 상품 삭제 2020/01/08 yun.hj -->
     <delete id="delete" > 
-        delete from cart_tbl where u_id=#{u_id}
+        delete from cart_tbl where p_no = #{p_no}
     </delete>
 </mapper>
