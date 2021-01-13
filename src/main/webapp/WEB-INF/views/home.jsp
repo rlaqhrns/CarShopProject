@@ -4,7 +4,7 @@
 
 <html>
 <head>
-	<title>홈</title>
+	<title>저리카 | Home </title>
 </head>
 <body>
 <h1>
