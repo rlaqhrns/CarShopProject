@@ -54,8 +54,8 @@ button {
 			<h1>CART</h1>
 			<nav aria-label="breadcrumb" class="banner-breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item active" aria-current="page">장바구니에
-						담긴 상품은 10일 동안 보관됩니다.</li>
+					<li class="breadcrumb-item active" aria-current="page">
+					장바구니에	담긴 상품은 10일 동안 보관됩니다.</li>
 				</ol>
 			</nav>
 		</div>
@@ -135,8 +135,6 @@ button {
 						</tr>
 
 
-
-
 						<tr class="total-amount_area">
 							<td class="d-none d-md-block"></td>
 							<td></td>
@@ -146,7 +144,6 @@ button {
 							</td>
 							<td id="totalMoney"></td>
 						</tr>
-
 
 						<tr class="out_button_area">
 							<td class="d-none-l"></td>
@@ -199,7 +196,7 @@ button {
       $("#totalMoney").html(productTotalAmount + "원");
       console.log("돈 : " + money);
    }
-      
+ 
    
    
    // 수량 업데이트 이벤트 쿼리 2021.01.12
@@ -212,8 +209,7 @@ button {
 	   // 마우스를 땔 시 인풋 박스가 사라짐 
    });
 
-   
-   
+
    
    
    // 팝업창 쿼리 2021.01.09 yun.hj
