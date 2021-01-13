@@ -140,28 +140,21 @@
 <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	  
-      		//var notifyid="";
-      		//var nnotifyid="";
       		
-  	      	<% session = request.getSession();
+  	      	<% 
+  	      	
+  	      		session = request.getSession();
 	      	   
   	      	%>
   	      	
   	      	var u_id = "<%=session.getAttribute("id")%>";
-  	      	console.log(u_id);
       		
       		$(document).ready(function(){
-      			
-
-      			
-      			
+		     			
       			$('[data-toggle="tooltip"]').tooltip();
-      			
-      			
+      			     			
       			var form = $('#returnFormAjax')[0];
-
-
-      		
+  		
       		  
       		  $('#confirmationAllList').click(function() {
       			    			
@@ -172,8 +165,7 @@
       		  
       		  });
       		  
-      	    		       		  
-
+      	    		       		 
       		});
       		
       		 function writeRefundForms() {
@@ -209,18 +201,13 @@
     	            	    type : 'post',
     	               		data : param,
     	               		success : function(data){
-    	              		console.log(data);
-    	            		//console.log($(this));
-    	            		//$('.btn-primary').attr('btn-primary', 'btn-success');
-    	            		
-
+    	              		console.log(data);	
     	            		window.location.reload();
     	            		
     	               },
     	               error : function(){	
     	                  console.log("통신실패");
-    	               }
-    	               
+    	               }    	               
     	              
     	            })
       				  
@@ -234,7 +221,6 @@
       		
       		function refundChangeModal() {
       			 $(".btn-warning").click(function(){
- 	      			console.log("되냐");
  					$('#ono').val($(this).val());
         			 	var btn = $(this);
         			 	console.log(btn);
@@ -246,16 +232,14 @@
         			 	$('#pname').val(notifyid);
         			 	$('#u_id').val(nnotifyid);	
         			 	$('#s_id').val(nnnotifyid);
- 	      			
- 	  				//var ono = $(this).val();
+
  	  				$.ajax({
  	            	    url :'isRefundTrue?ono=' + ono,
  	            	    type : 'post',
  		               	dataType : 'JSON',
  	               		success : function(data){
  	              		console.log(data);
- 	            		//console.log($(this));
- 	            		//$('.btn-primary').attr('btn-primary', 'btn-success');
+
  	            		if(data == false) {
  	            			console.log(btn);
  	            			btn.addClass('btn-success');
@@ -263,11 +247,10 @@
  	            			btn.attr('disabled', 'true');
  	            		}
  	            		else {
- 	            			//console.log("들어온다?");
  	            			$("#exampleModalCenter").modal('show');
- 	            			//$("#exampleModal").appendTo("body").modal();
+
  	            		}
- 	            		//$("#exampleModal").appendTo("body").modal();
+
  	               },
  	               error : function(){	
  	                  console.log("아이템통신실패");
@@ -276,19 +259,14 @@
  	              
  	            });  				
    			
-     		    //$("#exampleModal").appendTo("body").modal();
      		   });
-      		}
-      		
-      		
-      		//주문상세정보 pagination 10개마다 끊기 (재원/21.01.06)
+      		}     	
       		
     		// 캘린더 이벤트  (재원/21.01.06)
       		//The ready event occurs after the HTML document has been loaded, while the onload event occurs later, when all content (e.g. images) also has been loaded.
       	    //The onload event is a standard event in the DOM, while the ready event is specific to jQuery. The purpose of the ready event is that it should occur as early as possible after the document has loaded, so that code that adds functionality to the elements in the page doesn't have to wait for all content to load.
       		document.addEventListener('DOMContentLoaded', function() {
       			getReloadSuccess();
-      			//isRefundAccess();
       			refundChangeModal();
       			
       	    	let tbody = $('tbody');
@@ -333,7 +311,6 @@
             	      			var jsId = document.cookie.match(/JSESSIONID=[^;]+/);
             	      			
             	      			var start = moment(info.event.start).format("YYYY-MM-DD"); 
-            	      			//tbody.empty();
 	      						let text = '';
 	      						
 	      						$.ajax({
@@ -365,7 +342,6 @@
 	      		            		emptyTr.append(text);
 	      		            		console.log(text);
 	      		            		writeRefundForms();
-	      		            		//getReloadSuccess();
 	      		            		refundChangeModal();
 
 	      		               },
@@ -381,22 +357,12 @@
             	      		
             	      		//캘린더 날짜 클릭시 자동으로 밑으로 이동하면서 주문상세 정보 확인 가능 - 미완성 (재원/21.01.06)
             	      		 dateClick: function(info) {
-            	      			 info.jsEvent.preventDefault(); // don't let the browser navigate
-            	      			 //alert('Clicked on: ' + info.dateStr);
-            	      		    //alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-            	      		    //alert('Current view: ' + info.view.type);
-            	      		    // change the day's background color just for fun
-            	      		    //info.dayEl.style.backgroundColor = 'red';
+            	      			info.jsEvent.preventDefault(); // don't let the browser navigate
             	      		    originalTr.hide();
             	      		  	emptyTr.empty();
             	      		    let text = '';
-            	      		   
-            	      		   
+            	      		               	      		   
             	      		    var start = info.dateStr;
-            	      		    //var arrCal = resources.getEvents();
-            	      		    console.log(info.dateStr);
-            	      		    console.log(info.dayEl);
-            	      		    console.log(info.view.title);
             	      		    
             	      		  	$.ajax({
 	      		            	    url :'clickdateOrder?order_date=' + start + '&' + 'u_id=' + u_id,
@@ -421,15 +387,11 @@
 	      		            			else {
 	      		            				text += '<td> <button id="getItemRefund" class="btn btn-secondary" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>환불 완료</button></td>'
 	      		            			}	      		            			
-	      		            			//text += '<td> <button id="getItemRefund" class="btn btn-warning" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+'>교환/반품</button></td>'
 	      		            			text += '<td>'+value.order_date+'</td>'
 	      		            			text += '</tr>'
 	      		            		});
-	      		            		emptyTr.append(text);
-	      		            		console.log(text);
-	      		            		
+	      		            		emptyTr.append(text);	      		            		
 	      		            		writeRefundForms();
-	      		            		//getReloadSuccess();
 	      		            		refundChangeModal();
 	      		            		
 	      		               },

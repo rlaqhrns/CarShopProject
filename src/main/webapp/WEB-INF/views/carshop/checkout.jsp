@@ -95,7 +95,7 @@
                         </ul>
                         <hr>
                         <ul class="list list_2">
-                            <li><a href="#">총 금액<span><fmt:setLocale value="kor"/><fmt:formatNumber type="number" maxFractionDigits="3" value="${col_sum}"></fmt:formatNumber></span></a></li>
+                            <li><a href="#">총 금액<span><fmt:setLocale value="ko_kr"/><fmt:formatNumber type="currency" maxFractionDigits="3" value="${col_sum}"></fmt:formatNumber></span></a></li>
                         </ul>
                         <!-- Todo : 결제 수단 (pay)가 구매이력(buylist) 테이블에 들어가야함 (2020.12.18 재원) -->
                         <div class="payment_item">
