@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.shop.vo.Admin_Tbl;
 import com.shop.vo.Annc_Tbl;
 
 public interface AnnclistMapper {
@@ -14,4 +15,5 @@ public interface AnnclistMapper {
 	public int updateContent(@Param("before_content") String before_content, @Param("after_content") String after_content);
 	public Annc_Tbl selectLast();
 	public void delete(String date);
+	public Admin_Tbl adminCheck(String admin); //성연 추가 -성연 20.01.12
 }

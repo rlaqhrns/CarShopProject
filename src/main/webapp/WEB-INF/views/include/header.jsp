@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html">
-
+<!--  TITLE 삭제 2021.01.12 YHJ 개별 타이틀 속성 제공예정 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
 
 
@@ -146,8 +146,9 @@
 <%
 }
 %>
-							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+						
 						</ul>
+
 						<div class="nav-right">
 							<ul class="nav-shop">
 								<li class="nav-item"><a href="/carshop/cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>

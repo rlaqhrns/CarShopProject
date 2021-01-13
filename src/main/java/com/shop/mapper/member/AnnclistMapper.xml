@@ -23,4 +23,8 @@
 		delete from annc_tbl where annc_date = #{date}
 	</delete>
 	
+	<select id="adminCheck" resultType="com.shop.vo.Admin_Tbl">
+		SELECT * FROM admin_tbl WHERE id = #{admin}
+	</select>
+	
 </mapper>

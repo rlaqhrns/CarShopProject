@@ -48,11 +48,6 @@
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>공지 목록</h1>
-					<!--  <nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">공지사항 목록</a></li>
-            </ol>
-          </nav>  -->
 				</div>
 			</div>
     </div>
@@ -63,7 +58,7 @@
 	var writeCount=0;
 	var $this;
 	$(document).ready(function(){
-		console.log("레디 완료");
+		$("title").html("저기 카 | Announcement");
 		
 		$("#write").click(function(){
 			writefn();
@@ -76,12 +71,11 @@
 	    });
 		$(document).on("blur",'.update_title', function () {
 			after_title = $(this).val();
-	        
 	        $.ajax({
 				url : 'update_title?before_title=' + before_title + "&&after_title=" + after_title,
 				type : 'get',
 				success : function(data) {
-					console.log("update_title seccess!");
+					console.log("update_title success!");
 					update_date();
 					
 				},

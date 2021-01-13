@@ -36,7 +36,7 @@
  </div>
  -->
 <!-- yun.hj 2020/01/07 search icon 화면상단부에서 지웠음 -->
-
+<title>저리카 | Home </title>
 <main class="site-main">
 
 	<!--================ Hero banner start =================-->
@@ -112,6 +112,8 @@
 
 					<div class="card text-center card-product">
 						<div class="card-product__img">
+							<img class="img-fluid" 
+								src="/resources/img/upload/<c:out value="${list.img1}" />" onerror="this.src='/resources/img/noimage.gif'" style="width: 450px; height: 300px;">
 							<img class="img-fluid"
 								src="/resources/img/upload/<c:out value="${list.img1}" />"
 								onerror="this.src='/resources/img/noimage.gif'">
@@ -162,9 +164,9 @@
 					<div class="col-md-6 col-lg-4 col-xl-3">
 						<div class="card text-center card-product">
 							<div class="card-product__img">
-								<img class="img-fluid"
+								<img class="img-fluid" 
 									src="/resources/img/upload/<c:out value="${list2.img1}" />"
-									onerror="this.src='/resources/img/noimage.gif'">
+									onerror="this.src='/resources/img/noimage.gif'" style="width: 450px; height: 300px;"  >
 								<ul class="card-product__imgOverlay">
 									<li><button onClick="location.href='/carshop/product/details?p_no=${list2.p_no}'" >
 											<i class="ti-search"></i>
@@ -261,6 +263,7 @@
 			<div class="modal-body">...</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				<div id = "cart-btn-area"></div>
 			</div>
 		</div>
 	</div>
@@ -324,6 +327,8 @@ function addCartEvent(p_no,quantity) { //장바구니
 		dataType : 'JSON',
 		success : function(stats) {
 			$(".modal-body").html("\""+userId + "\"님 장바구니에 넣었습니다.");
+			$("#cart-btn-area").empty().append(`<button type="button" onClick="location.href='/carshop/cart'"
+				class="btn btn-primary" data-dismiss="modal">장바구니로 이동</button>`);
 			$('#notice').modal('show');
 
 		},
