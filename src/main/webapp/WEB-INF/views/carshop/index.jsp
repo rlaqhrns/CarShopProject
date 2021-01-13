@@ -36,7 +36,7 @@
  </div>
  -->
 <!-- yun.hj 2020/01/07 search icon 화면상단부에서 지웠음 -->
-
+<title>저리카 | Home </title>
 <main class="site-main">
 
 	<!--================ Hero banner start =================-->

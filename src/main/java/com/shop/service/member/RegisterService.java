@@ -7,6 +7,7 @@ import com.shop.vo.User_Tbl;
 public interface RegisterService {
 	
 	public All_User_Tbl idcheck(String id);
+	public All_User_Tbl toemailcheck(String toemail);
 	public boolean adduser(User_Tbl user_tbl);
 	public boolean addseller(Seller_Tbl seller_tbl);
 	//public void alluser_adduser(User_Tbl user_tbl);

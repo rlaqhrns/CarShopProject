@@ -22,4 +22,10 @@ public class SalelistServiceImpl implements SalelistService {
 		return smapper.selectall(s_id);
 	}
 
+
+	@Override
+	public String usercheck(String id) {
+		return smapper.usercheck(id);
+	}
+
 }
