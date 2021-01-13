@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RegisterProductController {
 
-	private static final String FILE_SERVER_PATH = "C:\\Users\\ssw74\\git\\CarShopProject\\src\\main\\webapp\\resources\\img\\upload";
+	private static final String FILE_SERVER_PATH = "E:\\GreenComputerPro\\CarShopProject\\src\\main\\webapp\\resources\\img\\upload";
 
 	@Setter(onMethod_ = @Autowired)
 	private CategoryService service;
