@@ -112,6 +112,8 @@
 
 					<div class="card text-center card-product">
 						<div class="card-product__img">
+							<img class="img-fluid" 
+								src="/resources/img/upload/<c:out value="${list.img1}" />" onerror="this.src='/resources/img/noimage.gif'" style="width: 450px; height: 300px;">
 							<img class="img-fluid"
 								src="/resources/img/upload/<c:out value="${list.img1}" />"
 								onerror="this.src='/resources/img/noimage.gif'">
@@ -162,9 +164,9 @@
 					<div class="col-md-6 col-lg-4 col-xl-3">
 						<div class="card text-center card-product">
 							<div class="card-product__img">
-								<img class="img-fluid"
+								<img class="img-fluid" 
 									src="/resources/img/upload/<c:out value="${list2.img1}" />"
-									onerror="this.src='/resources/img/noimage.gif'">
+									onerror="this.src='/resources/img/noimage.gif'" style="width: 450px; height: 300px;"  >
 								<ul class="card-product__imgOverlay">
 									<li><button onClick="location.href='/carshop/product/details?p_no=${list2.p_no}'" >
 											<i class="ti-search"></i>
