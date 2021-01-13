@@ -63,7 +63,7 @@
 	var writeCount=0;
 	var $this;
 	$(document).ready(function(){
-		console.log("레디 완료");
+		$("title").html("저기 카 | Announcement");
 		
 		$("#write").click(function(){
 			writefn();
@@ -81,7 +81,7 @@
 				url : 'update_title?before_title=' + before_title + "&&after_title=" + after_title,
 				type : 'get',
 				success : function(data) {
-					console.log("update_title seccess!");
+					console.log("update_title success!");
 					update_date();
 					
 				},

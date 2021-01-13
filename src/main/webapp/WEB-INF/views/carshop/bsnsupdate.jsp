@@ -65,6 +65,8 @@ div.login_box_img {
 	<script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
+			$("title").html("저기 카 | Business");
+			
 			console.log("사업자 콘솔로그");
 			
 			$("#bsnsbtn").on("click", function(e) {  //전송버튼 클릭되면
