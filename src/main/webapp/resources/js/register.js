@@ -16,7 +16,17 @@ $(document).ready(function(){
 		if(userid == ""){
 			$("#mid").css("color","red");
 			$("#mid").val("아이디를 입력해주세요");
-		} else{
+			idok=false;
+		}else if(userid.length > 20){
+			$("#mid").css("color","red");
+			$("#mid").val("아이디가 너무 깁니다");
+			idok=false;
+		}else if(userid.search(/\s/) != -1){
+			$("#mid").css("color","red");
+			$("#mid").val("공백은 포함할 수 없습니다");
+			console.log(userid.search(/\s/));
+			idok=false;
+		}else{
 			
 			$.ajax({
 				url : 'idcheck?id=' + userid,
