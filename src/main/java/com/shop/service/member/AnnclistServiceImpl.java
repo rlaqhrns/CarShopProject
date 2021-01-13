@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shop.mapper.member.AnnclistMapper;
+import com.shop.vo.Admin_Tbl;
 import com.shop.vo.Annc_Tbl;
 
 import lombok.Setter;
@@ -45,6 +46,12 @@ public class AnnclistServiceImpl implements AnnclistService {
 	public void delete(String date) {
 		amapper.delete(date);
 		
+	}
+
+	@Override
+	public Admin_Tbl adminCheck(String admin) {
+		// TODO Auto-generated method stub
+		return amapper.adminCheck(admin);
 	}
 
 }
