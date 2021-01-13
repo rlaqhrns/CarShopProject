@@ -250,6 +250,7 @@
   			
   			$('.button-paypal').click(function() {
   				
+  				//구매 가격 제한을 둠 (재원/21.01.13)
   				if(0 < totalPrice && totalPrice < 10000000) {
   				
 	  	  			if($('#f-option5').is(":checked")){
@@ -283,26 +284,24 @@
   			});
   			
   			
+  			//form submit(재원/20.12.29)	
   			$('.btn-creditchecks').click(function() {
   				
   				if(totalPrice == 0) {
   					alert("구매하실 물품이 없습니다. 물품을 선택 후 구매해주세요");
   				}
   				else {
-  					$('#checkoutform').submit(); //form submit(재원/20.12.29)	
+  					$('#checkoutform').submit(); 
   				}				
   				
   			});
 
 
   			
-  		 	//iamport 일반 결제 api 사용 https://docs.iamport.kr/implementation/payment?lang=ko (재원/20.12.30)
-  		 	
+  		 	//iamport 일반 결제 api 사용 https://docs.iamport.kr/implementation/payment?lang=ko (재원/20.12.30)  		 	
   			$("#kakaoPayCheck").click(function() {
-  				 //console.log("들어오나?");
   				 	var form = $("form")[1];
   				 	var formData = new FormData(form);
-  				 	//console.log(formData);
   				 
 	 		        var IMP = window.IMP; // 생략가능
 	 		        IMP.init('imp20831122'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용

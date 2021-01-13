@@ -112,7 +112,8 @@ public class ConfirmationController {
 	@ResponseBody
 	public boolean isRefundTrue (@RequestParam(value = "ono") int ono) {
 
-		//교환반품 신청이 이미 된 주문번호를 확인합니다.(재원/21.01.12)
+		//교환반품 신청이 된 주문번호를 확인합니다.(재원/21.01.12)
+		//returntbl에 없으면 true 있으면 false(재원/21.01.12)
 		return service.returnOne(ono);
 		
 	}

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.shop.mapper.product.ConfirmationMapper;
 import com.shop.vo.Order_Histroy_Tbl;
-import com.shop.vo.Prod_Tbl;
 import com.shop.vo.Return_End_Tbl;
 import com.shop.vo.Return_Tbl;
 import com.shop.vo.User_Tbl;
@@ -33,28 +32,9 @@ public class ConfirmationServiceImple implements ConfirmationService{
 	}
 
 	@Override
-	public Order_Histroy_Tbl getReturn(int ono) {
-		// TODO Auto-generated method stub
-		return mapper.getReturn(ono);
-	}
-
-	@Override
-	public Prod_Tbl findSid(int p_no) {
-		// TODO Auto-generated method stub
-		 
-		return mapper.findSid(p_no);
-	}
-
-	@Override
 	public void insertForms(Return_Tbl returntbl) {
 		// TODO Auto-generated method stub
 		mapper.insertForms(returntbl);
-	}
-
-	@Override
-	public List<Prod_Tbl> findList(int p_no) {
-		// TODO Auto-generated method stub
-		return mapper.findList(p_no);
 	}
 
 	@Override
@@ -74,7 +54,7 @@ public class ConfirmationServiceImple implements ConfirmationService{
 		// TODO Auto-generated method stub
 		
 		boolean hasData = true;
-		
+		//returntbl에 없으면 true를 반환 (재원/21.01.13)
 		Return_Tbl returntbl = mapper.returnOne(ono);
 		if(returntbl == null) {
 			hasData = true;

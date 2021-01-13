@@ -141,33 +141,35 @@
 <script type="text/javascript">
 	  
       		
+      		//세션을 받아옵니다. (재원/21.01.13)
   	      	<% 
   	      	
   	      		session = request.getSession();
 	      	   
   	      	%>
-  	      	
+  	    	//세션 id를 u_id로 설정합니다. (재원/21.01.13)
   	      	var u_id = "<%=session.getAttribute("id")%>";
       		
       		$(document).ready(function(){
-		     			
-      			$('[data-toggle="tooltip"]').tooltip();
-      			     			
-      			var form = $('#returnFormAjax')[0];
-  		
-      		  
-      		  $('#confirmationAllList').click(function() {
-      			    			
-      			let originalTr = $('#originalTr');
-      	    	let emptyTr = $('#emptyTr');
-      			originalTr.css("display", "");
-      			emptyTr.empty();  
-      		  
-      		  });
+		     	
+	      			//hovering을 위함 (재원/21.01.13)
+	      			$('[data-toggle="tooltip"]').tooltip();
+	  		
+	      		  //주문이력 전체를 볼 수 있게 함 (재원/21.01.13)
+	      		  $('#confirmationAllList').click(function() {
+	      			    			
+	      			let originalTr = $('#originalTr');
+	      	    	let emptyTr = $('#emptyTr');
+	      			originalTr.css("display", "");
+	      			emptyTr.empty();  
+	      		  
+	      		  });
       		  
       	    		       		 
       		});
       		
+      		//교환반품 버튼을 클릭하면 모달에 해당 주문번호에 맞게 데이터를 띄웁니다. (재원/21.01.13)
+      		//function으로 만들어서 다양하게 사용하도록 만듬 (재원/21.01.13)
       		 function writeRefundForms() {
       			 $('.btn-warning').click(function() {
        			 	$('#ono').val($(this).val());
@@ -184,6 +186,8 @@
       		} 
       		
       		
+      		//사유가 없으면 신청하지 못합니다. (재원/21.01.13)
+      		//교환반품 form post를 성공적으로 마치면 윈도우를 relaod합니다. (재원/21.01.13)
       		function getReloadSuccess() {
       		  $('.btn-primary').click(function() {
       			  if(!$("#message-text").val()) {
@@ -194,7 +198,6 @@
       				});
       			 }
       			  else{
-      				
           			  var param = $("form[name=returnFormAjax]").serialize();
           			  $.ajax({
     	            	    url :'confirmation',
@@ -219,6 +222,8 @@
       		
       		}
       		
+      		//교환 반품 신청하기를 진행합니다. (재원/21.01.13)
+      		//교환 반품 신청을 완료하면 버튼의 색깔을 초록색으로 바꾸고 버튼을 더이상 누를 수 없도록 합니다. (재원/21.01.13) 
       		function refundChangeModal() {
       			 $(".btn-warning").click(function(){
  					$('#ono').val($(this).val());
@@ -269,12 +274,14 @@
       			getReloadSuccess();
       			refundChangeModal();
       			
+      			//테이블 안에 <td>들을 숨기거나 없앰(재원/21.01.13)
       	    	let tbody = $('tbody');
       	    	let originalTr = $('#originalTr');
       	    	let emptyTr = $('#emptyTr');
       	    	let allTr = $('tbody tr');
       	    	let str = '';
       	    
+      	    	//이벤트 추가를 위해 배열로 데이터를 저장함.(재원/21.01.13)
 				var result = new Array();
       			
                 <c:forEach items="${buylist}" var ="buylist"> 
@@ -287,8 +294,7 @@
 	       		 	result.push(json);
         		</c:forEach>
 
-      			
-        		var dataJson = JSON.stringify(result);
+        		//캘린더 api -> fullcalendar.io(재원/21.01.13)
       	        var calendarEl = document.getElementById('calendar'); 
       	        var calendar;
       	      	var jsId = document.cookie.match(/JSESSIONID=[^;]+/);
@@ -300,8 +306,8 @@
             	          	dayMaxEvents: true,
             	          
             	          	
-            	          	//캘린더 이벤트 날짜별로 주문정보 확인 가능 - 미완성 (재원/21.01.06)
-            	      		eventClick:function (info) { //alert창 띄우는 기능 
+            	          	//캘린더 이벤트별로 주문정보 확인 가능 (재원/21.01.06)
+            	      		eventClick:function (info) { 
             	      			info.jsEvent.preventDefault(); // don't let the browser navigate
             	      			originalTr.hide();
             	      		  	emptyTr.empty();
@@ -321,7 +327,7 @@
 	      		               		success : function(data){
 	      		              		console.log(data);
 	      		            		let result = '';
-	      		            		
+	      		            		//교환반품이 되었는지에 따라 버튼 색깔과 disabled를 적용합니다. (재원/21.01.13)
 	      		            		$.each(data,function(key,value){
 	      		            			text+= '<tr id='+ start +'><td>'+ value.ono + '</td>' +'<td>'+value.pname+'</td>'+'<td>'+value.quantity+'</td>'+'<td>'+value.amount+'</td>'+'<td>'+value.pay+'</td>'
 	      		            			if(value.o_no == 0 && value.o_no2 == 0) {
@@ -340,7 +346,7 @@
 	      		            			text += '</tr>'
 	      		            		});
 	      		            		emptyTr.append(text);
-	      		            		console.log(text);
+	      		            		//console.log(text);
 	      		            		writeRefundForms();
 	      		            		refundChangeModal();
 
@@ -355,7 +361,7 @@
             	      			
             	      		},
             	      		
-            	      		//캘린더 날짜 클릭시 자동으로 밑으로 이동하면서 주문상세 정보 확인 가능 - 미완성 (재원/21.01.06)
+            	      		//캘린더 날짜 클릭시 해당 날짜 주문상세 정보 확인 가능 (재원/21.01.06)
             	      		 dateClick: function(info) {
             	      			info.jsEvent.preventDefault(); // don't let the browser navigate
             	      		    originalTr.hide();
@@ -372,7 +378,7 @@
 	      		               		success : function(data){
 	      		              		console.log(data);
 	      		            		let result = '';
-	      		            		
+	      		            		//교환반품이 되었는지에 따라 버튼 색깔과 disabled를 적용합니다. (재원/21.01.13)
 	      		            		$.each(data,function(key,value){
 	      		            			text+= '<tr id='+ start +'><td>'+ value.ono + '</td>' +'<td>'+value.pname+'</td>'+'<td>'+value.quantity+'</td>'+'<td>'+value.amount+'</td>'+'<td>'+value.pay+'</td>'
 	      		            			if(value.o_no == 0 && value.o_no2 == 0) {
@@ -404,10 +410,10 @@
 
             	      	  },
             	      	  
-            	      		//캘린더 이벤트 hovering 날짜별로 주문정보 확인 가능 (재원/21.01.06)
+            	      		//캘린더 이벤트 hovering 클릭하여 상세 확인 띄움 (재원/21.01.06)
             	      		eventMouseEnter: function(el) {
-            	      			console.log(this);
-            	      			console.log(el);
+            	      			//console.log(this);
+            	      			//console.log(el);
             	      			$('a').attr("data-toggle","tooltip");
             	      			$('a').attr("title", "클릭하여 상세를 확인하세요");
             	      	      	           
