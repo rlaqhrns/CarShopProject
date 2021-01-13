@@ -13,7 +13,7 @@ public interface CartMapper {
 	
 	public List<Cart_Tbl> cartMoney(); //
 	public List<Cart_Tbl> listCart(String u_id); // 장바구니 목록
-	public String delete(String u_id); // 장바구니 개별 삭제
+	public int delete(int p_no); // 장바구니 개별 삭제
 	// 칼럼타입 수정 2020.01.08 yunhj
 	public int deleteAll(String u_id); // 장바구니 모두 삭제
 	public void update(int p_no); // 장바구니 업데이트 

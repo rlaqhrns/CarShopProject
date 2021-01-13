@@ -75,8 +75,8 @@ public class CartServiceImple implements CartService {
 	}
 	
 	@Override
-	public String delete(String u_id) {
-		return mapper.delete(u_id);
+	public int delete(int p_no) {
+		return mapper.delete(p_no);
 	}
 	
 

@@ -82,7 +82,7 @@ button {
                </thead>
 
 
-
+					
                <tbody>
                   <c:forEach items="${cartList}" var="cart">
                      <tr align="center">
@@ -91,7 +91,7 @@ button {
                         <td>${cart.quantity}</td>
                         <td><input type="hidden" class="product-total-amount" value='${cart.total}'><fmt:formatNumber value="${cart.total}" pattern="#,###,###" />원</td>
                        	<!--  <td><input type="hidden" name="quantity" value="${row.quantity}"></td> -->
-                        <td><a class= "gray_btn ml-2" href= "${path}/carshop/delete?u_id=${cart.u_id}">삭제</a></td>
+                        <td><a class= "gray_btn ml-2" href= "/carshop/cart_delete?p_no=${cart.p_no }&u_id=${cart.u_id}" >삭제</a></td>
                       	<!-- <a class="gray_btn" id="btnUpdate" href="delete">삭제</a> -->
                        	<!-- delete 구현 -->
                      </tr>
@@ -104,7 +104,7 @@ button {
                      <td> 
                      	<div class="checkout_btn_inner d-flex align-items-center">
                      		<a class="gray_btn ml-2" id="btnUpdate" href="#" onclick = "showPopup()">Update</a> 
-                        	<a class="gray_btn ml-2" id="btnDelete" href="#">비우기</a>
+                        	<a class="gray_btn ml-2" id="btnDelete" href="/carshop/cart_deleteAll?u_id=${cart.u_id}" >비우기</a>
                         </div>
                      </td>
                   </tr>

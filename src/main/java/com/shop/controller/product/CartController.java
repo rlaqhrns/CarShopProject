@@ -39,10 +39,19 @@ public class CartController {
 	}
 	
 	// 장바구니 개별 삭제 controller 2020.01.08 yun.hj
-	@RequestMapping("delete")
-	public String delete(@RequestParam String u_id) {
-		
-		cartService.delete(u_id);
+	@RequestMapping("/cart_delete")
+	public String delete(@RequestParam int p_no ,@RequestParam String u_id) {
+		System.out.println("p_no 는 : " + p_no + "id : " + u_id);
+	int i = 	cartService.delete(p_no);
+	System.out.println("i의 값 :" + i);
+		return "redirect:/carshop/cart";
+	}
+	
+	@RequestMapping("/cart_deleteAll")
+	public String deleteAll(@RequestParam String u_id) {
+		System.out.println("all 들어옴");
+
+
 		return "redirect:/carshop/cart";
 	}
 
