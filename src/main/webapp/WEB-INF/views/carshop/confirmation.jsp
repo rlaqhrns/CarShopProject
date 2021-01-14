@@ -70,7 +70,7 @@
              		  	<c:when test="${buylist.o_no != 0 && buylist.o_no2 == 0}">
              		  		<td><button id="getItemRefund" class="btn btn-success" disabled value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}">교환/반품</button></td>	 
              		  	</c:when>
-             		  	<c:when test="${buylist.o_no != 0 && buylist.o_no2 != 0}">
+             		  	<c:when test="${buylist.o_no == 0 && buylist.o_no2 != 0}">
              		  		<td><button id="getItemRefund" class="btn btn-secondary" disabled value='<c:out value = "${buylist.ono}"/>' data-notifyid="${buylist.pname}" data-nnotifyid="${buylist.u_id}" data-nnnotifyid="${buylist.seller}">환불 완료</button></td>	 
              		  	</c:when>
              		  	<c:otherwise>
@@ -336,7 +336,7 @@
 	      		            			else if(value.o_no !=0 && value.o_no2 == 0) {
 	      		            				text += '<td> <button id="getItemRefund" class="btn btn-success" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>교환/반품</button></td>'
 	      		            			}
-	      		            			else if(value.o_no !=0 && value.o_no2 !=0 ) {
+	      		            			else if(value.o_no ==0 && value.o_no2 !=0 ) {
 	      		            				text += '<td> <button id="getItemRefund" class="btn btn-secondary" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>환불 완료</button></td>'
 	      		            			}
 	      		            			else {
@@ -387,7 +387,7 @@
 	      		            			else if(value.o_no !=0 && value.o_no2 == 0) {
 	      		            				text += '<td> <button id="getItemRefund" class="btn btn-success" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>교환/반품</button></td>'
 	      		            			}
-	      		            			else if(value.o_no !=0 && value.o_no2 !=0 ) {
+	      		            			else if(value.o_no ==0 && value.o_no2 !=0 ) {
 	      		            				text += '<td> <button id="getItemRefund" class="btn btn-secondary" value='+value.ono+' data-notifyid='+value.pname+' data-nnotifyid='+value.u_id+' data-nnnotifyid='+value.seller+' disabled>환불 완료</button></td>'
 	      		            			}
 	      		            			else {
