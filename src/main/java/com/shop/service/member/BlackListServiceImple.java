@@ -53,21 +53,22 @@ public class BlackListServiceImple implements BlackListService{
 		return new BlkPageDTO(mapper.getTotal(), mapper.getBlackWithPaging(crit));
 	}
 
-	@Transactional  //two mapper methods must work successfully at the same time -SungYeon 20.12.23
+	@Transactional(rollbackFor=Throwable.class)  //two mapper methods must work successfully at the same time -SungYeon 20.12.23
 	@Override
 	public boolean delete_allnseller(String s_id) {
 		// TODO Auto-generated method stub
-		try {   //try-catch to process the exception during transaction -SungYeon 20.12.23
+		//try {   //try-catch to process the exception during transaction -SungYeon 20.12.23
 			int a = mapper.delete_alluser(s_id);
 			int b = mapper.delete_seller(s_id);
 			mapper.setzero(s_id);  //추가 -성연 20.01.12
+			Integer.parseInt(null);
 			
 			return a == 1 && b == 1;
 			
-		} catch (Exception e) {
-			System.out.println("블랙리스트페이지 트랜잭션 실패");
-			return false;
-		}
+		//} catch (Exception e) {
+		//	System.out.println("블랙리스트페이지 트랜잭션 실패");
+		//	return false;
+		//}
 
 	}
 
