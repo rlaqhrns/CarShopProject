@@ -4,6 +4,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <style>
 .card-product__imgOverlay li button:hover .ti-heart {
 	margin: 0;
@@ -49,7 +50,7 @@ h3 {
 /* event banner */
 .banner {
 	position: relative;
-	width: 1519px;
+	width: 1920px;
 	height: 380px;
 	top: 50px;
 	margin: 0 auto;
@@ -58,45 +59,51 @@ h3 {
 }
 .banner ul {
 	position: absolute;
-	margin: 0px;
+margin: 0 auto;
 	padding: 0;
 	list-style: none;
 }
 
 .banner ul li {
 	float: left;
-	width: 1519px;
+	width: 1920px;
 	height: 380px;
-	margin: 0;
+	margin: 0 auto;
 	padding: 0;
 }
 
 .banner1 {
 	position: relative;
-	width: 1519px;
+	width: 1920px;
 	height: 410px;
+	margin: 0 auto;
 	top: 0px;
-	left : 0px;
+	left : 0px; 
+	padding: 0;
 	padding-bottom: 30px;
 	overflow: hidden;
 }
 .banner1 ul li {
 	float: left;
-	width: 1519px;
+	width: 1920px;
 	height: 410px;
+	margin: 0 auto;
+	padding: 0;
+	
 	top: 0px;
-	left : 0px;
+	left : 0px; 
 	padding-bottom: 30px;
 	
 }
 .banner1 ul {
 	position: absolute;
-	top: 0px;
-	left : 0px;
+ 	top: 0px;
+	left : 0px; 
+	margin: 0 auto;
+	padding: 0;
 	padding-bottom: 30px;
 	list-style: none;
 }
-
 
 /* event css end */
 
@@ -121,10 +128,10 @@ h3 {
 <section class="blog-banner-area" id="category">
 		<div class="banner1">
 			<ul>
-				<li><img src="/resources/img/home/main1.png" width="1519px" height="410px" alt="main배너" style=" padding-bottom: 30px"></li>
-				<li><a href="register"><img src="/resources/img/home/main2.png" width="1519px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li> 
-				<li><a href="https://direct.kbinsure.co.kr/home"><img src="/resources/img/home/main3.png" width="1519px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li>
-				<li><a href="#"><img src="/resources/img/home/main4.png" width="1519px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li>
+				<li><img src="/resources/img/home/main1.png" width="1920px" height="410px" alt="main배너" style=" padding-bottom: 30px"></li>
+				<li><a href="register"><img src="/resources/img/home/main2.png" width="1920px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li> 
+				<li><a href="https://direct.kbinsure.co.kr/home"><img src="/resources/img/home/main3.png" width="1920px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li>
+				<li><a href="#"><img src="/resources/img/home/main4.png" width=1920px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li>
 				<!-- 공지로 가는 링크는 공지 page 한 뒤 경로 수정-->
 				<!-- 이벤트 배너 하나 더 만들기 -->
 			</ul>
@@ -245,14 +252,17 @@ h3 {
 					<div class="col-md-6 col-lg-4 col-xl-3">
 						<div class="card text-center card-product">
 							<div class="card-product__img">
-								<img class="img-fluid" 
+								<img class="img-fluid"
 									src="/resources/img/upload/<c:out value="${list2.img1}" />"
-									onerror="this.src='/resources/img/noimage.gif'" style="width: 450px; height: 300px;"  >
+									onerror="this.src='/resources/img/noimage.gif'"
+									style="width: 450px; height: 300px;">
 								<ul class="card-product__imgOverlay">
-									<li><button onClick="location.href='/carshop/product/details?p_no=${list2.p_no}'" >
+									<li><button
+											onClick="location.href='/carshop/product/details?p_no=${list2.p_no}'">
 											<i class="ti-search"></i>
 										</button></li>
-									<li><button class="btn_shopping-cart" value="${list2.p_no }">
+									<li><button class="btn_shopping-cart"
+											value="${list2.p_no }">
 											<i class="ti-shopping-cart"></i>
 										</button></li>
 									<li><button class="btn_like_toggle" value="${list2.p_no }">
@@ -267,7 +277,8 @@ h3 {
 											value="${list2.p_name}" /></a>
 								</h4>
 								<p class="card-product__price">
-									<c:out value="${list2.amount}" />원
+									<c:out value="${list2.amount}" />
+									원
 								</p>
 							</div>
 						</div>
@@ -277,6 +288,7 @@ h3 {
 		</div>
 	</section>
 	<!-- ================ trending product section end ================= -->
+
 
 
 
