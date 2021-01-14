@@ -16,6 +16,17 @@
 		values(#{u_id},#{p_no},#{pname},#{quantity},#{amount},#{total})
 	</insert>
 
+
+		<!-- 장바구니 담기 2021/01/14 YHJ -->
+	<insert id="insertCart">
+		insert into 
+		cart_tbl(u_id,p_no,pname,quantity,amount,total)
+		values
+		(#{u_id},#{p_no},#{pname},#{quantity},#{amount},#{total})
+		
+	</insert>
+
+
 	<!-- cart list에는 가격이 없어서 다른테이블에서 끌어옴 HJ 2020.12.30 -->
 	<select id="sumTotal" resultType="int">
 

@@ -22,6 +22,84 @@
 	background-position: center;
 	background-image: url(/resources/img/heart/heart_white_full.png);
 }
+
+
+/* event 배너 css start 2021.01.13 YHJ*/
+body {
+	font-size: 11pt;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+h3 {
+	color: #85144b;
+	font-size: 14pt;
+	margin: 10 auto;
+	padding: 10px;
+}
+
+.contents {
+	width: 800px;
+	height: 400px;
+	background-color: #d6d6d6;
+	margin: 0 auto;
+}
+
+/* event banner */
+.banner {
+	position: relative;
+	width: 1519px;
+	height: 380px;
+	top: 50px;
+	margin: 0 auto;
+	padding: 0;
+	overflow: hidden;
+}
+.banner ul {
+	position: absolute;
+	margin: 0px;
+	padding: 0;
+	list-style: none;
+}
+
+.banner ul li {
+	float: left;
+	width: 1519px;
+	height: 380px;
+	margin: 0;
+	padding: 0;
+}
+
+.banner1 {
+	position: relative;
+	width: 1519px;
+	height: 410px;
+	top: 0px;
+	left : 0px;
+	padding-bottom: 30px;
+	overflow: hidden;
+}
+.banner1 ul li {
+	float: left;
+	width: 1519px;
+	height: 410px;
+	top: 0px;
+	left : 0px;
+	padding-bottom: 30px;
+	
+}
+.banner1 ul {
+	position: absolute;
+	top: 0px;
+	left : 0px;
+	padding-bottom: 30px;
+	list-style: none;
+}
+
+
+/* event css end */
+
 </style>
 <!--================ End Header Menu Area =================-->
 <!--
@@ -40,13 +118,19 @@
 <main class="site-main">
 
 	<!--================ Hero banner start =================-->
-	<section class="blog-banner-area" id="category">
-		<img class="img-fluid" src="/resources/img/home/main1.png"
-			alt="main배너"
-			style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" />
-
-	</section>
-	<!-- yun.hj 2020/01/07 main1 img change , 메인 배너 이미지 수정  -->
+<section class="blog-banner-area" id="category">
+		<div class="banner1">
+			<ul>
+				<li><img src="/resources/img/home/main1.png" width="1519px" height="410px" alt="main배너" style=" padding-bottom: 30px"></li>
+				<li><a href="register"><img src="/resources/img/home/main2.png" width="1519px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li> 
+				<li><a href="https://direct.kbinsure.co.kr/home"><img src="/resources/img/home/main3.png" width="1519px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li>
+				<li><a href="#"><img src="/resources/img/home/main4.png" width="1519px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li>
+				<!-- 공지로 가는 링크는 공지 page 한 뒤 경로 수정-->
+				<!-- 이벤트 배너 하나 더 만들기 -->
+			</ul>
+		</div>
+	</section>	
+	<!-- 2021/01/14 yhj main 이미지 경로와 어트랙션 추가 -->
 	<!--================ Hero banner end =================-->
 
 	<!--================ Hero Carousel start =================-->
@@ -197,17 +281,25 @@
 
 
 	<!-- ================ offer event section start ================= -->
-	<section class="offer" id="parallax-1" data-anchor-target="#parallax-1"
-		data-300-top="background-position: 20px 30px"
-		data-top-bottom="background-position: 0 20px">
-		<img class="img-fluid" src="/resources/img/home/event1.png"
-			alt="event배너" />
+	<!-- event 배너 start -->
+	<section>
+		<div class="banner" name="이벤트 배너 어트랙션">
+			<ul>
+				<li><img src="/resources/img/home/event1.png" width="1519px" height="380px"></li>
+				<li><img src="/resources/img/home/event2.png" width="1519px" height="380px"></li>
+				<li><img src="/resources/img/home/event3.png" width="1519px" height="380px"></li>
+				<li><img src="/resources/img/home/event5.png" width="1519px" height="380px"></li>
+				<li><img src="/resources/img/home/event6.png" width="1519px" height="380px"></li>
+				<li><a href="http://localhost:8080/carshop/product/details?p_no=26"><img src="/resources/img/home/event7.png" width="1519px" height="380px"></a></li>
+				<!-- 상품번호 바뀌면 경로 수정해주셔야 합니다 yhj -->
+				<!-- 이벤트 배너 하나 더 만들기 -->
+			</ul>
+		</div>
 	</section>
+	<!-- </section> -->
 	<!-- yun.hj 2020.01.07 : event1 img change 이밴트 배너 수정  -->
 
-
-
-	<!-- ================ Blog section start ================= -->
+<!-- ================ Blog section start ================= -->
 	<section class="blog">
 		<div class="container">
 			<div class="section-intro pb-60px">
@@ -444,4 +536,121 @@ $(document).ready(function(){
 	
 	init();
 })
+
+
+// 메인 배너 자동 슬라이드 쿼리 2021.01.13 YHJ
+	$(document).ready(
+			function() {
+
+				var $banner = $(".banner1").find("ul"); //사용할 배너
+
+				var $bannerWidth = $banner.children().outerWidth();// 폭
+				var $bannerHeight = $banner.children().outerHeight(); // 높이
+				var $bannerLength = $banner.children().length;	//배너 이미지의 갯수
+				var rollingId;
+
+				//정해진 초마다 함수 실행 
+				rollingId = setInterval(function() {
+					rollingStart();
+				}, 3000);//다음 이미지로 롤링 애니메이션 할 시간차 , 페이지 개수 별로 자동 계산 됨
+
+				banner.mouseover(function() {
+					//중지
+					clearInterval(rollingId);
+					$(this).css("cursor", "pointer");
+				});
+				//마우스 아웃되면 다시 시작
+				banner.mouseout(function() {
+					rollingId = setInterval(function() {
+						rollingStart();
+					}, 3000);
+					$(this).css("cursor", "default");
+				});
+
+				function rollingStart() {
+					$banner.css("width", $bannerWidth * $bannerLength + "px");
+					$banner.css("height", $bannerHeight + "px");  //alert(bannerHeight);
+					
+
+					$banner.animate({ // 베너 좌측 이미지 옮겨줌
+						left : -$bannerWidth + "px"
+					}, 1500, function() { //숫자는 롤링 진행되는 시간이다.
+						//event1(시작이미지)를 마지막 끝에 복사(이동이 아니라 복사)해서 추가 함.
+						$(this).append(
+								"<li>" + $(this).find("li:first").html()
+										+ "</li>");
+						//복사 된 첫번째 이미지 삭제 
+						$(this).find("li:first").remove(); //배너 위치 초기화
+						$(this).css("left", 0); // 반복실행
+					});
+				}
+			});
+	
+	// 메인 배너 자동 슬라이드 종료 2021.01.14 YHJ
+	
+	
+
+	// 이벤트 배너 자동 슬라이드 쿼리 2021.01.13 YHJ
+	$(document).ready(
+			function() {
+
+				var $banner = $(".banner").find("ul"); //사용할 배너
+
+				var $bannerWidth = $banner.children().outerWidth();// 폭
+				var $bannerHeight = $banner.children().outerHeight(); // 높이
+				var $bannerLength = $banner.children().length;	//배너 이미지의 갯수
+				var rollingId;
+
+				//정해진 초마다 함수 실행 
+				rollingId = setInterval(function() {
+					rollingStart();
+				}, 3000);//다음 이미지로 롤링 애니메이션 할 시간차 , 페이지 개수 별로 자동 계산 됨
+
+				banner.mouseover(function() {
+					//중지
+					clearInterval(rollingId);
+					$(this).css("cursor", "pointer");
+				});
+				//마우스 아웃되면 다시 시작
+				banner.mouseout(function() {
+					rollingId = setInterval(function() {
+						rollingStart();
+					}, 3000);
+					$(this).css("cursor", "default");
+				});
+
+				function rollingStart() {
+					$banner.css("width", $bannerWidth * $bannerLength + "px");
+					$banner.css("height", $bannerHeight + "px");  //alert(bannerHeight);
+					
+
+					$banner.animate({ // 베너 좌측 이미지 옮겨줌
+						left : -$bannerWidth + "px"
+					}, 1500, function() { //숫자는 롤링 진행되는 시간이다.
+						//event1(시작이미지)를 마지막 끝에 복사(이동이 아니라 복사)해서 추가 함.
+						$(this).append(
+								"<li>" + $(this).find("li:first").html()
+										+ "</li>");
+						//복사 된 첫번째 이미지 삭제 
+						$(this).find("li:first").remove(); //배너 위치 초기화
+						$(this).css("left", 0); // 반복실행
+					});
+				}
+			});
+
+	//배너 이미지에 마우스가 닿으면 슬라이드 일시 중지	
+	$banner.mouseover(function() {
+
+		clearInterval(rollingId);
+		$(this).css("cursor", "pointer");
+	});
+
+	$banner.mouseout(function() {
+		rollingId = setInterval(function() {
+			rollingStart();
+		}, 3000);
+		$(this).css("cursor", "default");
+	});
+
+
 </script>

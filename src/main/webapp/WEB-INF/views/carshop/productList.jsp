@@ -190,14 +190,14 @@ function addCartEvent(p_no,quantity) { //장바구니
 	
 
 	$.ajax({
-		url : '/carshop/product/addcart',
-		type : 'POST',
-		data : {
-			"u_id" : userId,
+		url : '/carshop/product/addcart', //컨트롤러 주소
+		type : 'POST', //메소드 방식
+		data : { //넘겨줄 데이터
+			"u_id" : userId, // "넘겨줄 데이터 이름(key) : 넘겨줄 값(value)"
 			"p_no" : p_no,
 			"quantity":quantity
 		},
-		dataType : 'JSON',
+		dataType : 'JSON', //데이터 방식? json방식으로 데이터를 넘겨줘요 
 		success : function(stats) {
 			$(".modal-body").html("\""+getUserId() + "\"님 장바구니에 넣었습니다.");
 			
@@ -212,7 +212,7 @@ function addCartEvent(p_no,quantity) { //장바구니
 	})
 }
 function addLikeEvent(p_no,$obj) { //찜목록추가
-	let userId = getUserId();
+	let userId = getUserId(); //유저아이디 가져온다 뭐가
 	if(loginTypeCheck()){ // 비회원, 판매자 아이디면 각각상황에 따른 모달창을 띄워준다.
 		return false;
 	}
@@ -426,21 +426,21 @@ function setProductList() { //상품을 그려주는 함수
 function clickEvent(){ //찜, 장바구니 버튼 클릭 이벤트
 	
 	let likeToggle = $(".btn_like_toggle");
-	let shoppingCart = $(".btn_shopping-cart");
-	likeToggle.off("click");
-	shoppingCart.off("click");
+	let shoppingCart = $(".btn_shopping-cart"); //장바구니 버튼
+	likeToggle.off("click"); //클릭이벤트 루프돌아서 클릭 이벤트 해제
+	shoppingCart.off("click");//클릭이벤트 루프돌아서 클릭 이벤트 해제
 	likeToggle.click(function(){ //찜목록 추가 삭제
 		let $obj = $(this);
 		//하트클래스 포함여부
-		if($obj.children().hasClass("heart_white_full")){
-			removeLikeEvent($(this).val(),$obj);
+		if($obj.children().hasClass("heart_white_full")){ //여기에서 하트에 불이 들어와있는이미지를 클래스로 가지고있으면
+			removeLikeEvent($(this).val(),$obj); //찜목록에서 삭제 파라미터(지금 클릭한 객체의 value값,클릭한 객체 )
 		}
 		else {
 			addLikeEvent($(this).val(),$obj);
 		}
 	});
 	shoppingCart.click(function(){ //장바구니 add
-		addCartEvent($(this).val(),1);
+		addCartEvent($(this).val(),1);// 카트 추가 (객체의 value,수량)
 	})
 	
 }
