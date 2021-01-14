@@ -7,12 +7,12 @@
 
 	<select id="index" resultType="com.shop.vo.Prod_Tbl">
 	<![CDATA[
-		select * from prod_tbl order by hit desc limit 5
+		select * from prod_tbl where amount != 0 order by hit desc limit 5
 		]]>
 	</select>
 	<select id="index2" resultType="com.shop.vo.Prod_Tbl">
 		<![CDATA[
-		select * from prod_tbl order by p_no desc limit 4
+		select * from prod_tbl where amount != 0 order by p_no desc limit 4
 		]]>
 	</select>
 	<select id="annc" resultType="com.shop.vo.Annc_Tbl">

@@ -81,7 +81,7 @@
 							
 							<label for="qty" style="margin-top:10px;float: left">수량 : </label> 
 							<input
-								type="number" name="qty" id="sst" size="2" maxlength="12"
+								type="number" min="1" name="qty" id="sst" size="2" maxlength="12"
 								value="1" title="Quantity" class="input-text qty"
 								style="margin-top:8px;float: left"> 
 							
@@ -595,6 +595,7 @@ $(document).ready(function() {
 			success : function(stats) {
 				$(".icon_heart_empty").addClass("icon_heart_red");								
 				$("#notice .modal-body").html("\""+ userId + "\"님 찜 목록에 넣었습니다.");
+				$("#cart-btn-area").empty();
 				$('#notice').modal('show');
 			},
 			error : function() {
@@ -627,6 +628,7 @@ $(document).ready(function() {
 			success : function(stats) {
 				$(".icon_heart_empty").removeClass("icon_heart_red");
 				$("#notice .modal-body").html("\""+ userId + "\"님 찜 목록에서 삭제되었습니다.");
+				$("#cart-btn-area").empty();
 				$('#notice').modal('show');
 			},
 			error : function() {
@@ -673,10 +675,12 @@ $(document).ready(function() {
 		let result = false;
 		if(sessoinExistenceChecked()){
 			$("#notice .modal-body").html("로그인 후 이용해주세요.");
+			$("#cart-btn-area").empty();
 			$('#notice').modal('show');
 			result = true;
 		}else if(getSellerCheck()){
 			$("#notice .modal-body").html("판매자는 이용할수 없습니다. 일반유저 로그인 후 이용해주세요.");
+			$("#cart-btn-area").empty();
 			$('#notice').modal('show');
 			result = true;
 		}
