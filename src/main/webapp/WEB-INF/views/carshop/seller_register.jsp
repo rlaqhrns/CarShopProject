@@ -15,7 +15,7 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="/resources/js/seller_register.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<title>저리카 | 회원가입 </title>
 <!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="category">
 	<div class="container h-100">
