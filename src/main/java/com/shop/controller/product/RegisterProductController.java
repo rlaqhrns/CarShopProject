@@ -44,12 +44,15 @@ public class RegisterProductController {
 			All_User_Tbl user = (All_User_Tbl) session.getAttribute("user");
 			String seller =user.getSeller();
 			
+			
 			if(seller.equals("Y")) {
 				model.addAttribute("cateParent", service.cateParent());
 				model.addAttribute("category", service.category());
 				model.addAttribute("user", session.getAttribute("id"));
 				System.out.println("user : " + session.getAttribute("id"));
+				
 				return "carshop/productForm";
+				
 			}else {
 				 return "error/gradeError";
 			}
