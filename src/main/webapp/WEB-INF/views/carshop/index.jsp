@@ -114,9 +114,6 @@
 						<div class="card-product__img">
 							<img class="img-fluid" 
 								src="/resources/img/upload/<c:out value="${list.img1}" />" onerror="this.src='/resources/img/noimage.gif'" style="width: 450px; height: 300px;">
-							<img class="img-fluid"
-								src="/resources/img/upload/<c:out value="${list.img1}" />"
-								onerror="this.src='/resources/img/noimage.gif'">
 							<ul class="card-product__imgOverlay">
 								<li><button onClick="location.href='/carshop/product/details?p_no=${list.p_no}'" >
 											<i class="ti-search"></i>
@@ -444,6 +441,7 @@ function init(){
 	
 }
 $(document).ready(function(){
+	
 	init();
 })
 </script>

@@ -38,14 +38,14 @@ public class LoginServiceImple implements LoginService{
 		try { //입력된 id/pw가 일반유저 or 관리자 테이블과 일치하는지 각자 확인
 			if(logmapper.getAdmin(id) != null) {
 				db_admin = logmapper.getAdmin(id);                 //admin_tbl에 아이디있는지 확인
-				String resultAdmin = admin(id, pw, db_admin.getId(), session);   //관리자 세션생성되면 "1"을 반환
+				String resultAdmin = admin(id, pw, db_admin, session);   //관리자 세션생성되면 "1"을 반환
 				return resultAdmin;         //"1"(관리자세션생성 성공)
 			}
 			if(logmapper.idpwcheck(id) != null) {
-				All_User_Tbl db_id = logmapper.idpwcheck(id);         //all_user_tbl에 아이디 있는지 확인
+				 db_id = logmapper.idpwcheck(id);         //all_user_tbl에 아이디 있는지 확인
 				//db와 정보가 다를경우
 					if(db_id != null) {  
-						String resultNormalUser = normalUser(id, pw, db_id.getId(), session);   //일반유저 세션생성시 "2"반환
+						String resultNormalUser = normalUser(id, pw, db_id, session);   //일반유저 세션생성시 "2"반환
 						return resultNormalUser; //"2"
 					}else {
 						return "-1";
@@ -160,7 +160,7 @@ public class LoginServiceImple implements LoginService{
 	
 	
 	//관리자 세션생성메서드
-	public String admin(String id, String pw, String db_admin, HttpSession session) {
+	public String admin(String id, String pw, Admin_Tbl db_admin, HttpSession session) {
 			session.setAttribute("id" , id);
 			session.setAttribute("pw", pw);
 			session.setAttribute("user", db_admin);
@@ -168,7 +168,7 @@ public class LoginServiceImple implements LoginService{
 	}
 	
 	//일반유저 세션생성메서드
-	public String normalUser(String id, String pw, String db_id, HttpSession session) {
+	public String normalUser(String id, String pw, All_User_Tbl db_id, HttpSession session) {
 		
 			session.setAttribute("id" , id);
 			session.setAttribute("pw", pw);
