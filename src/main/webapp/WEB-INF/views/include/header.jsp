@@ -127,8 +127,14 @@
 							<li class="nav-item"><a class="nav-link" href="/carshop/index">Home</a></li>
 							<li class="nav-item"><a class="nav-link" href="/carshop/productList">Shop</a></li>
 					        <li class="nav-item submenu dropdown">
+<% 
+	if("admin".equals(sessId)){
+%>
               		  		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 			                  aria-expanded="false">Admin</a>
+<%
+	}
+%>
 			            <ul class="dropdown-menu">
 			                  <li class="nav-item"><a class="nav-link" href="/carshop/blacklist">Black List</a></li>
 			                  <li class="nav-item"><a class="nav-link" href="/carshop/annclist">Announcement</a></li>
