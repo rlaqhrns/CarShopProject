@@ -39,7 +39,7 @@ public class BlkListPageController {
 	@GetMapping("/blacklist")
 	public String list(Model model, HttpSession session) {
 		//session.setAttribute("id", "asdf");
-		//session.setAttribute("id", "admin");
+		session.setAttribute("id", "admin");
 		String admin = (String)session.getAttribute("id");  //관리자인지 확인 -성연 20.01.12
 
 		
