@@ -81,7 +81,7 @@
 							
 							<label for="qty" style="margin-top:10px;float: left">수량 : </label> 
 							<input
-								type="number" name="qty" id="sst" size="2" maxlength="12"
+								type="number" min="1" name="qty" id="sst" size="2" maxlength="12"
 								value="1" title="Quantity" class="input-text qty"
 								style="margin-top:8px;float: left"> 
 							
