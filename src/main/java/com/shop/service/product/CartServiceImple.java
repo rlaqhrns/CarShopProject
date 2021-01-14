@@ -2,15 +2,18 @@ package com.shop.service.product;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shop.mapper.product.CartMapper;
 import com.shop.vo.Cart_Tbl;
+import com.shop.vo.Like_Tbl;
 
 import lombok.Setter;
 
 @Service
+
 public class CartServiceImple implements CartService {
 	@Setter(onMethod_ = @Autowired)
 	private CartMapper mapper;
@@ -38,18 +41,15 @@ public class CartServiceImple implements CartService {
 	}
 
 
+	// cart update 2021.01.13
 	@Override
-	public int deleteAll(String u_id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Cart_Tbl cart) {
+		
+			return mapper.update(cart);
 	}
 
-	@Override
-	public void update(int p_no) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
+	
 	@Override
 	public int countCart(String u_id, int p_no) {
 		// TODO Auto-generated method stub
@@ -63,21 +63,35 @@ public class CartServiceImple implements CartService {
 	}
 
 	@Override
-	public void modifyCart(Cart_Tbl vo) {
-		// TODO Auto-generated method stub
-
+	public int modifyCart(Cart_Tbl cart) {
+		
+		return mapper.modifyCart(cart);
 	}
 
 	@Override
 	public int sumTotal(String u_id) {
-		// TODO Auto-generated method stub
+
 		return mapper.sumTotal(u_id);
 	}
-	
+
 	@Override
-	public String delete(String u_id) {
-		return mapper.delete(u_id);
+	public int delete(int p_no, String u_id) {
+
+		return mapper.delete(p_no, u_id);
 	}
+
+	@Override
+	public int deleteAll(String u_id) {
+		
+		 return mapper.deleteAll(u_id);
+		
+	}
+	// 딜리트 리턴 수정 yun.hj
+	
+	
+	// 라이크의 정보를 받아와야함 // 디폴트는 1로 하고 보내면 반드시 1개가 와야함
+	// 상품명 개수 가격을 가져와야 함
+
 	
 
 }

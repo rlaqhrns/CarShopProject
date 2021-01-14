@@ -6,30 +6,55 @@
 <mapper namespace="com.shop.mapper.product.CartMapper">
 	<!-- 유저아이디로 장바구니테이블에서 상품목록을 가져온다.(BK/12.22) -->
 	<select id="getUserCart" resultType="com.shop.vo.Cart_Tbl">
-		select * from cart_tbl where 
+		select * from cart_tbl where
 		u_id = #{u_id}
 	</select>
 
 	<insert id="addCart">
-		insert into cart_tbl(u_id,p_no,pname,quantity,amount,total)
-			values(#{u_id},#{p_no},#{pname},#{quantity},#{amount},#{total})
+		insert into
+		cart_tbl(u_id,p_no,pname,quantity,amount,total)
+		values(#{u_id},#{p_no},#{pname},#{quantity},#{amount},#{total})
 	</insert>
 
 	<!-- cart list에는 가격이 없어서 다른테이블에서 끌어옴 HJ 2020.12.30 -->
 	<select id="sumTotal" resultType="int">
 
-		select nvl(sum(amount*quantity), 0)
-			from cart_tbl c, prod_tbl p
-				where c.p_no = p.p_no and u_id= #{u_id}
+		select
+		nvl(sum(amount*quantity), 0)
+		from cart_tbl c, prod_tbl p
+		where c.p_no = p.p_no and u_id= #{u_id}
 	</select>
 	<!-- 금액과 상품개수를 곱한 값에 0을 더해서 0이 나오면 jsp 에서 담긴상품이 없다고 출력 -->
 	<!-- 장바구니 테이블이랑 상품 테이블을 조인하고 조건추가 -->
 	<!-- 조건은 사용자의 아이디가 같고 상품 번호가 같으면 가격을 불러 이르킨다. -->
-	<!-- 2020.12.30  -->
+	<!-- 2020.12.30 -->
 	<!-- 후처리 주의 : my_sql은 넥스트벨 없어서 더미데이터에 꼭 p_no 넣어줘야함 안그럼 에러남 -->
+
+	<!-- 장바구니 개별 상품 삭제 2020/01/08 yun.hj -->
 	
-	 <!-- 장바구니 개별 상품 삭제 2020/01/08 yun.hj -->
-    <delete id="delete" > 
-        delete from cart_tbl where u_id=#{u_id}
-    </delete>
+	
+	
+	<delete id="delete">
+		delete from cart_tbl where u_id = #{arg1} and p_no = #{arg0}
+	</delete>
+	<!-- delete from cart_tbl where u_id = #{u_id} and p_no = #{p_no}  이것은 에러가 난다. -->
+	
+	
+	<delete id="deleteAll">
+		delete from cart_tbl where u_id = #{u_id}
+	</delete>
+	
+	
+	<!-- 장바구니 수량 업데이트 2021.01.13 -->
+	<update id="update">
+	<!-- id명은 컨트롤러 명과 동일하게 -->
+		update cart_tbl
+		
+		set quantity = quantity + #{quantity}
+		where u_id = #{u_id}
+		and p_no = #{p_no}
+	</update>
+	
+	
+
 </mapper>

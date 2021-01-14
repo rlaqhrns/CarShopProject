@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class Admin_Tbl {
-	private String id, pw, name, phone;
+	private String id, pw, name, phone,seller;
 }
