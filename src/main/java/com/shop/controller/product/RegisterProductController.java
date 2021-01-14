@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RegisterProductController {
 
-	private static final String FILE_SERVER_PATH = "C:\\Users\\ssw74\\git\\CarShopProject\\src\\main\\webapp\\resources\\img\\upload";
+	private static final String FILE_SERVER_PATH = "E:\\GreenComputerPro\\CarShopProject\\src\\main\\webapp\\resources\\img\\upload";
 	@Setter(onMethod_ = @Autowired)
 	private CategoryService service;
 	@Setter(onMethod_ = @Autowired)
@@ -44,12 +44,15 @@ public class RegisterProductController {
 			All_User_Tbl user = (All_User_Tbl) session.getAttribute("user");
 			String seller =user.getSeller();
 			
+			
 			if(seller.equals("Y")) {
 				model.addAttribute("cateParent", service.cateParent());
 				model.addAttribute("category", service.category());
 				model.addAttribute("user", session.getAttribute("id"));
 				System.out.println("user : " + session.getAttribute("id"));
+				
 				return "carshop/productForm";
+				
 			}else {
 				 return "error/gradeError";
 			}

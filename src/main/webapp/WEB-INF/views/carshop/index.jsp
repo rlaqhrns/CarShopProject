@@ -25,28 +25,6 @@
 }
 
 
-/* event 배너 css start 2021.01.13 YHJ*/
-body {
-	font-size: 11pt;
-	padding: 0;
-	margin: 0;
-	text-align: center;
-}
-
-h3 {
-	color: #85144b;
-	font-size: 14pt;
-	margin: 10 auto;
-	padding: 10px;
-}
-
-.contents {
-	width: 800px;
-	height: 400px;
-	background-color: #d6d6d6;
-	margin: 0 auto;
-}
-
 /* event banner */
 .banner {
 	position: relative;
@@ -58,18 +36,21 @@ h3 {
 	overflow: hidden;
 }
 .banner ul {
+
 	position: absolute;
-margin: 0 auto;
+	margin: 0 auto;
 	padding: 0;
 	list-style: none;
 }
 
 .banner ul li {
+
 	float: left;
 	width: 1920px;
 	height: 380px;
 	margin: 0 auto;
 	padding: 0;
+
 }
 
 .banner1 {
@@ -82,6 +63,7 @@ margin: 0 auto;
 	padding: 0;
 	padding-bottom: 30px;
 	overflow: hidden;
+
 }
 .banner1 ul li {
 	float: left;
@@ -89,11 +71,9 @@ margin: 0 auto;
 	height: 410px;
 	margin: 0 auto;
 	padding: 0;
-	
 	top: 0px;
 	left : 0px; 
 	padding-bottom: 30px;
-	
 }
 .banner1 ul {
 	position: absolute;
@@ -297,11 +277,11 @@ margin: 0 auto;
 	<section>
 		<div class="banner" name="이벤트 배너 어트랙션">
 			<ul>
-				<li><img src="/resources/img/home/event1.png" width="1519px" height="380px"></li>
-				<li><img src="/resources/img/home/event2.png" width="1519px" height="380px"></li>
-				<li><img src="/resources/img/home/event3.png" width="1519px" height="380px"></li>
-				<li><img src="/resources/img/home/event5.png" width="1519px" height="380px"></li>
-				<li><img src="/resources/img/home/event6.png" width="1519px" height="380px"></li>
+				<li><img src="/resources/img/home/event1.png" width="1920px" height="380px"></li>
+				<li><img src="/resources/img/home/event2.png" width="1920px" height="380px"></li>
+				<li><img src="/resources/img/home/event3.png" width="1920px" height="380px"></li>
+				<li><img src="/resources/img/home/event5.png" width="1920px" height="380px"></li>
+				<li><img src="/resources/img/home/event6.png" width="1920px" height="380px"></li>
 				<li><a href="http://localhost:8080/carshop/product/details?p_no=26"><img src="/resources/img/home/event7.png" width="1519px" height="380px"></a></li>
 				<!-- 상품번호 바뀌면 경로 수정해주셔야 합니다 yhj -->
 				<!-- 이벤트 배너 하나 더 만들기 -->

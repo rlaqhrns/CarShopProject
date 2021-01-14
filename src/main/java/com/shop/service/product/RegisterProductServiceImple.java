@@ -16,6 +16,7 @@ public class RegisterProductServiceImple implements RegisterProductService{
 	public void productForm(Prod_Tbl product) {
 
 		mapper.productForm(product);
+
 	}
 
 }
