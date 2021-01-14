@@ -58,6 +58,14 @@ public class RegisterController {
 		return service.idcheck(id);
 	}
 	
+	@GetMapping("/toemailcheck")
+	@ResponseBody
+	public All_User_Tbl toemailcheck(@RequestParam("toemail") String toemail, Model model) {
+		System.out.println("email : " + toemail);
+		System.out.println("service.toemailcheck : " + service.toemailcheck(toemail));
+		return service.toemailcheck(toemail);
+	}
+	
 	
 	@RequestMapping("/registertest")
 	public String registertest() {

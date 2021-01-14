@@ -62,29 +62,37 @@ public class LoginController {
 		return "carshop/login";
 	}
 	
+	@PostMapping("/onlyId")
+	@ResponseBody
+	public String getAjaxId(@RequestBody Login logvo) {
+		String back = "";
+		String result = loginservice.getId(logvo.getId());     //딱 id만 가져와서 박힘
+		if(result == null) back="-1";
+		else back="2";
+		return back;
+	}
+	
+	@PostMapping("/onlyPw")
+	@ResponseBody
+	public String getAjaxPw(@RequestBody Login logvo) {
+		String back = "";
+		String result = loginservice.getPw(logvo.getId(), logvo.getPw());     //딱 id만 가져와서 박힘
+		
+		if(result == null) back="-1";
+		else back="2";       //로그인정보 일치
+		return back;
+	}
+	
 	@PostMapping("/login") 
 	@ResponseBody
 	public String login_success( HttpSession session,@RequestBody Login logvo) {
 		String back = "";
-		//입력받은 id,pw확인
-		System.out.println("id = " + logvo.getId() + " pw = " + logvo.getPw());
+		String result = loginservice.login(logvo.getId(), logvo.getPw(), session);
 		
-		boolean result = loginservice.login(logvo.getId(), logvo.getPw(), session);
-		System.out.println("result : " + result);
-		String sessId = (String)session.getAttribute("id");    //key값이 "id"인 값을 가져온다
-		System.out.println("세션에 저장된 id : " + sessId);
-		
-		if(result == true) {
-			// 관리자페이지로 랜딩할경우
-			if(logvo.getId() == "admin"){
-				back = "0";
-			}
-			System.out.println("111111");
-			back = "0";
-		}else {
-			System.out.println("22222");
-			back = "-1";
-		}
+		if(result == "1") back = "1";			//관리자로 로그인
+		else if(result == "2") back = "2";		//회원으로 로그인
+		else back = "-1";						//로그인정보가 틀릴경우
+		System.out.println("back ==  7) " + back);
 		return back;
 	}
 	  
@@ -92,16 +100,14 @@ public class LoginController {
 	public String login2(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
 		HttpSession session1 = request.getSession(false);
-		return "carshop/index";
+		return "redirect:/carshop/index"; //return "carshop/index"로 두면 jsp만 보이고 컨트롤러는 실행이 안되서 물품들이 보이지 않음 (성연/21.01.14)
 	}
 	
 	
 	@GetMapping("/indexlogin")
 	public String indexlogin(HttpSession session) {
 		String sessionid = session.getId();
-		System.out.println("로그인성공해서 새로생긴 세션id  : " + sessionid);
 		String memberId = (String)session.getAttribute("id");
-		System.out.println("세션으로 indexlogin에 아이디 가져오는지?" + memberId);
 		return "carshop/indexlogin";
 	}
 	
@@ -124,7 +130,6 @@ public class LoginController {
 		All_User_Tbl db_id = loginservice.getid(email);
 			//db에 id가 없을경우
 			if(db_id == null) {
-				System.out.println("id없다=======");
 				return result;
 			}
 		String id = db_id.getId();

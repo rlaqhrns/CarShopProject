@@ -8,6 +8,12 @@
 		select * from order_history_tbl where u_id = #{u_id} order by order_date desc
 
  	</select>
+
+ 	<select id ="isUser" resultType="com.shop.vo.User_Tbl">
+
+		select * from user_tbl where u_id = #{u_id}
+
+ 	</select>
 	
 	 <select id ="orderDateLists" resultType="com.shop.vo.Order_Histroy_Tbl">
 	<![CDATA[
@@ -26,24 +32,6 @@
 		select order_history_tbl.ono, order_history_tbl.pname, order_history_tbl.quantity, order_history_tbl.amount, order_history_tbl.pay, order_history_tbl.order_date, order_history_tbl.u_id, prod_tbl.p_no, prod_tbl.s_id as seller from prod_tbl join order_history_tbl on prod_tbl.p_no = order_history_tbl.p_no where u_id = #{u_id}
 
  	</select>
-
- 	<select id ="getReturn" resultType="com.shop.vo.Order_Histroy_Tbl">
-
-		select * from order_history_tbl where ono = #{ono}
-
- 	</select>
-
- 	<select id ="findSid" resultType="com.shop.vo.Prod_Tbl">
-
-		select s_id from Prod_Tbl where p_no = #{p_no}
-
- 	</select>
-
- 	<select id ="findList" resultType="com.shop.vo.Prod_Tbl">
-
-		select s_id from Prod_Tbl where p_no = #{p_no}
-
- 	</select>
 	
 	<insert id="insertForms">
 	
@@ -51,6 +39,24 @@
 	
 	</insert>
 
+ 	<select id ="returnOne" resultType="com.shop.vo.Return_Tbl">
+
+		select * from return_tbl where ono = #{ono}
+
+ 	</select>
+
+ 	<select id ="findRefund" resultType="com.shop.vo.Return_Tbl">
+
+		select * from return_tbl where u_id = #{u_id}
+
+ 	</select>
+
+ 	<select id ="findrealRefund" resultType="com.shop.vo.Return_End_Tbl">
+
+		select * from return_end_tbl where u_id = #{u_id}
+
+ 	</select>
+	
 	
 
 </mapper>
