@@ -7,4 +7,7 @@
 	<select id="selectall" resultType="com.shop.vo.Prod_Tbl">
 		select * from prod_tbl where s_id = #{s_id}
 	</select>
+	<select id="usercheck" resultType="string">
+		select seller from all_user_tbl where id = #{id}
+	</select>
 </mapper>

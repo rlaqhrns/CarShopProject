@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html">
-<title>저기 카</title>
+<!--  TITLE 삭제 2021.01.12 YHJ 개별 타이틀 속성 제공예정 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
 
 
@@ -91,9 +91,9 @@
 	    contentType: "application/json; charset=utf-8",
 		success:function(data){
 			if(data){
-				console.log("if완료완료");
+				console.log("header if완료완료");
 			}else {
-				console.log("else완료");
+				console.log("header else완료");
 				$('.nav-login').attr("style","show");
 				$('.nav-logout').hide();
 			}
@@ -139,12 +139,16 @@
 	if(sessId != null){
 %>							
 							<li class="nav-item"><a class="nav-link" href="/carshop/mypage">Mypage</a></li>
-							
 <%
-	}
+}else {
+%>
+							<li class="nav-item"><a class="nav-link" href="login">Mypage</a></li>
+<%
+}
 %>
 						
 						</ul>
+
 						<div class="nav-right">
 							<ul class="nav-shop">
 								<li class="nav-item"><a href="/carshop/cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>

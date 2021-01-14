@@ -19,39 +19,45 @@ import lombok.Setter;
 @Controller
 public class UserUpdateController {
 
-	@Setter(onMethod_=@Autowired)
+	@Setter(onMethod_ = @Autowired)
 	private UserUpdateService uservice;
-	
-	
-	
+
 	@GetMapping("userupdateform")
 	public String userupdateForm(Model model, HttpSession session) {
-		//일반유저인지 판매자유저인지 확인. user에 Y or N 담김.
-			String user = ((All_User_Tbl)session.getAttribute("user")).getSeller();
-			System.out.println("user : " + user);
-			if(user.equals("N")) {
-				model.addAttribute("user",uservice.user_select(((All_User_Tbl)session.getAttribute("user")).getId()));
-				model.addAttribute("userType","user");
+
+		try {
+
+			// 일반유저인지 판매자유저인지 확인. user에 Y or N 담김.
+			String user = ((All_User_Tbl) session.getAttribute("user")).getSeller();
+			System.out.println("user_update user : " + user);
+			if (user.equals("N")) {
+				model.addAttribute("user", uservice.user_select(((All_User_Tbl) session.getAttribute("user")).getId()));
+				model.addAttribute("userType", "user");
 			} else {
-				model.addAttribute("userType","seller");
-				model.addAttribute("user",uservice.seller_select(((All_User_Tbl)session.getAttribute("user")).getId()));
+				model.addAttribute("userType", "seller");
+				model.addAttribute("user",
+						uservice.seller_select(((All_User_Tbl) session.getAttribute("user")).getId()));
 			}
-		return "carshop/user_update";
+			return "carshop/user_update";
+
+		} catch (Exception e) {
+			System.out.println("userupdateform 경로에서 에러 발생");
+			return "redirect:/carshop/error";
+		}
 	}
-	
+
 	@RequestMapping("user_updateok")
-	public String user_updateok(Model model,HttpSession session,User_Tbl user_tbl) {
+	public String user_updateok(Model model, HttpSession session, User_Tbl user_tbl) {
 		boolean result = uservice.user_update(user_tbl);
 		System.out.println("result : " + result);
-		return "carshop/mypage";
+		return "redirect:/carshop/mypage";
 	}
-	
+
 	@RequestMapping("seller_updateok")
-	public String seller_updateok(Model model,HttpSession session,Seller_Tbl seller_tbl) {
+	public String seller_updateok(Model model, HttpSession session, Seller_Tbl seller_tbl) {
 		boolean result = uservice.seller_update(seller_tbl);
 		System.out.println("result : " + result);
-		return "carshop/mypage";
+		return "redirect:/carshop/mypage";
 	}
-	
-	
+
 }
