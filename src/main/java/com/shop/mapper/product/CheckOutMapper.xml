@@ -22,5 +22,9 @@
 	<delete id="deleteCartList">
 		delete from cart_tbl where u_id = #{u_id}
 	</delete>
+	
+	 <select id ="isUser" resultType="com.shop.vo.User_Tbl">
+		select * from user_tbl where u_id = #{u_id}
+ 	</select>
 
 </mapper>

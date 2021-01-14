@@ -1,6 +1,8 @@
 package com.shop.controller.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +28,29 @@ public class AskController {
 
 	@PostMapping("/product/product_ask")
 	@ResponseBody
-	public List<Ask_Tbl> ask(@RequestParam("p_no")int p_no,Ask_Tbl ask) {
-		System.out.println("ask 컨트롤러 들어옴");
-		int result = service.askForm(ask);
-		if(result ==1) {
-			return service.ask(p_no);
-		}else {
-			return null;
+	public Map<String, Object> ask(@RequestParam("p_no") int p_no, Ask_Tbl ask) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		try {
+			int result = service.askForm(ask);
+			if (result == 1) {
+				map.put("list", service.ask(p_no));
+				map.put("code", 1);
+			} else {
+				map.put("code", 2);
+			}
+		} catch (Exception e) {
+			map.put("code", 3);
 		}
-		
-		
+
+		return map;
+
 	}
-	
-	
+
 	@PostMapping("/product/product_ask_reply")
 	@ResponseBody
-	public List<Ask_Tbl> ask_reply(Ask_Tbl ask) {
-		System.out.println("ask 컨트롤러 들어옴" + ask);
+	public Map<String,Object> ask_reply(Ask_Tbl ask) {
+		Map<String, Object> map = new HashMap<String, Object>();
 
 //		int result = serv	ice.ask_reply(ask_no);
 //		if(result ==1) {
@@ -51,11 +59,14 @@ public class AskController {
 //			System.out.println("else");
 //			return null;
 //		}
-			service.ask_reply(ask);
-			return service.ask(ask.getP_no());
-		
+		try {
+			map.put("list", service.ask(ask.getP_no()));
+			map.put("code", 1);
+		} catch (Exception e) {
+			map.put("code", 2);
+		}
+		return map;
+
 	}
-	
-	
 
 }

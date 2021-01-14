@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <%@ include file="../include/header.jsp"%>
 
 <title>CarShop - Product Details</title>
@@ -80,7 +81,7 @@
 							
 							<label for="qty" style="margin-top:10px;float: left">수량 : </label> 
 							<input
-								type="number" name="qty" id="sst" size="2" maxlength="12"
+								type="number" min="1" name="qty" id="sst" size="2" maxlength="12"
 								value="1" title="Quantity" class="input-text qty"
 								style="margin-top:8px;float: left"> 
 							
@@ -404,28 +405,50 @@ $(document).ready(function() {
 							dataType : "JSON",
 								type : "POST",
 							 success : function(data) {
-					$.each(data,function(index,value) {
-									text =  '<div class="comment_list">';
-									text += '<div class="review_item">';
-									text += '<div class="media">';
-									text += '<div class="media-body">';
-									text += '<h4>유저 ID : '+ value.u_id +'</h4>';
-									text += '<small><h5>' +value.ask_date + '</h5></small>';
-									
-									if(seller == 'Y'){
-									text += '<a class="reply_btn" id="askReply">Reply</a>';
-									}
-									
-									text += '</div></div>';
-									text += '<p>문의 제목 : ' +value.ask_title+ '</p>';
-									text += '<h6>문의 내용 : ' +value.ask_content+ '</h6>';
-									text += '<div id="ask'+value.ask_no+'">'
-									if(value.ask_reply !=null){
-									text +='<strong>답글 : '+value.ask_reply+'</strong>'
-									}
-									text +='</div><br></div></div>';
-									list.append(text);
-							})	
+								 console.log("data : " , data);
+								 if(data.code == 1){
+										$.each(data.list,function(index,value) {
+											text =  '<div class="comment_list">';
+											text += '<div class="review_item">';
+											text += '<div class="media">';
+											text += '<div class="media-body">';
+											text += '<h4>유저 ID : '+ value.u_id +'</h4>';
+											text += '<small><h5>' +value.ask_date + '</h5></small>';
+											
+											if(seller == 'Y'){
+											text += '<a class="reply_btn" id="askReply">Reply</a>';
+											}
+											
+											text += '</div></div>';
+											text += '<p>문의 제목 : ' +value.ask_title+ '</p>';
+											text += '<h6>문의 내용 : ' +value.ask_content+ '</h6>';
+											text += '<div id="ask'+value.ask_no+'">'
+											if(value.ask_reply !=null){
+											text +='<strong>답글 : '+value.ask_reply+'</strong>'
+											}
+											text +='</div><br></div></div>';
+											list.append(text);
+											
+											Swal.fire({
+												  icon: 'success',
+												  title: 'Wow...',
+												  text: '문의가 등록되었습니다'
+												  
+												})
+									})	
+								 }else{
+					  	    			Swal.fire({
+						    				  title: '처리되지 않았습니다',
+						    				  confirmButtonText: `확인`
+						    				}).then((result) => {
+						    				  /* Read more about isConfirmed, isDenied below */
+						    				  if (result.isConfirmed) {
+						    					  location.reload();
+						    				  }
+						    				})
+									 
+								 }
+
 							},error : function() {
 									console.log("통신실패");
 													}
@@ -443,6 +466,9 @@ $(document).ready(function() {
 					})
 	// modal 에서 작성 버튼 누를 시 이벤트 발생
 	$(document).on("click","#ask_replyBtn",function(){
+		
+		
+		
 		let ask_reply = $("#message-text").val();
 			let msg = "";
 			
@@ -454,9 +480,27 @@ $(document).ready(function() {
 			dataType:"JSON",
 			type:"POST",
 			success : function(data){
-				$("#ask"+ask_no).empty();
-			$("#ask"+ask_no).append('<strong>답글 : '+ ask_reply +'</strong>');
-			console.log("#ask"+ask_no);	 
+				if(data.code ==1){
+					$("#ask"+ask_no).empty();
+					$("#ask"+ask_no).append('<strong>답글 : '+ ask_reply +'</strong>');
+					console.log("#ask"+ask_no);
+					Swal.fire({
+						  icon: 'success',
+						  text: '등록되었습니다'
+						})
+				}else{
+  	    			Swal.fire({
+  	    				  
+	    				  title: '처리되지 않았습니다',
+	    				  confirmButtonText: `확인`
+	    				}).then((result) => {
+	    				  /* Read more about isConfirmed, isDenied below */
+	    				  if (result.isConfirmed) {
+	    					  location.reload();
+	    				  }
+	    				})
+				}
+				 
 			},error : function(request,error){
 				console.log("통신실패", request.status,"\n",request.responseText);
 			}

@@ -37,10 +37,9 @@ public class ProductReturnServiceImple implements ProductReturnService{
 	}
 
 	
-	@Transactional
 	@Override
-	public int insert_select(int ono) {
-		
+	@Transactional(rollbackFor = Exception.class)
+	public int insert_select(int ono) throws Exception{
 		mapper.insert_select(ono);
 		return mapper.delete(ono);
 	}

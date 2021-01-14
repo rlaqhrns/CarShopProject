@@ -50,20 +50,31 @@ public class CheckOutServiceImple implements CheckOutService{
 		//String u_id = "something";	임시 아이디 설정 (재원/20.12.28)
 		List<Cart_Tbl> cartL = mapper.cartList(u_id); //카트 정보 list로 받아오기 (재원/20.12.28)
 		
-		for(int i =0; i<cartL.size(); i++) { //들어가는지 확인 (재원/20.12.28)
-			System.out.println(cartL.get(i).getAmount());
-		}
-		
-		for(int i =0; i<cartL.size(); i++) { //카트 정보를 담은 List 돌면서 mapping 함 (재원/20.12.28)
-			order.setU_id(cartL.get(i).getU_id());		
-			order.setAmount(cartL.get(i).getAmount());
-			order.setPname(cartL.get(i).getPname());
-			order.setQuantity(cartL.get(i).getQuantity());
-			order.setP_no(cartL.get(i).getP_no()); //vo 객체를 바꾸면서 수정 setPno, getPno(재원/20.12.29)
-			mapper.insertBuyList(order);
-		}
+		try {
 
+			for(int i =0; i<cartL.size(); i++) { //들어가는지 확인 (재원/20.12.28)
+				System.out.println(cartL.get(i).getAmount());
+			}
+			
+			for(int i =0; i<cartL.size(); i++) { //카트 정보를 담은 List 돌면서 mapping 함 (재원/20.12.28)
+				order.setU_id(cartL.get(i).getU_id());		
+				order.setAmount(cartL.get(i).getAmount());
+				order.setPname(cartL.get(i).getPname());
+				order.setQuantity(cartL.get(i).getQuantity());
+				order.setP_no(cartL.get(i).getP_no()); //vo 객체를 바꾸면서 수정 setPno, getPno(재원/20.12.29)
+				mapper.insertBuyList(order);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
+	}
+
+	@Override
+	public User_Tbl isUser(String u_id) {
+		// TODO Auto-generated method stub
+		return mapper.getUser(u_id);
 	}
 	
 	
