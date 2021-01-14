@@ -81,7 +81,7 @@ public class BlkListPageController {
 		service.insert_report(report);
 		
 		
-		return "redirect:/carshop/product/details?p_no=" + p_no;  //신고를 하던 상품 디테일 페이지로 다시 이동 -성연 20.01.12
+		return "redirect:/carshop/index";  //신고를 하던 상품 디테일 페이지로 다시 이동 -성연 20.01.12
 	}
 	
 
