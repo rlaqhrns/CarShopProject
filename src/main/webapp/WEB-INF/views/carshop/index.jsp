@@ -24,77 +24,62 @@
 }
 
 
-/* event 배너 css start 2021.01.13 YHJ*/
-body {
-	font-size: 11pt;
-	padding: 0;
-	margin: 0;
-	text-align: center;
-}
-
-h3 {
-	color: #85144b;
-	font-size: 14pt;
-	margin: 10 auto;
-	padding: 10px;
-}
-
-.contents {
-	width: 800px;
-	height: 400px;
-	background-color: #d6d6d6;
-	margin: 0 auto;
-}
-
 /* event banner */
 .banner {
-	position: relative;
-	width: 1519px;
-	height: 380px;
-	top: 50px;
-	margin: 0 auto;
-	padding: 0;
-	overflow: hidden;
+    position: relative;
+    width: 1920px;
+    height: 380px;
+    top: 50px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
 }
 .banner ul {
-	position: absolute;
-	margin: 0px;
-	padding: 0;
-	list-style: none;
+    position: absolute;
+    margin: 0px;
+    padding: 0;
+    list-style: none;
 }
 
 .banner ul li {
-	float: left;
-	width: 1519px;
-	height: 380px;
-	margin: 0;
-	padding: 0;
+    float: left;
+    width: 1920px;
+    height: 380px;
+    margin: 0;
+    padding: 0;
 }
 
 .banner1 {
-	position: relative;
-	width: 1519px;
-	height: 410px;
-	top: 0px;
-	left : 0px;
-	padding-bottom: 30px;
-	overflow: hidden;
+    position: relative;
+    width: 1920px;
+    height: 410px;
+    margin: 0 auto;
+    top: 0px;
+    left : 0px; 
+    padding: 0;
+    padding-bottom: 30px;
+    overflow: hidden;
 }
 .banner1 ul li {
-	float: left;
-	width: 1519px;
-	height: 410px;
-	top: 0px;
-	left : 0px;
-	padding-bottom: 30px;
-	
+    float: left;
+    width: 1920px;
+    height: 410px;
+    margin: 0 auto;
+    padding: 0;
+
+    top: 0px;
+    left : 0px; 
+    padding-bottom: 30px;
+
 }
 .banner1 ul {
-	position: absolute;
-	top: 0px;
-	left : 0px;
-	padding-bottom: 30px;
-	list-style: none;
+    position: absolute;
+     top: 0px;
+    left : 0px; 
+    margin: 0 auto;
+    padding: 0;
+    padding-bottom: 30px;
+    list-style: none;
 }
 
 
