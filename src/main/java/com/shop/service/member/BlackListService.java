@@ -20,7 +20,7 @@ public interface BlackListService {
 	
 	public int getTotalCount();
 	
-	public boolean delete_allnseller(String s_id); //remove id from seller tbl & all user tbl at the same time -SungYeon 20.12.23
+	public boolean delete_allnseller(String s_id) throws Exception; //remove id from seller tbl & all user tbl at the same time -SungYeon 20.12.23
 	
 	public Prod_Tbl getprod(int p_no);
 	
