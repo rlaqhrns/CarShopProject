@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -73,7 +74,7 @@ public class CartController {
 
 	
 	
-	@RequestMapping("/cart-update")
+	@RequestMapping("/cart_update")
 	public String update(@RequestParam int[] quantity, @RequestParam int [] p_no, HttpSession session) {
 		// 메개변수타입과 매개변수명, mapper명과 인터페이스명 동일 
 		
@@ -92,9 +93,7 @@ public class CartController {
 			System.out.println("카드 업데이트 잘 되나요?");
 			
 		}
-		
-		
-		
+
 		return "redirect:/carshop/cart";
 		
 		
@@ -102,8 +101,29 @@ public class CartController {
 	}
 	
 
-	
-	
+	/*
+	 * @RequestMapping("/insert_cart") //세부적인 url mapping
+	 * 
+	 * public String insertCart(@ModelAttribute Cart_Tbl cart, HttpSession session)
+	 * {
+	 * 
+	 * System.out.println("장바구니 잘 저장 되나요?");
+	 * 
+	 * String u_id=(String)session.getAttribute("u_id");
+	 * 
+	 * 
+	 * if(u_id==null) {
+	 * 
+	 * System.out.println("아이디 값이 뭔데"+ u_id); //로그인하지 않은 상태이면 로그인 화면으로 이동 return
+	 * 
+	 * return "redirect:/carshop/login"; }
+	 * 
+	 * cart.setU_id(u_id); cartService.insertCart(cart); //장바구니 테이블에 저장됨
+	 * 
+	 * return "redirect:/carshop/like"; //장바구니 목록으로 이동 }
+	 * 
+	 * }
+	 */
 	
 	
 }

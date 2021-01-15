@@ -4,11 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../include/header.jsp"%>
 
-<title>Aroma Shop - Sale List</title>
 <link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 <link rel="stylesheet"
 	href="/resources/vendors/nouislider/nouislider.min.css">
-
+<title>저리카 | 판매목록 </title>
 
 <!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="category">

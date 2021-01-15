@@ -1,34 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+	String sessId = (String)session.getAttribute("id");
+%>
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html">
+<!--  TITLE 삭제 2021.01.12 YHJ 개별 타이틀 속성 제공예정 -->
+<title>Carshop | MyPage</title>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Carshop MyPage</title>
-
-<link rel="icon" href="/resources/img/Fevicon.png" type="image/png">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/papicon.png">
+<!-- 파피콘 이미지 수정 2020/01/08 yunhj -->
 <link rel="stylesheet"
 	href="/resources/vendors/bootstrap/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/resources/vendors/fontawesome/css/all.min.css">
 <link rel="stylesheet"
 	href="/resources/vendors/themify-icons/themify-icons.css">
-<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 <link rel="stylesheet"
 	href="/resources/vendors/owl-carousel/owl.theme.default.min.css">
 <link rel="stylesheet"
 	href="/resources/vendors/owl-carousel/owl.carousel.min.css">
-
+<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 
 <link rel="stylesheet" href="/resources/css/style.css">
 <link href='/resources/lib/main.css' rel='stylesheet' />
 <!-- 달력 css -->
 <script src='/resources/lib/main.js'></script>
 <!-- 달력 js  -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+<script> 
+	$.ajax({
+		url: '/carshop/headerAjax',
+		type : 'get',
+		dataType : "json",
+	    contentType: "application/json; charset=utf-8",
+		success:function(data){
+			if(data){
+				console.log("header if완료완료");
+			}else {
+				console.log("header else완료");
+				$('.nav-login').attr("style","show");
+				$('.nav-logout').hide();
+			}
+		},
+		error :function(){
+			console.log("실패함");
+		},
+		complete : function(){
+			console.log("ajax통신완료");
+		}
+	});
+</script>
 <script>
 //제이쿼리와 스크립트 둘 다 사용하기 위해 가장 바깥쪽에 객체, 변수들 선언 -Monica 2020.12.31
 var modal = document.getElementById('modalEvent'); 
@@ -194,7 +222,7 @@ const open = () => {  //이클립스 버그로 빨간줄 뜰 때가 있지만 �
 		 $(document).ready(function() {  //제이쿼리 동작을 위한 구역 -Monica 2020.12.31
 			 
 			 <c:forEach items='${schedules}' var="schd">//db에서 가져온 아이디에 해당하는 일정 반복문으로 달력에 입력 -Monica 2020.12.31
-			 console.log('${schd.schdtitle}:${schd.schdstart}:${schd.schdend}');
+			 //console.log('${schd.schdtitle}:${schd.schdstart}:${schd.schdend}');
 			 	calendar.addEvent({
 					title : "<c:out value='${schd.schdtitle}' />",
 					start : "<c:out value='${schd.schdstart}' />",
@@ -358,53 +386,62 @@ button {
 	width: 100px;
 }
 
+.searchbar {
+	margin-bottom: auto;
+	margin-top: auto;
+	height: 60px;
+	background-color: #353b48;
+	border-radius: 30px;
+	padding: 10px;
+}
+
+.search_input {
+	color: white;
+	border: 0;
+	outline: 0;
+	background: none;
+	width: 0;
+	caret-color: transparent;
+	line-height: 40px;
+	transition: width 0.4s linear;
+}
+
+.searchbar:hover>.search_input {
+	padding: 0 10px;
+	width: 450px;
+	caret-color: red;
+	transition: width 0.4s linear;
+}
+
+.searchbar:hover>.search_icon {
+	background: white;
+	color: #e74c3c;
+}
+
+.search_icon {
+	height: 40px;
+	width: 40px;
+	float: right;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	color: white;
+	text-decoration: none;
+}
+.header_area .main_menu .navbar .container .collapse .nav-right{
+	display : flex;
+	align-items : center;
+}
+.header_area .main_menu .navbar .container .collapse .nav-right .nav-log .nav-login {
+	margin-top : 20px;
+	margin-bottom : 20px;
+}
 </style>
+
 </head>
+
 <body>
-
-	<!--================ Start Header Menu Area =================-->
-	<header class="header_area">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light">
-				<div class="container">
-					<a class="navbar-brand logo_h" href="index.html"><img
-						src="/resources/img/logo2.png" alt="로고"></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-							<li class="nav-item active"><a class="nav-link"
-								href="index.html">Home</a></li>
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">MyPage</a></li>
-							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-						</ul>
-
-						<ul class="nav-shop">
-
-							<li class="nav-item"><button>
-									<i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span>
-								</button></li>
-							<li class="nav-item"><a class="button button-header"
-								href="register">회원가입</a></li> <!-- 로그아웃으로 전환 필요 -성연 2021.01.07 -->
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</header>
-	<!--================ End Header Menu Area =================-->
-	
 <!--  Modal -->
 	<div class="modalc hiddenc">
 		<div class="bgc"></div>
@@ -477,6 +514,69 @@ button {
 		</div>
 	</div>
 	<!-- /.modal -->
+	
+	<!--================ Start Header Menu Area =================-->
+	<header class="header_area">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<a class="navbar-brand logo_h" href="/carshop/index"><img src="/resources/img/logo3.png" alt="로고" style= "width: 70px; height: 70px;"></a>
+
+					<!-- yun.hj 2020.01.07 logo img change & 규격이 상이해서 style 추가 함 -->
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+							<li class="nav-item"><a class="nav-link" href="/carshop/index">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="/carshop/productList">Shop</a></li>
+					        <li class="nav-item submenu dropdown">
+<% 
+	if("admin".equals(sessId)){
+%>
+              		  		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+			                  aria-expanded="false">Admin</a>
+<%
+	}
+%>
+			            <ul class="dropdown-menu">
+			                  <li class="nav-item"><a class="nav-link" href="/carshop/blacklist">Black List</a></li>
+			                  <li class="nav-item"><a class="nav-link" href="/carshop/annclist">Announcement</a></li>
+			           </ul>		
+							
+							<!--  컨탠츠랑 mypage 위치 수정 2021.01.11 -->
+<%
+	if(sessId != null){
+%>							
+							<li class="nav-item"><a class="nav-link" href="/carshop/mypage">Mypage</a></li>
+<%
+}else {
+%>
+							<li class="nav-item"><a class="nav-link" href="login">Mypage</a></li>
+<%
+}
+%>
+						
+						</ul>
+
+						<div class="nav-right">
+							<ul class="nav-shop">
+								<li class="nav-item"><a href="/carshop/cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></a></li>
+							</ul><!-- yun.hj 2020/01/07 장바구니 경로 설정 -->
+								<!-- uin.hj 2020/01/08 mypage, home, shop, contact 경로 설정 -->
+								<!-- 결로 버그 수정 2021.01.11 hyejeong -->
+							<div class="nav-log">
+								<div class="nav-login" style="position:relative; visibility:hidden"><a class="button button-header" href="/carshop/login" >login</a></div>
+								<div class="nav-logout" style="position:relative; left : 0px; top:-50px;"><a class="button button-header"  href="/carshop/logout" >logout</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
 
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="blog">
@@ -655,6 +755,8 @@ button {
 										<a href="/carshop/product/details?p_no=${best.p_no }">
 											<h3><c:out value="${best.p_name }" /></h3>
 										</a>
+										<br>
+										<p>클릭 수: <c:out value="${best.hit }" /></p>
 									</div>
 								</div>
 							</c:forEach>
@@ -706,10 +808,11 @@ button {
 					<div class="single-footer-widget tp_widgets">
 						<h4 class="footer_title">Quick Links</h4>
 						<ul class="list">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Shop</a></li>
-							<li><a href="#">MyPage</a></li>
+							<li><a href="index">Home</a></li>
+							<li><a href="productList">Shop</a></li>
+							<li><a href="mypage">MyPage</a></li>
 							<li><a href="#">Contact</a></li>
+						<!-- 2020/01/08 yun.hj 경로설정 -->
 						</ul>
 					</div>
 				</div>
@@ -779,7 +882,9 @@ button {
 </footer>
 <!--================ End footer Area  =================-->
 
-<!-- 주의! 제이쿼리 nice-select.js 넣지 마세요 -Monica 2020.12.31 -->
+
+
+<script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script src="/resources/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/resources/vendors/skrollr.min.js"></script>
 <script src="/resources/vendors/owl-carousel/owl.carousel.min.js"></script>

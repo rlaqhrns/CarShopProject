@@ -38,7 +38,7 @@
 	}
 </style>
 
-	<title>Aroma Shop</title>
+	<title>저리카 | 공지</title>
 	<link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 	<link rel="stylesheet" href="/resources/vendors/nouislider/nouislider.min.css">
 	

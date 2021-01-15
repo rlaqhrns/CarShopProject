@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shop.service.member.BlackListService;
@@ -35,8 +36,9 @@ public class BlackListController {
 	private BlackListService blk_service;
 	
 	//Mapping that is getting black list data for ajax communication -SungYeon 20.12.23
+	@ResponseBody
 	@GetMapping(value = "/blacklista", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<BlkPageDTO> blklist(int pageNum){
+	public BlkPageDTO blklist(int pageNum){
 		//System.out.println("get blk list.....");
 		Criteria crit = new Criteria();
 		crit.setPageNum(pageNum);
@@ -45,7 +47,7 @@ public class BlackListController {
 		crit.setStartNum((crit.getPageNum()-1)*crit.getAmount()); //ex: when page is 1, data starts from / when page is 2, data starts from 1*amount -SungYeon 20.12.23
 		//System.out.println("crit: " + crit);
 		
-		return new ResponseEntity<>(blk_service.getBlkList(crit), HttpStatus.OK);
+		return blk_service.getBlkList(crit);
 	}
 	
 	//Mapping that allows ajax to remove receiving id from black list tbl(not deleting id from all user tbl) -SungYeon 20.12.23
