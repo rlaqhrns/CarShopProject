@@ -282,7 +282,7 @@
 				<li><img src="/resources/img/home/event3.png" width="1920px" height="380px"></li>
 				<li><img src="/resources/img/home/event5.png" width="1920px" height="380px"></li>
 				<li><img src="/resources/img/home/event6.png" width="1920px" height="380px"></li>
-				<li><a href="http://localhost:8080/carshop/product/details?p_no=26"><img src="/resources/img/home/event7.png" width="1519px" height="380px"></a></li>
+				<li><a href="http://localhost:8080/carshop/product/details?p_no=26"><img src="/resources/img/home/event7.png" width="1920px" height="380px"></a></li>
 				<!-- 상품번호 바뀌면 경로 수정해주셔야 합니다 yhj -->
 				<!-- 이벤트 배너 하나 더 만들기 -->
 			</ul>

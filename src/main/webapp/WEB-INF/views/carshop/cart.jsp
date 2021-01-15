@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
 <style>
 /*팝업창 css style 생성 2021.01.09 yun.hj*/
 button {
@@ -81,26 +82,29 @@ button {
 							<th scope="col"><b>삭제 </b></th>
 						</tr>
 					</thead>
-
-
-
-					<tbody>
-
+					<!-- u_id 가 없을떄 -->
+    <!-- xml파일에서 hashmap에 list를 넣어놓았기 때문에 현재 map에 자료가 들어있다.  -->
+    <!--  id 값이 널이 되어서 모두 when으로 빠진다. -->
+    
+		<tbody>
+			<c:choose>
+			    <c:when test="${empty u_id}">로그인 후 이용해 주시기 바랍니다.</c:when>
+   					 <c:otherwise>
 						<!--   <form name="form1" id = "form1" method="post" action="${path}/carshop/cart/cart-update">-->
-						<form name="form1" id="form1" method="post" action="${path}/carshop/cart-update">
+						<form name="form1" id="form1" method="post" action="/carshop/cart-update" >
 							<c:forEach items="${cartList}" var="cart">
 								<tr align="center">
 									<td>${cart.pname}</td>
 									<td><fmt:formatNumber value="${cart.amount}"
 											pattern="#,###,###" />원</td>
-
 									<td>
-										<!--  <input type = "number" style="" name="quantity" value="${cart.quantity}" >-->
-
+										<%--   <input type = "number" style="" name="quantity" value="${cart.quantity}" > --%>
+										
 										<label for="cart_qty" style="float: left"></label> <input
 										value="${cart.quantity}" type="number" name="quantity"
-										size="1" maxlength="12" min="0" title="Quantity"
-										style="float: left"> <!-- value="1" class= "cart-update" id="sst"  -->
+										size="1" maxlength="12" min="1" title="Quantity" value="1" class= "cart-update" id="sst" 
+										style="float: left"> 
+										<!--  -->
 										<input type="hidden" name="p_no" value="${cart.p_no}">
 
 										<!-- 상품수량 변경을 위해 상품 ID 번호를 hidden 속성해줌 --> <!-- <input type = "hidden" name= "total" value="${cart.total}">-->
@@ -129,11 +133,12 @@ button {
 								<div class="checkout_btn_inner d-flex align-items-center">
 									<!--  <a class="gray_btn ml-2" id="btnUpdate" href="#" onclick = "showPopup()">Update</a> -->
 									<a class="gray_btn ml-2" id="btnDelete"
-										href="${path}/carshop/cart_deleteAll?u_id=${u_id}">비우기</a>
+										href="${path}/carshop/cart_deleteAll?u_id=${u_id}" onclick = "showPopup()" >비우기</a>
 								</div>
 							</td>
 						</tr>
-
+		</c:otherwise>
+</c:choose>
 
 						<tr class="total-amount_area">
 							<td class="d-none d-md-block"></td>
@@ -154,22 +159,23 @@ button {
 							<td>
 								<div class="checkout_btn_inner d-flex align-items-center">
 									<a class="gray_btn" href="productList" id="btnList">쇼핑계속하기</a>
-									<a class="primary-btn ml-2" href="checkout">상품주문</a>
+									<a class="primary-btn ml-2" href="checkout"   >상품주문</a>
 
 								</div>
 							</td>
 						</tr>
-						<div id="popup" class="hide">
-							<div class="content">
-								<p>장바구니 물품이 업데이트 되었습니다.</p>
-								<button onclick="closePopup()">확인</button>
+							<div id="popup" class="hide">
+								<div class="content">
+									<p>장바구니에 모든 상품을 삭제하였습니다.</p>
+										<button onclick="closePopup()">확인</button>
+								</div>
 							</div>
-						</div>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+	
 </section>
 <!--================End Cart Area =================-->
 <%@ include file="../include/footer.jsp"%>
@@ -209,10 +215,11 @@ button {
 	   // 마우스를 땔 시 인풋 박스가 사라짐 
    });
 
-
+   
+ 
    
    
-   // 팝업창 쿼리 2021.01.09 yun.hj
+    // 팝업창 쿼리 2021.01.09 yun.hj
    function showPopup(hasFilter) {
 		const popup = document.querySelector('#popup');
 	  
@@ -228,6 +235,6 @@ button {
 	function closePopup() {
 		const popup = document.querySelector('#popup');
 	  popup.classList.add('hide');
-	}
+	} 
    
 </script>
