@@ -35,27 +35,25 @@ public class LoginServiceImple implements LoginService{
 	
 	@Override
 	public String login(String id, String pw, HttpSession session)  {
-		try { //입력된 id/pw가 일반유저 or 관리자 테이블과 일치하는지 각자 확인
-			if(logmapper.getAdmin(id) != null) {
-				db_admin = logmapper.getAdmin(id);                 //admin_tbl에 아이디있는지 확인
-				String resultAdmin = admin(id, pw, db_admin, session);   //관리자 세션생성되면 "1"을 반환
-				return resultAdmin;         //"1"(관리자세션생성 성공)
+		try { 
+			if(logmapper.getAdmin(id) != null) {		//입력된 정보가 관리자인지 확인
+				db_admin = logmapper.getAdmin(id);                		 //admin_tbl에 아이디있는지 확인
+				String resultAdmin = admin(id, pw, db_admin, session);   //관리자메서드에서 세션생성되면 "1"을 반환
+				return resultAdmin;        								 //"1"(관리자세션생성 성공)
 			}
-			if(logmapper.idpwcheck(id) != null) {
-				 db_id = logmapper.idpwcheck(id);         //all_user_tbl에 아이디 있는지 확인
-				//db와 정보가 다를경우
-					if(db_id != null) {  
-						String resultNormalUser = normalUser(id, pw, db_id, session);   //일반유저 세션생성시 "2"반환
-						return resultNormalUser; //"2"
+			if(logmapper.idpwcheck(id) != null) {		//입력된 정보가 일반유저인지 확인
+				 db_id = logmapper.idpwcheck(id);  	    //all_user_tbl에 아이디 있는지 확인
+					if(db_id != null) {  				//db에 아이디가 있을경우
+						String resultNormalUser = normalUser(id, pw, db_id, session); //일반유저메서드에서 세션생성되면 "2"반환
+						return resultNormalUser; 		//"2"
 					}else {
-						return "-1";
+						return "-1"; 				
 					}   
 			}
-			return "-1";
+			return "-1";			//가입된 id값이 없는경우
 		} catch(Exception e) {
-			System.out.println("로그인실패");
 			e.printStackTrace();
-			return "-1";
+			return "-1";			//가입된 id값이 없는경우
 		}
 	}
 
@@ -106,22 +104,21 @@ public class LoginServiceImple implements LoginService{
 	
 	@Override
 	public String getId(String id) {
+		
+		Admin_Tbl adminInfo = logmapper.getAdmin(id);
+		All_User_Tbl userInfo = logmapper.getIdById(id);
+		
 		try {
-			if(logmapper.getAdmin(id) != null) { 					//작성한 아이디가 admin인 경우 확인
-				String db_admin = logmapper.getAdmin(id).getId(); 
-				if(id.equals(db_admin)) {
-					return "2";
-				}
+			if(adminInfo != null) { 				  //작성한 아이디가 admin인 경우 확인
+				String db_admin = adminInfo.getId();  //관리자 정보중 id만 추출
+				if(id.equals(db_admin)) return "2";	  //db id와 입력받은 id의 일치여부 확인
 				return null;
 			}
-			if(logmapper.getIdById(id).getId() != null) {          //작성한 아이디가 normalUser인 경우 확인
-				String getId = logmapper.getIdById(id).getId();
-				if(id.equals(getId)) {
-					return "2";
-				}
+			if(userInfo != null) {          		//작성한 아이디가 normalUser인 경우 확인
+				String getId = userInfo.getId();	//유저정보중 id만 추출
+				if(id.equals(getId)) return "2";	//db id와 입력받은 id의 일치여부 확인	
 				return null;
 			}
-			
 			return null;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -134,19 +131,18 @@ public class LoginServiceImple implements LoginService{
 	@Override
 	public String getPw(String id, String pw) {
 		
+		Admin_Tbl adminInfo = logmapper.getAdmin(id);
+		All_User_Tbl userInfo = logmapper.getIdById(id);
+		
 		try {
-			if(logmapper.getAdmin(id) != null) {
-				String db_admin = logmapper.getAdmin(id).getPw();
-				if(pw.equals(db_admin)) {
-					return "2";
-				}
+			if(adminInfo != null) {          		    //입력값이 관리자인지 확인
+				String db_admin = adminInfo.getPw();  	//관리자 정보중 비번만 추출
+				if(pw.equals(db_admin)) return "2";	    //db비번과 입력받은 번호의 일치여부 확인
 				return null;
 			}
-			if(logmapper.getIdById(id).getPw() != null) {
-				String getPw = logmapper.getIdById(id).getPw();
-				if(getPw.equals(pw)) {
-					return "2";
-				}
+			if(userInfo != null) { 				    //입력값이 일반유저인지 확인
+				String getPw = userInfo.getPw();	//유저정보중 비번만 추출
+				if(getPw.equals(pw)) return "2";	//db비번과 입력받은 번호의 일치여부 확인	
 				return null;
 			}
 			return null;

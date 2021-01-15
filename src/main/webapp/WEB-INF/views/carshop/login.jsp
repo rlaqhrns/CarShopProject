@@ -14,45 +14,45 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
 <script type="text/javascript"></script>	
 <script>
-function aaa(){
-	var id = $('#id').val();   
-	var pw = $('#pw').val();  
-	$.ajax({
-        url: '/carshop/login',
-        type : 'post',
-        async : false,
-        dataType : "json",
-         contentType: "application/json; charset=utf-8",
-         data : JSON.stringify({
-            'id' : id,
-            'pw' : pw,
-            }),
-        success:function(data){
-           if(data == "-1"){
-              preventDefault;
-           }else if(data == "1"){
-              console.log("관리자로 로그인 성공");
-              location.href="/carshop/index";
-           }else if(data == "2"){
-              console.log("회원으로 로그인 성공");
-              location.href="/carshop/index";
-           }
-        },
-        error :function(){
-           console.log("실패함");
-        }
-  });// ajax
-};// aaa
+	function submitLogin(){              //제대로 입력된 id,pw를 컨트롤러로 보내는 메서드
+		var id = $('#id').val();   
+		var pw = $('#pw').val();  
+		$.ajax({
+	        url: '/carshop/login',
+	        type : 'post',
+	        async : false,				 //동기적통신을 위해 false처리
+	        dataType : "json",
+	         contentType: "application/json; charset=utf-8",
+	         data : JSON.stringify({
+	            'id' : id,
+	            'pw' : pw,
+	            }),
+	        success:function(data){
+	           if(data == "-1"){  				  //로그인에 실패할 경우
+	              preventDefault;
+	           }else if(data == "1"){	
+	              console.log("관리자로 로그인 성공");
+	              location.href="/carshop/index";  //로그인 성공시 해당세션을 갖고 로그인
+	           }else if(data == "2"){
+	              console.log("회원으로 로그인 성공");
+	              location.href="/carshop/index";  //로그인 성공시 해당세션을 갖고 로그인
+	           }
+	        },
+	        error :function(){
+	           console.log("실패함");
+	        }
+	  });// ajax
+	};// submitLogin
 function showSwal(){
-
+	
+	//ajax순서대로 id,pw를 각각 db와 비교하기 위함
 	var id = $('#id').val();   
 	var pw = $('#pw').val();  
 	
-	console.log("id guide ajax 정상동작");
-	$.ajax({
+	$.ajax({						//로그인 ID칸에 입력된 값이 가입되어있는지 확인
 		url: '/carshop/onlyId',
 		type : 'post',
-		async : false,
+		async : false,				//동기통신(false) : ajax통신을 순서대로 처리하기위함
 		dataType : "json",
 	    contentType: "application/json; charset=utf-8",
 	    data : JSON.stringify({
@@ -60,19 +60,19 @@ function showSwal(){
 	    	}),
 		success:function(data){
 			if(data == "-1"){
-				$('#idmessage').attr("type","text").css("color","red");
+				$('#idmessage').attr("type","text").css("color","red");  //입력된 id값이 틀릴경우 뜨는 안내문구
 				 preventDefault;
 			}
 		},
 		error :function(){
 			console.log("아이디만 가져오기 성공");
 		}
-	});
-	console.log("pw guide ajax 정상동작");
-	$.ajax({
+	});  //ajax
+
+	$.ajax({						//로그인 ID,PW칸에 입력된 값이 가입되어있는지 확인
 			url: '/carshop/onlyPw',
 			type : 'post',
-			async : false,
+			async : false,			//동기통신(false) : ajax통신을 순서대로 처리하기위함
 			dataType : "json",
 		    contentType: "application/json; charset=utf-8", 
 		    data : JSON.stringify({
@@ -82,19 +82,19 @@ function showSwal(){
 			success:function(data){
 				console.log("success 들어옴")
 				if(data == "-1"){
-					$('#pwmessage').attr("type","text").css("color","red");
-			        //비밀번호가 틀릴경우 다음 ajax로 넘어가지 않고 머무르도록
+					$('#pwmessage').attr("type","text").css("color","red");  //입력된 pw값이 틀릴경우 뜨는 안내문구
+					preventDefault;
 				}
 				else if(data=="2"){
-					aaa();
+					submitLogin();   //id,pw이 db와 일치할경우 submitLogin메서드로 이동
 				}
 			},
 			error :function(){
-				console.log("pw만 가져오기 성공");
+				console.log("pw만 가져오기 통신실패");
 			}
-	});
+	});   //ajax
 	
-	};//showSwal
+};//showSwal
 
 </script>	
 <style>
