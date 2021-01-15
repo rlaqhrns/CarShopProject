@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html">
 <!--  TITLE 삭제 2021.01.12 YHJ 개별 타이틀 속성 제공예정 -->
-<title>Carshop | MyPage</title>
+<title>저리카 | 마이페이지</title>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/papicon.png">
@@ -580,14 +580,15 @@ button {
 
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="blog">
+	<img class="img-fluid" src="/resources/img/cart/title.png" alt="배너"
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" />
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>My Page</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#">마이</a></li>
-							<li class="breadcrumb-item active" aria-current="page">페이지</li>
+							<li class="breadcrumb-item"><a href="#">마이 페이지</a></li>
 						</ol>
 					</nav>
 				</div>
@@ -728,15 +729,15 @@ button {
 									<c:when test="${status == 'user' }">일반회원</c:when>
 								</c:choose> </p>
 							<div class="social_icon">
-								<a href="/carshop/userupdateform"> <i class="fab fa-github"></i> 계정정보 수정하기
+								<a href="/carshop/userupdateform"> <i class="fas fa-user"></i> 계정정보 수정하기
 								</a> 
 								<c:choose>
 									<c:when test="${status == 'seller' }">
-										<a href="/carshop/productForm"> <i class="fab fa-behance"></i> 판매글쓰기
+										<a href="/carshop/productForm"> <i class="fas fa-sticky-note"></i> 판매글쓰기
 								</a>
 									</c:when>
 									<c:when test="${status == 'user' }">
-										<a href="/carshop/like"> <i class="fab fa-behance"></i> 찜
+										<a href="/carshop/like"> <i class="fas fa-heart"></i> 찜
 									목록
 								</a>
 									</c:when>
@@ -773,15 +774,10 @@ button {
 	<section class="instagram_area">
 		<div class="container box_1620">
 			<div class="insta_btn">
-				<a class="btn theme_btn" href="#">Follow us on instagram</a>
+				<a class="btn theme_btn" href="#"></a>
 			</div>
 			<div class="instagram_image row m0">
-				<a href="#"><img src="/resources/img/instagram/ins-1.jpg" alt=""></a>
-				<a href="#"><img src="/resources/img/instagram/ins-2.jpg" alt=""></a>
-				<a href="#"><img src="/resources/img/instagram/ins-3.jpg" alt=""></a>
-				<a href="#"><img src="/resources/img/instagram/ins-4.jpg" alt=""></a>
-				<a href="#"><img src="/resources/img/instagram/ins-5.jpg" alt=""></a>
-				<a href="#"><img src="/resources/img/instagram/ins-6.jpg" alt=""></a>
+				<br><br><br><br><br><br>
 			</div>
 		</div>
 	</section>
@@ -820,18 +816,13 @@ button {
 					<div class="single-footer-widget instafeed">
 						<h4 class="footer_title">member</h4>
 						<ul class="list instafeed d-flex flex-wrap">
-							<li><img src="/resources/img/gallery/r1.png" alt=""
-								style="width: 70px; hight: 70px;"></li>
-							<li><img src="/resources/img/gallery/r1.png" alt=""
-								style="width: 70px; hight: 70px;"></li>
-							<li><img src="/resources/img/gallery/r1.png" alt=""
-								style="width: 70px; hight: 70px;"></li>
-							<li><img src="/resources/img/gallery/r1.png" alt=""
-								style="width: 70px; hight: 70px;"></li>
-							<li><img src="/resources/img/gallery/r1.png" alt=""
-								style="width: 70px; hight: 70px;"></li>
-							<li><img src="/resources/img/gallery/r1.png" alt=""
-								style="width: 70px; hight: 70px;"></li>
+							<li>신승원</li>
+							<li>박재원</li>
+							<li>김보군</li>
+							<li>박성연</li>
+							<li>이보미</li>
+							<li>노가빈</li>
+							<li>윤혜정</li>
 						</ul>
 					</div>
 				</div>
@@ -848,7 +839,7 @@ button {
 								<span class="fa fa-phone"></span> INSTAGRAM
 							</p>
 							<p>
-								@jipcok <br> tel.031-1234-5678
+								@jipcok <br>  Fax.0504-093-7765
 							</p>
 
 							<p class="sm-head">
