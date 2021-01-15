@@ -152,7 +152,8 @@ function sendFormUsingAjax(){
 							<div class="form-group">
 								<div class="col-md-12">
 									<label class="email" >이메일<br>
-									<input class="writeemail" id="email"  name="email" type="email" style="border:1 solid light-gray;" placeholder="  가입하신 이메일을 입력해주세요" required>
+									<input class="writeemail" id="email"  name="email" type="email" 
+													style="border:1 solid light-gray;" placeholder="  가입하신 이메일을 입력해주세요" required>
 									</label>
 								</div>
 							</div>

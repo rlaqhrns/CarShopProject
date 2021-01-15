@@ -17,11 +17,12 @@ import lombok.Setter;
 
 @RequestMapping("/carshop/*")
 @Controller
-public class UserUpdateController {
+public class UserUpdateController { //회원정보수정
 
 	@Setter(onMethod_ = @Autowired)
 	private UserUpdateService uservice;
-
+	
+	//일반유저와 판매자유저만 접근 가능
 	@GetMapping("userupdateform")
 	public String userupdateForm(Model model, HttpSession session) {
 
@@ -33,10 +34,13 @@ public class UserUpdateController {
 			if (user.equals("N")) {
 				model.addAttribute("user", uservice.user_select(((All_User_Tbl) session.getAttribute("user")).getId()));
 				model.addAttribute("userType", "user");
-			} else {
+			} else if(user.equals("Y")) {
 				model.addAttribute("userType", "seller");
 				model.addAttribute("user",
 						uservice.seller_select(((All_User_Tbl) session.getAttribute("user")).getId()));
+			}else {
+				System.out.println("관리자가 접근?");
+				return "redirect:/carshop/error";
 			}
 			return "carshop/user_update";
 
@@ -46,6 +50,7 @@ public class UserUpdateController {
 		}
 	}
 
+	//일반유저-수정버튼 클릭시 실행
 	@RequestMapping("user_updateok")
 	public String user_updateok(Model model, HttpSession session, User_Tbl user_tbl) {
 		boolean result = uservice.user_update(user_tbl);
@@ -53,6 +58,7 @@ public class UserUpdateController {
 		return "redirect:/carshop/mypage";
 	}
 
+	//판매자유저-수정버튼 클릭시 실행
 	@RequestMapping("seller_updateok")
 	public String seller_updateok(Model model, HttpSession session, Seller_Tbl seller_tbl) {
 		boolean result = uservice.seller_update(seller_tbl);
