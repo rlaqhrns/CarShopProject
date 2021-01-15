@@ -173,7 +173,7 @@
 <!-- Modal end -->
 
 
-<%@ include file="../include/topproduct.jsp"%>
+
 <%@ include file="../include/footer.jsp"%>
 
 <script src="/resources/vendors/nouislider/nouislider.min.js"></script>
@@ -201,10 +201,11 @@ function addCartEvent(p_no,quantity) { //장바구니
 		success : function(stats) {
 			$(".modal-body").html("\""+getUserId() + "\"님 장바구니에 넣었습니다.");
 			
-			$("#cart-btn-area").empty().append(`<button type="button" onClick="location.href='/carshop/cart'"
+			$("#cart-btn-area").html(`<button type="button" onClick="location.href='/carshop/cart'"
 											class="btn btn-primary" data-dismiss="modal">장바구니로 이동</button>`);
 			$('#notice').modal('show');
 
+			
 		},
 		error : function() {
 			console.log("장바구니 통신실패");
@@ -228,6 +229,7 @@ function addLikeEvent(p_no,$obj) { //찜목록추가
 		success : function(stats) {
 			$obj.children(".ti-heart").addClass("heart_white_full");								
 			$(".modal-body").html("\""+getUserId() + "\"님 찜 목록에 넣었습니다.");
+			$("#cart-btn-area").empty();
 			$('#notice').modal('show');
 		},
 		error : function() {
@@ -252,6 +254,7 @@ function removeLikeEvent(p_no,$obj) { //찜목록삭제
 		success : function(stats) {
 			$obj.children(".ti-heart").removeClass("heart_white_full");
 			$(".modal-body").html("\""+getUserId() + "\"님 찜 목록에서 삭제되었습니다.");
+			$("#cart-btn-area").empty();
 			$('#notice').modal('show');
 		},
 		error : function() {

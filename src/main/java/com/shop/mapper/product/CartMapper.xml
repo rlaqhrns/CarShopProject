@@ -60,12 +60,13 @@
 	<update id="update">
 	<!-- id명은 컨트롤러 명과 동일하게 -->
 		update cart_tbl
-		
-		set quantity = quantity + #{quantity}
+		set quantity = quantity + #{quantity}, total = (quantity * amount)
 		where u_id = #{u_id}
 		and p_no = #{p_no}
 	</update>
 	
-	
+	<select id="countCart" resultType="Integer">
+		select count(*) from cart_tbl where p_no = #{p_no} and u_id = #{u_id} group by u_id,p_no ;
+	</select>
 
 </mapper>
