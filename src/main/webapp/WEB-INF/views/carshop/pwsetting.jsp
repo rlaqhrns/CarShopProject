@@ -105,22 +105,23 @@
               <div class="row">
                 <div class="form-group">
                   <div class="col-md-12">
-                    <label class="pw" >비밀번호　<input class="writepw" id="pw1" type="password" style="border:1 solid light-gray;" placeholder=" 영문.숫자.특수기호 8자리 이상" name="pw1"  required>
+                    <label class="pw" >비밀번호　
+                    	<input class="writepw" id="pw1" type="password" style="border:1 solid light-gray;" placeholder=" 영문.숫자.특수기호 8자리 이상" name="pw1"  required>
                     </label>
                           </div>
                           <br>
                           <div class="col-md-12">
-                    <label class="pw" >비번확인　<input class="writepw" id="pw2" type="password" style="border:1 solid light-gray;" placeholder=" 한번 더 입력해주세요" name="pw2"  required>
+                    <label class="pw" >비번확인　
+                    	<input class="writepw" id="pw2" type="password" style="border:1 solid light-gray;" placeholder=" 한번 더 입력해주세요" name="pw2"  required>
                     </label>
-                    <input type="hidden" name="email" value='<c:out value="${email}"/>' /> 
+                    <input type="hidden" name="email" value='<c:out value="${email}"/>' />      
                   </div>
                 </div>
               </div>
             </fieldset>
             <div class="row2">
               <button class="btn" type="submit"  style="background-color : #2ed5e5;">
-                <i class="fas fa-lock"></i>
-                  비밀번호 재설정
+                <i class="fas fa-lock"></i>비밀번호 재설정
               </button>
             </div>
           </form>
@@ -139,23 +140,23 @@ $(document).ready(function(){
 	$(".btn").click(function(e){
 		 var pw1 = $('#pw1').val();
 	     var pw2 = $('#pw2').val();
-		//비번이 제대로 입력이 되지않은경우
-		if(pw1==' ' || pw2==' ') {
+
+		if(pw1==' ' || pw2==' ') {									//비번이 제대로 입력이 되지않은경우
 			swal("Please write", "Password를 기입해주세요!", "info");
 			return;
 		}
-		//이메일 유효성 검사
-		if(pw1 != pw2) {
+		
+		if(pw1 != pw2) {											//비번2개가 일치하지 않을때
 	    	swal("Oops", "Password가 일치하지않아요:-(", "error");
 	    	e.preventDefault();
 			return;
 	    }	
-		if (!ValidatePW(pw1)) {
+		if (!ValidatePW(pw1)) {										//비밀번호 유효성 검사
 	        swal("Oops", "영문,숫자,특수기호포함 8자 이상 기입해주세요", "error");
 			e.preventDefault();
 	         return;
 	    }
-		alert("비밀번호 재설정완료! 로그인창으로 이동합니다");
+		alert("비밀번호 재설정완료! 로그인창으로 이동합니다");						//모든 조건이 맞을때 컨트롤러로 이동
 
 		return;
 	});

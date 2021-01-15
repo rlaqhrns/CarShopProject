@@ -63,7 +63,7 @@ public class BlackListController {
 	
 	//Mapping that allows ajax to remove receiving id from all user tbl and seller tbl -SungYeon 20.12.23
 	@DeleteMapping(value = "/blkdelete/{s_id}", produces = MediaType.TEXT_PLAIN_VALUE)  //패스에 붙여 받아 특수문자에 영향받지 않도록 수정 -성연 20.01.12
-	public ResponseEntity<String> deleteblk(@PathVariable("s_id") String s_id){
+	public ResponseEntity<String> deleteblk(@PathVariable("s_id") String s_id) throws Exception{
 		System.out.println("s_id = " + s_id);
 		int a= blk_service.blkremove(s_id); //removing this id from black list tbl -SungYeon 20.12.23
 		
