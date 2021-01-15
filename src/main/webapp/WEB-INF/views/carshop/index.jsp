@@ -434,7 +434,7 @@ function addLikeEvent(p_no,$obj) { //찜목록추가
 		},
 		dataType : 'JSON',
 		success : function(stats) {
-			$(".icon_heart_empty").addClass("icon_heart_red");								
+			$obj.children(".ti-heart").addClass("heart_white_full");								
 			$("#notice .modal-body").html("\""+ userId + "\"님 찜 목록에 넣었습니다.");
 			$("#cart-btn-area").empty();
 			$('#notice').modal('show');
