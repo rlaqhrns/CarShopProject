@@ -80,13 +80,16 @@ public class ConfirmationController {
 						
 						for(int k=0; k<listre.size(); k++) {
 							//구매자의 주문이력 중 판매자가 승인한 교환반품 list들과 동일한 ono가 존재할시 vo의 o_no2에 ono를 setter로 저장합니다. (재원/21.01.12)
-							if(listre.get(k).getOno() == list.get(i).getO_no())
+							if(listre.get(k).getOno() == list.get(i).getOno())
 							{
 								
-								list.get(i).setO_no2(list.get(i).getO_no());
+								list.get(i).setO_no2(list.get(i).getOno());
+								System.out.println(list.get(i).getO_no2());
 							}
 						}
 					}
+					
+					list.stream().forEach(System.out::println);
 					
 				}catch(Exception e) {
 					e.getMessage();
@@ -144,14 +147,16 @@ public class ConfirmationController {
 				}
 				
 				for(int k=0; k<listre.size(); k++) {
-					if(listre.get(k).getOno() == odr.get(i).getO_no())
+					if(listre.get(k).getOno() == odr.get(i).getOno())
 					{
 						
-						odr.get(i).setO_no2(odr.get(i).getO_no());
+						odr.get(i).setO_no2(odr.get(i).getOno());
+						System.out.println(odr.get(i).getO_no2());
 					}
 				}
 			}
 			
+			//odr.stream().forEach(System.out::println);	
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -189,14 +194,16 @@ public class ConfirmationController {
 				}
 				
 				for(int k=0; k<listre.size(); k++) {
-					if(listre.get(k).getOno() == odr.get(i).getO_no())
+					if(listre.get(k).getOno() == odr.get(i).getOno())
 					{
 						
-						odr.get(i).setO_no2(odr.get(i).getO_no());
+						odr.get(i).setO_no2(odr.get(i).getOno());
+						System.out.println(odr.get(i).getO_no2());
 					}
 				}
 			}
 			
+			//odr.stream().forEach(System.out::println);	
 			
 		}catch(Exception e){
 			e.printStackTrace();
