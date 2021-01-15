@@ -25,14 +25,32 @@ public class CartServiceImple implements CartService {
 
 	@Override
 	public int addCart(Cart_Tbl cart) {
-		return mapper.addCart(cart);
-
+		//System.out.println("addCartService 호출");
+		Integer count = 0;
+		try {
+			count = mapper.countCart(cart.getU_id(),cart.getP_no());//상품이 장바구니에 들어있는지 체크
+		}catch(Exception e) {
+			
+		}
+			
+		
+		
+		int result = 0;
+		if(count == null) {
+			System.out.println("addCart 호출");
+			result = mapper.addCart(cart);
+		}else {
+			result = mapper.update(cart);
+		}
+		
+		
+		return result;
 	}
 
-	@Override
-	public List<Cart_Tbl> listCart(String u_id) {
-		return mapper.listCart(u_id);
-	}
+	/*
+	 * @Override public List<Cart_Tbl> listCart(String u_id) { return
+	 * mapper.listCart(u_id); }
+	 */
 
 	@Override
 	public List<Cart_Tbl> cartMoney() {
@@ -41,12 +59,13 @@ public class CartServiceImple implements CartService {
 	}
 
 
-	// cart update 2021.01.13
-	@Override
-	public int update(Cart_Tbl cart) {
-		
-			return mapper.update(cart);
-	}
+	/*
+	 * // cart update 2021.01.13
+	 * 
+	 * @Override public int update(Cart_Tbl cart) {
+	 * 
+	 * return mapper.update(cart); }
+	 */
 
 	
 	
@@ -68,11 +87,11 @@ public class CartServiceImple implements CartService {
 		return mapper.modifyCart(cart);
 	}
 
-	@Override
-	public int sumTotal(String u_id) {
-
-		return mapper.sumTotal(u_id);
-	}
+	/*
+	 * @Override public int sumTotal(String u_id) {
+	 * 
+	 * return mapper.sumTotal(u_id); }
+	 */
 
 	@Override
 	public int delete(int p_no, String u_id) {
@@ -85,6 +104,12 @@ public class CartServiceImple implements CartService {
 		
 		 return mapper.deleteAll(u_id);
 		
+	}
+	// 2021/01/14 cart 담기 YHJ 
+	@Override
+	public int insertCart(Cart_Tbl cart) {
+		
+		return mapper.insertCart(cart);
 	}
 	// 딜리트 리턴 수정 yun.hj
 	

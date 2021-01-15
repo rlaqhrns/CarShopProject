@@ -2,6 +2,8 @@ package com.shop.mapper.product;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.shop.vo.Cart_Tbl;
 import com.shop.vo.Like_Tbl;
 
@@ -16,8 +18,7 @@ public interface CartMapper {
 	public List<Cart_Tbl> listCart(String u_id); // 장바구니 목록
 	
 	
-	
-	
+	public int insertCart(Cart_Tbl cart); // 카트 담기
 	
 	public int delete(int p_no, String u_id); // 장바구니 개별 삭제
 	// 칼럼타입 수정 2020.01.08 yunhj
@@ -35,8 +36,8 @@ public interface CartMapper {
 	
 	
 	public int sumTotal(String u_id); // 장바구니 total
-	public int countCart(String u_id, int p_no); // 장바구니 상품 개수
-	public void updateCart(Cart_Tbl vo); // 장바구니 수정
+	public Integer countCart(@Param("u_id")String u_id, @Param("p_no")int p_no); // 장바구니 상품 개수
+	public int updateCart(Cart_Tbl cart); // 장바구니 수정
 	
 	
 	

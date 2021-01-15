@@ -647,6 +647,15 @@ function init(){ //이벤트함수 init
 $(document).ready(function() {
 	init();
 	carSearchCheckEvent();
+	// 인덱스 페이지 에서 카테고리 상품클릭하여 해당 no랑 구분자를 제이쿼리 객체를 만든다
+	let cate_no = "${param.cate_no}";
+	let click = "${param.click}";
+	// 클릭이 y였을시 라디오버튼을 해당 id에 맞게 체크하고 trigger를 이용해 강제로 발생하게한다
+	if(click =='Y'){
+		$("#"+cate_no).prop('checked',true);
+		$("#"+cate_no).trigger("change");
+		
+	}
 	
 })
 </script>

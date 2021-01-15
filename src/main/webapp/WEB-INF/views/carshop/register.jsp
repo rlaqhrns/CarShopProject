@@ -14,7 +14,7 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="/resources/js/register.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<title>저리카 | 회원가입 </title>
 <!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="category">
 	<div class="container h-100">
@@ -158,7 +158,7 @@
 									style="min-width: 300px !important;">
 									<!-- 자동차 정보 수정 -->
 									<option value="소나타">소나타</option>
-									<option value="그린저">그랜져</option>
+									<option value="그랜져">그랜져</option>
 									<option value="카니발">카니발</option>
 									<option value="소울">소울</option>
 									<option value="마티즈">마티즈</option>

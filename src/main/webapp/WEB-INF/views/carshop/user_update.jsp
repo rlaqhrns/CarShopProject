@@ -20,7 +20,7 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <%@ include file="../include/header.jsp"%>
-
+<title>저리카 | 회원정보 수정 </title>
 <body>
 
 	<div class="content py-5  bg-light">
