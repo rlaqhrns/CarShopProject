@@ -112,7 +112,7 @@ $(document).ready(
 
 
 	})
-//수정 버튼을 누르면 실행
+//수정 버튼을 누르면 최종실행
 function finalcheck() {
 
 	//모든 항목에 값을 입력했는지 체크

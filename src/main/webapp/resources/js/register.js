@@ -11,6 +11,7 @@ var sample2_detailAddressok=false;
 $(document).ready(function(){
 	console.log("document ready!");
 	
+	//아이디 중복확인 버튼 클릭시 실행
 	$("#id_check").click(function(){
 		userid = $("#userid").val();
 		if(userid == ""){
@@ -27,7 +28,7 @@ $(document).ready(function(){
 			console.log(userid.search(/\s/));
 			idok=false;
 		}else{
-			
+			//값이 있으면 success, 값이 없으면 error
 			$.ajax({
 				url : 'idcheck?id=' + userid,
 				type : 'get',
@@ -79,6 +80,7 @@ $(document).ready(function(){
 	
 	}
 
+//비밀번호 정규화패턴에 맞는지 체크
 function pwdcheck(){
 	pwd = $("#password").val();
 	if(!/^[a-zA-Z0-9]{8,15}$/.test(pwd)){
@@ -90,6 +92,8 @@ function pwdcheck(){
 		pwdok=true;
 	}
 }
+
+//이름이 길면 쿼리문에서 에러가 나므로 막기위해 실행
 function namecheck(){
 	name = $("#username").val();
 	if(name.length > 20){
@@ -103,6 +107,7 @@ function namecheck(){
 	
 }
 
+//이메일 인증 클릭시 실행
 function emailcheck(){
 	toemail = $("#email").val();
 	if(!/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/.test(toemail)){
@@ -110,7 +115,7 @@ function emailcheck(){
 		$("#memail").val("이메일 형식이 맞지 않습니다.");
 		emailok=false;
 	} else {
-		
+		//중복된 이메일이 있으면 seccess, 없으면 error
 		$.ajax({
 			url : 'toemailcheck?toemail=' + toemail,
 			type : 'get',
@@ -121,7 +126,7 @@ function emailcheck(){
 				emailok=false;
 			},
 			error : function() {
-				//이메일 인증코드를 위한 난수 생성
+				//이메일 사용가능, 이메일 인증코드를 위한 난수 생성
 				emailcode = Math.floor(Math.random() * 1000000)+100000;
 				if(emailcode>1000000){
 					emailcode = emailcode - 100000;
@@ -155,6 +160,7 @@ function emailcheck(){
 	}
 }
 	
+	//입력한 인증코드와 일치하는지 확인
 	function emailcodecheck(){
 		if(emailok){
 			var emailcode_input = $("#emailcode").val();
@@ -172,6 +178,7 @@ function emailcheck(){
 		}
 	}
 	
+	//휴대폰번호 정규화패턴에 맞는지 체크
 	function phonecheck(){
 		phone = $("#phone").val();
 	if(!/(\d{2,4}).*(\d{3,4}).*(\d{4,4})/.test(phone)){
