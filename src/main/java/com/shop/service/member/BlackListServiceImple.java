@@ -61,7 +61,7 @@ public class BlackListServiceImple implements BlackListService{
 			int a = mapper.delete_alluser(s_id);
 			int b = mapper.delete_seller(s_id);
 			mapper.setzero(s_id);  //추가 -성연 20.01.12
-			Integer.parseInt(null);
+			//Integer.parseInt(null);
 			
 			return a == 1 && b == 1;
 			
