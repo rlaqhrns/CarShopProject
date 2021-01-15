@@ -83,7 +83,9 @@ $(document).ready(function(){
 //비밀번호 정규화패턴에 맞는지 체크
 function pwdcheck(){
 	pwd = $("#password").val();
-	if(!/^[a-zA-Z0-9]{8,15}$/.test(pwd)){
+	var checkNum = pwd.search(/[0-9]/g);
+	var checkEng = pwd.search(/[a-z]/ig);
+	if((!/^[a-zA-Z0-9]{8,15}$/.test(pwd)) || checkNum <0 || checkEng <0){
 		$("#mpwd").css("color","red");
 		$("#mpwd").val("숫자와 영문자 조합으로 8~15자리를 사용해야 합니다.");
 		pwdok=false;

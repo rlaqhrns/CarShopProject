@@ -55,7 +55,7 @@
 													value="<c:out value="${user.u_pw}"></c:out>">
 												<div class="tip_massage_div">
 													<input type="text" value="" class="tip_massage" id="mpwd"
-														style="width: 250px" tabindex="-1" readonly>
+														style="width: 300px" tabindex="-1" readonly>
 												</div>
 											</div>
 										</div>
@@ -80,7 +80,7 @@
 													value="<c:out value="${user.s_pw}"></c:out>">
 												<div class="tip_massage_div">
 													<input type="text" value="" class="tip_massage" id="mpwd"
-														style="width: 250px" tabindex="-1" readonly>
+														style="width: 300px" tabindex="-1" readonly>
 												</div>
 											</div>
 										</div>

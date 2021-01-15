@@ -13,11 +13,12 @@ $(document).ready(
 		//비밀번호 수정
 		$(document).on("blur", '#pwd', function() {
 			pwd = $("#pwd").val();
-			console.log(pwd);
-			if (!/^[a-zA-Z0-9]{8,15}$/.test(pwd)) {
+			var checkNum = pwd.search(/[0-9]/g);
+			var checkEng = pwd.search(/[a-z]/ig);
+			if ((!/^[a-zA-Z0-9]{8,15}$/.test(pwd)) || checkNum < 0 || checkEng < 0) {
+				$("#mpwd").css("color", "red");
 				$("#mpwd").val("숫자와 영문자 조합으로 8~15자리를 사용해야 합니다.");
 				pwdok = false;
-				console.log(pwdok);
 			} else {
 				$("#mpwd").val("");
 				pwdok = true;
