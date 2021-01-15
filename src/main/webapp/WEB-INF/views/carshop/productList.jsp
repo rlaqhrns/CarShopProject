@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../include/header.jsp"%>
 
-<title>Aroma Shop - Category</title>
+<title>저리카 | 카테고리 </title>
 <link rel="stylesheet" href="/resources/vendors/linericon/style.css">
 <link rel="stylesheet"
 	href="/resources/vendors/nouislider/nouislider.min.css">
@@ -31,16 +31,14 @@
 
 <!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="category">
+<img class="img-fluid" src="/resources/img/cart/title.png" alt="배너"
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" />
 	<div class="container h-100">
 		<div class="blog-banner">
 			<div class="text-center">
-				<h1>Shop Category</h1>
+				<h1> Category</h1>
 				<nav aria-label="breadcrumb" class="banner-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Shop
-							Category</li>
-					</ol>
+					
 				</nav>
 			</div>
 		</div>

@@ -233,9 +233,6 @@ button {
    }
 
    
- 
-   
-   
     // 팝업창 쿼리 2021.01.09 yun.hj
    function showPopup(hasFilter) {
       const popup = document.querySelector('#popup');
