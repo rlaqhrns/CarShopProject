@@ -16,11 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/carshop/*")
 @Slf4j
-public class salelistController {
+public class salelistController { //판매목록 출력
 
 	@Setter(onMethod_=@Autowired)
 	private SalelistService service;
 	
+	//판매자만 판매목록 출력가능
 	@RequestMapping("/salelist")
 	public String salelist(Model model, HttpSession session) {
 		
@@ -32,7 +33,7 @@ public class salelistController {
 				model.addAttribute("salelist",service.selectall(id));
 				return "carshop/salelist";
 			}else {
-				System.out.println("권한 없음 : " + seller);
+				System.out.println("판매자가 아님 : " + seller);
 				return "redirect:/carshop/error";
 			}
 			

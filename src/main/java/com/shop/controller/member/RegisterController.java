@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/carshop/*")
 @Slf4j
-public class RegisterController {
+public class RegisterController { //회원가입
 
 	@Setter(onMethod_=@Autowired)
 	private RegisterService service;
@@ -37,19 +37,21 @@ public class RegisterController {
 
 	}
 	
+	//일반유저 - 가입완료버튼 클릭시 실행
 	@PostMapping("/onregister")
 	public String onregister(Model model, User_Tbl user_tbl) {
 		service.adduser(user_tbl);
 		return "redirect:login";
 	}
 	
+	//판매자유저 - 가입완료버튼 클릭시 실행
 	@PostMapping("/onseller_register")
 	public String onseller_register(Model model, Seller_Tbl seller_tbl) {
 		service.addseller(seller_tbl);
 		return "redirect:login";
 	}
 	
-	
+	//아이디 중복체크
 	@GetMapping("/idcheck")
 	@ResponseBody
 	public All_User_Tbl idcheck(@RequestParam("id") String id, Model model) {
@@ -58,6 +60,7 @@ public class RegisterController {
 		return service.idcheck(id);
 	}
 	
+	//이메일 중복체크
 	@GetMapping("/toemailcheck")
 	@ResponseBody
 	public All_User_Tbl toemailcheck(@RequestParam("toemail") String toemail, Model model) {
@@ -65,15 +68,6 @@ public class RegisterController {
 		System.out.println("service.toemailcheck : " + service.toemailcheck(toemail));
 		return service.toemailcheck(toemail);
 	}
-	
-	
-	@RequestMapping("/registertest")
-	public String registertest() {
-		return "carshop/registerTest";
-		
-	}
-	
-
 	
 	
 }
