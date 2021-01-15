@@ -137,11 +137,8 @@
 							<li class="nav-item"><a class="nav-link" href="login">Mypage</a></li>
 <%
 }
-%>
-				            		
-							
+%>		
 							<!--  컨탠츠랑 mypage 위치 수정 2021.01.11 -->
-
 					        <li class="nav-item submenu dropdown">
 <% 
 	if("admin".equals(sessId)){
