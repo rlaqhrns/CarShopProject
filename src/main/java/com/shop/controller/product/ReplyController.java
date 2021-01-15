@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import org.apache.ibatis.annotations.Param;
@@ -29,16 +30,20 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/carshop/*")
 public class ReplyController {
-	private static final String FILE_SERVER_PATH = "C:\\Users\\ssw74\\git\\CarShopProject\\src\\main\\webapp\\resources\\img\\replyUpload";
+	//private static final String FILE_SERVER_PATH = "E:\\GreenComputerPro\\CarShopProject\\src\\main\\webapp\\resources\\img\\replyUpload";
 	
 	@Setter(onMethod_ = @Autowired)
 	private ReplyService service;
-
+	@Autowired
+	private ServletContext servletContext;
 	
 	
 	
 	@PostMapping("/product/replyForm")
 	public String reply_form(@RequestParam("img")MultipartFile[] file,Reply_Tbl reply,Model model) throws IllegalStateException, IOException {
+		
+		String path = servletContext.getRealPath("/resources/img/replyUpload"); //파일 상대경로를 위한 이클립스 워크스페이스경로의 톰캣 서버 실제경로 이용 (재원/21.01.14)  
+        System.out.println(path);
 		
 		try {
 			System.out.println("file : " +file.length);
@@ -66,7 +71,7 @@ public class ReplyController {
 				reply.setR_img3(msg + file[2].getOriginalFilename());
 			}
 			for(int i =0; i<file.length; i++) {
-				file[i].transferTo(new File(FILE_SERVER_PATH, msg + file[i].getOriginalFilename()));
+				file[i].transferTo(new File(path, msg + file[i].getOriginalFilename()));
 
 			}
 			
