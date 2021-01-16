@@ -111,7 +111,7 @@
 				<li><img src="/resources/img/home/main1.png" width="1920px" height="410px" alt="main배너" style=" padding-bottom: 30px"></li>
 				<li><a href="register"><img src="/resources/img/home/main2.png" width="1920px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li> 
 				<li><a href="https://direct.kbinsure.co.kr/home"><img src="/resources/img/home/main3.png" width="1920px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li>
-				<li><a href="#"><img src="/resources/img/home/main4.png" width=1920px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li>
+				<li><a href="#"><img src="/resources/img/home/main4.png" width="1920px" height="410px" alt="main배너" style=" padding-bottom: 30px"></a></li>
 				<!-- 공지로 가는 링크는 공지 page 한 뒤 경로 수정-->
 				<!-- 이벤트 배너 하나 더 만들기 -->
 			</ul>
@@ -282,7 +282,7 @@
 				<li><img src="/resources/img/home/event3.png" width="1920px" height="380px"></li>
 				<li><img src="/resources/img/home/event5.png" width="1920px" height="380px"></li>
 				<li><img src="/resources/img/home/event6.png" width="1920px" height="380px"></li>
-				<li><a href="http://localhost:8080/carshop/product/details?p_no=26"><img src="/resources/img/home/event7.png" width="1519px" height="380px"></a></li>
+				<li><a href="http://localhost:8080/carshop/product/details?p_no=26"><img src="/resources/img/home/event7.png" width="1920px" height="380px"></a></li>
 				<!-- 상품번호 바뀌면 경로 수정해주셔야 합니다 yhj -->
 				<!-- 이벤트 배너 하나 더 만들기 -->
 			</ul>
@@ -434,9 +434,11 @@ function addLikeEvent(p_no,$obj) { //찜목록추가
 		},
 		dataType : 'JSON',
 		success : function(stats) {
-			$(".icon_heart_empty").addClass("icon_heart_red");								
+			$obj.children(".ti-heart").addClass("heart_white_full");								
 			$("#notice .modal-body").html("\""+ userId + "\"님 찜 목록에 넣었습니다.");
+			$("#cart-btn-area").empty();
 			$('#notice').modal('show');
+			
 		},
 		error : function() {
 			console.log("통신실패");
@@ -462,6 +464,7 @@ function removeLikeEvent(p_no,$obj) { //찜목록삭제
 		success : function(stats) {
 			$obj.children(".ti-heart").removeClass("heart_white_full");
 			$(".modal-body").html("\""+getUserId() + "\"님 찜 목록에서 삭제되었습니다.");
+			$("#cart-btn-area").empty();
 			$('#notice').modal('show');
 		},
 		error : function() {

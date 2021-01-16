@@ -126,21 +126,7 @@
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 							<li class="nav-item"><a class="nav-link" href="/carshop/index">Home</a></li>
 							<li class="nav-item"><a class="nav-link" href="/carshop/productList">Shop</a></li>
-					        <li class="nav-item submenu dropdown">
-<% 
-	if("admin".equals(sessId)){
-%>
-              		  		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-			                  aria-expanded="false">Admin</a>
-<%
-	}
-%>
-			            <ul class="dropdown-menu">
-			                  <li class="nav-item"><a class="nav-link" href="/carshop/blacklist">Black List</a></li>
-			                  <li class="nav-item"><a class="nav-link" href="/carshop/annclist">Announcement</a></li>
-			           </ul>		
-							
-							<!--  컨탠츠랑 mypage 위치 수정 2021.01.11 -->
+							<!-- admin과 mypage위치 변경(간격문제) Bomi 2021.01.11 -->
 <%
 	if(sessId != null){
 %>							
@@ -151,8 +137,21 @@
 							<li class="nav-item"><a class="nav-link" href="login">Mypage</a></li>
 <%
 }
+%>		
+							<!--  컨탠츠랑 mypage 위치 수정 2021.01.11 -->
+					        <li class="nav-item submenu dropdown">
+<% 
+	if("admin".equals(sessId)){
 %>
-						
+              		  		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+			                  aria-expanded="false">Admin</a>
+<%
+	}
+%>
+							<ul class="dropdown-menu">
+				                  <li class="nav-item"><a class="nav-link" href="/carshop/blacklist">Black List</a></li>
+				                  <li class="nav-item"><a class="nav-link" href="/carshop/annclist">Announcement</a></li>
+				           </ul>
 						</ul>
 
 						<div class="nav-right">
