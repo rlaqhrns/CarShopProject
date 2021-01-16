@@ -732,11 +732,11 @@ button {
 								</a> 
 								<c:choose>
 									<c:when test="${status == 'seller' }">
-										<a href="/carshop/productForm"> <i class="fab fa-behance"></i> 판매글쓰기
+										<a href="/carshop/productForm"> <i class="fas fa-heart"></i> 판매글쓰기
 								</a>
 									</c:when>
 									<c:when test="${status == 'user' }">
-										<a href="/carshop/like"> <i class="fab fa-behance"></i> 찜
+										<a href="/carshop/like"> <i class="fas fa-heart"></i> 찜
 									목록
 								</a>
 									</c:when>
