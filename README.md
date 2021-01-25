@@ -13,7 +13,7 @@
 
 
 [more screenshots](https://github.com/JaewonP/CarShopProject/issues/262)
-<br/>
+
 ## 📚 Technology stack & other Open-source libraries
 프로젝트 환경 설정 및 사용 기술
 
