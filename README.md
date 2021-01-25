@@ -58,6 +58,7 @@ Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트입니다.
 
 ## More information
 ### Project Work Place 
+프로젝트 관리용 trello 주소를 공유합니다.  
 [저리카Trello](https://trello.com/b/3SnYgCuw/%EC%A0%80%EB%A6%AC%EC%B9%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
 
 # Contact
