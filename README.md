@@ -61,11 +61,11 @@ Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트입니다.
 [저리카Trello](https://trello.com/b/3SnYgCuw/%EC%A0%80%EB%A6%AC%EC%B9%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
 
 # Contact
-프로젝트 팀원 메일
-JaewonP: <protectingjw@naver.com>
-lee-bomi: <bomvll@naver.com> 
-percussion8: <ms960315@gmail.com>
-rkqls8522: <rkqls8522@naver.com>
-rlaqhrns: <rlaqhrns93@naver.com>
-shin745: <shinswon745@naver.com>
-YUNHYEJEONG: <findme0@naver.com>
+프로젝트 팀원 메일  
+JaewonP: <protectingjw@naver.com>  
+lee-bomi: <bomvll@naver.com>  
+percussion8: <ms960315@gmail.com>  
+rkqls8522: <rkqls8522@naver.com>  
+rlaqhrns: <rlaqhrns93@naver.com>  
+shin745: <shinswon745@naver.com>  
+YUNHYEJEONG: <findme0@naver.com>  
