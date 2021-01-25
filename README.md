@@ -61,7 +61,7 @@
 
 ## 📑 More information
 ### Project Work Place 
-[저리카Trello](https://trello.com/b/3SnYgCuw/%EC%A0%80%EB%A6%AC%EC%B9%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8) : 프로젝트 관리용 trello 주소를 공유합니다.  
+* [저리카Trello](https://trello.com/b/3SnYgCuw/%EC%A0%80%EB%A6%AC%EC%B9%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8) : 프로젝트 관리용 trello 주소를 공유합니다.  
 
 ## 📧 Contact
 프로젝트 팀원 메일  
