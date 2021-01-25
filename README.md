@@ -14,7 +14,7 @@ Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트입니다.
 [more screenshots](https://github.com/JaewonP/CarShopProject/issues/262)
 
 # Technology stack & other Open-source libraries
-프로젝트 환경 설정
+프로젝트 환경 설정 및 사용 기술
 
 ### IDE
 * eclipse - integrated development environment (IDE) used in computer programming. 
