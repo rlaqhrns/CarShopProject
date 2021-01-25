@@ -39,7 +39,7 @@ Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트입니다.
 * git - 코드 버전관리용
 * [Trello](https://trello.com/) - 프로젝트 관리 툴
 ### External Tools & Services
-* Amazon EC2 - Deploying web site
+* [Amazon EC2](https://aws.amazon.com/ko/?nc2=h_lg) - web site deploy service
 * PuTTy - Access to Amazon EC2 instance 
 * [FileZila](https://filezilla-project.org/) - upload file to EC2 instance
 * ubuntu - EC2 instance terminal 
