@@ -50,6 +50,7 @@
 * [다음 우편번호 서비스](https://postcode.map.daum.net/guide) - 주소 찾기 api 
 * [sweetalert2](https://sweetalert2.github.io/) - javascript/css pop up UX
 <br/>
+
 ## 📌 How to start the api
 아래의 주소를 클릭하면 접근이 가능합니다. 
 
@@ -57,10 +58,12 @@
 > <http://52.78.28.86:8080/carshop/index>
 * 주의사항 : 실제 현금 거래는 불가능합니다.  
 <br/>
+
 ## 📑 More information
 ### Project Work Place 
 [저리카Trello](https://trello.com/b/3SnYgCuw/%EC%A0%80%EB%A6%AC%EC%B9%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8) : 프로젝트 관리용 trello 주소를 공유합니다.  
 <br/>
+
 ## 📧 Contact
 프로젝트 팀원 메일  
 > JaewonP: <protectingjw@naver.com>  
