@@ -3,19 +3,19 @@
 [![GitHub forks](https://img.shields.io/github/forks/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject/network)
 [![GitHub license](https://img.shields.io/github/license/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject)
 
-# 🔖Description
+## 🔖 Description
 > Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트    
 > 사용자맞춤 용품보기 및 쇼핑가능한 복합공간  
 
 
-# 📇Application screenshots
+## 📇 Application screenshots
 ![home](https://user-images.githubusercontent.com/63588838/105671316-da8c7980-5f25-11eb-9edc-130d3c9f98e7.JPG)
 ![gif](https://user-images.githubusercontent.com/63588838/105672866-7dde8e00-5f28-11eb-991a-2a506bd23b33.gif)
 
 
 [more screenshots](https://github.com/JaewonP/CarShopProject/issues/262)
 
-# 📚Technology stack & other Open-source libraries
+## 📚 Technology stack & other Open-source libraries
 프로젝트 환경 설정 및 사용 기술
 
 ### IDE
