@@ -4,7 +4,7 @@
 [![GitHub license](https://img.shields.io/github/license/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject)
 
 # 🔖Description
-> Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트 
+> Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트    
 > 사용자맞춤 용품보기 및 쇼핑가능한 복합공간  
 
 
