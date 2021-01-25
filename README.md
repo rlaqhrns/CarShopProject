@@ -3,17 +3,17 @@
 [![GitHub forks](https://img.shields.io/github/forks/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject/network)
 [![GitHub license](https://img.shields.io/github/license/lee-bomi/CarShopProject)](https://github.com/lee-bomi/CarShopProject)
 
-# Description
+# 🔖Description
 Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트입니다.  
 
-# Application screenshots
+# 📇Application screenshots
 ![home](https://user-images.githubusercontent.com/63588838/105671316-da8c7980-5f25-11eb-9edc-130d3c9f98e7.JPG)
 ![gif](https://user-images.githubusercontent.com/63588838/105672866-7dde8e00-5f28-11eb-991a-2a506bd23b33.gif)
 
 
 [more screenshots](https://github.com/JaewonP/CarShopProject/issues/262)
 
-# Technology stack & other Open-source libraries
+# 📚Technology stack & other Open-source libraries
 프로젝트 환경 설정 및 사용 기술
 
 ### IDE
@@ -49,18 +49,18 @@ Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트입니다.
 * [다음 우편번호 서비스](https://postcode.map.daum.net/guide) - 주소 찾기 api 
 * [sweetalert2](https://sweetalert2.github.io/) - javascript/css pop up UX
 
-## How to start the api
+## 📌 How to start the api
 아래의 주소를 클릭하면 접근이 가능합니다. 
 
 
 > <http://52.78.28.86:8080/carshop/index>
 * 주의사항 : 실제 현금 거래는 불가능합니다.  
 
-## More information
+## 📑 More information
 ### Project Work Place 
 [저리카Trello](https://trello.com/b/3SnYgCuw/%EC%A0%80%EB%A6%AC%EC%B9%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8) : 프로젝트 관리용 trello 주소를 공유합니다.  
 
-# Contact
+## 📧 Contact
 프로젝트 팀원 메일  
 > JaewonP: <protectingjw@naver.com>  
 lee-bomi: <bomvll@naver.com>  
