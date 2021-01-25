@@ -62,7 +62,7 @@ Spring Framework JAVA 기반 자동차 관련 용품 판매 사이트입니다.
 
 # Contact
 프로젝트 팀원 메일  
-JaewonP: <protectingjw@naver.com>  
+> JaewonP: <protectingjw@naver.com>  
 lee-bomi: <bomvll@naver.com>  
 percussion8: <ms960315@gmail.com>  
 rkqls8522: <rkqls8522@naver.com>  
