@@ -47,7 +47,7 @@
 * PuTTy - Access to Amazon EC2 instance 
 * [FileZila](https://filezilla-project.org/) - upload file to EC2 instance
 * ubuntu - EC2 instance terminal 
-* [iamport](https://www.iamport.kr/) - kakaopay 결제 연동 테스트 api 
+* [i'mport](https://www.iamport.kr/) - kakaopay 결제 연동 테스트 api 
 * [FullCalendar](https://fullcalendar.io/) - 달력 api
 * [EmailJS](https://www.emailjs.com/?src=email-footer) - 자바스크립트 이메일 api
 * [다음 우편번호 서비스](https://postcode.map.daum.net/guide) - 주소 찾기 api 
